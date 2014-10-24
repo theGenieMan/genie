@@ -25,6 +25,7 @@ Revisions   :
 	<cfset target=application.genieService.getWestMerciaNominalTargetInfo(nominalRef=nominalRef)>
 	<cfset tabs=application.genieService.getWestMerciaNominalTabs(nominalRef=nominalRef)>
 	<cfset photo=application.genieService.getWestMerciaNominalLatestPhoto(nominalRef=nominalRef)>
+	<cfset photos=Application.genieService.getWestMerciaNominalPhotos(nominalRef=nominalRef)>
 	<cfset noPhotos=application.genieService.getWestMerciaNominalPhotoCount(nominalRef=nominalRef)>
 	<cfset photoList=application.genieService.getWestMerciaNominalPhotoList(nominalRef=nominalRef)>
 	<cfset warnings=application.genieService.getWestMerciaNominalWarnings(nominalRef=nominalRef)>
@@ -436,6 +437,26 @@ Revisions   :
 
 <div id="photoData" style="display:none">
 	
+	<cfloop index="i" from="1" to="#ArrayLen(photos)#" step="1">
+		      <div style="margin-left:20px; margin-bottom:10px; float:left">
+	 			  <div class="photo_title" align="center" style="width:200px">
+  					  <span id="photoDate">#IIf(Len(photos[i].getDatePhotoTaken()) IS 0,DE("&nbsp;"),DE("Taken: "&photos[i].getDatePhotoTaken()))#</span> <span id="photoSystem">#IIf(Len(photos[i].getSYSTEM_ID()) IS 0,DE("&nbsp;"),DE("("&photos[i].getSYSTEM_ID()&")"))#</span><br> 
+					  <img src="#photos[i].getPHOTO_URL()#" id="photoImg" border="0" alt="Picture Of "#nominal.getFull_Name()#"  width="200" height="250">
+					  <div align="right" style="height:20px;">
+					  <cfif photos[i].getSYSTEM_ID() IS "CUSTODY"
+					  	 OR photos[i].getSYSTEM_ID() IS "WARKS CUST">						 
+						 	<a href="/downloadImage.cfm?img=#Replace(photos[i].getPHOTO_URL(),application.str_Image_URL,application.str_Image_Temp_Dir)#&nominalRef=#nominal.getNOMINAL_REF()#"><img src="/images/download.png" class="downloadImage" hspace="5" border="0"></a>
+					  <cfelse>
+					  	  <br>								 
+					  </cfif>					  			  
+					  </div>
+				  </div>
+			 </div>		
+	  
+	  <cfif i MOD 3 IS 0>
+	  	  <br style="clear:all">
+		</cfif>
+	</cfloop>
 </div>
 
 </body>
