@@ -434,6 +434,10 @@ Revisions   :
 
 <div id="dialogData" style="display:none;"></div>
 
+<div id="photoData" style="display:none">
+	
+</div>
+
 </body>
 </cfoutput>
 
