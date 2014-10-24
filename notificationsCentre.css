@@ -1,0 +1,72 @@
+.notification{
+	border: 1px solid #808080;;		
+	padding: 5px;
+	margin:5px;		 
+	width: 475px;
+	height: 150px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: #666 0px 2px 3px;
+	-moz-box-shadow: #666 0px 2px 3px;
+	box-shadow: #666 0px 2px 3px;
+	background: #FFFFFF;
+	position:relative;
+	z-index: 0;
+	behavior: url('/csspie/PIE.htc');
+	text-align:left;
+}
+
+.ncHeader{
+	width:510px; 
+	padding:2px 0px 0px 6px; 
+	border-top:1px solid #808080; 
+	border-left:1px solid #808080; 
+	border-right:1px solid #808080; 
+	background-color:#d8d8d8; 
+	height:20px; 
+	z-index:0;
+	text-align:left;
+}	
+
+.ncContainer{
+	width:510px; 
+	border:1px solid #808080; 
+	padding:3px; 
+	background-color:#d8d8d8; 
+	height:335px; 
+	overflow:auto
+}	
+
+.ncPhoto{
+	display:inline-block;
+	padding-right:10px;
+}
+
+.ncUpdateContainer{
+  display:inline-block; 
+  width:360px; 
+  vertical-align:top;	
+}
+
+.ncUpdates{
+  overflow:auto; 
+  height:130px; 
+  width:355px;
+  padding-right:5px;
+  margin-top:3px;	  
+}
+
+.ncUpdate{
+  border-bottom:1px solid #808080;
+  
+}
+
+.ncUpdate a{
+  font-weight:bold;
+  text-decoration:none;	
+}
+
+.notificationDismissAll, .notificationDismiss {
+	cursor:hand;
+}
