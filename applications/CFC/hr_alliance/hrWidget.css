@@ -1,0 +1,33 @@
+.hrResultsArea{
+	overflow-y:scroll; 
+	overflow-x:hidden;
+	display:none;
+	position:absolute;	
+	border:1px solid black;
+	z-index:9999;
+	background-color:#ffffff;
+}
+
+.hrResultsArea .row0 {
+	background-color:#ffffff;	
+	width:100%;
+}
+
+.hrResultsArea .row1 {
+	background-color:#d7d7d7;	
+	width:100%;
+}
+
+.hrResultsArea .searchResult{
+	cursor:hand;
+	width:100%;
+	margin:2px;
+}
+
+.highlight{
+	text-decoration:underline;
+}
+
+.light{
+	color:#7e7e7e;
+}

@@ -1,0 +1,132 @@
+8
+
+dir
+134
+file:///W:/genie/3.3/code/ckeditor/plugins
+file:///W:/genie/3.3/code
+
+
+
+2014-01-20T07:52:02.543829Z
+69
+n_bla003
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+f2084464-1138-3447-8e7f-63aee081e79c
+
+fakeobjects
+dir
+
+find
+dir
+
+preview
+dir
+
+pagebreak
+dir
+
+div
+dir
+
+image
+dir
+
+scayt
+dir
+
+a11yhelp
+dir
+
+forms
+dir
+
+table
+dir
+
+magicline
+dir
+
+wsc
+dir
+
+pastefromword
+dir
+
+liststyle
+dir
+
+link
+dir
+
+flash
+dir
+
+colordialog
+dir
+
+templates
+dir
+
+icons.png
+file
+
+
+
+
+2014-06-25T09:53:46.393791Z
+28bcce9ae3a2cca2654d8295bf0fc045
+2014-01-20T07:52:02.543829Z
+69
+n_bla003
+has-props
+
+dialog
+dir
+
+clipboard
+dir
+
+smiley
+dir
+
+iframe
+dir
+
+tabletools
+dir
+
+about
+dir
+
+icons_hidpi.png
+file
+
+
+
+
+2014-06-25T09:53:46.487541Z
+4f873ff0712d31ede9d4c8bb2c2ef907
+2014-01-20T07:52:02.543829Z
+69
+n_bla003
+has-props
+
+showblocks
+dir
+
+specialchar
+dir
+

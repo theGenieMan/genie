@@ -1,0 +1,15 @@
+div.dpaBox label{
+	width:85px;
+	display:inline-block;
+	padding:5px;
+}
+
+div.dpaBox .dpaPersonSearchBox{	
+	display:inline-block;	
+}
+
+
+.error{
+	font-weight:bold;
+	color:red;
+}

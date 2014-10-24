@@ -1,0 +1,38 @@
+/* css for position, pointers etc...
+ * 
+ * NO COLOURS IN HERE, THEY ARE DEALT WITH BY THE JQUERY UI
+ * 
+ */
+
+body{
+	font-family:Courier;
+	font-size:9pt;
+}
+
+.genieResultButtons{
+	display:none;
+}
+
+.genieCamera {display:none;}
+
+.genieWarning {display:none;}
+
+.genieAddress {display:none;}
+
+table.genieData, table.wmpData {
+	border-spacing: 2px;
+	border-collapse: separate;	
+}
+
+table.genieData td, table.wmpData td {
+	padding: 3px;
+	border-bottom:1px solid black;
+}
+
+table.genieData thead th, table.wmpData thead th {
+	background-color:white;
+	color:black;
+	font-weight:bold;
+	border:1px solid black;
+}	
+

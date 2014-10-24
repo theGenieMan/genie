@@ -1,0 +1,142 @@
+8
+
+dir
+134
+file:///W:/genie/3.3/code/ckeditor
+file:///W:/genie/3.3/code
+
+
+
+2014-06-13T06:31:10.668175Z
+123
+n_bla003
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+f2084464-1138-3447-8e7f-63aee081e79c
+
+ckeditor.js
+file
+
+
+
+
+2014-06-25T09:54:10.050041Z
+ce9b19af37b8f399382c66f2d354fd0d
+2014-01-20T07:52:02.543829Z
+69
+n_bla003
+
+config.js
+file
+
+
+
+
+2014-06-25T09:54:10.096916Z
+3c289e8d372c17436a8a287a80bc90f7
+2014-01-20T07:52:02.543829Z
+69
+n_bla003
+
+lang
+dir
+
+plugins
+dir
+
+LICENSE.md
+file
+
+
+
+
+2014-06-25T09:54:10.190666Z
+278c39e8d44069873ff53a3cd547b929
+2014-01-20T07:52:02.543829Z
+69
+n_bla003
+
+adapters
+dir
+
+samples
+dir
+
+contents.css
+file
+
+
+
+
+2014-06-25T09:54:10.237541Z
+0dcec76b936679828e621f685629982f
+2014-01-20T07:52:02.543829Z
+69
+n_bla003
+
+skins
+dir
+
+CHANGES.md
+file
+
+
+
+
+2014-06-25T09:54:10.284416Z
+a90e20717b5c3e82f39cac1f46dd2a48
+2014-01-20T07:52:02.543829Z
+69
+n_bla003
+
+filemanager
+dir
+
+README.md
+file
+
+
+
+
+2014-06-25T09:54:10.315666Z
+cd71c58ee48b3847dc9c8e7d333824e0
+2014-01-20T07:52:02.543829Z
+69
+n_bla003
+
+build-config.js
+file
+
+
+
+
+2014-06-25T09:54:10.362541Z
+5d828190d71240108a647b693eeee066
+2014-01-20T07:52:02.543829Z
+69
+n_bla003
+
+styles.js
+file
+
+
+
+
+2014-06-25T09:54:10.393791Z
+a4f7dd9e5f79bf0e3d293fe5f18cee7e
+2014-01-20T07:52:02.543829Z
+69
+n_bla003
+

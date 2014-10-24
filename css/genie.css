@@ -1,0 +1,356 @@
+/* css for position, pointers etc...
+ * 
+ * NO COLOURS IN HERE, THEY ARE DEALT WITH BY THE JQUERY UI
+ * 
+ */
+
+/*
+body{
+	font-family:Arial;
+	font-size:10pt;
+}*/
+
+label{
+	font-weight:bold;
+}
+
+div.spacer{
+	height:2px;
+}
+
+.searchPaneHeader {
+	cursor:hand;
+	padding-left:10px;
+}
+
+input[type=text] {
+/*	border:1px solid #808080; */
+	padding:2px;
+}
+
+input.input2char{
+	width:1.5em;
+}
+
+input.input4char{
+	width:3.5em;
+}
+
+.searchPaneContent{
+	overflow:hidden !important;
+}
+
+.genieCamera {width:20px; height:14px; background:url(/images/personSearch.png) 0 0px;}
+
+.genieWarning {width:20px; height:15px; background:url(/images/personSearch.png) 0 -14px;}
+
+.genieAddress {width:20px; height:15px; background:url(/images/personSearch.png) 0 -29px;}
+
+.genieMagglass {width:20px; height:15px; background:url(/images/personSearch.png) 0 -45px;}
+
+.geniePlus {width:20px; height:15px; background:url(/images/personSearch.png) 0 -62px;} 
+
+.genieFamily {width:20px; height:15px; background:url(/images/personSearch.png) 0 -81px; float:right;} 
+
+.progressBar {width:160px; height:20px;background:url(/images/progressBar.gif)}
+
+.smallSpinner {width:16px; height:16px;background:url(/images/smallSpinner.gif);}
+
+.geniePhotoHolder{
+	text-align:center;
+}
+
+.nominalTitle{
+	font-size:120%;
+}
+
+.iom1{
+	background-color:red;
+	color : #FFF;
+    line-height:1.1em;	
+	padding:1px;
+	text-align:center;
+	font-weight:bold;
+	font-size:85%; 
+	width:300px;  
+	margin:2px;	
+}
+
+.iom2{
+	background-color:orange;
+	color : #000;
+    line-height:1.1em;	
+	padding:1px;
+	text-align:center;
+	font-weight:bold;
+	font-size:85%; 
+	width:300px;  
+	margin:2px;	
+}
+
+.iom3{
+	background-color:#66FF33;
+	color : #000;
+    line-height:1.1em;	
+	padding:1px;
+	text-align:center;
+	font-weight:bold;
+	font-size:85%; 
+	width:300px;  
+	margin:2px;	
+}
+
+.iom4{
+	background-color:#000000;
+	color : #FFF;
+    line-height:1.1em;	
+	padding:1px;
+	text-align:center;
+	font-weight:bold;
+	font-size:85%; 
+	width:300px;  
+	margin:2px;	
+}
+
+.warningDeceased
+{
+  	background-color : #F00;
+	color : #FFF;
+  	line-height:1.1em;	
+	padding:1px;
+	text-align:center;
+	font-weight:bold;
+	font-size:110%; 
+	width:300px;  
+	margin:2px;
+}
+
+.photo_title
+{
+	background-color : #0C5C99;
+	color : #FFF;
+    line-height:1.3em;
+	font-size:90%;
+	text-align:left;
+	font-weight:bold;
+	width:250;
+	text-align:center;
+}
+
+#infoBoxParent{	   
+    display: table;		 
+    width: 98%;    
+	vertical-align:middle;
+}
+
+.infoBoxChild{
+	width: 150px;
+    height: 35px;
+    display: inline-block;    
+	font-size:90%;
+	margin-top:2px;
+}
+
+.infoBoxPieRed{
+display: table-cell;
+border: 1px solid #F00;
+color:white;
+font-weight:bold;
+/*padding: 15px 0; */
+text-align: center; 
+height:45px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+-webkit-box-shadow: #666 0px 2px 3px;
+-moz-box-shadow: #666 0px 2px 3px;
+box-shadow: #666 0px 2px 3px;
+background: #FF0000;
+background: -webkit-gradient(linear, 0 0, 0 bottom, from(#FF0000), to(#FF0000));
+background: -webkit-linear-gradient(#FF0000, #FF0000);
+background: -moz-linear-gradient(#FF0000, #FF0000);
+background: -ms-linear-gradient(#FF0000, #FF0000);
+background: -o-linear-gradient(#FF0000, #FF0000);
+background: linear-gradient(#FF0000, #FF0000);
+-pie-background: linear-gradient(#FF0000, #FF0000);
+behavior: url(/csspie/PIE.htc);
+}
+
+.infoBoxPieGreen{
+display: table;	
+border: 1px solid #090;
+color:white;
+font-weight:bold;
+/*padding: 15px 0; */
+text-align: center; 
+height:45px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+-webkit-box-shadow: #666 0px 2px 3px;
+-moz-box-shadow: #666 0px 2px 3px;
+box-shadow: #666 0px 2px 3px;
+background: #090;
+background: -webkit-gradient(linear, 0 0, 0 bottom, from(#090), to(#090));
+background: -webkit-linear-gradient(#090, #090);
+background: -moz-linear-gradient(#090, #090);
+background: -ms-linear-gradient(#090, #090);
+background: -o-linear-gradient(#090, #090);
+background: linear-gradient(#090, #090);
+-pie-background: linear-gradient(#090, #090);
+behavior: url(/csspie/PIE.htc);
+}
+
+.infoBoxPieIOM1{
+display: table;		
+border: 1px solid #F00;
+color:white;
+font-weight:bold;
+/*padding: 15px 0; */
+text-align: center; 
+height:45px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+-webkit-box-shadow: #666 0px 2px 3px;
+-moz-box-shadow: #666 0px 2px 3px;
+box-shadow: #666 0px 2px 3px;
+background: #FF0000;
+background: -webkit-gradient(linear, 0 0, 0 bottom, from(#FF0000), to(#FF0000));
+background: -webkit-linear-gradient(#FF0000, #FF0000);
+background: -moz-linear-gradient(#FF0000, #FF0000);
+background: -ms-linear-gradient(#FF0000, #FF0000);
+background: -o-linear-gradient(#FF0000, #FF0000);
+background: linear-gradient(#FF0000, #FF0000);
+-pie-background: linear-gradient(#FF0000, #FF0000);
+behavior: url(/csspie/PIE.htc);
+}
+
+.infoBoxPieIOM2{
+display: table;	
+border: 1px solid orange;
+color:white;
+font-weight:bold;
+/*padding: 15px 0; */
+text-align: center; 
+height:45px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+-webkit-box-shadow: #666 0px 2px 3px;
+-moz-box-shadow: #666 0px 2px 3px;
+box-shadow: #666 0px 2px 3px;
+background: orange;
+background: -webkit-gradient(linear, 0 0, 0 bottom, from(orange), to(orange));
+background: -webkit-linear-gradient(orange, orange);
+background: -moz-linear-gradient(orange, orange);
+background: -ms-linear-gradient(orange, orange);
+background: -o-linear-gradient(orange, orange);
+background: linear-gradient(orange, orange0);
+-pie-background: linear-gradient(orange, orange);
+behavior: url(/csspie/PIE.htc);
+}
+
+.infoBoxPieIOM3{
+display: table;	
+border: 1px solid #090;
+color:white;
+font-weight:bold;
+/*padding: 15px 0; */
+text-align: center; 
+height:45px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+-webkit-box-shadow: #666 0px 2px 3px;
+-moz-box-shadow: #666 0px 2px 3px;
+box-shadow: #666 0px 2px 3px;
+background: #090;
+background: -webkit-gradient(linear, 0 0, 0 bottom, from(#090), to(#090));
+background: -webkit-linear-gradient(#090, #090);
+background: -moz-linear-gradient(#090, #090);
+background: -ms-linear-gradient(#090, #090);
+background: -o-linear-gradient(#090, #090);
+background: linear-gradient(#090, #090);
+-pie-background: linear-gradient(#090, #090);
+behavior: url(/csspie/PIE.htc);
+}
+
+.infoBoxPieIOM4{
+display: table;	
+border: 1px solid black;
+color:white;
+font-weight:bold;
+/*padding: 15px 0; */
+text-align: center; 
+height:45px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+-webkit-box-shadow: #666 0px 2px 3px;
+-moz-box-shadow: #666 0px 2px 3px;
+box-shadow: #666 0px 2px 3px;
+background: black;
+background: -webkit-gradient(linear, 0 0, 0 bottom, from(black), to(black));
+background: -webkit-linear-gradient(black, black);
+background: -moz-linear-gradient(black, black);
+background: -ms-linear-gradient(black, black);
+background: -o-linear-gradient(black, black);
+background: linear-gradient(black, black);
+-pie-background: linear-gradient(black, black);
+behavior: url(/csspie/PIE.htc);
+}
+
+.infoBoxPieBlue{
+display: table;
+border: 1px solid blue;
+color:white;
+height:45px;
+font-weight:bold;
+/*padding: 15px 0; */
+text-align: center; 
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+-webkit-box-shadow: #666 0px 2px 3px;
+-moz-box-shadow: #666 0px 2px 3px;
+box-shadow: #666 0px 2px 3px;
+background: blue;
+background: -webkit-gradient(linear, 0 0, 0 bottom, from(blue), to(blue));
+background: -webkit-linear-gradient(blue, blue);
+background: -moz-linear-gradient(blue, blue);
+background: -ms-linear-gradient(blue, blue);
+background: -o-linear-gradient(blue, blue);
+background: linear-gradient(blue, blue);
+-pie-background: linear-gradient(blue, blue);
+behavior: url(/csspie/PIE.htc);
+}
+
+.infoBoxMiddle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.infoBoxInner {
+    margin-left: auto;
+    margin-right: auto; 
+    width: 200px;	
+}
+
+.photoScrollLink{
+	cursor:hand;
+}
+
+.nominalInfoHolder{
+	height:290px;
+	overflow:auto;
+}
+
+.warningInfoHolder{
+	height:290px;
+	overflow:auto;
+}
+
+#dialogWarningData{
+	cursor:hand;
+}

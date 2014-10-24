@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>V4 - Code</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>com.adobe.ide.coldfusion.projectNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>312 Code</name>
+			<type>2</type>
+			<location>//svr20312/d$/inetpub/wwwroot</location>
+		</link>
+	</linkedResources>
+</projectDescription>
