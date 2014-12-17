@@ -1,17 +1,18 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
 <head>
 	<title>Offence Enquiry - What am I searching?</title>
-	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/accessibility/home/stylesheet.cfm">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/css/genie.css">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">	
 </head>
 
 <body>
+
+<cfset headerTitle="GENIE OFFENCE ENQUIRY - What am I searching ?">	
+<cfinclude template="/header.cfm">
 	
-<div class="header">
- GENIE OFFENCE ENQUIRY - What am I searching ?
-</div>	
-<input type="button" value="Back To Search Screen (B)" onClick="window.close(); opener.focus();" AccessKey="B">
-<div>
+<div style="clear:both;">
 <br>
 <strong>Systems available for search:</strong>
 <Br><Br>

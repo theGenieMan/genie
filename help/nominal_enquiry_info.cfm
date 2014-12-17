@@ -1,16 +1,17 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
 <head>
 	<title>Person Enquiry - What am I searching?</title>
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/css/genie.css">	
-	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/jquery-ui-1.10.4.custom.css">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">	
 </head>
 
 <body>
-	
-<div class="ui-widget-header" align="center">
- GENIE NOMINAL ENQUIRY - What am I searching ?
-</div>	
+
+<cfset headerTitle="GENIE NOMINAL ENQUIRY - What am I searching ?">	
+<cfinclude template="/header.cfm">
+
 <Br>
 <div>
 <strong>Important information about CRIMES and NSPIS Custody/Case Preparation nominals</strong>

@@ -32,10 +32,16 @@ Revisions   :
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/css/genie.css">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">
-	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/jquery_news_ticker/styles/ticker-style.css">	  
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/jquery_news_ticker/styles/ticker-style.css">
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/customControls/dpa/css/dpa.css">	  
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/applications/cfc/hr_alliance/hrWidget.css">
 	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
-	<script type="text/javascript" src="/jQuery/jquery_news_ticker/includes/jquery.ticker.js"></script>			
+	<script type="text/javascript" src="/jQuery/jquery_news_ticker/includes/jquery.ticker.js"></script>	
+	<script type="text/javascript" src="/jQuery/customControls/dpa/jquery.genie.dpa.js"></script>	
+	<script type="text/javascript" src="/applications/cfc/hr_alliance/hrBean.js"></script>
+	<script type="text/javascript" src="/jQuery/highlight/jquery.highlight.js"></script>
+	<script type="text/javascript" src="/applications/cfc/hr_alliance/jquery.hrQuickSearch.js"></script>	
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>
 	<script>
@@ -128,6 +134,50 @@ Revisions   :
 			
 		}
 		
+		// dpa box for the notifications centre should a user click on the 
+		// link for the nominal or the updates.
+		var $dpaBox=$('#dpa').dpa({
+					requestFor:{
+						initialValue:$('#enquiryUser').val(),
+					},
+					dpaUpdated: function(e,data){
+							// update the dpa boxes as per the values entered.
+							$('#reasonCode').val(data.reasonCode)
+							$('#reasonText').val(data.reasonText)
+							$('#requestFor').val(data.requestFor)
+							$('#dpaValid').val('Y').change()							
+							var urlToOpen=data.urlToOpen;
+							var howToOpen=data.howToOpen;
+							// send the data to the session update function in the genie service
+							
+							$.ajax({
+									 type: 'POST',
+									 url: '/genieSessionWebService.cfc?method=updateSession&reasonCode='+data.reasonCode+'&reasonText='+data.reasonText+'&requestFor='+data.requestFor,						 							  
+									 cache: false,
+									 async: false,							 
+									 success: function(data, status){									 				
+										if(urlToOpen.length>0){											
+										  if (howToOpen == 'full') {
+										  	fullscreen(urlToOpen, 'nominal' + getTimestamp())
+										  }
+										  if (howToOpen == 'current') {
+										  	window.location(urlToOpen)
+										  }
+										  if (howToOpen == 'new') {
+										  	window.open(urlToOpen)
+										  }	
+										}														  					  
+									 },
+									 error: function(jqXHR, textStatus, errorThrown){
+									 	alert('An error occurred updating the session info: '+textStatus+', '+errorThrown)			
+									 }
+							});								
+							
+							
+					}
+					
+		});		
+		
 	});	
 	</script>
 </head>
@@ -141,7 +191,7 @@ Revisions   :
 <body onLoad="setTimeout('RemoveMessage()',5000)">
 <cfoutput>
 <cfinclude template="header.cfm">
-
+<div id="dpa" style="display:none;"></div>
 <cfif arrayLen(sysMessages) GT 0>
 <div align="center">
 <ul id="js-news" class="js-hidden">
@@ -224,8 +274,20 @@ Revisions   :
  </td>
 </tr>
 </table>
+<cfset sessionId=createUUID()>
+<input type="hidden" name="sessionId" id="sessionId" value="#sessionId#">
+<input type="hidden" name="sessionId" id="terminalId" value="#session.hostName#">
+<input type="hidden" name="enquiryUser" id="enquiryUser" value="#session.user.getUserId()#">
+<input type="hidden" name="enquiryUserName" id="enquiryUserName" value="#session.user.getFullName()#">
+<input type="hidden" name="enquiryUserDept" id="enquiryUserDept" value="#session.user.getDepartment()#">
+<input type="hidden" name="requestFor" id="requestFor" value="">
+<input type="hidden" name="reasonCode" id="reasonCode" value="">
+<input type="hidden" name="reasonText" id="reasonText" value="">
+<input type="hidden" name="reasonText" id="dpaValid" value="N">
 </cfoutput>	
 </div>
 
 </body>
 </html>
+
+	

@@ -22,3 +22,10 @@ var xmlWMPPersonSearch ='<personSearch xmlns="http://tempuri.org/">';
 	xmlWMPPersonSearch+=' <postTown>~postTown~</postTown>';
 	xmlWMPPersonSearch+=' <nickname>~nickname~</nickname>';
 	xmlWMPPersonSearch+='</personSearch>'; 
+	
+var otherNamesDialog ='<div id="otherNamesDialog">';
+	otherNamesDialog+=' <div id="onLoadingDiv" style="width:100%" align="center"><h4>Loading, please wait</h4><div class="progressBar"></div></div>';
+	otherNamesDialog+='	<div id="onData" style="display:none;"></div>';
+	otherNamesDialog+='</div>';	
+	
+

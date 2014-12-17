@@ -85,11 +85,14 @@ Revisions   :
 	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
 	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.js"></script>
 	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.plugin.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
 	<script type="text/javascript" src="/jQuery/customControls/dpa/jquery.genie.dpa.js"></script>
 	<script type="text/javascript" src="/applications/cfc/hr_alliance/hrBean.js"></script>
 	<script type="text/javascript" src="/jQuery/highlight/jquery.highlight.js"></script>
+	<script type="text/javascript" src="/jQuery/datatables/media/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="/applications/cfc/hr_alliance/jquery.hrQuickSearch.js"></script>
 	<script type="text/javascript" src="js/nominalEvents.js"></script>
 	<script type="text/javascript" src="js/photoScroll.js"></script>
@@ -98,7 +101,13 @@ Revisions   :
 
 <cfoutput>
 <body>
-<input type="hidden" id="hiddenPhotoList" name="hiddenPhotoList" value="<cfoutput>#photoList#</cfoutput>">	
+<input type="hidden" id="hiddenPhotoList" name="hiddenPhotoList" value="<cfoutput>#photoList#</cfoutput>">
+<cfif isDefined('fullWarnings')>
+	<input type="hidden" id="fullWarnings" name="fullWarnings" value="YES">
+</cfif>
+<cfif isDefined('fromPrint')>
+	<input type="hidden" id="fromPrint" name="fromPrint" value="YES">
+</cfif>	
 <cfinclude template="/header.cfm">	
 
 <div style="clear:all;">
@@ -115,16 +124,17 @@ Revisions   :
 <br> 
 </div>	 
 
-<div class="ui-widget-header nominalTitle" align="center">
-	#nominal.getFULL_NAME()# (#nominal.getNOMINAL_REF()#)
+<div id="personalDetails">
+<div class="#iif(nominal.getDECEASED() IS "Y",de('deceasedTitle'),de('nominalTitle'))#" align="center">
+<cfif nominal.getDECEASED() IS "Y">**** DECEASED **** - </cfif>#nominal.getFULL_NAME()# (#nominal.getNOMINAL_REF()#)<cfif nominal.getDECEASED() IS "Y"> - **** DECEASED ****</cfif>
 </div>
 
-<table width="100%" border=1 height="300px">
+<table width="100%" border=0 height="300px" id="nominalDetailsTable">
 	<tr>
-		<td width="210" valign="top">
+		<td width="210" valign="top" id="photoColumn">
 				 <div class="photo_title" align="center" style="width:200px">
   					  <span id="photoDate">#IIf(Len(photo.getDatePhotoTaken()) IS 0,DE("&nbsp;"),DE("Taken: "&photo.getDatePhotoTaken()))#</span> <span id="photoSystem">#IIf(Len(photo.getSYSTEM_ID()) IS 0,DE("&nbsp;"),DE("("&photo.getSYSTEM_ID()&")"))#</span><br> 
-					  <img src="#photo.getPHOTO_URL()#" id="photoImg" border="0" alt="#IIf(Len(photo.getAS_REF()) IS 0,DE("No Photo Available"),DE("Picture Of "&nominal.getFull_Name()&" ("&nominal.getNOMINAL_REF()))#."  width="200" height="250">
+					  <img src="#photo.getPHOTO_URL()#" id="photoImg" border="0" alt="#IIf(Len(photo.getAS_REF()) IS 0,DE("No Photo Available"),DE("Picture Of "&nominal.getFull_Name()&" ("&nominal.getNOMINAL_REF()))#."  width="200">
 					  <div id="photoScrollingLinks" style="display:none;">
 						  <div align="left" style="display:inline-block;width:30%">
 						   <span id="photoPrev" class="photoScrollLink">&lt;&lt;&lt&lt</span>
@@ -138,7 +148,7 @@ Revisions   :
 					  </div>
 				  </div>				
 		</td>		
-		<td valign="top" width="50%">
+		<td valign="top" id="detailsColumn" #iif(arrayLen(warnings) GT 0,DE('width="50%"'),de('width="90%"'))#>
 		  <div id="nominalInfoHolder">	
 			<table width="98%" class="nominalData">
 				<tr>
@@ -201,21 +211,15 @@ Revisions   :
 			<div id="infoBoxParent">
 				    <!--- deceased marker --->
 					<cfif nominal.getDECEASED() IS "Y">						
-						 <div class="infoBoxChild infoBoxPieRed">	
-						  <div class="infoBoxMiddle">
-					       <div class="infoBoxInner">
-			                  **** DECEASED ****<br>
+						 <div class="redWarningBox">	
+						      **** DECEASED ****<br>
 	                          #IIf(Len(nominal.getDATE_OF_DEATH_TEXT()) IS 0,DE("&nbsp;"),DE(nominal.getDATE_OF_DEATH_TEXT()))#
-	                          #IIf(nominal.getDOD_ESTIMATE_FLAG() IS 'Y',DE("(Estimated)"),DE("&nbsp;"))#	                          
-						   </div>
-						  </div>
+	                          #IIf(nominal.getDOD_ESTIMATE_FLAG() IS 'Y',DE("(Estimated)"),DE("&nbsp;"))#	                          						  
 		                 </div>
 		            </cfif>    						
 				    <!--- alias name types --->
 					<cfif nominal.getName_Type() IS NOT "P">				    
-						 <div class="infoBoxChild infoBoxPieRed">
-						  <div class="infoBoxMiddle">
-					       <div class="infoBoxInner">						 		
+						 <div class="redWarningBox">						  						 		
 						  <cfswitch expression="#nominal.getName_Type()#">
 						   <cfcase value="A">
 							  ALIAS RECORD
@@ -235,38 +239,31 @@ Revisions   :
 						   <cfcase value="W">
 							  ALIAS WEDDED NAME RECORD
 						   </cfcase>						   					   						   						   						   
-						  </cfswitch>
-						   </div>
-						  </div>
+						  </cfswitch>						   
 						 </div> 
 				    </cfif>
 				    <!--- prisoner release --->		
 					<cfif Len(release.getPNC_ID()) GT 0>						
-						<div class="infoBoxChild infoBoxPieRed">
-						  <div class="infoBoxMiddle">
-					       <div class="infoBoxInner">	
+						<div class="redWarningBox">						  	
 							 Prisoner @ #release.getESTABLISHMENT()#<br>						 
-							 Release Date: #DateFormat(release.getDIARY_DATE(),"DD/MM/YYYY")#<br>
-							 <a href="http://websvr.intranet.wmcpolice/index_email.cfm?page_address=%2Fapplications%2Foms%2Fcode%2Frelease_search.cfm%3FFRM_BTNSEARCH=Search%26OMS_XL%3DYES%26FRM_HIDACTION=Search%26FRM_TXTPNCID=#release.getPNC_ID()#%26FromNomImg=YES%23The_Results" target="_blank">Click For Details</a>
-						   </div>
-						 </div>
+							 Release Date: #DateFormat(release.getDIARY_DATE(),"DD/MM/YYYY")#						   
 						</div>
 					</cfif>
 					<!--- target marker --->			
 					<cfif Len(target.getTARGET_REF()) GT 0>
-						<div class="infoBoxChild infoBoxPieRed">
+						<div class="redWarningBox">
 						 #target.getReason()#
 						</div>						
 					</cfif>
 					<!--- persistent young offender addition --->
 					<cfif pyo>					
-						<div class="infoBoxChild infoBoxPieRed">
+						<div class="redWarningBox">
 						 DETER YOUNG OFFENDER<br>
-						 <a href="../../../docs/DYO_FLOWCHART.doc" target="_blank">Click For Guidance</a>
+						 <a href="/help/DYO_FLOWCHART.doc" target="_blank">Click For Guidance</a>
 						</div>												
 					</cfif>
 					<cfif Len(currentCustody.getCustody_Ref()) GT 0>						
-						<div class="infoBoxChild infoBoxPieRed">
+						<div class="redWarninbBox">
 						   <cfif currentCustody.getSTATUS() IS "C">
                              IN CUSTODY @ #currentCustody.getSTATION()#<Br>#currentCustody.getCUSTODY_REF()#
                            <cfelse>
@@ -275,12 +272,12 @@ Revisions   :
 						</div>						
 					</cfif>		
 					<cfif rmp.current>					
-						<div class="infoBoxChild infoBoxPieRed">							  
+						<div class="redWarningBox">							  
 							CURRENT RMP <br> #rmp.rmp.getRMP_TYPE()#                     
 						</div>						
 					</cfif>												
 					<cfif nominal.getSTEP_FLAG() IS "Y">						
-						<div class="infoBoxChild infoBoxPieRed">
+						<div class="redWarningBox">
 						 STEP PACKAGE(S)                         
 						</div>						
 					</cfif>	
@@ -299,7 +296,7 @@ Revisions   :
                            </cfif>
                        </cfif>
 
-                        <div class="infoBoxChild #IIf(ccpType IS "Live",DE("infoBoxPieRed"),DE("infoBoxPieGreen"))#">
+                        <div class="infoBoxChild #IIf(ccpType IS "Live",DE("redWarningBox"),DE("greenWarningBox"))#">
                             CHILD PROTECTION<br>CARE PLAN<br>
                             #nominal.getDATE_STARTED_TEXT()# #IIF(Len(nominal.getDATE_FINISHED_TEXT()) GT 0,DE(' - '&nominal.getDATE_FINISHED_TEXT()),DE(''))#                               
                         </div>
@@ -308,8 +305,8 @@ Revisions   :
                     
                     <!--- iom info boxes --->    
 					<cfif iom>					
-					<div class="infoBoxChild infoBoxPieIOM#iomLevel#">
-                      INTEGRATED OFFENDER MANAGEMENT (IOM) - 
+					<div class="warningBoxIOM#iomLevel#">
+                      I O M  - 
 					  <cfswitch expression="#iomLevel#">
 					  	  <cfcase value="1">
 						  RED
@@ -324,13 +321,13 @@ Revisions   :
 						  BLACK
 						  </cfcase>
 					  </cfswitch>
-                      <br>(<a href="../../../docs/IOM_guidance.doc" target="_blank">Click Here For Guidance</a>)
+                      <br>(<a href="/help/IOM_guidance.doc" target="_blank">Click Here For Guidance</a>)
 					</div>									
 					</cfif>        					
 
 					<!--- threat to life RMP --->
 					<cfif nominal.getTTL_FLAG() IS "Y">
-					<div class="infoBoxChild infoBoxPieRed">
+					<div class="redWarningBox">
 						 SUBJECT OF RISK MANAGEMENT PLAN<br>
 						 *** CONTACT FDI IF POLICE CONTACT ***
 						 <cfif isDefined('session.isFDI')>
@@ -342,68 +339,56 @@ Revisions   :
 					</cfif>
 					
             		<cfif Len(onWarrant.getWarrant_Ref()) GT 0>
-					  <div class="infoBoxChild infoBoxPieRed">
+					  <div class="redWarningBox">
 						 CURRENTLY WANTED<br>ON WARRANT
 					  </div>						
 					</cfif>
 								
 					<cfif Len(onBail.getBAIL_REF()) GT 0>
-					<div class="infoBoxChild infoBoxPieRed">
+					<div class="redWarningBox">
 					  CURRENTLY ON BAIL <cfif ArrayLen(onBail.getBailConditions()) GT 0><br>CONDITIONS APPLY</cfif>
 					</div>
 					</cfif>						
 					
 					<cfif ppo>
-					<div class="infoBoxChild infoBoxPieRed">
+					<div class="redWarningBox">
                        PRIORITY &amp; PROLIFIC OFFENDER (PPO)
-                       <br>(<a href="../../../docs/generic_PPO_guidance.pdf" target="_blank">Click Here For Guidance</a>)
+                       <br>(<a href="/help/generic_PPO_guidance.pdf" target="_blank">Click Here For Guidance</a>)
 					</div>			
 					</cfif>
                     
                     <cfif nominal.getTACAD_FLAG() IS "Y" and session.loggedInUserLogAccess LTE 20>
-					<div class="infoBoxChild infoBoxPieRed">
+					<div class="redWarningBox">
 						   SUBJECT OF TACTICAL ADVICE<br>
                            <a href="#Application.TACAD_Link##nominalRef#" target="_blank">Click Here For More Information</a>
 					</div>						
                     </cfif>
                     
                     <cfif nominal.getCOMP_STATUS() IS "M" OR nominal.getCOMP_STATUS() IS "I">
-					<div class="infoBoxChild infoBoxPieBlue">
-					 <div class="infoBoxMiddle">
-					  <div class="infoBoxInner">
-						CURRENTLY LISTED AS<Br>A MISSING PERSON
-					  </div>
-					 </div>						
+					<div class="blueWarningBox">					 
+						CURRENTLY LISTED AS<Br>A MISSING PERSON					  
 					</div>
 					</cfif>
 					            
                     <cfif Len(nominal.getCOLLECTOR_TXT()) GT 0>
-					<div class="infoBoxChild infoBoxPieRed">
+					<div class="redWarningBox">
 						ASB - Div: #nominal.getCOLLECTOR_DIV()#<br>
-                        #nominal.getCOLLECTOR_TXT()# (<a href="/genie/docs/asb_guidance.doc" target="_blank">Click For Notes</a>)
+                        #nominal.getCOLLECTOR_TXT()#<br>
+						(<a href="/help/asb_guidance.doc" target="_blank">Click For Notes</a>)
 					</div>
 					</cfif>
 					
                     <cfif Len(nominal.getQUICK_STEP_FLAG()) GT 0>
-					<div class="infoBoxChild infoBoxPieRed">
+					<div class="redWarningBox">
 						QUICK STEP PACKAGE<br>
 						(<a href="#application.nominalQuickStepLink##nominal.getNOMINAL_REF()#" target="_blank">Click For Details</a>)
 					</div>												
-					</cfif>  
-					
-					<cfif section27.current>
-					<div class="infoBoxChild infoBoxPieRed">
-						SEC 27 :
-						#section27.s27.getS27_DATE_FROM_TEXT_SHORT()# - #section27.s27.getS27_DATE_TO_TEXT_SHORT()#
-						<br>Zone: #section27.s27.getS27_ZONE()# 
-						<br>Issued By: #section27.s27.getOFFICER()# 
-					</div>	
 					</cfif>  
 										    		
 			</div>
 		  </div>
 		</td>
-		<td valign="top">
+		<td valign="top" id="warningsColumn">
 			<div class="warningInfoHolder">
 			 <div id="warningDataBox">	
 			 <cfif arrayLen(warnings) GT 0>	
@@ -420,9 +405,11 @@ Revisions   :
 					</div>
 					<cfloop index="i" from="1" to="#ArrayLen(warnings)#" step="1">
 					  <cfif thisWarningType IS warnings[i].getWSC_DESC()>
+					  	<cfif Len(warnings[i].getDATE_MARKED()) GT 0>
 						<div class="warningText">
 							<strong>#warnings[i].getDATE_MARKED()# <cfif Len(warnings[i].getEND_DATE()) GT 0> - #warnings[i].getEND_DATE()#</cfif></strong>. #warnings[i].getWS_NOTE()#
 						</div>
+						</cfif>
 					  </cfif>
 					</cfloop>
 				</cfloop>
@@ -432,6 +419,59 @@ Revisions   :
 		</td>
 	</tr>
 </table>
+</div>
+	
+<cfset tabOrder="ROLES,ADDRESSES,BAILS,PROCDEC,VEHICLES,TELNOS,DOCS,ALIAS,ASSOC,CUSTODIES,FEAT,WARRANTS,ORGS,FPU,IRAQS,MISPER,STEP,OCC,WARN,SS,RMP">
+
+<cfset enableTabs="">
+<cfset disableTabs="">
+
+<cfset tabIndex=0>
+<cfloop list="#tabOrder#" index="tab" delimiters=",">
+	<cfif StructFind(tabs,tab)>
+	  <cfset enableTabs=ListAppend(enableTabs,tabIndex,",")>
+	<cfelse>
+	  <cfset disableTabs=ListAppend(disableTabs,tabIndex,",")>
+	</cfif>
+	<cfset tabIndex++>
+</cfloop>
+
+<!--- if the enable tabs list is empty then send a value of 999
+      the jquery function will disabled all tabs based on this --->
+<cfif Len(enableTabs) IS 0>
+	<cfset enableTabs=999>
+</cfif>
+<cfif not isDefined('url.firstTab')>
+<input type="hidden" name="firstTab" id="firstTab" value="#ListGetAt(enableTabs,1,",")#">
+<cfelse>
+<input type="hidden" name="firstTab" id="firstTab" value="#firstTab#">
+</cfif>
+<input type="hidden" name="disableTabs" id="disableTabs" value="#disableTabs#">
+<div id="nominalTabs" style="display:none;">
+  <ul>
+	<li><a href="/dataTables/nominal/roles.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>R</u>oles</a></li>
+	<li><a href="/dataTables/nominal/addresses.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>A</u>ddr</a></li>
+	<li><a href="/dataTables/nominal/bails.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>B</u>ail</a></li>
+	<li><a href="/dataTables/nominal/processdecisions.cfm?nominalRef=#nominal.getNominal_Ref()#">Pr D<u>e</u>c</a></li>
+	<li><a href="/dataTables/nominal/vehicles.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>V</u>eh</a></li>
+	<li><a href="/dataTables/nominal/telephones.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>T</u>el</a></li>
+	<li><a href="/dataTables/nominal/documents.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>D</u>oc</a></li>
+	<li><a href="/dataTables/nominal/alias.cfm?nominalRef=#nominal.getNominal_Ref()#">A<u>l</u>ias</a></li>
+	<li><a href="/dataTables/nominal/associates.cfm?nominalRef=#nominal.getNominal_Ref()#">A<u>s</u>soc</a></li>
+	<li><a href="/dataTables/nominal/custodies.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>C</u>ust</a></li>
+	<li><a href="/dataTables/nominal/features.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>F</u>eat</a></li>
+	<li><a href="/dataTables/nominal/warrants.cfm?nominalRef=#nominal.getNominal_Ref()#">Wr<u>n</u>t</a></li>
+	<li><a href="/dataTables/nominal/organisations.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>O</u>rgs</a></li>
+	<li><a href="/dataTables/nominal/fpu.cfm?nominalRef=#nominal.getNominal_Ref()#">FP<u>U</u></a></li>
+	<li><a href="/dataTables/nominal/iraqs.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>I</u>raq</a></li>	
+	<li><a href="/dataTables/nominal/misper.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>M</u>isp</a></li>
+	<li><a href="/dataTables/nominal/step.cfm?nominalRef=#nominal.getNominal_Ref()#">Pac<u>k</u></a></li>
+	<li><a href="/dataTables/nominal/occupations.cfm?nominalRef=#nominal.getNominal_Ref()#">Occ<u>J</u></a></li>
+	<li><a href="/dataTables/nominal/warnings.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>W</u>arn</a></li>
+	<li><a href="/dataTables/nominal/stopsearch.cfm?nominalRef=#nominal.getNominal_Ref()#">Src<u>h</u></a></li>
+	<li><a href="/dataTables/nominal/rmps.cfm?nominalRef=#nominal.getNominal_Ref()#">RM<u>P</u></a></li>		
+  </ul>
+</div>	
 
 <div id="dialogData" style="display:none;"></div>
 
@@ -458,6 +498,8 @@ Revisions   :
 		</cfif>
 	</cfloop>
 </div>
+
+<div id='searchingDiv' class="centered loadingDiv" style="display:none;"><h4>Loading, please wait</h4><div align="center" style="width:100%"><div class='progressBar' align="center"></div></div></div>
 
 </body>
 </cfoutput>

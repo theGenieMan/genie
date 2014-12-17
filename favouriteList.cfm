@@ -110,7 +110,7 @@ ORDER BY DATE_ADDED DESC
 	     <cfloop query="qry_NameDetails">
 		  <cfset latestPhoto=application.genieService.getWestMerciaNominalLatestPhoto(NOMINAL_REF)>
 	      <tr class="row_colour#i MOD 2#" id="tr#NOMINAL_REF#">
-	       <td valign="top"><strong><a href="javascript:void(0);" onClick="fullscreen('reason_for_enquiry.cfm?page=nominal_details/code/nominalinformation.cfm&str_CRO=#NOMINAL_REF#&#Session.URLToken#&frm_SelReason=&frm_TxtReason=&frm_TxtDetails=Clicked link from favourite nominals, nominal #NOMINAL_REF#','#NOMINAL_REF#_Nom_Info');">#DETAILS# (#NOMINAL_REF#)</a></strong></td>
+	       <td valign="top"><strong><a href="#NOMINAL_REF#" class="genieNominal" dpa="Y">#DETAILS# (#NOMINAL_REF#)</a></strong></td>
 		   <td valign="top"><img src="#latestPhoto.getPHOTO_URL()#" height="100"></td>       
 	       <td valign="top">#DOB#</td>
 	       <td valign="top">#SEX#</td>

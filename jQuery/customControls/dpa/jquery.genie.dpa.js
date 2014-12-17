@@ -29,7 +29,9 @@
 						reasonCode:'reasonCode',
 						reasonText:'reasonText',
 						dpaValid:'dpaValid'
-			}					
+			},
+			urlToOpen:'',
+			howToOpen:'',					
 		},
 		
 		// the constructor
@@ -45,12 +47,12 @@
 				dpaDivHtml += '    <option value="'+i+'">'+i+' - '+this.options.reasonCodes[i]+'</option>';
 			}
 			dpaDivHtml += '      </select>';
-			dpaDivHtml += '<br><label for="'+this.options.reasonText+'">Details:</label><input type="text" name="'+this.options.reasonText+'" id="'+this.options.reasonText+'" class="mandatory" size="45" value="'+this.options.reasonTextValue+'">'
+			dpaDivHtml += '<br><label for="'+this.options.reasonText+'">Details:</label><input type="text" name="'+this.options.reasonText+'" id="'+this.options.reasonText+'" class="mandatory" size="45" value="'+this.options.reasonTextValue+'">'			
 			dpaDivHtml += '<br><br><div id="dpaError" class="error" style="display:none">You must complete all DPA boxes</div>'			
 			dpaDivHtml += '</div>';
 			
 			this.dpaBox= $(dpaDivHtml);
-			var dpaDestHtml  ='<input type="hidden" name="'+this.options.updateDestination.requestFor+'" id="'+this.options.updateDestination.requestFor+'">';
+			var dpaDestHtml  ='<input type="hidden" name="'+this.options.updateDestination.requestFor+'" id="'+this.options.updateDestination.requestFor+'">';			
 			this.dpaDestination=$(dpaDestHtml);
 			
 			this.dpaReasonTxt    = this.dpaBox.find('#'+this.options.reasonCodeTxt);
@@ -212,7 +214,9 @@
 									 click: function() {
 									 	var reasonCode=thisDialog.find('#'+options.reasonCodeTxt).val();
 										var reasonText=thisDialog.find('#'+options.reasonText).val();
-										var requestFor=thisThing.find('#'+options.requestFor.requestForUserName).val();
+										var requestFor=thisDialog.find('#'+options.requestFor.requestForUserName).val();
+										var urlToOpen=self.options.urlToOpen;
+										var howToOpen=self.options.howToOpen;
 										
 										if (reasonCode.length == 0 || reasonText.length == 0 || requestFor.length==0){
 									 	    thisDialog.find('#dpaError').show();
@@ -223,7 +227,9 @@
 											self._trigger("dpaUpdated", null, {
 												reasonCode: reasonCode,
 												reasonText: reasonText,												
-												requestFor: requestFor						
+												requestFor: requestFor,
+												urlToOpen: urlToOpen,
+												howToOpen: howToOpen,						
 											});
 											
 											// update the given destinations and hide the DPA dialog
@@ -239,6 +245,10 @@
 		
 		},
 
+		setUrlToOpen: function(value){
+			this._setOption('urlToOpen',value);
+		},
+		
 		/*
 		// _setOptions is called with a hash of all options that are changing
 		// always refresh when changing options
@@ -247,11 +257,12 @@
 		alert('_setOptions')
 		this._superApply( arguments );
 		this._refresh();
-		},
+		},*/
 		// _setOption is called for each individual option that is changing
-		_setOption: function( key, value ) {
-		this._super( key, value );
+		_setOption: function( key, value ) {			
+			this.options[ key ] = value;			
+		//this._superApply(arguments);	
+		//this._super( key, value );
 		}
-		*/
 		
 	}); 

@@ -1407,3 +1407,229 @@ font-size:90%;
 	border-color: #0000FF;
 	color: #0000FF;
 }
+
+button#personEnquiryButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#addressEnquiryButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#custodyEnquiryButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#custodyWhiteboardButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#telephoneEnquiryButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#vehicleEnquiryButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#procDecEnquiryButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#offenceEnquiryButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#intelEnquiryButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#intelFreeTextButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#crimeBrowserButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#firearmsEnquiryButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#propertyEnquiryButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#bailDiaryButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#warningEnquiryButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#bailConditionsButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#recentSearchesButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#namexUpdateButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#userNotesButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:center;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button{
+	cursor:hand;
+}
+
+.qtip{
+    max-width: 550px;
+}
+
+pre.crime {
+    white-space: pre-line;       /* CSS 3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+	font-family : Arial,Helvetica,sans-serif;	
+}

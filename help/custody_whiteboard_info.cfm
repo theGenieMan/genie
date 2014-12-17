@@ -1,19 +1,19 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
 <head>
 	<title>Custody Whiteboard - What am I searching?</title>
-	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/accessibility/home/stylesheet.cfm">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/css/genie.css">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">			
 </head>
 
 <body>
 	
-<div class="header">
- GENIE CUSTODY WHITEBOARD - What am I searching ?
-</div>	
+<cfset headerTitle="GENIE CUSTODY WHITEBOARD - What am I searching ?">	
+<cfinclude template="/header.cfm">
 
 <div style="clear:both;">
-<input type="button" value="Back To Search Screen(B)" onClick="window.close(); opener.focus();" AccessKey="B">
-<br><br>
+<br>
 <strong>Systems available for search:</strong>
 <br><br>
 NSPIS custody where a nominal is being detained

@@ -1,6 +1,7 @@
 ﻿<cfcomponent output="false">
 
-	<cfif SERVER_NAME IS "genie.intranet.wmcpolice" 
+	<cfif SERVER_NAME IS "genie.intranet.wmcpolice"
+	   OR SERVER_NAME IS "genieuat.intranet.wmcpolice" 
 	   OR SERVER_NAME IS "svr20312"
 	   OR SERVER_NAME IS "svr20306"
 	   OR SERVER_NAME IS "svr20424"

@@ -1,0 +1,124 @@
+body 
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:0.8em;
+		margin:0px 5px 0px 5px;
+}
+
+table {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 100%;
+}
+
+.header
+{
+	background-color : Navy;
+	color : #FFF;
+  line-height:1.3em;
+	font-size:120%;
+	text-align:center;
+	font-weight:bold;
+}
+
+#outer
+{
+	display:inline;
+	width:100%;
+	margin:0px;
+	padding:0px;
+}
+
+#hmenu
+{
+ display:inline; 
+ float:left; 
+/* width:100%; */
+ padding:5px 3px 0px;
+}
+
+.grade1{
+background-color:red;
+color:yellow;
+}
+
+.grade2{
+background-color:navy;
+color:yellow;
+}
+
+.grade3{
+background-color:#14d8b0;
+color:yellow;
+}
+
+.grade4{
+background-color:green;
+color:yellow;
+}
+
+.searchbutton {
+background-color: Red; 
+font-family:Arial;  
+font-weight: bold;
+}
+
+legend {
+font-weight:bold;
+}
+
+.table_title
+{
+	background-color : Navy;
+	color : #FFF;
+	font-size:90%;
+	font-weight:bold;
+	text-align:left;
+	padding:2px;
+}
+
+.red {
+color:#FF0000
+}
+
+.green {
+color:green;
+}
+
+div.row
+{
+ clear:both;
+ padding:0.1em;
+}
+
+div.row span.label
+{
+ width:25%;
+ float:left;
+}
+
+fieldset 
+{
+    width:100%;
+    padding:0.5em;
+    border:1px solid #006;
+    margin-left:0.5em;
+    margin-right:0.5em;
+}
+legend, label
+{
+    font-weight:bold;	
+}
+.crime_button{
+background-color:#FF6600;
+font-weight:bold;
+}
+.submit input { font-weight:bold; }
+
+#left
+{
+	width:100%;
+	margin:0px;
+	padding:0px;
+	float: left;
+	display:inline
+}

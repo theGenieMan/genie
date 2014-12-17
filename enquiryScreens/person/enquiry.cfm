@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
 	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.js"></script>
 	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>
+	<script type="text/javascript" src="/js/globalVars.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
 	<script type="text/javascript" src="js/personFunctions.js"></script>
@@ -49,22 +50,26 @@
 		</div>
 	</div>
 	
-	<form class="enquiryForm">
-	<div id="searchPanes">
-	  <br>	  
+	<input type="button" class="clearEnquiryForm ui-button" value="CLEAR FORM">
+	<form class="enquiryForm" style="margin:2px 0px 0px 0px;">
+	<div id="searchPanes">	    
 	  <div class="ui-state-highlight" align="center">
 		<strong>Either</strong> enter a unique ID number in one of the Reference Number fields   
-		<strong>or</strong> type data into <strong>one or more</strong> of the search fields in the Name / DOB / Additional Sections
+		<strong>or</strong> type data into <strong>one or more</strong> of the search fields in the Name / DOB / Additional Sections<br>
+		<b>Firearms</b> searches can be performed on Surnames, Forenames and PNC ID
+		<cfif session.isWMidsUser>
+		<br><b>West Mids</b> search boxes are marked with WM	
+		</cfif>
 	  </div>
 	  <div class="spacer">&nbsp;</div>
-	  <div id="sourcePane" class="ui-accordion searchPane">
+	  <div id="sourcePane" class="ui-accordion searchPane" initOpen="true">
 	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Data Sources <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent">
 			<table width="98%" align="center">
 		  		<tr>
 		  			<td width="15%"><b>Data Sources</b></td>
 					<td>
-						<input type="checkbox" name="wmpData" id="wmpData" displayInPane="WP/WMP" checked disabled> WP/WMP 
+						<input type="checkbox" name="wmpData" id="wmpData" displayInPane="WP/WMP" checked disabled noClear="Yes"> WP/WMP 
 						<input type="checkbox" name="firearmsData" id="firearmsData" displayInPane="Firearms" checked> Firearms
 						<cfif session.isWMidsUser>
 						<input type="checkbox" name="wMidsData" id="wMidsData" displayInPane="West Mids"> West Mids
@@ -75,7 +80,7 @@
 		</div>
 	  </div>
 	  <div class="spacer">&nbsp;</div>
-	  <div id="referencePane" class="ui-accordion searchPane">
+	  <div id="referencePane" class="ui-accordion searchPane" initOpen="false">
 	  	<div class="ui-accordion-header ui-state-default searchPaneHeader"><span class="toggler">>></span> Reference Nos <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent" style="display:none">
 			<table width="98%" align="center">
@@ -86,18 +91,18 @@
 					</td>
 					<td><label for="cro">CRO</label></td>
 					<td>
-						<input type="text" name="cro" id="cro" displayInPane="CRO">						
+						<input type="text" name="cro" id="cro" displayInPane="CRO"> <cfif session.isWMidsUser><b>WM</b></cfif>						
 					</td>					
 					<td><label for="pnc">PNC ID</label></td>
 					<td>
-						<input type="text" name="pnc" id="pnc"  displayInPane="PNC Id">						
+						<input type="text" name="pnc" id="pnc"  displayInPane="PNC Id">	<cfif session.isWMidsUser><b>WM</b></cfif>					
 					</td>					
 		  		</tr>				
 		  	</table>			
 		</div>
 	  </div>
 	  <div class="spacer">&nbsp;</div>
-	  <div id="namePane" class="ui-accordion searchPane">
+	  <div id="namePane" class="ui-accordion searchPane" initOpen="true">
 	  	  <div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Name / DOB <span class="dataEntered"></span></div>
 		  <div class="ui-widget-content ui-accordion-content searchPaneContent">
 		  	<div>
@@ -128,7 +133,7 @@
 					<td>
 						<input type="text" name="surname1" id="surname1" displayInPane="Surname 1" value="spittle">
 						&nbsp;
-						<input type="text" name="surname2" id="surname2" displayInPane="Surname 2">
+						<input type="text" name="surname2" id="surname2" displayInPane="Surname 2"> <cfif session.isWMidsUser><b>WM</b></cfif>
 					</td>
 				</tr>
 				<tr>
@@ -136,7 +141,7 @@
 					<td>
 						<input type="text" name="forename1" id="forename1" displayInPane="Forename 1" value="brett">
 						&nbsp;
-						<input type="text" name="forename2" id="forename2" displayInPane="Forename 2">					
+						<input type="text" name="forename2" id="forename2" displayInPane="Forename 2"> <cfif session.isWMidsUser><b>WM</b></cfif>					
 					</td>
 				</tr>
 				<tr>
@@ -151,8 +156,10 @@
 						</select> /						
 						<input type="text" name="dobYear" id="dobYear" class="input4char" maxlength="4" displayInPane="DOB Year">
 						&nbsp;&nbsp;
+						<cfif session.isWMidsUser><b>WM</b> | </cfif>
 						<label for="exactDOB">Exact DOB Match?</label>
 						<input type="checkbox" name="exactDOB" id="exactDOB" displayInPane="Exact DOB">
+						
 					</td>
 				</tr>
 				<tr id="wMidsOrderTr" style="display:none;">
@@ -170,7 +177,7 @@
 		  </div>		
 	  </div>		 	  
 	  <div class="spacer">&nbsp;</div>
-	  <div id="additionalPane" class="ui-accordion searchPane">
+	  <div id="additionalPane" class="ui-accordion searchPane" initOpen="false">
 	  	<div class="ui-accordion-header ui-state-default searchPaneHeader"><span class="toggler">>></span> Additional Parameters <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent" style="display:none">
 			<table width="98%" align="center">
@@ -182,23 +189,24 @@
 				 		  <cfloop query="application.qry_Sex">
 				  		   <option value="#rv_low_value#">#RV_MEANING#</option>				 
 				          </cfloop>
-				        </select>
+				        </select> <cfif session.isWMidsUser><b>WM</b></cfif>
 					</td>
 					<td width="15%"><label for="ageFrom">Age</label></td>
 					<td>
 						<input type="text" name="ageFrom" id="ageFrom" class="input2char" displayInPane="Age From">
 						-						
-						<input type="text" name="ageTo" id="ageTo" class="input2char" displayInPane="Age To">
+						<input type="text" name="ageTo" id="ageTo" class="input2char" displayInPane="Age To"> <cfif session.isWMidsUser><b>WM</b></cfif>
 					</td>					
 					<td width="15%"><label for="pob">Place of Birth</label></td>
 					<td>
-						<input type="text" name="pob" id="pob" displayInPane="Place of Birth">						
+						<input type="text" name="pob" id="pob" displayInPane="Place of Birth">		
+						<cfif session.isWMidsUser>WM</cfif>				
 					</td>					
 		  		</tr>		
 		  		<tr>
 		  			<td><label for="maiden">Maiden Name</label></td>
 					<td>
-						<input type="text" name="maiden" id="maiden" displayInPane="Maiden Name">
+						<input type="text" name="maiden" id="maiden" displayInPane="Maiden Name"> <cfif session.isWMidsUser><b>WM</b></cfif>
 					</td>
 					<td><label for="nickname">Nick name</label></td>
 					<td>
@@ -206,7 +214,7 @@
 					</td>					
 					<td><label for="pTown">Post Town</label></td>
 					<td>
-						<input type="text" name="pTown" id="pTown" displayInPane="Post Town">						
+						<input type="text" name="pTown" id="pTown" displayInPane="Post Town"> <cfif session.isWMidsUser><b>WM</b></cfif>						
 					</td>					
 		  		</tr>							
 		  	</table>			
@@ -286,13 +294,7 @@
 	<input type="hidden" name="reasonCode" id="reasonCode" value="">
 	<input type="hidden" name="reasonText" id="reasonText" value="">
 	<input type="hidden" name="reasonText" id="dpaValid" value="N">
-	
-	
-	<div id="otherNamesDialog" style="display:none;">
-		<div id='onLoadingDiv' style='width:100%' align='center'><h4>Loading, please wait</h4><div class='progressBar'></div></div>
-		<div id='onData' style="display:none;"></div>
-	</div>
-	
+		
 	<div id="wMidsDialog" style="display:none;">
 		<div id='wmLoadingDiv' style='width:100%' align='center'><h4>Loading, please wait</h4><div class='progressBar'></div></div>
 		<div id='wmData' style="display:none;"></div>

@@ -748,7 +748,7 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
 	float: left;
-	padding: .5em 1em;
+	padding: .5em 0.4em;
 	text-decoration: none;
 }
 .ui-tabs .ui-tabs-nav li.ui-tabs-active {
@@ -766,7 +766,7 @@ button.ui-button::-moz-focus-inner {
 .ui-tabs .ui-tabs-panel {
 	display: block;
 	border-width: 0;
-	padding: 1em 1.4em;
+	padding: 0.3em 0.3em;
 	background: none;
 }
 .ui-tooltip {
@@ -938,7 +938,7 @@ body .ui-tooltip {
 	background-image: url("images/ui-icons_0C5C99_256x240.png");
 }
 .ui-widget-header .ui-icon {
-	background-image: url("images/ui-icons_0C5C99_256x240.png");
+	background-color: url("images/ui-icons_0C5C99_256x240.png");
 }
 .ui-state-default .ui-icon {
 	background-image: url("images/ui-icons_0C5C99_256x240.png");
@@ -1192,15 +1192,14 @@ table.genieData td, table.wmpData td {
 	padding: 3px;
 }
 
-table.genieData thead th, table.wmpData thead th {
+table.genieData thead th, table.wmpData thead th, table.wmpData th {
 	background-color:#0C5C99;
 	color:white;
 	font-weight:bold;
 }	
 
 table.nominalData {
-	border:1px solid #808080;
-	font-size:90%;
+	border:1px solid #808080;	
 }
 
 table.nominalData th {
@@ -1209,7 +1208,12 @@ table.nominalData th {
 	font-weight:bold;
 	text-align:left;
 	padding:2px;
-}	
+	font-size:90%
+}
+
+table.nominalData td {	
+	font-size:90%
+}		
 
 .row_colour0
 {
@@ -1317,7 +1321,15 @@ color:#FF0000;
 font-size:90%;
 }
 
-.genieNominal{
+.genieNominal, .genieCustodyLink, .genieCustodyPaste, .genieCrimeLink, .genieCaseLink, .genieOISLink,
+.genieAddressLink, .genieAddressNomHover, .genieAddressOrgHover, .genieAddressIntelHover, 
+.genieAddressOffenceHover, .genieAddressMap, .genieAddressSNT, .genieIntelLink, .genieFirearmsNominal,
+.genieVehicleSearchLink, .genieCrashLink, .genieTelNoSearchLink,  .genieMisperLink,
+.genieSTEPLink, .genieRMPLink, .genieStopSearchLink, .genieANPRSearch, .genieVehicleIntelLink,
+.genieAttachedDocument, .genieCustodySummary, .genieTelephoneIntelLink, .genieNFLMSNominal,
+.genieHTCULink, .geniePDOffences, #searchHelp, .closePopup, .wmcHOOCLookupCode, .wmcHOMCLookupCode,
+.wmcRecRepLookupCode, .propCategoryLookupCode, .propSubCategoryLookupCode, .propManufacturerLookupCode,
+.genieErrorLink {
 	cursor:hand;
 	color:#0000FF !important;
 	text-decoration:underline;
@@ -1383,6 +1395,407 @@ font-size:90%;
 
 .warningText
 {
+	padding-top:2px;
 	text-align:left;
-	font-size:85%;
+	font-size:90%;
+}
+
+button#personEnquiryButton{
+    background: #d0e5f5 url('/images/personEnquiryIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#addressEnquiryButton{
+    background: #d0e5f5 url('/images/addressEnquiryIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#custodyEnquiryButton{
+    background: #d0e5f5 url('/images/custodyEnquiryIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#custodyWhiteboardButton{
+    background: #d0e5f5 url('/images/custodyWhiteboardIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#telephoneEnquiryButton{
+    background: #d0e5f5 url('/images/telephoneEnquiryIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#vehicleEnquiryButton{
+    background: #d0e5f5 url('/images/vehicleEnquiryIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#procDecEnquiryButton{
+    background: #d0e5f5 url('/images/processDecisionIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#offenceEnquiryButton{
+    background: #d0e5f5 url('/images/offenceEnquiryIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#intelEnquiryButton{
+    background: #d0e5f5 url('/images/intelEnquiryIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#intelFreeTextButton{
+    background: #d0e5f5 url('/images/intelFreeTextIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#crimeBrowserButton{
+    background: #d0e5f5 url('/images/crimeBrowserIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#firearmsEnquiryButton{
+    background: #d0e5f5 url('/images/firearmsEnquiryIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#propertyEnquiryButton{
+    background: #d0e5f5 url('/images/propertyEnquiryIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#bailDiaryButton{
+    background: #d0e5f5 url('/images/bailDiaryIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#warningEnquiryButton{
+    background: #d0e5f5 url('/images/warningEnquiryIcon.png') no-repeat 98% 50%;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#bailConditionsButton{
+    background: #d0e5f5;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#recentSearchesButton{
+    background: #d0e5f5;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#namexUpdateButton{
+    background: #d0e5f5;
+	border:1px solid #0C5C99;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#userNotesButton{
+    background: #d0e5f5;
+	border:1px solid #0C5C99;
+    text-align:center;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button{
+	cursor:hand;
+}
+
+.qtip{
+    max-width: 550px;
+}
+
+pre.crime {
+    white-space: pre-line;       /* CSS 3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+	font-family : Arial,Helvetica,sans-serif;	
+}
+
+.ninetypc{
+	font-size:90%
+}
+
+.thSorted{
+	color:yellow !important;
+}
+
+.thSortable{
+	color:red !important;
+	cursor:hand;
+	text-decoration:underline;
+}
+
+.loadingDiv{
+	border:2px solid #0C5C99; 
+	padding:5px;
+	text-align:center;
+	width:200px;
+	height:100px;
+	background-color:white;
+	z-index:0;
+}
+
+div.geniePanel{
+	border:1px solid #0C5C99;
+	padding:2px;
+}	
+
+div.geniePanel .header{
+	background-color:#0C5C99;
+	color:white;
+	font-size:110%;
+	font-weight:bold;
+	padding:2px;
+	margin-bottom:2px;
+}
+
+.nominalTitle{
+	font-size:120%;
+	font-weight:bold;
+	background-color:#0C5C99;
+	color:white;
+}
+
+.deceasedTitle{
+	font-size:120%;
+	font-weight:bold;
+	background-color:#FF0000;
+	color:white;
+}
+
+.redWarningBox{
+	font-weight:bold;
+	background-color:#FF0000;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	float:left;
+}
+
+.greenWarningBox{
+	font-weight:bold;
+	background-color:#009900;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.blueWarningBox{
+	font-weight:bold;
+	background-color:#000099;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.warningBoxIOM1{
+	font-weight:bold;
+	background-color:#FF0000;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.warningBoxIOM2{
+	font-weight:bold;
+	background-color:orange;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.warningBoxIOM3{
+	font-weight:bold;
+	background-color:#009900;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.warningBoxIOM4{
+	font-weight:bold;
+	background-color:#000000;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.highlightCrime{
+	background-color:red !important;
+	color:white !important;
+	font-weight:bold !important;
+}
+
+.popupSearchResults{
+	border:1px solid black;
+	width:350px;
+	height:150px;
+	position:absolute;
+	overflow:auto;
+	z-index:9999;
+	margin-top:10px;
+	background-color:white;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+input[readonly]{
+	background-color:#aaa;
+	color:black;
+	font-weight:bold;
+}
+
+.bailHour{
+	background-color:#0C5C99;
+	color:white;
+	font-weight:bold;	
+}
+
+.bailRow{
+	height:40px;
+}
+
+.clearLookup{
+	font-size:90%;
+	font-weight:bold;
+	color:red;
+	cursor:hand;	
+}
+
+.detected{
+	background-color:#FF0000;
+}
+
+.undetected{
+	background-color:#009900;
 }

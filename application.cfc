@@ -19,14 +19,14 @@
     <cfset application.Env=application.confData.Env>
     <cflog file="genie" type="information" text="onApplicationStart started">
     
-    <cflog file="genie" type="information" text="Application: running session management setup">
+    <cflog file="genie" type="information" text="Application: running session management setup for a #application.Env# Server">
 	
 	<cflog file="genie" type="information" text="Application: ApplicationTimeout=#This.applicationtimeout# SessionTimeout=#This.sessiontimeout#">
 	
 	<cfset locale=SetLocale("English (UK)")>    
     
     <cfset adminObj = createObject("component","cfide.adminapi.administrator")>
-	<cfset adminObj.login("admin")>     
+	<cfset adminObj.login("admin","G3n13s3v3r")>     
         
     <cfset cfserver = createObject("component","cfide.adminapi.runtime")>
 	<cfset cfserver.clearTrustedCache()>
@@ -165,15 +165,24 @@
 																				   crimePath=application.str_Crime_Path,
 																				   intelPath=application.str_Intel_XML_Path,
 																				   intelB99Path=application.str_IntelB99_XML_Path,
-																				   redirectorUrl=application.redirectorUrl                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+																				   redirectorUrl=application.redirectorUrl,
+																				   nominalTempDir=application.nominalTempDir,
+																				   custodyTempDir=application.custodyTempDir,
+																				   caseTempDir=application.caseTempDir,
+																				   intelFTSTempDir=application.intelFTSTempDir,
+																				   crimeTempDir=application.crimeTempDir                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 		                                                                          )>
         <cflog file="genie" type="information" text="onApplicationStart genieService started">                                                                                                                                                                                                                                                                                                                
 		<!--- setup the form service --->
 		<cfset Application.formService=CreateObject("component","applications.cfc.forms.formService").init(formsBaseDir=application.formsBaseDir,
 		                                                                                                   formsMasterFile=application.formsMasterFile)>                                                                                                                                                                                                                                                                                                                                                                                                                    
 		<cfset Application.genieMessageService=CreateObject("component","genieObj.genieMessageService").init(dsn=application.warehouseDSN)>
-		<cfset Application.genieUserService=CreateObject("component","genieObj.genieUserService").init(warehouseDSN=application.warehouseDSN)>
+		<cfset Application.genieUserService=CreateObject("component","genieObj.genieUserService").init(warehouseDSN=application.warehouseDSN,warehouseDSN2=application.warehouseDSN2)>
 		<cfset Application.genieVarService=CreateObject("component","genieObj.genieVarService").init()>  
+		<cfset Application.genieErrorService=CreateObject("component","genieObj.genieErrorService").init(warehouseDSN=application.warehouseDSN,
+																										 warehouseDSN2=application.warehouseDSN2,
+																										 errorHtmlDirectory=application.errorHtmlDirectory)>
+		<cfset Application.hrService=CreateObject("component","applications.cfc.hr_alliance.hrService").init(application.warehouseDSN)>   
                                                                                                                                                                                                                                                                                                                                                                                                                                        
    </cflock>
 
@@ -367,8 +376,7 @@
 </cffunction>
 
 <cffunction name="onSessionStart">
-
-      <cfset var hrService=CreateObject("component","applications.cfc.hr_alliance.hrService").init(application.warehouseDSN)>      
+            
       <!--- put in the user information --->
       <cfset var sUser=AUTH_USER>	           
       <cfset var lis_GENIEGroups=Replace(application.genieUserGroups,",","|","ALL")>
@@ -394,9 +402,9 @@
 		</cfif>
 	  </cfif>                                        
 	  
-      <cfset Session.User=hrService.getUserByUID(sUser)>   	 
+      <cfset Session.User=application.hrService.getUserByUID(sUser)>   	 
 
-	  <cfset s_ISGenieUser = hrService.isMemberOf(groups=lis_GENIEGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+	  <cfset s_ISGenieUser = application.hrService.isMemberOf(groups=lis_GENIEGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
 	    
 	  <cflog file="genie" type="information" text="Session UserId: checking on:#session.user.getTrueUserId()# Complete #session.user.getTrueUserId()# Genie User?:#s_ISGenieUser#">
 	    	
@@ -413,14 +421,14 @@
 			</cfif>			
 		</cfif>   
 	    
-	  <cfset session.ISNameUpdater=hrService.isMemberOf(groups=lis_NameGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
-	  <cfset session.ISDVSUser=hrService.isMemberOf(groups=lis_DVSGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
-      <cfset session.isWMidsUser=hrService.isMemberOf(groups=lis_WMidsGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
-      <cfset session.isHTCUUser=hrService.isMemberOf(groups=lis_HTCUGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
-	  <cfset session.isNomMergeUser=hrService.isMemberOf(groups=lis_NomMergeGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
-	  <cfset session.isGenieAdmin=hrService.isMemberOf(groups=lis_GenieAdmin,uid=session.user.getTrueUserId(),adServer=application.adServer)> 
-	  <cfset session.isBailCondsUser=hrService.isMemberOf(groups=lis_BailConds,uid=session.user.getTrueUserId(),adServer=application.adServer)> 	    
-	  <cfset session.isPDFPackageUser=hrService.isMemberOf(groups=lis_PackagePdf,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+	  <cfset session.ISNameUpdater=application.hrService.isMemberOf(groups=lis_NameGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+	  <cfset session.ISDVSUser=application.hrService.isMemberOf(groups=lis_DVSGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+      <cfset session.isWMidsUser=application.hrService.isMemberOf(groups=lis_WMidsGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+      <cfset session.isHTCUUser=application.hrService.isMemberOf(groups=lis_HTCUGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+	  <cfset session.isNomMergeUser=application.hrService.isMemberOf(groups=lis_NomMergeGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+	  <cfset session.isGenieAdmin=application.hrService.isMemberOf(groups=lis_GenieAdmin,uid=session.user.getTrueUserId(),adServer=application.adServer)> 
+	  <cfset session.isBailCondsUser=application.hrService.isMemberOf(groups=lis_BailConds,uid=session.user.getTrueUserId(),adServer=application.adServer)> 	    
+	  <cfset session.isPDFPackageUser=application.hrService.isMemberOf(groups=lis_PackagePdf,uid=session.user.getTrueUserId(),adServer=application.adServer)>
 
       <cfif Session.user.getIsValidRecord()>
 	  	  <cfset Session.LoggedInUserId=session.user.getUSERID()>
@@ -435,6 +443,27 @@
 		  <cfset Session.LoggedInUserEmail="">
 		  <cfset Session.LoggedInUserDiv="H">                                                                                                                                                                   	
 	  </cfif>
+	  
+	  <!--- should the person be able to submit a stop search / drink drive --->
+	  <cfif (session.user.getDepartment() IS "Infrastructure" OR 
+	  	     session.user.getDepartment() IS "Public Contact" OR 
+			 session.user.getDepartment() IS "ES ICT" OR
+			 session.user.getDepartment() IS "LP Operational Support" OR
+			 session.user.getDuty() IS "ANPR CONTROLLERS")
+	  	    OR session.user.getUserId() IS "p_nor002"
+			OR session.user.getUserId() IS "l_hil001"
+			OR session.user.getUserId() IS "l_dai001"
+			OR session.user.getUserId() IS "c_new002"
+			OR session.user.getUserId() IS "s_add001" 
+			OR session.user.getUserId() IS "s_jac005"
+			OR session.user.getUserId() IS "d_mon002" 
+			OR session.user.getUserId() IS "23004310"
+			OR session.user.getUserId() IS "23004392TW">
+			<cfset session.isOCC=true>
+	  <cfelse>
+	        <cfset session.isOCC=false>
+	  </cfif>	
+	  
 		
         <!--- user is valid so log the user in --->
         <cfset session.lastLoginDate=application.genieUserService.logUserIn(userId=session.user.getUSERID(),fullName=session.loggedInUser)>
@@ -472,8 +501,8 @@
 		 <cfset Session.LoggedInUserLogAccess=99>
 		</cfif>
         
-        <cfif sUser IS "n_bla003">
-         <cfset session.LoggedInUserLogAccess=20>
+        <cfif session.user.getUserId() IS "n_bla003">
+         <cfset session.LoggedInUserLogAccess=99>
         </cfif>                
         
         <!--- see if the user uses any of the large fonts --->
@@ -497,6 +526,7 @@
     <cfset Session.userSettings = application.genieUserService.getUserSettings(userId=session.user.getUserId(),userName=session.user.getFullName())>   
 	<cfset Session.hostName = Left(Replace(inet_address.getByName(REMOTE_ADDR).getHostName(),".","","ALL"),8)> 
 	<cfset Session.server = inet_address.getLocalHost().getHostName()>   
+	<cfset Session.serverIp = inet_address.getLocalHost().getHostAddress()>   
     <cfset Session.ThisUUID=CreateUUID()>
 	<cfset Session.StartTime=now()>    
 
@@ -526,7 +556,7 @@
 <cffunction name="initConfigTimeouts" returnType="struct">
    <cfset var confReturn=StructNew()>	
    <cfif SERVER_NAME IS "genie.intranet.wmcpolice" OR SERVER_NAME IS "SVR20623" 
-	  OR SERVER_NAME IS "SVR20424" OR SERVER_NAME IS "SVR20306"> 
+	  OR SERVER_NAME IS "SVR20424" OR SERVER_NAME IS "SVR20306" or SERVER_NAME IS "genieuat.intranet.wmcpolice"> 
      <cfset confReturn.ENV="LIVE">
 	 <cfset confReturn.sessionTimespan="#createtimespan(0,4,0,0)#">
      <cfset confReturn.applicationTimespan="#createtimespan(0,2,0,0)#"> 

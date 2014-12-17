@@ -98,48 +98,6 @@ $(document).on('submit','.enquiryForm',
 	}
 )
 
-// when an alias (other names) link is clicked, open a dialog
-// with the otherNames.cfm page for that nominal
-$(document).on('click','.genieNominalAlias',
-	function(e){
-		e.preventDefault();
-		var nominalRef=$(this).attr('href');
-		var nominalName=$(this).closest('tr').find('td.fullName a').html();
-		var onUrl='otherNames.cfm?nom_ref='+nominalRef+'&name='+encodeURI(nominalName);
-		
-		// work out the dialog size based on the size of the screen
-		var dWidth=$(window).width()-100;
-		var dHeight= $(window).height()-150;
-		
-		$('#onData').html('').hide()
-		$('#onLoadingDiv').show();
-		
-		// load the alias data into the hidden div used for the dialog
-		$('#otherNamesDialog').load(onUrl,null,
-			function(){
-			 $('#onData').show()
-			 $('#onLoadingDiv').hide();				
-		});
-		
-		// open the dialog			
-			 
-					$('#otherNamesDialog').dialog({
-						modal: true,
-						position: 'center',
-						height: dHeight,
-						width: dWidth,
-						title: 'Genie - Nominal Other Names',
-						open: function(event, ui){
-
-						},
-						close: function(event, ui){																	    										               
-							$(this).dialog('destroy');																																									
-						},
-						buttons: [ { text: "Close", click: function() { $( this ).dialog( "close" ); } } ]
-					}); 
-		
-	});
-
 // when a west mids nominal is clicked open dialog
 // with the west mids summary page for that nominal
 $(document).on('click','.wMidsNominal',

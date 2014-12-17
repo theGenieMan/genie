@@ -60,10 +60,6 @@ input.input4char{
 	text-align:center;
 }
 
-.nominalTitle{
-	font-size:120%;
-}
-
 .iom1{
 	background-color:red;
 	color : #FFF;
@@ -357,4 +353,20 @@ behavior: url(/csspie/PIE.htc);
 
 #showAllPhotos{
 	cursor:hand;
+}
+
+.whiteboardPhoto{
+	border:1px solid black;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+}
+
+ol.bailConditions li {
+	margin-bottom:3px;
 }

@@ -40,6 +40,15 @@
 		 
 	</cffunction> 
 
+	<cffunction name="getAppVar" access="remote" output="false" returntype="string" returnformat="plain">
+		<cfargument name="varName" type="string" required="true" hint="name of app variable to get">		
+	 	
+	 	<cfset var returnVar = application.genieVarService.getAppVar(varName=arguments.varName)>
+	 	
+	 	<cfreturn returnVar>	
+		 
+	</cffunction> 
+
 	<cffunction name="resetSession" access="remote" output="false" returntype="string">
 	 	
 	 	<cflog file="genie" type="information" text="Web service resetSession has been called" />

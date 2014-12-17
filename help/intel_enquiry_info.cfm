@@ -1,16 +1,17 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
 <head>
-	<title>Process Decision Enquiry - What am I searching?</title>
-	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/accessibility/home/stylesheet.cfm">	
+	<title>Intel Enquiry - What am I searching?</title>
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/css/genie.css">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">		
 </head>
 
 <body>
+
+<cfset headerTitle="GENIE INTEL ENQUIRY - What am I searching ?">	
+<cfinclude template="/header.cfm">
 	
-<div class="header">
- GENIE INTEL ENQUIRY - What am I searching ?
-</div>	
-<input type="button" value="Back To Search Screen (B)" onClick="window.close(); opener.focus();" AccessKey="B"><br><br>
 <div>
 <br>
 

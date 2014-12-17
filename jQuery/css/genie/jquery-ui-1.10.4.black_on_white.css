@@ -1407,3 +1407,210 @@ font-size:90%;
 	border-color: #000000;
 	color: #000000;
 }
+
+button#personEnquiryButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#addressEnquiryButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#custodyEnquiryButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#custodyWhiteboardButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#telephoneEnquiryButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#vehicleEnquiryButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#procDecEnquiryButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#offenceEnquiryButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#intelEnquiryButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#intelFreeTextButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#crimeBrowserButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#firearmsEnquiryButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#propertyEnquiryButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#bailDiaryButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#warningEnquiryButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#bailConditionsButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#recentSearchesButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#namexUpdateButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#userNotesButton{
+    background: #FFFFFF;
+	border:1px solid #000000;
+    text-align:center;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button{
+	cursor:hand;
+}
+
+.qtip{
+    max-width: 550px;
+}
+
+pre.crime {
+    white-space: pre-line;       /* CSS 3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+	font-family : Arial,Helvetica,sans-serif;	
+}

@@ -73,7 +73,7 @@
 </cfsavecontent>
 
 <cfsavecontent variable="variables.nominalLongTableHeader">
-<table width="98%" align="center" class="dataTable genieData">
+<table width="100%" align="center" class="dataTable genieData">
   <thead>
     <tr>
 		<th width='5%'>Nom Ref</th>
@@ -136,8 +136,8 @@
 
 <cfsavecontent variable="variables.fNominalTableRow">
 <tr id="F_%personRef%">
-	<td valign="top"><a class="%nominalClass%">%personRef%</a></td>
-	<td valign="top" class="fullName"><a class="%nominalClass%">%fullName%</a></td>
+	<td valign="top"><a href="%personRef%" class="%nominalClass%">%personRef%</a></td>
+	<td valign="top" class="fullName"><a href="%personRef%" class="%nominalClass%">%fullName%</a></td>
 	<td valign="top">%photoData%</td>
 	<td valign="top">%DOB%</td>
 	<td valign="top">%AGE%</td>
@@ -642,7 +642,8 @@
 	
 		<cfset westMerResults = application.genieService.doWestMerciaPersonSearch(searchTerms=searchFields, 
 		                                                                          pasteReq='Y',
-																				  auditReq='Y')>  
+																				  auditReq='Y',
+                                                                                  searchUUID=thisUUID)>  
 		
 		<cfif searchData.resultType IS "XML">
 		
@@ -921,7 +922,7 @@
 			<cfelse>
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%AGE%',"","ALL")>
 			</cfif>
-			<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalClass%','firearmsNominal',"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalClass%','genieFirearmsNominal',"ALL")>
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%photoUrl%',PHOTO_URL,"ALL")>
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%photoTitle%',PERSON_URN&" "&SURNAME,"ALL")>
 											
@@ -1121,6 +1122,251 @@
 	  <cfreturn returnTable>  
 	    
   </cffunction>  	
+
+    <cffunction name="addNominalFavourite" access="remote" returntype="string" returnFormat="plain" output="false" hint="adds a user favourite nominal">
+   	  <cfargument name="userId" type="string" required="true" hint="person to add favourite for">
+	  <cfargument name="nominalRef" type="string" required="true" hint="nominal ref to add">
+	  <cfargument name="showUpdates" type="string" required="true" hint="Y or N for updates required">
+	  <cfargument name="notes" type="string" required="true" hint="any notes to add">  	  
+	
+	  <cfset var returnData="">
+	    
+	  <cfset application.genieUserService.addUserFavourite(userId=userId,
+	                                                       nominalRef=nominalRef,
+														   showUpdates=showUpdates,
+														   notes=notes)>  
+	    
+	  <cfreturn returnData>  
+	    
+  </cffunction>  	
+  
+    <cffunction name="deleteNominalFavourite" access="remote" returntype="string" returnFormat="plain" output="false" hint="deletes a user favourite nominal">
+   	  <cfargument name="userId" type="string" required="true" hint="person to add favourite for">
+	  <cfargument name="nominalRef" type="string" required="true" hint="nominal ref to add">
+	    	  
+	
+	  <cfset var returnData="">
+	    
+	  <cfset application.genieUserService.deleteFavouriteNominal(userId=userId,
+	                                                       		 nominalRef=nominalRef)>  
+	    
+	  <cfreturn returnData>  
+	    
+  </cffunction>   
+  
+    <cffunction name="updateNominalFavourite" access="remote" returntype="string" returnFormat="plain" output="false" hint="deletes a user favourite nominal">
+   	  <cfargument name="userId" type="string" required="true" hint="person to add favourite for">
+	  <cfargument name="nominalRef" type="string" required="true" hint="nominal ref to add">
+	  <cfargument name="showUpdates" type="string" required="true" hint="show update value">
+	  <cfargument name="notes" type="string" required="true" hint="notes">  	  
+	
+	  <cfset var returnData="">
+	    
+	  <cfset application.genieUserService.updateFavouriteNominals(userId=userId,
+	                                                       		 nominalRef=nominalRef,
+																 showUpdates=showUpdates,
+																 notes=notes)>  
+	    
+	  <cfreturn returnData>  
+	    
+  </cffunction>   
+
+    <cffunction name="validateWarningEnquiry" access="remote" returntype="string" returnformat="plain" output="false" hint="validates a warning enquiry">
+     <cfset var wArgs=deserializeJSON(toString(getHttpRequestData().content))>			          
+	 <cfset var validation=StructNew()>	 
+	 <cfset var errorHtmlStart="<div id='errorContainer'><div class='error' id='searchErrors'>">
+	 <cfset var errorHtmlEnd="</div></div>">
+	 
+	 <cfset validation.valid=true>
+	 <cfset validation.errors="">
+
+	    <cfif Len(wArgs.frmWarnings) IS 0>			
+		  <cfset validation.valid=false>
+		  <cfset validation.errors=ListAppend(validation.errors,"You must select at least one warning marker to search on","|")> 			
+		</cfif>		 
+		
+		<cfif Len(wArgs.date_marked1) GT 0>
+			<cfif not LSIsDate(wArgs.date_marked1)>
+				<cfset validation.valid=false>
+	    		<cfset validation.errors=ListAppend(validation.errors,"Date Marked Between/Of `#wArgs.date_marked1#` is not a valid date.","|")>	
+			</cfif>
+		</cfif>
+		<cfif Len(wArgs.date_marked2) GT 0>
+			<cfif not LSIsDate(wArgs.date_marked2)>
+				<cfset validation.valid=false>
+	    		<cfset validation.errors=ListAppend(validation.errors,"Date Marked To `#wArgs.date_marked2#` is not a valid date.","|")>					
+			</cfif>
+		</cfif>
+	    <cfif Len(wArgs.date_marked1) GT 0 AND Len(wArgs.date_marked2) GT 0>
+			<cfif LSIsDate(wArgs.date_marked1) AND LSIsDate(wArgs.date_marked2)>
+				<cfif dateDiff('d',LSParseDateTime(wArgs.date_marked1),LSParseDateTime(wArgs.date_marked2)) LT 0>
+					<cfset validation.valid=false>
+	    			<cfset validation.errors=ListAppend(validation.errors,"Date Marked To `#wArgs.date_marked2#` must be after Date Marked Between/Of `#wArgs.date_marked1#`.","|")>	
+				</cfif>
+			</cfif>
+		</cfif>		 
+		
+		<cfif Len(wArgs.age1) GT 0>
+			<cfif not isNumeric(wArgs.age1)>
+				<cfset validation.valid=false>
+    			<cfset validation.errors=ListAppend(validation.errors,"Age Between/On `#wArgs.age1#` must be a number.","|")>
+			</cfif>
+	    </cfif>
+
+		<cfif Len(wArgs.age2) GT 0>
+			<cfif not isNumeric(wArgs.age2)>
+				<cfset validation.valid=false>
+    			<cfset validation.errors=ListAppend(validation.errors,"Age To `#wArgs.age2#` must be a number.","|")>
+			</cfif>
+	    </cfif>
+
+	    <cfif Len(wArgs.age1) GT 0 AND Len(wArgs.age2) GT 0>
+			<cfif isNumeric(wArgs.age1) AND isNumeric(wArgs.age2)>
+				<cfif int(wArgs.age2) LT int(wArgs.age1)>
+					<cfset validation.valid=false>
+	    			<cfset validation.errors=ListAppend(validation.errors,"Age To `#wArgs.age2#` must be greater than Age Between/On `#wArgs.age1#`.","|")>
+				</cfif>
+			</cfif>
+		</cfif>	
+
+				 
+		<cfif validation.valid>
+			<cfreturn true>
+		<cfelse>
+			<cfreturn errorHtmlStart&Replace(validation.errors,"|","<br>","ALL")&errorHtmlEnd>
+		</cfif>	
+			
+	</cffunction>
+
+  <cffunction name="doWarningEnquiry" access="remote" returntype="string" returnFormat="plain" output="false" hint="do warning enquiry">
+  	  <cfargument name="resultType" type="string" required="false" default="html" hint="result format, options html or xml">
+	  
+	  <cfset var thisUUID=createUUID()>  	  	  	  	
+      <cfset var searchData=deserializeJSON(toString(getHttpRequestData().content))>
+      <cfset var enquiryResults = "">	
+	  	  
+		<cfset enquiryResults = application.genieService.doWarningMarkerSearch(searchData.frmWarnings,
+																		  searchData.current_only,
+																		  searchData.how_to_use,
+																		  searchData.sort_by,
+																		  searchData.date_marked1,
+																		  searchData.date_marked2,
+																		  searchData.age1,
+																		  searchData.age2,
+																		  searchData.sex,
+																		  searchData.post_town, 
+																		  thisUUID)>  
+		
+		<cfif arguments.resultType IS "XML">
+		
+		<cfelseif arguments.resultType IS "html">					    				
+			<cfset returnData = doWarningEnquiryTable(nominalArray=enquiryResults.nominals,
+			                                        UUID=thisUUID)>				 														
+		<cfelse>
+			<cfset returnData = 'No Valid Return Format Specified. options are XML  or HTML'>
+		</cfif>				
+																  
+		<cfreturn returnData>																		  		
+   
+   </cffunction>
+   
+   <cffunction name="doWarningEnquiryTable" access="private" output="false" returntype="string">
+  	<cfargument name="nominalArray" required="true" type="array" hint="query of nominals to format into a long table">
+	<cfargument name="uuid" required="false" type="string" hint="if not blank will create a searchUUID file that can be used for scroll thru nominals without going back to the list">  
+	
+	<cfset var returnTable="">
+	<cfset var thisNominal="">  
+	<cfset var str_Name="">
+	<cfset var i=0>
+	
+	 <cfif arrayLen(nominalArray) GT 0>
+		<cfset returnTable  =duplicate(variables.nominalLongTableHeader)>
+		<cfloop from="1" to="#ArrayLen(nominalArray)#" index=i>		  	  	
+			<cfset thisNominal=duplicate(variables.nominalLongTableRow)>
+			<cfif ListLast(nominalArray[i].getLATEST_PHOTO().getPHOTO_URL(),'/') IS NOT "noimage.gif">
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%photoData%',variables.photoDiv,"ALL")>
+			<cfelse>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%photoData%',"","ALL")>
+			</cfif>
+			<cfif Len(nominalArray[i].getLATEST_ADDRESS()) GT 0>
+			    <cfset thisNominal=ReplaceNoCase(thisNominal,'%addressData%',variables.addressDiv,"ALL")>
+			<cfelse>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%addressData%',"","ALL")>
+			</cfif>
+			<cfif Len(nominalArray[i].getWARNINGS_TEXT()) GT 0>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%warningData%',variables.warningDiv,"ALL")>					
+			<cfelse>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%warningData%',"","ALL")>
+			</cfif>
+			<cfif nominalArray[i].getNAME_TYPE() IS "P">				
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%clickData%',variables.clickData,"ALL")>
+			<cfelse>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%clickData%','',"ALL")>
+			</cfif>					
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalRef%',nominalArray[i].getNOMINAL_REF(),"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%forename1%',nominalArray[i].getFORENAME_1(),"ALL")>				
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%surname1%',nominalArray[i].getSURNAME_1(),"ALL")>	
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%surname2%',nominalArray[i].getSURNAME_2(),"ALL")>	
+			
+			 <!--- check the type of the nominal, if it's an O then it's an official
+		     record of an Employee so display the employee info --->
+				<cfif nominalArray[i].getSUB_TYPE() IS "O" AND Len(nominalArray[i].getRANK()) GT 0 AND LEN(nominalArray[i].getBADGE_NUMBER()) GT 0>
+					<cfset str_Name = nominalArray[i].getRANK() & " " & nominalArray[i].getBADGE_NUMBER() & " " & nominalArray[i].getURNAME_1()>
+					<cfif Len(nominalArray[i].getSURNAME_2()) GT 0>
+						<cfset str_Name = str_Name & "-" & nominalArray[i].getSURNAME_2()>
+					</cfif>
+				<cfelse>
+					<cfset str_Name = nominalArray[i].getFULL_NAME()>
+				</cfif>
+			
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%fullName%',str_Name,"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%shortName%',nominalArray[i].getFORENAME_1()&" "&nominalArray[i].getSURNAME_1(),"ALL")>	
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%DOB%',nominalArray[i].getDATE_OF_BIRTH_TEXT(),"ALL")>
+			<cfif Len(nominalArray[i].getDATE_OF_BIRTH_TEXT()) GT 0>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%AGE%',getAge(LSDateFormat(nominalArray[i].getDATE_OF_BIRTH_TEXT(),"DD/MM/YYYY")),"ALL")>
+			<cfelse>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%AGE%',"","ALL")>
+			</cfif>
+			
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%Address%',nominalArray[i].getLATEST_ADDRESS(),"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%Warnings%',nominalArray[i].getWARNINGS_TEXT(),"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%pTown%',nominalArray[i].getPOST_TOWN(),"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%pob%',nominalArray[i].getPLACE_OF_BIRTH(),"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%sex%',nominalArray[i].getSEX(),"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%photoUrl%',nominalArray[i].getLATEST_PHOTO().getPHOTO_URL(),"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%photoDate%',nominalArray[i].getLATEST_PHOTO().getDatePhotoTaken(),"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%photoTitle%',nominalArray[i].getNOMINAL_REF()&" "&nominalArray[i].getSURNAME_1()&IIF(Len(nominalArray[i].getSURNAME_2()) GT 0,de('-'&nominalArray[i].getSURNAME_2()),de('')),"ALL")>
+			
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%nameType%',nominalArray[i].getNAME_TYPE(),"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%ethnicapp%',nominalArray[i].getETHNICITY_16(),"ALL")>
+			
+			<cfif Len(nominalArray[i].getOTHER_NAMES_FLAG()) GT 0 OR (nominalArray[i].getNAME_TYPE() IS NOT "P" AND nominalArray[i].getNAME_TYPE() IS NOT "T")>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%othernames%','<a href="#nominalArray[i].getNOMINAL_REF()#" class="genieNominalAlias">Other Names</a>',"ALL")>	
+		    <cfelse>
+			    <cfset thisNominal=ReplaceNoCase(thisNominal,'%othernames%','',"ALL")>
+			</cfif>			
+						
+			<cfif nominalArray[i].getNAME_TYPE() IS "P">
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalClass%','genieNominal',"ALL")>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalHRef%','href="#nominalArray[i].getNOMINAL_REF()#" uuid="#arguments.uuid#"',"ALL")>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%checkbox%','<input type="checkbox" id="chk_#nominalArray[i].getNOMINAL_REF()#">',"ALL")>
+			<cfelse>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalClass%','',"ALL")>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalHRef%','',"ALL")>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%checkbox%','',"ALL")>
+			</cfif>								
+			
+			<cfset returnTable &= thisNominal>			  
+		</cfloop>				
+	    <Cfset returnTable &=duplicate(variables.nominalLongTableFooter)>	
+				
+	<cfelse>
+		<cfset returnTable  = "<p><b>Your Search Returned No Results</b></p>">
+	</cfif> 
+	  
+	<cfreturn returnTable>  
+	  	  
+  </cffunction>    
 
     <cffunction name="createAuditStructure" access="private" output="false" returntype="struct">
   	  <cfargument name="auditData" required="true" type="struct" hint="struct containing audit data">
