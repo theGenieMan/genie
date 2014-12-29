@@ -1329,7 +1329,7 @@ font-size:90%;
 .genieAttachedDocument, .genieCustodySummary, .genieTelephoneIntelLink, .genieNFLMSNominal,
 .genieHTCULink, .geniePDOffences, #searchHelp, .closePopup, .wmcHOOCLookupCode, .wmcHOMCLookupCode,
 .wmcRecRepLookupCode, .propCategoryLookupCode, .propSubCategoryLookupCode, .propManufacturerLookupCode,
-.genieErrorLink {
+.genieErrorLink, .wMidsAddress, .wMidsTelephone, .wMidsVehicle, .fakeLink {
 	cursor:hand;
 	color:#0000FF !important;
 	text-decoration:underline;
@@ -1798,4 +1798,22 @@ input[readonly]{
 
 .undetected{
 	background-color:#009900;
+}
+
+.photo_title
+{
+	background-color : #0C5C99;
+	color : #FFF;
+    line-height:1.3em;
+	font-size:90%;
+	text-align:left;
+	font-weight:bold;
+	width:250;
+	text-align:center;
+}
+
+.bugReport{
+	color:white;
+	text-decoration:underline;
+	cursor:hand;
 }

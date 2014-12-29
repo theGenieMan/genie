@@ -26,7 +26,7 @@
 	<cfset locale=SetLocale("English (UK)")>    
     
     <cfset adminObj = createObject("component","cfide.adminapi.administrator")>
-	<cfset adminObj.login("admin","G3n13s3v3r")>     
+	<cfset adminObj.login("G3n13s3v3r","admin")>     
         
     <cfset cfserver = createObject("component","cfide.adminapi.runtime")>
 	<cfset cfserver.clearTrustedCache()>
@@ -509,18 +509,6 @@
         
         
         <cfset Session.usesLargeFont=false>
-        
-        <cfif FileExists(sUserStyleFile)>
-        
-          <cffile action="read" file="#sUserStyleFile#" variable="sUserStyles">
-          <cfset iFind=ListContains(sUserStyles,sUser,chr(10))>
-          
-          <cfif iFind GT 0>
-             <cfif FindNoCase("large",ListGetAt(sUserStyles,iFind,chr(10)))>
-               <cfset session.usesLargeFont=true>
-             </cfif>             
-          </cfif>
-        </cfif>
    
     
     <cfset Session.userSettings = application.genieUserService.getUserSettings(userId=session.user.getUserId(),userName=session.user.getFullName())>   
@@ -529,6 +517,13 @@
 	<cfset Session.serverIp = inet_address.getLocalHost().getHostAddress()>   
     <cfset Session.ThisUUID=CreateUUID()>
 	<cfset Session.StartTime=now()>    
+	<cfset session.lastDPAUpdate=now()>		
+	<cfset session.audit_code=''>
+	<cfset session.audit_for=''>
+	<cfset session.audit_details=''>
+	<cfset session.ethnic_code=''>
+	<cfset session.audit_for_collar=''>
+	<cfset session.audit_for_force=''>
 
     <cflog file="genie" type="information" text="Session Start: Complete #session.URLToken# #session.loggedInUser#, last login=#session.lastLoginDate#, log access level set to #session.LoggedInUserLogAccess#, GenieUser=#session.genieUser#">
 

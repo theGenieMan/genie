@@ -12,16 +12,20 @@
 			width:625,
 			height:250,
 			position: 'center',
-			reasonCodes: ['TRANSACTION LOG AND OTHER AUDIT CHECKS','VEHICLE AND/OR PERSON STOPPED','MOVING VEHICLE','ABANDONED OR PARKED AND UNATTENDED VEHICLE','VEHICLES INVOLVED IN ROAD ACCIDENT','SUBJECT OF PROCESS OR INVESTIGATION','ADMINISTRATION - FOR NON-OPERATIONAL MATTERS','CHILD ACCESS ENQUIRIES','ON BEHALF OF OTHER AUTHORISED AGENCY','UPDATE/CONFIRM/BROADCAST'],
+			reasonCodes: ['ENCOUNTER - General Person Enquiry','ENCOUNTER - Stop Search','ENCOUNTER - Anti-social behaviour','VULNERABLE PERSON - Domestic','VULNERABLE PERSON - Child Incident','VULNERABLE PERSON - Other','ROAD TRAFFIC - Driver Stop (S163)','ROAD TRAFFIC - Collision','ROAD TRAFFIC - Drink Drive','ROAD TRAFFIC - Vehicle Related Enquiries','STREET PROCESS DISPOSAL','POST CUSTODY - Bail Enquiries','POST CUSTODY - Warrant','CUSTODY','INVESTIGATION ENQUIRY','INTELLIGENCE ENQUIRY','OFFENCE ENQUIRY','PROPERTY ENQUIRY','OTHER'],
+			ethnicCodes: ['W1-White British','W2-Irish','W9-Any Other White','A1-Indian','A2-Pakistani','A3-Bangladeshi','A9-Any Other Asian','B1-Caribbean','B2-African','B9-Any Other Black','M1-White and Black Caribbean','M2-White and Black African','M3-White and Asian','M9-Any Other Mixed','O1-Chinese','O9-Any other Ethnic','NS-Not Stated'],
 			requestById: 'dpaRequestFor',
 			reasonCodeTxt: 'dpaReasonCodeTxt',
 			reasonCodeSelect: 'dpaReasonCodeSelect',
-			reasonCodeValue: '6',
+			ethnicCodeSelect: 'dpaEthnicCodeSelect',
+			reasonCodeValue: '',
 			reasonText: 'dpaReasonText',	
-			reasonTextValue: 'Testing New Version',
+			reasonTextValue: '',
 			requestFor: {
 						requestForUserId:'dpaRequestForUserId',
 						requestForUserName: 'dpaRequestForUserName',
+						requestForCollar: 'dpaRequestForCollar',
+						requestForForce: 'dpaRequestForForce',
 						initialValue: ''
 			},
 			updateDestination:{
@@ -31,7 +35,9 @@
 						dpaValid:'dpaValid'
 			},
 			urlToOpen:'',
-			howToOpen:'',					
+			howToOpen:'',	
+			enquiryScreen:'',
+			alwaysClear:true				
 		},
 		
 		// the constructor
@@ -47,6 +53,13 @@
 				dpaDivHtml += '    <option value="'+i+'">'+i+' - '+this.options.reasonCodes[i]+'</option>';
 			}
 			dpaDivHtml += '      </select>';
+			dpaDivHtml += '<span class="driverEthnicity" style="display:none;"><br><label for="'+this.options.reasonCodeTxt+'">Driver Ethnicity:</label>';
+			dpaDivHtml += '<select name="'+this.options.ethnicCodeSelect+'" id="'+this.options.ethnicCodeSelect+'" class="mandatory">';
+			dpaDivHtml += '        <option value=""></option>';
+			for (var i = 0; i < this.options.ethnicCodes.length; i++) {
+				dpaDivHtml += '    <option value="'+this.options.ethnicCodes[i].split('-')[0]+'">'+this.options.ethnicCodes[i]+'</option>';
+			}
+			dpaDivHtml += '      </select></span>';
 			dpaDivHtml += '<br><label for="'+this.options.reasonText+'">Details:</label><input type="text" name="'+this.options.reasonText+'" id="'+this.options.reasonText+'" class="mandatory" size="45" value="'+this.options.reasonTextValue+'">'			
 			dpaDivHtml += '<br><br><div id="dpaError" class="error" style="display:none">You must complete all DPA boxes</div>'			
 			dpaDivHtml += '</div>';
@@ -57,6 +70,7 @@
 			
 			this.dpaReasonTxt    = this.dpaBox.find('#'+this.options.reasonCodeTxt);
 			this.dpaReasonSelect = this.dpaBox.find('#'+this.options.reasonCodeSelect);
+			this.dpaEthnicSelect = this.dpaBox.find('.driverEthnicity');
 			/*
 			this.clearButton = $( "<input type='button' value='Clear' class='dpaClearButton'>");
 			this.updateButton = $( "<input type='button' value='Continue' class='dpaUpdateButton'>");			
@@ -68,7 +82,9 @@
 			this.element.find('#dpaRequestForSearch').hrQuickSearch(
 				{
 					returnUserId: this.options.requestFor.requestForUserId,
-					returnFullName: this.options.requestFor.requestForUserName,					
+					returnFullName: this.options.requestFor.requestForUserName,			
+					returnCollarNo: this.options.requestFor.requestForCollar,
+					returnForce: this.options.requestFor.requestForForce,		
 					initialValue: this.element.find('#dpaRequestForSearch').attr('initialValue')
 				}
 			);
@@ -131,14 +147,26 @@
 			this._on( this.dpaReasonTxt, {			
 			change: function(e){
 					var reasonCode=$('#'+e.target.id).val();
-					this.dpaReasonSelect.val(reasonCode);			
+					this.dpaReasonSelect.val(reasonCode);								
+					if (reasonCode=='6' && this.options.enquiryScreen == 'Person'){
+						this.dpaEthnicSelect.show();
+					}
+					else{
+						this.dpaEthnicSelect.hide();
+					}
 				}
 			});
 			
 			this._on( this.dpaReasonSelect, {			
 			change: function(e){					
 					var reasonCode=$('#'+e.target.id).val();
-					this.dpaReasonTxt.val(reasonCode);
+					this.dpaReasonTxt.val(reasonCode);					
+					if (reasonCode=='6' && this.options.enquiryScreen == 'Person'){
+						this.dpaEthnicSelect.show();
+					}
+					else{
+						this.dpaEthnicSelect.hide();
+					}
 				}
 			});
 			
@@ -193,6 +221,7 @@
 		// check if it's already a dialog box
 		// if it is just show it, if not create it
 		    var thisDialog=this.element;
+			this.element.find(':input:enabled:visible:first').focus();
 			var options=this.options;
 			var self=this;
 			if ($(this.element).hasClass('ui-dialog-content')) {
@@ -215,10 +244,16 @@
 									 	var reasonCode=thisDialog.find('#'+options.reasonCodeTxt).val();
 										var reasonText=thisDialog.find('#'+options.reasonText).val();
 										var requestFor=thisDialog.find('#'+options.requestFor.requestForUserName).val();
+										var requestForCollar=thisDialog.find('#'+options.requestFor.requestForCollar).val();
+										var requestForForce=thisDialog.find('#'+options.requestFor.requestForForce).val();
+										var ethnicCode=thisDialog.find('#'+options.ethnicCodeSelect).val();
 										var urlToOpen=self.options.urlToOpen;
 										var howToOpen=self.options.howToOpen;
 										
-										if (reasonCode.length == 0 || reasonText.length == 0 || requestFor.length==0){
+										if ((reasonCode.length == 0 || reasonText.length == 0 || requestFor.length==0)
+										    ||
+											(reasonCode==6 && ethnicCode.length==0 && options.enquiryScreen=='Person')
+										   ){
 									 	    thisDialog.find('#dpaError').show();
 										    return false; 
 										}
@@ -228,9 +263,20 @@
 												reasonCode: reasonCode,
 												reasonText: reasonText,												
 												requestFor: requestFor,
+												requestForCollar: requestForCollar,
+												requestForForce: requestForForce,
+												ethnicCode: ethnicCode,
 												urlToOpen: urlToOpen,
 												howToOpen: howToOpen,						
 											});
+											
+											// clear the dpa down
+											if (options.alwaysClear) {
+												thisDialog.find('#' + options.reasonCodeTxt).val('').change()
+												thisDialog.find('#' + options.reasonText).val('')
+												thisDialog.find('#' + options.ethnicCodeSelect).val('')
+												thisDialog.find('#dpaRequestForSearch').hrQuickSearch('doReset')
+											}
 											
 											// update the given destinations and hide the DPA dialog
 											thisDialog.find('#dpaError').hide();										

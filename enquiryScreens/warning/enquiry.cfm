@@ -89,9 +89,9 @@
 					<td valign="top"><label for="date_marked1">Date Marked</label></td>
 					<td valign="top" colspan="2">
 						<b>Between/On</b> 
-						<input name="date_marked1" id="date_marked1" displayInPane="Date Marked Between/On" size="10" value="01/12/2014" datepicker> 
+						<input name="date_marked1" id="date_marked1" displayInPane="Date Marked Between/On" size="10" datepicker> 
 						<b>And</b> 
-						<input name="date_marked2" id="date_marked2" displayInPane="Date Marked To" size="10" value="08/12/2014" datepicker>
+						<input name="date_marked2" id="date_marked2" displayInPane="Date Marked To" size="10" datepicker>
 					</td>										
 				</tr>	
 			    <tr>
@@ -187,6 +187,9 @@
 	<input type="hidden" name="reasonCode" id="reasonCode" value="">
 	<input type="hidden" name="reasonText" id="reasonText" value="">
 	<input type="hidden" name="reasonText" id="dpaValid" value="N">
+	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
+	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
+	<input type="hidden" name="requestForForce" id="requestForForce" value="">
 			
 	</cfoutput>
 	

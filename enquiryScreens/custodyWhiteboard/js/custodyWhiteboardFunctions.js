@@ -62,10 +62,10 @@ function doCustodyWhiteboard(){
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
 				  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred validating the person enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });		
 
 	$('#resultsContainer').show()	

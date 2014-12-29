@@ -130,10 +130,10 @@ function doOffenceEnquiry(){
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
 				  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error performing the offence enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });		
 
 	$('#resultsContainer').show()	

@@ -89,10 +89,10 @@ $(document).on('submit','.enquiryForm',
 			
 			}
 							  					  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred validating the person enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });			
 		
 	}
@@ -117,18 +117,7 @@ $(document).on('click','.wMidsNominal',
 		var dWidth=$(window).width()-100;
 		var dHeight= $(window).height()-150;
 		
-		$('#wmData').html('').hide()
-		$('#wmLoadingDiv').show();
-		
-		// load the alias data into the hidden div used for the dialog
-		$('#wMidsDialog').load(wmUrl,null,
-			function(){
-			 $('#wmData').show()
-			 $('#wmLoadingDiv').hide();				
-		});
-		
-		// open the dialog			
-			 
+		// open the dialog						 
 					$('#wMidsDialog').dialog({
 						modal: true,
 						position: 'center',
@@ -136,13 +125,22 @@ $(document).on('click','.wMidsNominal',
 						width: dWidth,
 						title: 'Genie - West Mids Summary',
 						open: function(event, ui){
-
+							$('#wmData').html('').hide()		
+							$('#wmLoadingDiv').show();							
+							// load the alias data into the hidden div used for the dialog
+							$('#wmData').load(wmUrl,null,
+								function(){
+								 $('#wmData').show()
+								 $('#wmLoadingDiv').hide();			 				
+							});	
 						},
-						close: function(event, ui){																	    										               
-							$(this).dialog('destroy');																																									
+						close: function(event, ui){															
+							$(this).dialog('destroy');																																							
 						},
 						buttons: [ { text: "Close", click: function() { $( this ).dialog( "close" ); } } ]
 					}); 
+		
+	
 		
 	});
 	

@@ -114,10 +114,10 @@ function doPropertyEnquiry(){
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
 				  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error performing the property enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });		
 
 	$('#resultsContainer').show()	
@@ -176,10 +176,10 @@ function doPropCategoryLookup(searchElement, codeElement){
 			
 							
 				  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error performing the Property Category Lookup Data: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });
 	
 }
@@ -225,10 +225,10 @@ function doPropSubCategoryLookup(searchElement, codeElement, categoryCode){
 			
 							
 				  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error performing the Property Sub Category Lookup Data: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });
 	
 }
@@ -274,10 +274,10 @@ function doManufacturerLookup(searchElement, codeElement){
 			
 							
 				  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error performing the Manufacturer Lookup Data: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });
 	
 }
@@ -323,10 +323,10 @@ function doPropModelLookup(searchElement, codeElement, manufacturerCode){
 			
 							
 				  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error performing the Property Sub Category Lookup Data: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });
 	
 }

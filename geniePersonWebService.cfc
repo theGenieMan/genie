@@ -97,8 +97,8 @@
 
 <cfsavecontent variable="variables.nominalLongTableRow">
 <tr id="%nameType%_%nominalRef%">
-	<td valign="top"><a %nominalHRef% class='%nominalClass%'>%nominalRef%</a></td>
-	<td valign="top" class="fullName"><a %nominalHRef% class='%nominalClass%'>%fullName%</a></td>
+	<td valign="top"><a %nominalHRef% class='%nominalClass%' %targetInfo%>%nominalRef%</a></td>
+	<td valign="top" class="fullName"><a %nominalHRef% class='%nominalClass%' %targetInfo%>%fullName%</a></td>
 	<td valign="top">%SEX%</td>	
 	<td valign="top" align="center">%warningData%</td>
 	<td valign="top" align="center">%photoData%</td>
@@ -880,7 +880,13 @@
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalClass%','genieNominal',"ALL")>
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalHRef%','href="#NOMINAL_REF#" uuid="#arguments.uuid#"',"ALL")>
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%checkbox%','<input type="checkbox" id="chk_#NOMINAL_REF#">',"ALL")>
+				<cfif Len(TARGET) GT 0>
+					<cfset thisNominal=ReplaceNoCase(thisNominal,'%targetInfo%','target="'&TARGET&'"',"ALL")>	
+				<cfelse>
+					<cfset thisNominal=ReplaceNoCase(thisNominal,'%targetInfo%','',"ALL")>
+				</cfif>
 			<cfelse>
+				<cfset thisNominal=ReplaceNoCase(thisNominal,'%targetInfo%','',"ALL")>
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalClass%','',"ALL")>
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalHRef%','',"ALL")>
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%checkbox%','',"ALL")>

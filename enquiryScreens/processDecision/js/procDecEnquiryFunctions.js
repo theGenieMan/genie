@@ -99,10 +99,10 @@ function doProcessDecisionEnquiry(){
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
 				  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error performing the custody enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });		
 
 	$('#resultsContainer').show()	

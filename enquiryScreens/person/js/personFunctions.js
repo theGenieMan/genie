@@ -72,7 +72,7 @@ function doPersonEnquiry(){
 		 data: JSON.stringify( dataToSend ),
 		 success: function(data, status){
 		 	
-		 	var $resultsTable=$($.trim(data))							
+		 	var $resultsTable=$($.trim(data))										
 				$resultsTable.find("tbody tr:even").addClass('row_colour0');
 				$resultsTable.find("tbody tr:odd").addClass("row_colour1");			
 				$resultsTable.find('td div.genieToolTip').qtip({
@@ -112,7 +112,8 @@ function doPersonEnquiry(){
 			}
 			
 			// we have one result, if the nominal ref column has a link in it then click it on the users behalf
-			if (noResults == 1){
+			// and the west mids button has not been checked.
+			if (noResults == 1 && dataToSend.wMids != 'Y'){
 				$resultsTable.find("tbody tr:nth-child(1) td:nth-child(1) a").trigger('click');
 			}
 			
@@ -180,10 +181,10 @@ function doPersonEnquiry(){
 				$('#firearmsResultsButtons input[type=button]').removeAttr('disabled')
 			}
 									  					  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred running the firearms person enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });			
    }
    else
@@ -246,10 +247,10 @@ function doPersonEnquiry(){
 				$('#wMidsResultsButtons input[type=button]').removeAttr('disabled')
 			}
 									  					  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred running the west midlands police person enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });			
 		
    }

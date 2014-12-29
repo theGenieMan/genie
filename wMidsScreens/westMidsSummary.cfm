@@ -88,7 +88,7 @@ Revisions   :
   
   <div style="padding-bottom:5px;">
   #x#.  
-  <a href="nominal_details/code/westMidsNominalDetail.cfm?summaryNo=#x#&appRef=#summaryDetails[x].xmlChildren[1].app_ref.xmlText#&sysid=#summaryDetails[x].xmlChildren[1].sys_ref.xmlText#&forceId=#summaryDetails[x].xmlChildren[1].force_ref.xmlText#&detailType=PERSON&sourceRef=#sourceRef#&#Session.URLToken#" target="_blank">
+  <a href="summaryNo=#x#&appRef=#summaryDetails[x].xmlChildren[1].app_ref.xmlText#&sysid=#summaryDetails[x].xmlChildren[1].sys_ref.xmlText#&forceId=#summaryDetails[x].xmlChildren[1].force_ref.xmlText#&detailType=PERSON&sourceRef=#sourceRef#&#Session.URLToken#" class="wMidsDetail">
   #summaryDetails[x].xmlChildren[2].xmlText#  
   </a>
   </div>

@@ -89,10 +89,10 @@ function doBailDiary(){
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
 				  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error performing the intelligence enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });		
 
 	$('#resultsContainer').show()	

@@ -131,7 +131,7 @@
 				<tr>
 					<td><label for="surname1">Surname / Maiden Name</label></td>
 					<td>
-						<input type="text" name="surname1" id="surname1" displayInPane="Surname 1" value="spittle">
+						<input type="text" name="surname1" id="surname1" displayInPane="Surname 1">
 						&nbsp;
 						<input type="text" name="surname2" id="surname2" displayInPane="Surname 2"> <cfif session.isWMidsUser><b>WM</b></cfif>
 					</td>
@@ -139,7 +139,7 @@
 				<tr>
 					<td><label for="forename1">Forename / Nickname</b></td>
 					<td>
-						<input type="text" name="forename1" id="forename1" displayInPane="Forename 1" value="brett">
+						<input type="text" name="forename1" id="forename1" displayInPane="Forename 1">
 						&nbsp;
 						<input type="text" name="forename2" id="forename2" displayInPane="Forename 2"> <cfif session.isWMidsUser><b>WM</b></cfif>					
 					</td>
@@ -293,7 +293,10 @@
 	<input type="hidden" name="requestFor" id="requestFor" value="">
 	<input type="hidden" name="reasonCode" id="reasonCode" value="">
 	<input type="hidden" name="reasonText" id="reasonText" value="">
-	<input type="hidden" name="reasonText" id="dpaValid" value="N">
+	<input type="hidden" name="dpaValid" id="dpaValid" value="N">
+	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
+	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
+	<input type="hidden" name="requestForForce" id="requestForForce" value="">
 		
 	<div id="wMidsDialog" style="display:none;">
 		<div id='wmLoadingDiv' style='width:100%' align='center'><h4>Loading, please wait</h4><div class='progressBar'></div></div>

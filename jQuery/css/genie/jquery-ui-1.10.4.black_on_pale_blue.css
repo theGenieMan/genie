@@ -752,7 +752,7 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
 	float: left;
-	padding: .5em 1em;
+	padding: .5em 0.4em;
 	text-decoration: none;
 }
 .ui-tabs .ui-tabs-nav li.ui-tabs-active {
@@ -770,7 +770,7 @@ button.ui-button::-moz-focus-inner {
 .ui-tabs .ui-tabs-panel {
 	display: block;
 	border-width: 0;
-	padding: 1em 1.4em;
+	padding: 0.3em 0.3em;
 	background: none;
 }
 .ui-tooltip {
@@ -788,7 +788,7 @@ body .ui-tooltip {
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-family: Arial;
+	/*font-family: Arial;*/
 	font-size: 100%;
 }
 
@@ -1214,6 +1214,26 @@ table.nominalData th {
 	text-align:left;
 	padding:2px;
 }	
+table.nominalData td {	
+	font-size:90%
+}		
+
+.row_colour0
+{
+	background-color : #CCCCFF;
+}
+
+.row_colour1
+{
+	background-color : #CCCCFF;	
+}
+.mandatory{
+	background-color : #CCCCFF;
+}
+
+input[type=text] {
+	border:1px solid #000000;
+}
 
 .notification{
 	border: 1px solid #000000;		
@@ -1227,7 +1247,7 @@ table.nominalData th {
 	-webkit-box-shadow: #666 0px 2px 3px;
 	-moz-box-shadow: #666 0px 2px 3px;
 	box-shadow: #666 0px 2px 3px;
-	background: #ebebeb;
+	background: #CCCCFF;
 	color:#000000;
 	position:relative;
 	z-index: 0;
@@ -1241,7 +1261,7 @@ table.nominalData th {
 	border-top:1px solid #000000; 
 	border-left:1px solid #000000; 
 	border-right:1px solid #000000; 
-	background-color:#ebebeb; 
+	background-color:#CCCCFF; 
 	height:20px; 
 	z-index:0;
 	text-align:left;
@@ -1251,7 +1271,7 @@ table.nominalData th {
 	width:510px; 
 	border:1px solid #000000; 
 	padding:3px; 
-	background-color:#ebebeb; 
+	background-color:#CCCCFF; 
 	height:335px; 
 	overflow:auto
 }	
@@ -1328,7 +1348,15 @@ color:#000000;
 font-size:90%;
 }
 
-.genieNominal{
+.genieNominal, .genieCustodyLink, .genieCustodyPaste, .genieCrimeLink, .genieCaseLink, .genieOISLink,
+.genieAddressLink, .genieAddressNomHover, .genieAddressOrgHover, .genieAddressIntelHover, 
+.genieAddressOffenceHover, .genieAddressMap, .genieAddressSNT, .genieIntelLink, .genieFirearmsNominal,
+.genieVehicleSearchLink, .genieCrashLink, .genieTelNoSearchLink,  .genieMisperLink,
+.genieSTEPLink, .genieRMPLink, .genieStopSearchLink, .genieANPRSearch, .genieVehicleIntelLink,
+.genieAttachedDocument, .genieCustodySummary, .genieTelephoneIntelLink, .genieNFLMSNominal,
+.genieHTCULink, .geniePDOffences, #searchHelp, .closePopup, .wmcHOOCLookupCode, .wmcHOMCLookupCode,
+.wmcRecRepLookupCode, .propCategoryLookupCode, .propSubCategoryLookupCode, .propManufacturerLookupCode,
+.genieErrorLink, .wMidsAddress, .wMidsTelephone, .wMidsVehicle, .fakeLink {
 	cursor:hand;
 	color:#000000 !important;
 	text-decoration:underline;
@@ -1373,8 +1401,8 @@ font-size:90%;
 
 .photo_title
 {
-	background-color : #CCCCFF;
-	color : #000000;
+	background-color : #000000;
+	color : #CCCCFF;
     line-height:1.3em;
 	font-size:90%;
 	text-align:left;
@@ -1408,6 +1436,34 @@ font-size:90%;
 	color: #000000;
 }
 
+.warningTitle
+{
+  	background-color : #000;
+	color : #CCF;
+  	line-height:1.1em;	
+	padding:1px;
+	text-align:center;
+	font-weight:bold;	 	  
+	margin:2px;
+}
+
+.warningTab
+{
+  	background-color : #000;
+	color : #CCF;
+  	line-height:1.1em;	
+	padding:1px;
+	text-align:center;
+	font-weight:bold;	  
+	margin:2px;
+}
+
+.warningText
+{
+	padding-top:2px;
+	text-align:left;
+	font-size:90%;
+}
 button#personEnquiryButton{
     background: #CCCCFF;
 	border:1px solid #000000;
@@ -1613,4 +1669,202 @@ pre.crime {
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 	font-family : Arial,Helvetica,sans-serif;	
+}
+
+.ninetypc{
+	font-size:90%
+}
+
+.thSorted{
+	color:#000000 !important;
+}
+
+.thSortable{
+	color:#000000 !important;
+	cursor:hand;
+	text-decoration:underline;
+}
+
+.loadingDiv{
+	border:2px solid #000000; 
+	padding:5px;
+	text-align:center;
+	width:200px;
+	height:100px;
+	background-color:#CCCCFF;
+	z-index:0;
+}
+
+div.geniePanel{
+	border:1px solid #000000;
+	padding:2px;
+}	
+
+div.geniePanel .header{
+	background-color:#000000;
+	color:#CCCCFF;
+	font-size:110%;
+	font-weight:bold;
+	padding:2px;
+	margin-bottom:2px;
+}
+
+.nominalTitle{
+	font-size:120%;
+	font-weight:bold;
+	background-color:#000000;
+	color:#CCCCFF;
+}
+
+.deceasedTitle{
+	font-size:120%;
+	font-weight:bold;
+	background-color:#FF0000;
+	color:white;
+}
+
+.redWarningBox{
+	font-weight:bold;
+	background-color:#FF0000;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	float:left;
+}
+
+.greenWarningBox{
+	font-weight:bold;
+	background-color:#009900;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.blueWarningBox{
+	font-weight:bold;
+	background-color:#000099;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.warningBoxIOM1{
+	font-weight:bold;
+	background-color:#FF0000;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.warningBoxIOM2{
+	font-weight:bold;
+	background-color:orange;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.warningBoxIOM3{
+	font-weight:bold;
+	background-color:#009900;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.warningBoxIOM4{
+	font-weight:bold;
+	background-color:#000000;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+
+.warningBoxIOM4 a{
+	color:white !important;
+}
+
+.highlightCrime{
+	background-color:red !important;
+	color:white !important;
+	font-weight:bold !important;
+}
+
+.popupSearchResults{
+	border:1px solid black;
+	width:350px;
+	height:150px;
+	position:absolute;
+	overflow:auto;
+	z-index:9999;
+	margin-top:10px;
+	background-color:CCCCFF;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+input[readonly]{
+	background-color:#aaa;
+	color:black;
+	font-weight:bold;
+}
+
+.bailHour{
+	background-color:#CCCCFF;
+	color:white;
+	font-weight:bold;	
+}
+
+.bailRow{
+	height:40px;
+}
+
+.clearLookup{
+	font-size:90%;
+	font-weight:bold;
+	color:red;
+	cursor:hand;	
+}
+
+.detected{
+	background-color:#FF0000;
+}
+
+.undetected{
+	background-color:#009900;
 }

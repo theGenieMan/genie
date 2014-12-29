@@ -62,11 +62,11 @@
 		  		<tr>
 		  			<td valign="top" width="15%"><label for="org_dsp">Crime No</label></td>
 					<td  valign="top" width="30%">
-						<input name="org_code" id="org_code" displayInPane="Org Code" size="4" value="22DA">
+						<input name="org_code" id="org_code" displayInPane="Org Code" size="4">
 						/
-						<input name="serial_no" id="serial_no" displayInPane="Serial No" size="7" value="">
+						<input name="serial_no" id="serial_no" displayInPane="Serial No" size="7">
 						/
-						<input name="year" id="year" displayInPane="Year" size="2" value="14">
+						<input name="year" id="year" displayInPane="Year" size="2">
 					</td>
 					<td width="5%">&nbsp;</td>
 					<td width="15%" valign="top"><label for="beat_code">Beat Code</label></td>
@@ -304,6 +304,9 @@
 	<input type="hidden" name="reasonCode" id="reasonCode" value="">
 	<input type="hidden" name="reasonText" id="reasonText" value="">
 	<input type="hidden" name="reasonText" id="dpaValid" value="N">
+	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
+	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
+	<input type="hidden" name="requestForForce" id="requestForForce" value="">
 	
 	
 	<div id="pdOffencesDialog" style="display:none;">

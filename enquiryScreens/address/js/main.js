@@ -9,7 +9,7 @@ $(document).ready(function() {
 		var $resultsTabs=$( "#resultsTabs" ).tabs();	
 		var $dpaBox=$('#dpa').dpa({
 					requestFor:{
-						initialValue:$('#enquiryUser').val(),
+						initialValue:'',
 					},
 					dpaUpdated: function(e,data){
 							// update the dpa boxes as per the values entered.
@@ -17,19 +17,19 @@ $(document).ready(function() {
 							$('#reasonText').val(data.reasonText)
 							$('#requestFor').val(data.requestFor)
 							$('#dpaValid').val('Y').change()
+							$('#requestForCollar').val(data.requestForCollar)
+							$('#requestForForce').val(data.requestForForce)
+							$('#ethnicCode').val(data.ethnicCode)
 							
 							// send the data to the session update function in the genie service
 							
 							$.ajax({
 									 type: 'POST',
-									 url: '/genieSessionWebService.cfc?method=updateSession&reasonCode='+data.reasonCode+'&reasonText='+data.reasonText+'&requestFor='+data.requestFor,						 							  
+									 url: '/genieSessionWebService.cfc?method=updateSession&reasonCode='+data.reasonCode+'&reasonText='+data.reasonText+'&requestFor='+data.requestFor+'&ethnicCode='+data.ethnicCode+'&requestForCollar='+data.requestForCollar+'&requestForForce='+data.requestForForce,						 							  
 									 cache: false,
 									 async: false,							 
 									 success: function(data, status){							
 														  					  
-									 },
-									 error: function(jqXHR, textStatus, errorThrown){
-									 	alert('An error occurred updating the session info: '+textStatus+', '+errorThrown)			
 									 }
 							});								
 							

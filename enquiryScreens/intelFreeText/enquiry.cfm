@@ -61,7 +61,7 @@
 		  		<tr>
 		  			<td valign="top" width="15%"><label for="search_text">Search Text</label></td>
 					<td  colspan="4" valign="top" width="30%">
-						<input type="text" name="search_text" id="search_text" value='nick AND hagley' size="75" displayInPane="Search Text"> <span id="searchHelp"><u>Help</u></span>
+						<input type="text" name="search_text" id="search_text" size="75" displayInPane="Search Text"> <span id="searchHelp"><u>Help</u></span>
 					</td>									
 		  		</tr>	
 				<tr>
@@ -154,6 +154,9 @@
 	<input type="hidden" name="reasonCode" id="reasonCode" value="">
 	<input type="hidden" name="reasonText" id="reasonText" value="">
 	<input type="hidden" name="reasonText" id="dpaValid" value="N">
+	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
+	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
+	<input type="hidden" name="requestForForce" id="requestForForce" value="">
 	
 	
 	<div id="searchTextPopup" style="display:none">

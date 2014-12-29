@@ -35,6 +35,34 @@ Revisions   :
 	<script>
 	$(document).ready(function() {
 
+	  $(document).on('click','.fontBigger',
+	  	function(e){
+			e.preventDefault()
+			var currSize=parseInt($('#myFontSize').val());
+			    currSize=currSize+1;
+			$('body').css('font-size',currSize+'pt');
+			$('#myFontSize').val(currSize)
+		}
+	  );
+	  
+	  $(document).on('click','.fontSmaller',
+	  	function(e){
+			e.preventDefault();
+			var currSize=parseInt($('#myFontSize').val());
+			    currSize=currSize-1;
+			$('body').css('font-size',currSize+'pt');
+			$('#myFontSize').val(currSize)
+		}
+	  )
+	  
+	  $(document).on('click','.fontDefault',
+	  	function(e){
+			e.preventDefault();
+			$('body').css('font-size','10pt');
+			$('#myFontSize').val('10')
+		}
+	  )	  
+
 	  $(document).on('change','#font',
 	  
 	  	function(){
@@ -75,7 +103,7 @@ Revisions   :
 			
 			$.ajax({
 					 type: 'POST',
-					 url: '/genieSessionWebService.cfc?method=updateUserSettings&font='+$('#font').val()+'&stylesheet='+$('#colourScheme').val()+'&openNewWindow='+$('#openNewWindow').val()+'&userId='+$('#userId').val()+'&userName='+$('#userName').val(),						 							  
+					 url: '/genieSessionWebService.cfc?method=updateUserSettings&font='+$('#font').val()+'&stylesheet='+$('#colourScheme').val()+'&openNewWindow='+$('#openNewWindow').val()+'&fontSize='+$('#myFontSize').val()+'&userId='+$('#userId').val()+'&userName='+$('#userName').val(),						 							  
 					 cache: false,
 					 async: false,							 
 					 success: function(data, status){							
@@ -89,16 +117,10 @@ Revisions   :
 									 success: function(data, status){																	
 											var aTag = $("a[name='top']");
     										$('html,body').animate({scrollTop: aTag.offset().top},'slow');		  					  
-									 },
-									 error: function(jqXHR, textStatus, errorThrown){
-									 	alert('An error occurred updating your settings: '+textStatus+', '+errorThrown)			
 									 }
 							});	
 						
 									  					  
-					 },
-					 error: function(jqXHR, textStatus, errorThrown){
-					 	alert('An error occurred updating your settings: '+textStatus+', '+errorThrown)			
 					 }
 			});	
 			
@@ -162,6 +184,15 @@ Revisions   :
 				</div>
 			</td>
 		</tr>
+		
+		<tr>
+			<td valign="top"><b>Font Size</b></td>
+			<td valign="top">&nbsp;</td>
+			<td valign="top" colspan="3">
+				<a href="##" class="fontBigger">Make Bigger</a> | <a href="##" class="fontSmaller">Make Smaller</a> | <a href="##" class="fontDefault">Set To Default</a>
+				<input type="hidden" name="myFontSize" id="myFontSize" value="10"> 
+			</td>			
+		</tr>		
 		
 		<tr>
 			<td valign="top"><b>Colour Scheme</b></td>

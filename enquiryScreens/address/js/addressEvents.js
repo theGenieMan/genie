@@ -53,10 +53,11 @@ $(document).on('submit','.enquiryForm',
 			
 			}
 							  					  
-		 },
+		 }
+		 /*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred validating the person enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });			
 		
 	}
@@ -159,5 +160,48 @@ $(document).on('click','.genieAddressNomHover, .genieAddressOrgHover, .genieAddr
 	}
 );
 
-
+// when a west mids address is clicked open dialog
+// with the west mids summary page for that nominal
+$(document).on('click','.wMidsAddress',
+	function(e){
+		
+		e.preventDefault();
+		var wMidsRef=$(this).attr('href').split('|');
+		var appRef=wMidsRef[0];
+		var sysId=wMidsRef[1];
+		var forceId=wMidsRef[2];		
+		var summaryType=wMidsRef[3];
+		var address=wMidsRef[4];
+		var wmUrl='/wMidsScreens/westMidsSummary.cfm?appRef='+appRef+'&sysId='+sysId+'&forceId='+forceId+'&summaryType='+summaryType+'&nominalName='+encodeURI(address);
+		
+		// work out the dialog size based on the size of the screen
+		var dWidth=$(window).width()-100;
+		var dHeight= $(window).height()-150;
+		
+		// open the dialog						 
+					$('#wMidsDialog').dialog({
+						modal: true,
+						position: 'center',
+						height: dHeight,
+						width: dWidth,
+						title: 'Genie - West Mids Summary',
+						open: function(event, ui){
+							$('#wmData').html('').hide()		
+							$('#wmLoadingDiv').show();							
+							// load the alias data into the hidden div used for the dialog
+							$('#wmData').load(wmUrl,null,
+								function(){
+								 $('#wmData').show()
+								 $('#wmLoadingDiv').hide();			 				
+							});	
+						},
+						close: function(event, ui){															
+							$(this).dialog('destroy');																																							
+						},
+						buttons: [ { text: "Close", click: function() { $( this ).dialog( "close" ); } } ]
+					}); 
+		
+	
+		
+	});
 	

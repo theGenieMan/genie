@@ -9,9 +9,16 @@
 	
 */
 
+//open bug report window
+$(document).on('click','.bugReport',
+	function(){
+		window.open('bugReport.cfm');	
+	}
+);
 
+// global ajax error catching
 $(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
-	var $theErrorDiv=$('<div class="errorDiv" id="theGlobalError"></div>');	
+	var $theErrorDiv=$('<div class="errorDiv" id="theGlobalError" style="display:none;"></div>');	
 	var $pageHtml=$($("html"));
 	var thisErrorPackage={};
 	
@@ -82,10 +89,8 @@ $(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
 			alert("GENIE - An Error Has Occurred\n\nUnfortunately we can't capture why the error has happened.\n\nPlease contact the ICT Service Desk and give as much information as you can about the error\n\n eg.The screen you are in, what search parameters you are using, any useful information like nominal references, crime nos etc..\n\nThanks, The Genie Team. ")
 		}
 	});
-	
-	
-	
-});
+		
+}); 
 
 // Event that toggles the size of a search pane
 $(document).on('click','.searchPaneHeader', function() {   
@@ -181,6 +186,7 @@ $(document).on('click','.genieNominal',
 			var nominalRef=$(this).attr('href');
 			var searchUUID=$(this).attr('uuid');
 			var dpa=$(this).attr('dpa');
+			var target=$(this).attr('target');
 			var firstTab=$(this).attr('firstTab');
 			var url='/nominalViewers/genie/nominal.cfm?nominalRef='+nominalRef;
 			
@@ -199,20 +205,34 @@ $(document).on('click','.genieNominal',
 			}	
 			else
 			{
+				var goNominal=false;
+				
+				// check if the nominal is a target
+				if (typeof target !== 'undefined'){
+					var conf=confirm('Nominal '+nominalRef+' is marked as a target\n\nReason: '+target+'\n\nIf you continue to view the nominal information regarding your check will be forwarded to the creator of the target\n\nPress Ok to continue to view the nominal or Cancel to stop.')
+					if (conf){
+						goNominal=true
+					}
+				}
+				else{
+					goNominal=true
+				}
+				
 				// check if there is a tickbox for the nominal on the
 				// screen if so check it
 				
 				if($('#chk_'+nominalRef).length>0){
 					$('#chk_'+nominalRef).prop('checked',true)
 				}
-								
-				if($(this).hasClass('targetSelf')){
-					window.location = url
-				}
-				else
-				{
-					fullscreen(url, 'nominal' + nominalRef)
-				}				
+				
+				if (goNominal) {				
+					if ($(this).hasClass('targetSelf')) {
+						window.location = url
+					}
+					else {
+						fullscreen(url, 'nominal' + nominalRef)
+					}
+				}		
 			}			
 			
 		}
@@ -925,6 +945,30 @@ $(document).on('click','.genieNominalAlias',
 						},
 						buttons: [ { text: "Close", click: function() { $( this ).dialog( "close" ); } } ]
 					}); 	
+	});
+
+// when a west mids detail is clicked open dialog
+$(document).on('click','.wMidsDetail',
+	function(e){
+		
+		e.preventDefault();
+		var wMidsRef=$(this).attr('href').split('|');
+		var inList=$(this).attr('inList');
+		var showInCurrentWindow=false;
+		var wmUrl='/wMidsScreens/westMidsNominalDetail.cfm?'+wMidsRef;
+		
+		if (inList=='Y'){
+				showInCurrentWindow=true;
+		}
+		
+		if (showInCurrentWindow){
+			window.location = wmUrl;
+		}
+		else{
+			window.open(wmUrl)	
+		}
+		
+		
 	});
 
 // event that clears down lookup input boxes

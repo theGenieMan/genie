@@ -224,10 +224,10 @@ function doAddressEnquiry(){
 			if ($('#actionsDropDown').length > 0) {
 				$('#actionsDropDown').show();
 			}		  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred processing the address enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });		
 		 
    // if firearms results have been requested init the tab and do the call
@@ -284,10 +284,10 @@ function doAddressEnquiry(){
 				$('#firearmsResultsButtons input[type=button]').removeAttr('disabled')
 			}
 									  					  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred running the firearms person enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });			
    }
    else
@@ -350,10 +350,10 @@ function doAddressEnquiry(){
 				$('#wMidsResultsButtons input[type=button]').removeAttr('disabled')
 			}
 									  					  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred running the west midlands police person enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });			
 		
    }

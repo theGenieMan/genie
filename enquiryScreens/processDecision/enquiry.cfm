@@ -154,6 +154,9 @@
 	<input type="hidden" name="reasonCode" id="reasonCode" value="">
 	<input type="hidden" name="reasonText" id="reasonText" value="">
 	<input type="hidden" name="reasonText" id="dpaValid" value="N">
+	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
+	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
+	<input type="hidden" name="requestForForce" id="requestForForce" value="">
 	
 	
 	<div id="pdOffencesDialog" style="display:none;">

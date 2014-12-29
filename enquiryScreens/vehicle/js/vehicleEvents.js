@@ -53,63 +53,14 @@ $(document).on('submit','.enquiryForm',
 			
 			}
 							  					  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred validating the person enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });			
 		
 	}
 )
-
-
-// when a west mids nominal is clicked open dialog
-// with the west mids summary page for that nominal
-$(document).on('click','.wMidsNominal',
-	function(e){
-		
-		e.preventDefault();
-		var wMidsRef=$(this).attr('href').split('|');
-		var appRef=wMidsRef[0];
-		var sysId=wMidsRef[1];
-		var forceId=wMidsRef[2];
-		var nominalRef=wMidsRef[3];
-		var summaryType=wMidsRef[4];
-		var nominalName=$(this).closest('tr').find('td.fullName').html();
-		var wmUrl='/wMidsScreens/westMidsSummary.cfm?appRef='+appRef+'&sysId='+sysId+'&forceId='+forceId+'&summaryType='+summaryType+'&nominalRef='+nominalRef+'&nominalName='+encodeURI(nominalName);
-		
-		// work out the dialog size based on the size of the screen
-		var dWidth=$(window).width()-100;
-		var dHeight= $(window).height()-150;
-		
-		$('#wmData').html('').hide()
-		$('#wmLoadingDiv').show();
-		
-		// load the alias data into the hidden div used for the dialog
-		$('#wMidsDialog').load(wmUrl,null,
-			function(){
-			 $('#wmData').show()
-			 $('#wmLoadingDiv').hide();				
-		});
-		
-		// open the dialog			
-			 
-					$('#wMidsDialog').dialog({
-						modal: true,
-						position: 'center',
-						height: dHeight,
-						width: dWidth,
-						title: 'Genie - West Mids Summary',
-						open: function(event, ui){
-
-						},
-						close: function(event, ui){																	    										               
-							$(this).dialog('destroy');																																									
-						},
-						buttons: [ { text: "Close", click: function() { $( this ).dialog( "close" ); } } ]
-					}); 
-		
-	});
 
 // when an address link is clicked, open a dialog
 // with the addressDetails.cfm page for that address
@@ -152,4 +103,48 @@ $(document).on('click','.genieVehicleIntelLink',
 		
 	});
 
+// when a west mids address is clicked open dialog
+// with the west mids summary page for that vehicle
+$(document).on('click','.wMidsVehicle',
+	function(e){
+		
+		e.preventDefault();
+		var wMidsRef=$(this).attr('href').split('|');
+		var appRef=wMidsRef[0];
+		var sysId=wMidsRef[1];
+		var forceId=wMidsRef[2];		
+		var summaryType=wMidsRef[3];
+		var vrm=wMidsRef[4];
+		var wmUrl='/wMidsScreens/westMidsSummary.cfm?appRef='+appRef+'&sysId='+sysId+'&forceId='+forceId+'&summaryType='+summaryType+'&nominalName='+encodeURI(vrm);
+		
+		// work out the dialog size based on the size of the screen
+		var dWidth=$(window).width()-100;
+		var dHeight= $(window).height()-150;
+		
+		// open the dialog						 
+					$('#wMidsDialog').dialog({
+						modal: true,
+						position: 'center',
+						height: dHeight,
+						width: dWidth,
+						title: 'Genie - West Mids Summary',
+						open: function(event, ui){
+							$('#wmData').html('').hide()		
+							$('#wmLoadingDiv').show();							
+							// load the alias data into the hidden div used for the dialog
+							$('#wmData').load(wmUrl,null,
+								function(){
+								 $('#wmData').show()
+								 $('#wmLoadingDiv').hide();			 				
+							});	
+						},
+						close: function(event, ui){															
+							$(this).dialog('destroy');																																							
+						},
+						buttons: [ { text: "Close", click: function() { $( this ).dialog( "close" ); } } ]
+					}); 
+		
 	
+		
+	});
+			

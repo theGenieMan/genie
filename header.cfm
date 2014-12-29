@@ -30,6 +30,15 @@ Revisions        :
 				});
 			}
 		 );
+		 		
+		if ( $('#genieUserMyFontSize').length>0 ) {
+			var fontSize=parseInt($('#genieUserMyFontSize').val())		
+			if (fontSize != 10){
+				$('body').css('font-size',fontSize+'pt');
+			}
+		}
+		 
+		 
 	});
 </script>
 
@@ -57,7 +66,15 @@ Revisions        :
 <cfset inet_address = CreateObject("java", "java.net.InetAddress")>
 <cfoutput>
 <div class="ui-widget-header" align="center">
-	GENIE #application.version# #application.ENV#<cfif isDefined('headerTitle')> - #headerTitle#</cfif>
+ <table width="99%" cellpadding=0 cellspacing=0 align="center"> 
+ 	<tr>
+ 		<td width="10%" valign="top" align="left">
+		<img src="/images/bugIcon.png" border="0" style="vertical-align:middle;" class="bugReport" >&nbsp;<span class="bugReport">Report Bug</span>	
+		</td>
+		<td width="80%">GENIE #application.version# #application.ENV#<cfif isDefined('headerTitle')> - #headerTitle#</cfif></td>
+		<td width="10%">&nbsp;</td>
+ 	</tr>
+ </table>	
 </div>
 
 <cfset nominalInfo="">
@@ -65,13 +82,13 @@ Revisions        :
 	<cfset nominalRef="">	
 </cfif>	
 <table width="100%" align="center">
-	<tr>
+	<tr>		
 		<td width="50%">			
 		<cfif showActionSelect>
 		  <span id="actionsDropDown">
 			   <b>Actions</b>:
 			   <cfif isDefined('nominalRef') && isDefined('nominal')>
-			   	   <cfset nominalInfo='nominalRef="'&nominalRef&'" nominalName="'&nominal.getFULL_NAME()&'"'>'
+			   	   <cfset nominalInfo='nominalRef="'&nominalRef&'" nominalName="'&nominal.getFULL_NAME()&'"'>
 			   </cfif>
 			   <select name="actionSelectDropDown" id="actionSelectDropDown" actionType="Enq" #nominalInfo#>
 			   	  <option value="">-- Select --</option>		 
@@ -98,7 +115,8 @@ Revisions        :
 			<input type="hidden" id="genieCurrentUserId" value="#iif(session.user.getForceCode() IS '22',de(session.user.getUSERID()),de(session.user.getOTHERUSERID()))#">
 			<input type="hidden" id="genieCurrentUserIdWMP" value="#session.user.getUSERID()#">
 			<input type="hidden" id="genieCurrentUserName" value="#session.user.getFullName()#">
-			<input type="hidden" id="genieCurrentUserCollar" value="#session.user.getCollar()#">			
+			<input type="hidden" id="genieCurrentUserCollar" value="#session.user.getCollar()#">	
+			<input type="hidden" id="genieUserMyFontSize" value="#session.userSettings.fontSize#">			
 		</td>
 	</tr>
 </table>

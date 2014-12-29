@@ -94,12 +94,25 @@
 	  <cfset var iVehCount=0>
 	  <cfset var searchData=deserializeJSON(toString(getHttpRequestData().content))> 	     	  
 	  <cfset var returnTable=''>
+	  <cfset var resultType=searchData.resultType>
+	    
+	  <!--- remove the none search related elements from the search terms --->
+	  <cfset structDelete(searchData,'wMids')>	  
+	  <cfset structDelete(searchData,'resultType')>
+	  <cfset structDelete(searchData,'enquiryUser')>
+	  <cfset structDelete(searchData,'enquiryUserName')>
+	  <cfset structDelete(searchData,'enquiryUserDept')>
+	  <cfset structDelete(searchData,'requestFor')>
+	  <cfset structDelete(searchData,'reasonCode')>  
+	  <cfset structDelete(searchData,'reasonText')>
+	  <cfset structDelete(searchData,'sessionId')>  
+	  <cfset structDelete(searchData,'terminalId')>    	    
 	
 		<cfset vehicleResults = application.genieService.doWestMerciaVehicleSearch(searchTerms=searchData)>  
 		
-		<cfif searchData.resultType IS "XML">
+		<cfif resultType IS "XML">
 		
-		<cfelseif searchData.resultType IS "html">						
+		<cfelseif resultType IS "html">						
 				<cfset returnData = doWMerVehicleTable(vehicleResults)>				 														
 		<cfelse>
 			<cfset returnData = 'No Valid Return Format Specified. options are XML  or HTML'>
@@ -109,7 +122,7 @@
    
    </cffunction>
 		
-   <cffunction name="doWMerVehicleTable" access="private" output="false" returntype="string">
+    <cffunction name="doWMerVehicleTable" access="private" output="false" returntype="string">
   	<cfargument name="vehicles" required="true" type="query" hint="query of addresses returned">	  
 	
 	<cfset var returnTable="">
@@ -176,7 +189,7 @@
 	  	  
   </cffunction>
   
-  <cffunction name="doWestMidsVehicleEnquiry" output="false" returntype="any" access="remote"  returnformat="plain">
+    <cffunction name="doWestMidsVehicleEnquiry" output="false" returntype="any" access="remote"  returnformat="plain">
 	
 		<cfset var return = StructNew()>
 		<cfset var westMidsResults = "">
@@ -185,49 +198,20 @@
 		<cfset var sDobPart = "">
 		<cfset var searchData=deserializeJSON(toString(getHttpRequestData().content))>
 		<cfset var auditData=createAuditStructure(searchData)>
-		<cfset var searchXml = "<risp:surname>$surname$</risp:surname><risp:forenames>$forename$</risp:forenames><risp:dob>$dob$</risp:dob><risp:cro/><risp:gender>$gender$</risp:gender><risp:pncid/><risp:maiden_name>$maidenname$</risp:maiden_name><risp:agefrom>$agefrom$</risp:agefrom><risp:ageto>$ageto$</risp:ageto><risp:place_of_birth>$pob$</risp:place_of_birth><risp:postal_town>$postal$</risp:postal_town><risp:fuzzy_name>Y</risp:fuzzy_name>">
-	
-		<cfset searchXml = Replace(searchXml, '$surname$', searchData.surname1)>
-		<cfset searchXml = Replace(searchXml, '$forename$', searchData.forename1)>
-	
-		<!--- dob, we need to see if all fields are filled if so full dob and no part
-		      otherwise part dob and no full --->
-		<cfif Len(searchData.dobDay) GT 0 AND Len(searchData.dobMonth) GT 0 AND Len(searchData.dobYear) GT 0>
-			<!--- full dob --->
-			<cfset sDob = searchData.dobDay & "/" & searchData.dobMonth & "/" & searchData.dobYear>
-			<cfset searchXml = Replace(searchXml, '$dob$', sDob)>
-		<cfelse>
-			<cfif Len(searchData.dobYear) GT 0>
-			
-				<cfset sDobPart = searchData.dobYear>
-				<cfset sDobPart = Replace(sDobPart, "%%", "%")>
-				<cfset searchXml = Replace(searchXml, '$dob$', sDobPart)>
-			</cfif>
-			<cfif Len(searchData.dobDay) IS 0 AND Len(searchData.dobMonth) IS 0 AND Len(searchData.dobYear) IS 0>
-				<cfset searchXml = Replace(searchXml, '$dob$', '')>
-			</cfif>
-		</cfif>
-	
-		<cfset searchXml = Replace(searchXml, '$gender$', 
-		                           iif(Len(searchData.sex) IS 0, de('U'), de(searchData.sex)))>
-		<cfset searchXml = Replace(searchXml, '$maidenname$', searchData.maiden)>
-		<cfset searchXml = Replace(searchXml, '$pob$', searchData.pob)>
-		<cfset searchXml = Replace(searchXml, '$postal$', searchData.pTown)>
-		<cfset searchXml = Replace(searchXml, '$agefrom$', searchData.ageFrom)>
-		<cfset searchXml = Replace(searchXml, '$ageto$', searchData.ageTo)>
+		<cfset var searchXml = "<risp:vrm>$vrm$</risp:vrm>">
 		
-		<cfset westMidsResults = application.genieService.doWestMidsPersonSearch(searchTerms=searchXml,
+		
+	
+		<cfset searchXml = Replace(searchXml, '$vrm$', searchData.vrm)>		
+		
+		<cfset westMidsResults = application.genieService.doWestMidsVehicleSearch(searchTerms=searchXml,
 																				 userId=auditData.enquiryUser,
 																				 terminalId=auditData.terminalId,
 																				 sessionId=auditData.sessionId, 		                                                                         
 																				 fromWebService='Y',
 																				 wsAudit=auditData)>
-	
-	    <cflog file="geniePersonWS" type="information" text="xxx#searchData.wMidsOrder#xxx" />
-		<cfset westMidsNominalsGrouped = application.genieService.doWestMidsNominalGrouping(nominals=westMidsResults.nominals, 
-		                                                                                    group=searchData.wMidsOrder)>
-	
-		<cfset westMidsHTML = formatWestMidsResults(westMidsNominalsGrouped, searchData.wMidsOrder)>
+		    
+		<cfset westMidsHTML = formatWestMidsResults(westMidsResults.vehicles)>
 	
 		<cfreturn westMidsHTML>
 	
@@ -235,90 +219,81 @@
 
 	<cffunction name="formatWestMidsResults" output="false" returntype="any" access="private"
 	            hint="formats the west mids results for display">
-		<cfargument name="qWestMidsResults" type="any" required="true" 
-		            hint="west mids results to be formatted"/>
-		<cfargument name="westMidsOrder" type="string" required="true" 
-		            hint="how the west mids data should be ordered options name,force,system"/>
+		<cfargument name="vehicles" type="any" required="true" 
+		            hint="west mids results to be formatted"/>		
 	
 		<cfset var returnHTML = "">
-		<cfset var iNom = 1>
-		<cfset var qMatches = "">
+		<cfset var iVeh = 1>
+		<cfset var thisVeh = "">
+		
 	
-		<cfif qWestMidsResults.distinctQuery.recordCount IS 0>
+		<cfif arrayLen(vehicles) IS 0>
 			<cfset returnHTML = "<p><b>Your Search Returned No Results</b></p>">
 		<cfelse>
-		
-			<cfloop query="arguments.qWestMidsResults.distinctQuery">
-			
-				<cfif arguments.westMidsOrder IS "name">
-					<cfset returnHTML &= "<h3>#FIRSTNAME# #SURNAME# #DOB#</h3>">
-					<cfquery name="qMatches" dbtype="query">
-						SELECT *
-						 FROM arguments.qWestMidsResults.fullquery
-						 WHERE firstname='#FIRSTNAME#'
-						 AND surname ='#SURNAME#'
-						 AND dob ='#DOB#'
-					</cfquery>
-				<cfelseif arguments.westMidsOrder IS "system">
-					<cfset returnHTML &= "<h3>#APP_REF#</h3>">
-					<cfquery name="qMatches" dbtype="query">
-						SELECT *
-						 FROM arguments.qWestMidsResults.fullquery
-						 WHERE app_ref=<cfqueryparam value="#app_REF#" cfsqltype="cf_sql_varchar">
-						ORDER BY force_ref
-					</cfquery>
-				<cfelseif arguments.westMidsOrder IS "force">
-					<cfset returnHTML &= "<h3>#FORCE_REF#</h3>">
-					<cfquery name="qMatches" dbtype="query">
-						SELECT *
-						 FROM arguments.qWestMidsResults.fullquery
-						 WHERE force_ref=<cfqueryparam value="#Force_REF#" cfsqltype="cf_sql_varchar">
-						ORDER BY force_ref, app_ref
-					</cfquery>
-				</cfif>
-				<cfset returnHTML &= variables.wMidsTableHeader>
-			
-				<cfset iNom = 1>
-				<cfloop query="qMatches">
-					<cfset checkBoxLink = "#app_ref##Replace(Replace(sys_ref,"/","","ALL"),":","","ALL")##force_ref#">
-					
-					<cfset thisRow=Duplicate(variables.wMidsTableRow)>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%DISPLAY_FORCE%',DISPLAY_FORCE,"ALL")>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%APP_REF%',ReplaceList(APP_REF, variables.wMidsSysCodes, variables.wMidsSysReplaces) & chr(13) & chr(10),"ALL")>					
-					
-					<cfif APP_REF IS NOT "FLINT" and APP_REF IS NOT "BOF2">
-					<cfset thisRow=ReplaceNoCase(thisRow,'%NOM_LINK%',variables.wMidsHref,"ALL")>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%nominalHref%','href="#APP_REF#|#SYS_REF#|#FORCE_REF#|#Nominal_Ref#|PERSON"',"ALL")>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%REFERENCE%',NOMINAL_REF,"ALL")>
-					<cfelse>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%NOM_LINK%',NOMINAL_REF,"ALL")>
-					</cfif>
-					
-				
-					<cfif RISP_PHOTO_EXISTS IS "Y">
-	  					<cfset thisRow=ReplaceNoCase(thisRow,'%NOM_PHOTO%',variables.fPhotoDiv,"ALL")>
-					<cfelse>
-					    <cfset thisRow=ReplaceNoCase(thisRow,'%NOM_PHOTO%','',"ALL")>
-					</cfif>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%photoUrl%',RISP_PHOTO,"ALL")>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%photoTitle%',NOMINAL_REF & " " & REPLACE(SURNAME, "'", "", "ALL"),"ALL")>					
-					<cfset thisRow=ReplaceNoCase(thisRow,'%NOM_NAME%',FIRSTNAME & " " & SURNAME,"ALL")> 
-					<cfset thisRow=ReplaceNoCase(thisRow,'%NOM_DOB%',DOB,"ALL")>
-					<cfset returnHTML &= thisRow>
-					
-				</cfloop>
-				
-				
-				<cfset returnHTML &= variables.wMidsTableFooter>
-				
-			</cfloop>
+			 <cfoutput>
+			    <cfsavecontent variable="thisVeh">
+					<div class="vehicleResult">
+						<table width="98%" class="genieData">
+						 <thead>	
+						 <tr>
+							<th width="5%">Force</th>				 
+							<th width="10%">System Name</th>
+							<th width="15%">Reference</th>
+							<th width="15%">VRM</th>	
+							<th width="20%">Make</th>	
+							<th width="20%">Model</th>	
+							<th width="20%">Colour</th>	 
+						 </tr>
+						 </thead>
+						 <tbody>
+			             <cfloop from="1" to="#arrayLen(vehicles)#" index="iVeh">
+			             <tr>
+			               <td>#vehicles[iVeh].getDISPLAY_FORCE()#</td>
+			               <td>#vehicles[iVeh].getAPP_REF()#</td>
+			               <td>#vehicles[iVeh].getSYS_REF()#</td>
+			               <td>
+			                  <cfif vehicles[iVeh].getAPP_REF() IS NOT "FLINT" and vehicles[iVeh].getAPP_REF() IS NOT "BOF2">                    
+			                   <a href="#vehicles[iVeh].getAPP_REF()#|#vehicles[iVeh].getSYS_REF()#|#vehicles[iVeh].getFORCE_REF()#|VEHICLE|#vehicles[iVeh].getVRM()#" class="wMidsVehicle">
+			                  </cfif>                       
+			                       #vehicles[iVeh].getVRM()#
+			                  <cfif vehicles[iVeh].getAPP_REF() IS NOT "FLINT" and vehicles[iVeh].getAPP_REF() IS NOT "BOF2"> 
+			                   </a>
+			                  </cfif>
+			               </td>  
+						   <td>#vehicles[iVeh].getMANUFACTURER()#</td>
+						   <td>#vehicles[iVeh].getMODEL()#</td>
+						   <td>#vehicles[iVeh].getPRIMARY_COL()#</td>                                                       
+			             </tr>
+			             </cfloop>
+			             </tbody> 
+			            </table>
+			       </div>     					
+				</cfsavecontent>	
+			 </cfoutput>	
+				<cfset returnHTML &= thisVeh>
+
 		</cfif>
 	
 	   <cfreturn returnHTML>
 	
 	</cffunction>
-  
-  
 
+	<cffunction name="createAuditStructure" access="private" output="false" returntype="struct">
+  	  <cfargument name="auditData" required="true" type="struct" hint="struct containing audit data">
+	  
+	  <cfset var auditStruct=structNew()>
+	    
+	  <cfset auditStruct.enquiryUser=auditData.enquiryUser>
+      <cfset auditStruct.enquiryUserName=auditData.enquiryUserName>
+	  <cfset auditStruct.enquiryUserDept=auditData.enquiryUserDept>
+	  <cfset auditStruct.requestFor=auditData.requestFor>
+	  <cfset auditStruct.reasonCode=auditData.reasonCode>
+	  <cfset auditStruct.reasonText=auditData.reasonText>   
+	  <cfset auditStruct.sessionId=auditData.sessionId>	  
+	  <cfset auditStruct.terminalId=auditData.terminalId>	  
+      
+	  <cfreturn auditStruct>  	
+		
+    </cffunction>  
    
 </cfcomponent>

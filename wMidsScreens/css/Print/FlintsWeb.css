@@ -1,0 +1,899 @@
+input
+{
+	onkeydown="f(this)";
+}
+td p
+{
+	padding-bottom:20px;
+}
+.body
+{
+    FONT-SIZE: 18px;
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+}
+jgdiv {
+scrollbar-arrow-color: #3F0; 
+scrollbar-3d-light-color : #3CF;
+scrollbar-base-color: #000; 
+scrollbar-face-color: #099; 
+scrollbar-dark-shadow-color : #006;
+scrollbar-highlight-color: #CCC; 
+scrollbar-shadow-color: #000;
+}
+.small
+{
+    FONT-SIZE: 8pt;
+    color: Black;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.MOTDwhite
+{
+    FONT-SIZE: 8pt;
+    font-weight: bold;
+    COLOR: WHITE;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.small2
+{
+    FONT-SIZE: 5pt;
+    COLOR: #FFFFFF;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.stinput
+{
+    FONT-SIZE: 8pt;
+    width: 100%;
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.results
+{
+    FONT-SIZE: 10pt;
+    width: 100%;
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.headings
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    COLOR: #cc0066;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.code
+{
+    FONT-SIZE: 10px;
+    COLOR: #000000;
+    FONT-FAMILY: "Courier New", Courier, mono
+}
+P
+{
+    FONT-SIZE: 12px;
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.bodybold
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.fmcbody
+{
+    FONT-SIZE: 12px;
+    COLOR: #cccccc;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.fmcsmall
+{
+    FONT-SIZE: 10px;
+    COLOR: #cccccc;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.mxheading
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 12px;
+    COLOR: #ffffff;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.bgblurb
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 24px;
+    COLOR: #cc0066;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+BODY
+{
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	FONT-SIZE: 8pt;
+	background-color:Silver;   
+}
+.xtrasmall
+{
+    FONT-SIZE: 8px;
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.authorName
+{
+    FONT-SIZE: 18px;
+    COLOR: #666666;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.titles
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 18px;
+    COLOR: #333333;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.bodyLarge
+{
+    FONT-SIZE: 12px;
+    COLOR: #333333;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.searchtablesurr
+{
+	Z-INDEX: 100; 
+	POSITION: absolute; 
+	TOP: 115; 
+	HEIGHT: 125px;
+	width: 360px;
+	border-left: solid 1px White;
+	border-right: solid 1px Gray;
+	border-bottom: solid 1px Black;
+}
+.resultstablesurr
+{
+	Z-INDEX: 105; 
+	 POSITION: absolute; 
+	 left: 0;
+	 TOP: 320px;
+	 width: 340px;
+	 height: 950px
+}
+.resultsframe
+{
+	Z-INDEX: 105; 
+	 POSITION: absolute; 
+	 left: 0;
+	 TOP: 315px;
+	 width: 340px;
+	 height: 10px
+}
+.iresultstablesurr
+{
+	Z-INDEX: 105; 
+	 POSITION: absolute; 
+	 TOP: 340px;
+	 width: 339px;
+}
+.flintsflash
+{
+	Z-INDEX: 10; 
+	LEFT: -10px; 
+	VISIBILITY: visible; 
+	WIDTH: 360px; 
+	POSITION: absolute; 
+	TOP: 310px; 
+	background-color: Black;
+	HEIGHT: 30px
+}
+.MainDiv
+{
+	position: absolute;
+	top: 5%;
+	height: 90%;
+	left: 0%;
+	width:90%;
+}
+.DetsFrame
+{
+	Z-INDEX: 101; 
+	position: absolute;
+	LEFT: 350px; 
+	VISIBILITY: hidden; 
+	OVERFLOW: hidden; 
+	WIDTH: 650px; 
+	HEIGHT: 540px; 
+	BACKGROUND-COLOR: silver;
+	top: 40
+}
+
+.FirstTab
+{
+	Z-INDEX: 104; 
+	 POSITION: absolute; 
+	 TOP: 80px;
+	 width: 120px;
+	 height: 26px;
+	 left: 0;
+	 border-bottom: none 1px White;
+	 cursor: pointer;
+}
+.SecondTab
+{
+	Z-INDEX: 104; 
+	 POSITION: absolute; 
+	 TOP: 80px;
+	 width: 120px;
+	 height: 26px;
+	 left: 120px;
+	 border-bottom: solid 1px White;
+	 cursor: pointer;
+}
+.ThirdTab
+{
+	Z-INDEX: 105; 
+	 POSITION: absolute; 
+	 TOP: 80px;
+	 width: 120px;
+	 height: 25px;
+	 left: 240px;
+	 border-bottom: solid 1px White;
+	 cursor: pointer;
+}
+.PrintOnly
+{
+    FONT-SIZE: 0pt;
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    visibility: hidden
+}
+.PrintOnlySmall
+{
+    FONT-SIZE: 0pt;
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    visibility: hidden
+}
+.PrintDiv
+{
+	overflow: auto;
+	height: 480px;
+}
+.PrintDivWP
+{
+	overflow: auto;
+	height: 480px;
+}
+.xofycounter
+{
+	background-color: Black;
+	color:Lime;
+	font-weight: bold;
+	border: solid 1px white
+}
+
+.xofycountersmall
+{
+	background-color: Black;
+	color:Red;
+	border: solid 1px white
+}
+.PrintDivNotes
+{
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    height: 40px;
+    overflow: auto;
+    background-color: White;
+}
+.SelDetDiv
+{
+	COLOR:Yellow;
+	background-color : Gray;
+	border-left: solid 1px black;
+	border-top: solid 1px black;
+	border-right: solid 1px black;
+	position: absolute;
+	top: 92px;
+	width: 100px;
+	height: 20px;
+	padding: 1px 2px 1px 3px;
+	cursor: pointer
+}
+.SelRiskDiv
+{
+	COLOR: white;
+	background-color : silver;
+	border: solid 1px black;
+	position: absolute;
+	top: 92px;
+	width: 100px;
+	left: 100px;
+	height: 20px;
+	padding: 1px 2px 1px 3px;
+	cursor: pointer
+}
+.DetsDiv
+{
+	position:absolute;
+	top: 140px;
+	background-color: Gray;
+	border-left: solid 1px black;
+	border-bottom: solid 1px black;
+	border-right: solid 1px black;
+	height: 130px;
+	color:Red
+}
+.RisksDiv
+{
+	position:absolute;
+	top: 140px;
+	background-color: Gray;
+	border-left: solid 1px black;
+	border-bottom: solid 1px black;
+	border-right: solid 1px black;
+	width: 95%;
+	height: 10px
+}
+.LinksDiv
+{
+	position:absolute;
+	top:275px;
+	background-color: silver;
+	border: solid 1px black;
+	width: 95%;
+	height: 140px
+}
+.DetsDivCtl
+{
+	position:absolute;
+	top: 0px;
+	left: 90%;
+	height: 101%;
+	background-color: Gray;
+	border: solid 1px black;
+	width: 10%
+}
+.MemoDivCtl
+{
+	position:absolute;
+	top: 30px;
+	left: 85%;
+	height: 100px;
+	background-color: Gray;
+	border: solid 1px black;
+	padding: 10px 2px 2px 2px;
+	width: 40px
+}
+.PrintDivNotesLong
+{
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    height: 80px;
+    overflow: auto;
+    background-color: White;
+    border: solid 1px black
+}
+.PrintDivNotesLonger { color: #000000; font-size: 8pt; font-family: Verdana, Arial, Helvetica, sans-serif; background-color: white; height: 160px; overflow: auto; border: solid 1px black }
+.PrintDivNotesLongNB
+{
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    height: 80px;
+    overflow: auto;
+    background-color: White;
+}
+.LOGHEADFRAME
+{
+	position: absolute;
+	top: 30px;
+	width: 90%;
+	height: 245Px;
+	margin:0px;
+	padding:0px;
+}
+.SubsDiv
+{
+	position:absolute;
+	top: 46px;
+	background-color: White;
+	border: solid 1px black;
+	width: 95%;
+	height: 45px;
+	overflow:auto
+}
+.CustOffDiv
+{
+	background-color: White;
+	border: solid 1px black;
+	width: 95%;
+	height: 65px;
+	overflow:auto
+}
+.CustPerDiv
+{
+	background-color: White;
+	border: solid 1px black;
+	width: 100%;
+	height: 85px;
+	overflow:auto
+}
+.SelLinks1
+{
+	COLOR:Yellow;
+	background-color : Gray;
+	border-left: solid 1px black;
+	border-top: solid 1px black;
+	border-right: solid 1px black;
+	position: absolute;
+	top: 0px;
+	width: 80px;
+	height:20px;
+	left:0px;
+	padding: 1px 2px 1px 3px;
+	cursor: pointer
+}
+.SelLinks2
+{
+	COLOR: white;
+	background-color : silver;
+	border-left: solid 1px black;
+	border-top: solid 1px black;
+	border-right: solid 1px black;
+	position: absolute;
+	padding: 1px 2px 1px 3px;
+	top: 0px;
+	width: 80px;
+	height:20px;
+	left: 80px;
+	cursor: pointer
+}
+.SelLinks3
+{
+	COLOR: white;
+	background-color : silver;
+	border-left: solid 1px black;
+	border-top: solid 1px black;
+	border-right: solid 1px black;
+	position: absolute;
+	top: 0px;
+	width: 80px;
+	height:20px;
+	left: 160px;
+	padding: 1px 2px 1px 3px;
+	cursor: pointer
+}
+.SelLinks4
+{
+	COLOR: white;
+	background-color : silver;
+	border-left: solid 1px black;
+	border-top: solid 1px black;
+	border-right: solid 1px black;
+	position: absolute;
+	top: 0px;
+	width: 80px;
+	height:20px;
+	left: 240px;
+	padding: 1px 2px 1px 3px;
+	cursor: pointer
+}
+.LinkedItemDiv
+{
+	position:relative;
+	top: 0px;
+	background-color: white;
+	border: solid 1px black;
+	width: 99%;
+	height: 115px;
+	overflow:auto
+}
+.IMSMemoDiv
+{
+	position:absolute;
+	top:275px;
+	background-color: silver;
+	border: solid 1px black;
+	width: 95%;
+	height: 140px;
+	z-index:100
+}
+.selTD
+{
+	 border-top: solid 1px black;
+	 border-left: solid 1px black;
+	 border-right: solid 1px black;
+	 background-color: Gray;
+	 font-weight: bold;
+	 cursor:pointer;
+	 width:15%
+}
+.UNselTD
+{
+	 border-top: solid 1px black;
+	 border-left: solid 1px black;
+	 border-right: solid 1px black;
+	 background-color: Silver;
+	 font-weight:normal;
+	 cursor: pointer;
+	 width: 17%
+}
+.LibDetTab
+{ 
+	font-size: 8pt;
+	padding: 0px;
+	border: 0px
+	
+}
+.CloseImsMemo
+{
+	position:absolute;
+	top:7px;
+	background-color: silver;
+	border: solid 1px black;
+	width: 65px;
+	height: 20px;
+	left: 85%;
+	z-index:100;
+	overflow:auto;
+	text-align:center;
+	padding: 2px 2px 2px 3px;
+	cursor:pointer
+}
+.GraphViewDiv
+{
+	position:absolute;
+	top:10px;
+	background-color: silver;
+	border: solid 1px black;
+	width: 120px;
+	height: 15px;
+	left: 70%;
+	z-index:100;
+	cursor:pointer
+}
+.MemoMainDiv
+{
+	position:absolute;
+	top:0px;
+	left:0px;
+	background-color: silver;
+	z-index:100
+}
+.ImsDetDivShow
+{
+	display:block;
+}
+.ImsDetDivHide
+{
+	display:none;
+}
+.cal_calendar {font-size:10pt;font-family:verdana;padding:0px;margin:0px;border:none; border-collapse:collapse;}
+.cal_header {background-color:#CCCCCC;padding:0px;margin:0px;border:solid 1px black; border-collapse:collapse;}
+.cal_cell {padding:2px;margin:1px;border:2px groove;text-align:center;width:3ex}
+.cal_labelcell {padding:2px;margin:1px;border:2px groove;text-align:center;}
+.cal_oddweek {background-color:#AAAACC;padding:0px;margin:0px;border:none; border-collapse:collapse;}
+.cal_evenweek {background-color:#CCCCEE;padding:0px;margin:0px;border:none; border-collapse:collapse;}
+.cal_day {width:3ex;text-align:center;padding:0px;margin:0px;border:none; border-collapse:collapse;cursor:pointer;}
+.cal_today {text-align:center;background-color:red;color:blue;font-weight:bold;text-decoration: underline}
+.cal_today_nb {width:3ex;text-align:center;padding:0px;margin:0px;border:none; border-collapse:collapse;cursor:pointer;}
+.cal_disabled {color:#999999;width:3ex;padding:0px;margin:0px;border:none; border-collapse:collapse;}
+.cal_common {color:black;width:3ex;padding:0px;margin:0px;border:none; border-collapse:collapse;}
+.cal_holiday {color:red;width:3ex;padding:0px;margin:0px;border:none; border-collapse:collapse;}
+.cal_event {background-color:yellow;color:red;cursor:pointer;text-decoration: underline}
+.opts_year {width:28ex;height:16px;background-color:#CCCCCC;padding:0px;margin:0px;border:none; border-collapse:collapse;text-align:center;}
+.opts_month {width:28ex;height:16px;background-color:#CCCCCC;padding:0px;margin:0px;border:none; border-collapse:collapse;text-align:center;}
+.opts_row {padding:0px;margin:0px;border:none; border-collapse:collapse;vertical-align:middle;}
+.opts_head {font-size:10pt;font-family:verdana;padding:0px;margin:0px;border:none; border-collapse:collapse;vertical-align:middle;}
+.opts_but {padding:0px;margin:0px;border:none; border-collapse:collapse;vertical-align:middle;}
+.cmpg_div 
+{
+	border: solid 1px black
+}
+.cmpg_event 
+{
+	background-color:yellow;
+	color:blue;
+	padding:0px;
+	margin:0px;
+	border:solid 1px blue; 
+	border-collapse:collapse;
+	cursor:pointer;
+	text-decoration: underline
+}
+
+.cmpg_event_sel
+{
+	background-color:red;
+	color:blue;
+	padding:0px;
+	margin:0px;
+	border:solid 1px blue; 
+	border-collapse:collapse;
+	cursor:pointer;
+	text-decoration: underline
+}
+.CmpgMapIcon1
+	{
+		top:210px;
+		left:290px;
+	}
+.CmpgMapIcon2
+	{
+		top:235px;
+		left:345px;
+	}
+.CmpgMapIcon3
+	{
+		top:288px;
+		left:305px;
+	}
+
+.CmpgMapIcon4
+	{
+		top:166px;
+		left:390px;
+	}
+.CmpgMapIcon5
+	{
+		top:288px;
+		left:215px;
+	}
+.CmpgMapIcon6
+	{
+		top:235px;
+		left:448px;
+	}
+.CmpgMapIcon7
+	{
+		top:165px;
+		left:198px;
+	}
+.CmpgMapIcon8
+	{
+		top:128px;
+		left:198px;
+	}
+.cmpgdivsel
+{
+	COLOR:Yellow;
+	background-color : Gray;
+	border-left: solid 1px black;
+	border-top: solid 1px black;
+	border-right: solid 1px black;
+	width: 80px;
+	height:20px;
+	padding: 1px 2px 1px 3px;
+	cursor: pointer
+}
+.MainDetailPage
+{
+	WIDTH: 100%; 
+	BORDER-TOP-STYLE: none; 
+	BORDER-RIGHT-STYLE: none; 
+	BORDER-LEFT-STYLE: none; 
+	BACKGROUND-COLOR: silver; 
+	BORDER-BOTTOM-STYLE: none;
+	overflow:visible;
+	height:420px
+}
+.cmpgdiv
+{
+	COLOR: white;
+	background-color : silver;
+	border-left: solid 1px black;
+	border-top: solid 1px black;
+	border-right: solid 1px black;
+	padding: 1px 2px 1px 3px;
+	width: 80px;
+	height:20px;
+	cursor: pointer
+}
+.cmpgrowsdiv
+{
+	text-align:center;
+	height:240;
+	overflow:auto;
+	border:solid 1px black;
+}
+.cmpgPopUp
+{
+	background-image:url(..\images\MWay.gif);
+	position:absolute;
+	height:50;
+	width:100;
+	top:0;
+	top:0;
+	font-size:7pt;
+	font-weight:bold;
+	color:White;
+	padding-top:7px;
+	display:none;
+}
+.tabLab
+{
+	background-color:White;
+	color:Black;
+	font-weight:bold;
+}
+.tabField
+{
+	background-color:White;
+	color:Black
+}
+table.sortable a.sortheader {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    font-size:10pt;
+    text-decoration: none;
+    display: block;
+}
+table.sortable span.sortarrow {
+    color: black;
+    text-decoration: none;
+}
+.SelPageDiv
+{
+	background-image:url(../images/SelTab.jpg);
+	background-color:Silver;
+	background-repeat:no-repeat;
+	color:White;
+	position:absolute;
+	top:40px;
+	overflow:visible;
+	width:150px;
+	height:21px;
+    font-size:10pt;
+}
+.SelPageDiv1
+{
+	background-image:url(../images/SelTab1.jpg);
+	background-color:Silver;
+	background-repeat:no-repeat;
+	color:White;
+	position:absolute;
+	top:40px;
+	overflow:visible;
+	width:150px;
+	height:21px;
+    font-size:10pt;
+}
+.UnSelPageDiv
+{
+	background-image:url(../images/UnSelTab.jpg);
+	background-repeat:no-repeat;
+	background-color:Silver;
+	position:absolute;
+	top:40px;
+	color:Black;
+	overflow:visible;
+	width:150px;
+	height:21px;
+    font-size:10pt;
+	cursor: pointer;
+}
+.SelDetDiv
+{
+	background-color : Silver;
+	border-left: solid 1px white;
+	border-top: solid 1px white;
+	border-right: solid 1px white;
+	position:relative;
+	left:-2px;
+	top:0px;
+	overflow:visible;
+	width:120px;
+	height:10px;
+    font-size:10pt;
+	cursor: pointer;
+}
+.CloseTabDiv
+{
+	border: solid 1px black;
+	width:18px;
+    font-size:8pt;
+    position:relative;
+    top:2;
+    left:2;
+	cursor: pointer;
+	padding: 1 1 1 4
+}
+.tabTextDiv
+{
+	height:18px;
+	position:relative;
+	top:-18px;
+	left:25px;
+	overflow:hidden;
+	padding: 2 0 0 2
+}
+.FlintsPage
+{	background-color:Silver;
+	position:absolute;
+	width:1000px;
+	height:614px;
+	top:61px;
+	left:0px;
+	border-left:solid 1px black;
+	border-right:solid 1px black;
+	border-bottom:solid 1px black;
+}
+.optCell
+{
+	border-bottom:solid 1px gray;
+	border-right:solid 1px black;
+	font-size:7pt
+}
+.optButt
+{
+	border-bottom:outset 1px black;
+	border-right:solid 1px black;
+	border-top:solid 1px white;
+	border-left:solid 1px white;
+	text-align:center;
+	cursor:pointer;
+	font-size:7pt;
+}
+.SelBorder
+{
+	background-color:gray;
+	color:White;
+}
+.qterm { color: #444; background-color: #ee9; font-weight: bold; }
+.sortable th.descend{
+	background-image:url(../images/caret_up.gif);
+	}
+.sortable th.ascend{
+	background-image:url(../images/caret_down.gif);
+	}
+.sortable th{
+	background-position: 95% 50%;
+	background-repeat:no-repeat;
+	cursor:pointer;
+	padding: 6px 15px 6px 6px;
+	}
+table.menu a 
+{ 
+width:32px; 
+border:1px solid #333333;
+display: block; 
+} 
+div.menu a 
+{
+color: #333333; 
+background: #ffffff; 
+text-decoration:none; 
+font-size:11px; 
+line-height:16px; 
+font-family: Tahoma, verdana, sans-serif;
+padding: 0px 0px;
+}
+div.menu a:link {
+color: #333333; 
+background: silver; 
+}
+
+div.menu a:active { 
+color: #000000;
+background: silver; 
+}
+
+div.menu a:visited {
+color: #333333; 
+background: silver; 
+}
+
+div.menu a:hover {
+color: #eeeeee;
+background: gray; 
+border:1px solid #000000; 
+}
+
+
+

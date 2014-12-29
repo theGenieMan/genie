@@ -63,10 +63,10 @@ $(document).on('submit','.enquiryForm',
 			
 			}
 							  					  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred validating the inteliigence free text search: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });
 	}
 )

@@ -92,10 +92,10 @@ function doVehicleEnquiry(){
 			if ($('#actionsDropDown').length > 0) {
 				$('#actionsDropDown').show();
 			}		  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred processing the vehicle enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });				   
    
    // if west mids results have been requested init the tab and do the call
@@ -105,7 +105,7 @@ function doVehicleEnquiry(){
 
 		$.ajax({
 		 type: 'POST',
-		 url: '/genieAddressWebService.cfc?method=doWestMidsAddressEnquiry',						 
+		 url: '/genieVehicleWebService.cfc?method=doWestMidsVehicleEnquiry',						 
 		 contentType: "application/json",						 
 		 cache: false,
 		 async: true,
@@ -115,30 +115,18 @@ function doVehicleEnquiry(){
 			var $resultsTable=$($.trim(data))							
 				$resultsTable.find("tbody tr:even").addClass('row_colour0');
 				$resultsTable.find("tbody tr:odd").addClass("row_colour1");			
-				$resultsTable.find('td div.genieToolTip').qtip({
-									  	content: {
-											        text: function(event, api){
-														// Retrieve content from custom attribute of the $('.selector') elements.
-														return $(this).children('.toolTip').html();
-													}
-												  },
-										position: {
-											      my: 'left top',
-								                  at: 'right center',
-								                  viewport: $(window)         
-											   	}											  															    
-									  });				
+				
 			$('#wMidsResultsData').append($resultsTable);
 			$('#wMidsSpinner').hide();
 			$('#wMidsSearchingDiv').hide();
 			$('#wMidsResults').show();
 			
-			if ($('#wMidsResultsData').find('h3').length>200){
+			if ($('#wMidsResultsData').find('tbody tr').length>200){
 				noResults='200+'
 			}
 			else
 			{
-				noResults=$('#wMidsResultsData').find('h3').length
+				noResults=$('#wMidsResultsData').find('tbody tr').length
 			}
 			
 			$('#wMidsResultsCount').html('['+ noResults +']').show()
@@ -150,12 +138,12 @@ function doVehicleEnquiry(){
 			else
 			{
 				$('#wMidsResultsButtons input[type=button]').removeAttr('disabled')
-			}
+			}						
 									  					  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred running the west midlands police person enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });			
 		
    }

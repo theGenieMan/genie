@@ -54,10 +54,10 @@
 		  		<tr>
 		  			<td width="15%"><b>Data Sources</b></td>
 					<td>
-						<input type="checkbox" name="wmpData" id="wmpData" displayInPane="WP/WMP" checked disabled> WP/WMP 
-						<input type="checkbox" name="firearmsData" id="firearmsData" displayInPane="Firearms" checked> Firearms
+						<input type="checkbox" name="wmpData" id="wmpData" displayInPane="WP/WMP" checked disabled noClear> WP/WMP 
+						<input type="checkbox" name="firearmsData" id="firearmsData" displayInPane="Firearms" checked noClear> Firearms
 						<cfif session.isWMidsUser>
-						<input type="checkbox" name="wMidsData" id="wMidsData" displayInPane="West Mids"> West Mids
+						<input type="checkbox" name="wMidsData" id="wMidsData" displayInPane="West Mids" noClear> West Mids
 						</cfif>	
 					</td>										
 		  		</tr>				
@@ -81,11 +81,11 @@
 		  		<tr>
 		  			<td width="15%"><label for="postcode">Postcode</label></td>
 					<td width="25%">
-						<input name="postcode" id="postcode" displayInPane="Postcode" size="8" value="WR4 9QN"> <cfif session.isWMidsUser><b>WM</b></cfif>						
+						<input name="postcode" id="postcode" displayInPane="Postcode" size="8"> <cfif session.isWMidsUser><b>WM</b></cfif>						
 					</td>
 					<td width="15%"><label for="premiseno">Premise No</label></td>
 					<td>
-						<input name="premiseno" id="premiseno" displayInPane="Premise No" value="145" size="2">	<cfif session.isWMidsUser><b>WM</b></cfif>					
+						<input name="premiseno" id="premiseno" displayInPane="Premise No" size="2">	<cfif session.isWMidsUser><b>WM</b></cfif>					
 					</td>																		
 		  		</tr>	
 		  		<tr>
@@ -200,7 +200,9 @@
 	<input type="hidden" name="reasonCode" id="reasonCode" value="">
 	<input type="hidden" name="reasonText" id="reasonText" value="">
 	<input type="hidden" name="reasonText" id="dpaValid" value="N">
-	
+	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
+	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
+	<input type="hidden" name="requestForForce" id="requestForForce" value="">	
 	
 	<div id="addressDetailsDialog" style="display:none;">
 		<div id='onLoadingDiv' style='width:100%' align='center'><h4>Loading, please wait</h4><div class='progressBar'></div></div>

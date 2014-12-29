@@ -307,58 +307,36 @@
 	  	  
   </cffunction>
   
-    <cffunction name="doWestMidsPersonEnquiry" output="false" returntype="any" access="remote"  returnformat="plain">
+    <cffunction name="doWestMidsAddressEnquiry" output="false" returntype="any" access="remote"  returnformat="plain">
 	
 		<cfset var return = StructNew()>
 		<cfset var westMidsResults = "">
-		<cfset var westMidsHTML = "">
-		<cfset var sDob = "">
-		<cfset var sDobPart = "">
+		<cfset var westMidsHTML = "">		
 		<cfset var searchData=deserializeJSON(toString(getHttpRequestData().content))>
 		<cfset var auditData=createAuditStructure(searchData)>
-		<cfset var searchXml = "<risp:surname>$surname$</risp:surname><risp:forenames>$forename$</risp:forenames><risp:dob>$dob$</risp:dob><risp:cro/><risp:gender>$gender$</risp:gender><risp:pncid/><risp:maiden_name>$maidenname$</risp:maiden_name><risp:agefrom>$agefrom$</risp:agefrom><risp:ageto>$ageto$</risp:ageto><risp:place_of_birth>$pob$</risp:place_of_birth><risp:postal_town>$postal$</risp:postal_town><risp:fuzzy_name>Y</risp:fuzzy_name>">
+		<cfset var searchXml = "<risp:street>$street$</risp:street><risp:housenumber>$housenumber$</risp:housenumber><risp:flatnumber>$flatnumber$</risp:flatnumber><risp:postcode>$postcode$</risp:postcode>">
 	
-		<cfset searchXml = Replace(searchXml, '$surname$', searchData.surname1)>
-		<cfset searchXml = Replace(searchXml, '$forename$', searchData.forename1)>
-	
-		<!--- dob, we need to see if all fields are filled if so full dob and no part
-		      otherwise part dob and no full --->
-		<cfif Len(searchData.dobDay) GT 0 AND Len(searchData.dobMonth) GT 0 AND Len(searchData.dobYear) GT 0>
-			<!--- full dob --->
-			<cfset sDob = searchData.dobDay & "/" & searchData.dobMonth & "/" & searchData.dobYear>
-			<cfset searchXml = Replace(searchXml, '$dob$', sDob)>
-		<cfelse>
-			<cfif Len(searchData.dobYear) GT 0>
-			
-				<cfset sDobPart = searchData.dobYear>
-				<cfset sDobPart = Replace(sDobPart, "%%", "%")>
-				<cfset searchXml = Replace(searchXml, '$dob$', sDobPart)>
-			</cfif>
-			<cfif Len(searchData.dobDay) IS 0 AND Len(searchData.dobMonth) IS 0 AND Len(searchData.dobYear) IS 0>
-				<cfset searchXml = Replace(searchXml, '$dob$', '')>
-			</cfif>
-		</cfif>
-	
-		<cfset searchXml = Replace(searchXml, '$gender$', 
-		                           iif(Len(searchData.sex) IS 0, de('U'), de(searchData.sex)))>
-		<cfset searchXml = Replace(searchXml, '$maidenname$', searchData.maiden)>
-		<cfset searchXml = Replace(searchXml, '$pob$', searchData.pob)>
-		<cfset searchXml = Replace(searchXml, '$postal$', searchData.pTown)>
-		<cfset searchXml = Replace(searchXml, '$agefrom$', searchData.ageFrom)>
-		<cfset searchXml = Replace(searchXml, '$ageto$', searchData.ageTo)>
+		<cfset searchXml = Replace(searchXml, '$postcode$', searchData.post_code)>
+		<cfset searchXml = Replace(searchXml, '$housenumber$', searchData.building_number)>
+		<cfset searchXml = Replace(searchXml, '$flatnumber$', searchData.part_id)>
+		<cfset searchXml = Replace(searchXml, '$street$', searchData.street_1)>
 		
-		<cfset westMidsResults = application.genieService.doWestMidsPersonSearch(searchTerms=searchXml,
+		<cfset westMidsResults = application.genieService.doWestMidsAddressSearch(searchTerms=searchXml,
 																				 userId=auditData.enquiryUser,
 																				 terminalId=auditData.terminalId,
 																				 sessionId=auditData.sessionId, 		                                                                         
 																				 fromWebService='Y',
 																				 wsAudit=auditData)>
 	
-	    <cflog file="geniePersonWS" type="information" text="xxx#searchData.wMidsOrder#xxx" />
-		<cfset westMidsNominalsGrouped = application.genieService.doWestMidsNominalGrouping(nominals=westMidsResults.nominals, 
-		                                                                                    group=searchData.wMidsOrder)>
+	    <cfsavecontent variable="theResults">
+			<cfdump var="#westMidsResults#" format="text">
+		</cfsavecontent>
+		
+		<cflog file="genieAddressWS" type="information" text="#theResults#">
+		    
+		<cfset westMidsAddressesGrouped = application.genieService.doWestMidsAddressGrouping(westMidsResults.addresses)>
 	
-		<cfset westMidsHTML = formatWestMidsResults(westMidsNominalsGrouped, searchData.wMidsOrder)>
+		<cfset westMidsHTML = formatWestMidsResults(westMidsAddressesGrouped)>
 	
 		<cfreturn westMidsHTML>
 	
@@ -368,12 +346,13 @@
 	            hint="formats the west mids results for display">
 		<cfargument name="qWestMidsResults" type="any" required="true" 
 		            hint="west mids results to be formatted"/>
-		<cfargument name="westMidsOrder" type="string" required="true" 
-		            hint="how the west mids data should be ordered options name,force,system"/>
+
 	
 		<cfset var returnHTML = "">
 		<cfset var iNom = 1>
 		<cfset var qMatches = "">
+		<cfset var thisAddress = "">
+		<cfset var iAddr=0>
 	
 		<cfif qWestMidsResults.distinctQuery.recordCount IS 0>
 			<cfset returnHTML = "<p><b>Your Search Returned No Results</b></p>">
@@ -381,66 +360,55 @@
 		
 			<cfloop query="arguments.qWestMidsResults.distinctQuery">
 			
-				<cfif arguments.westMidsOrder IS "name">
-					<cfset returnHTML &= "<h3>#FIRSTNAME# #SURNAME# #DOB#</h3>">
-					<cfquery name="qMatches" dbtype="query">
-						SELECT *
-						 FROM arguments.qWestMidsResults.fullquery
-						 WHERE firstname='#FIRSTNAME#'
-						 AND surname ='#SURNAME#'
-						 AND dob ='#DOB#'
-					</cfquery>
-				<cfelseif arguments.westMidsOrder IS "system">
-					<cfset returnHTML &= "<h3>#APP_REF#</h3>">
-					<cfquery name="qMatches" dbtype="query">
-						SELECT *
-						 FROM arguments.qWestMidsResults.fullquery
-						 WHERE app_ref=<cfqueryparam value="#app_REF#" cfsqltype="cf_sql_varchar">
-						ORDER BY force_ref
-					</cfquery>
-				<cfelseif arguments.westMidsOrder IS "force">
-					<cfset returnHTML &= "<h3>#FORCE_REF#</h3>">
-					<cfquery name="qMatches" dbtype="query">
-						SELECT *
-						 FROM arguments.qWestMidsResults.fullquery
-						 WHERE force_ref=<cfqueryparam value="#Force_REF#" cfsqltype="cf_sql_varchar">
-						ORDER BY force_ref, app_ref
-					</cfquery>
-				</cfif>
-				<cfset returnHTML &= variables.wMidsTableHeader>
-			
-				<cfset iNom = 1>
-				<cfloop query="qMatches">
-					<cfset checkBoxLink = "#app_ref##Replace(Replace(sys_ref,"/","","ALL"),":","","ALL")##force_ref#">
-					
-					<cfset thisRow=Duplicate(variables.wMidsTableRow)>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%DISPLAY_FORCE%',DISPLAY_FORCE,"ALL")>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%APP_REF%',ReplaceList(APP_REF, variables.wMidsSysCodes, variables.wMidsSysReplaces) & chr(13) & chr(10),"ALL")>					
-					
-					<cfif APP_REF IS NOT "FLINT" and APP_REF IS NOT "BOF2">
-					<cfset thisRow=ReplaceNoCase(thisRow,'%NOM_LINK%',variables.wMidsHref,"ALL")>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%nominalHref%','href="#APP_REF#|#SYS_REF#|#FORCE_REF#|#Nominal_Ref#|PERSON"',"ALL")>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%REFERENCE%',NOMINAL_REF,"ALL")>
-					<cfelse>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%NOM_LINK%',NOMINAL_REF,"ALL")>
-					</cfif>
-					
-				
-					<cfif RISP_PHOTO_EXISTS IS "Y">
-	  					<cfset thisRow=ReplaceNoCase(thisRow,'%NOM_PHOTO%',variables.fPhotoDiv,"ALL")>
-					<cfelse>
-					    <cfset thisRow=ReplaceNoCase(thisRow,'%NOM_PHOTO%','',"ALL")>
-					</cfif>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%photoUrl%',RISP_PHOTO,"ALL")>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%photoTitle%',NOMINAL_REF & " " & REPLACE(SURNAME, "'", "", "ALL"),"ALL")>					
-					<cfset thisRow=ReplaceNoCase(thisRow,'%NOM_NAME%',FIRSTNAME & " " & SURNAME,"ALL")> 
-					<cfset thisRow=ReplaceNoCase(thisRow,'%NOM_DOB%',DOB,"ALL")>
-					<cfset returnHTML &= thisRow>
-					
-				</cfloop>
-				
-				
-				<cfset returnHTML &= variables.wMidsTableFooter>
+			 <cfoutput>
+			 <cfsavecontent variable="thisAddress">
+			 <h3>#houseNo# #street# #town# #postcode#</h3>
+             
+             <cfquery name="qMatches" dbtype="query">
+		  	  SELECT *
+			  FROM  qWestMidsResults.fullquery
+			  WHERE houseNo='#houseNo#'
+			  AND   street  ='#street#'
+			  AND   town    ='#town#'
+              AND   postcode='#postcode#'
+			 </cfquery>             
+             
+	 			<table width="95%" align="center" class="dataTable genieData">
+	 			 <thead>	
+				 <tr>
+					<th width="15%">Force Id</th>                    
+					<th width="15%">System Name</th>
+					<th width="15%">Reference</th>
+					<th width="55%">Address</th>
+                    <th>&nbsp;</td>
+				 </tr>
+				 </thead>
+	             <cfset iAddr=1>
+				 <tbody>
+	             <cfloop query="qMatches">                                                         
+	             <tr>
+	               <td>#FORCE_REF#</td>
+	               <td>#APP_REF#</td>
+	               <td>#SYS_REF#</td>
+	               <td>
+                      <cfif APP_REF IS NOT "FLINT" and APP_REF IS NOT "BOF2">                                                                        
+                       <a href="#APP_REF#|#SYS_REF#|#FORCE_REF#|ADDRESS|#houseNo# #street# #town# #postcode#" class="wMidsAddress">
+                      </cfif>
+                        #houseNo# #street# #town# #postcode#
+                      <cfif APP_REF IS NOT "FLINT" and APP_REF IS NOT "BOF2">                            
+                       </a>
+                      </cfif>
+                   </td>
+                   <td><input type="checkbox"></td>                                             
+	             </tr>
+	             <cfset iAddr=iAddr+1>
+	             </cfloop>
+	             </tbody>
+	            </table>   			
+			</cfsavecontent>
+			</cfoutput>
+			   
+			<cfset returnHtml &= thisAddress>
 				
 			</cfloop>
 		</cfif>
@@ -449,7 +417,23 @@
 	
 	</cffunction>
   
-  
+    <cffunction name="createAuditStructure" access="private" output="false" returntype="struct">
+  	  <cfargument name="auditData" required="true" type="struct" hint="struct containing audit data">
+	  
+	  <cfset var auditStruct=structNew()>
+	    
+	  <cfset auditStruct.enquiryUser=auditData.enquiryUser>
+      <cfset auditStruct.enquiryUserName=auditData.enquiryUserName>
+	  <cfset auditStruct.enquiryUserDept=auditData.enquiryUserDept>
+	  <cfset auditStruct.requestFor=auditData.requestFor>
+	  <cfset auditStruct.reasonCode=auditData.reasonCode>
+	  <cfset auditStruct.reasonText=auditData.reasonText>   
+	  <cfset auditStruct.sessionId=auditData.sessionId>	  
+	  <cfset auditStruct.terminalId=auditData.terminalId>	  
+      
+	  <cfreturn auditStruct>  	
+		
+    </cffunction>   
 
    
 </cfcomponent>

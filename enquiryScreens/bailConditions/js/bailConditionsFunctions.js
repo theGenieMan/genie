@@ -56,7 +56,7 @@ function doBailConditions(){
 		 success: function(data, status){
 
 		 	var $resultsData=$($.trim(data))
-			alert($.trim(data))			
+			
 			var $resultsTable=$resultsData.find('table');
 			var $resultsSpan=$resultsData.find('span#noResults')
 										
@@ -98,10 +98,10 @@ function doBailConditions(){
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
 				  
-		 },
+		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error performing the intelligence enquiry: '+textStatus+', '+errorThrown)			
-		 }
+		 }*/
 		 });		
 
 	$('#resultsContainer').show()	

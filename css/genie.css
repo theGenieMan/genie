@@ -121,18 +121,6 @@ input.input4char{
 	margin:2px;
 }
 
-.photo_title
-{
-	background-color : #0C5C99;
-	color : #FFF;
-    line-height:1.3em;
-	font-size:90%;
-	text-align:left;
-	font-weight:bold;
-	width:250;
-	text-align:center;
-}
-
 #infoBoxParent{	   
     display: table;		 
     width: 98%;    
