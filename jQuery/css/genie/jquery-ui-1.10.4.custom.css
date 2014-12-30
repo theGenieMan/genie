@@ -1329,7 +1329,7 @@ font-size:90%;
 .genieAttachedDocument, .genieCustodySummary, .genieTelephoneIntelLink, .genieNFLMSNominal,
 .genieHTCULink, .geniePDOffences, #searchHelp, .closePopup, .wmcHOOCLookupCode, .wmcHOMCLookupCode,
 .wmcRecRepLookupCode, .propCategoryLookupCode, .propSubCategoryLookupCode, .propManufacturerLookupCode,
-.genieErrorLink, .wMidsAddress, .wMidsTelephone, .wMidsVehicle, .fakeLink {
+.genieErrorLink, .wMidsAddress, .wMidsTelephone, .wMidsVehicle, .fakeLink, .genieBugLink {
 	cursor:hand;
 	color:#0000FF !important;
 	text-decoration:underline;

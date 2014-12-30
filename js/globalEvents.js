@@ -625,6 +625,22 @@ $(document).on('click','.genieAttachedDocument',
 				
 });		
 
+// event that fires when a link with the class of genieAttachedDocument
+// is clicked. the href of the link should be a valid path
+// and filename
+$(document).on('click','.genieAddressSNT',
+	    function(e){
+			e.preventDefault();
+			var hrefLink=$(this).attr('href');
+			
+			getAppVar('LPATeamLink').done(function(result) {
+				var docLink=result+hrefLink								
+				theWin=window.open(docLink)
+				theWin.focus()    
+			})
+				
+});
+
 // events related to the Action Select Drop Down Box
 $(document).on('change','#actionSelectDropDown',
 	function(){

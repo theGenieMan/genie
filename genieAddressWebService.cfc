@@ -17,7 +17,7 @@
 <cfset variables.addressIntelHoverClass="genieAddressIntelHover">
 <cfset variables.addressMapClass="genieAddressMap">
 <cfset variables.addressSNTClass="genieAddressSNT">
-<cfset variables.googleLink="https://maps.google.com/?q=">
+<cfset variables.googleLink="http://maps.google.com/?q=">
 
 <cfsavecontent variable="variables.wMerAddressTableHeader">
 <table width="100%" align="center" class="dataTable genieData">
@@ -47,7 +47,7 @@
 	<td valign="top" align="center"><b><a href="%PREMISE_KEY%%POST_CODE%" premiseKey="%PREMISE_KEY%" postCode="%POST_CODE%" class="%addressOffenceHoverClass%">%OFFENCE_COUNT%</a></b></td>
 	<td valign="top" align="center"><b><a href="%PREMISE_KEY%%POST_CODE%" premiseKey="%PREMISE_KEY%" postCode="%POST_CODE%" class="%addressOrgHoverClass%">%ORG_COUNT%</a></b></td>
 	<td valign="top" align="center"><b><a href="%PREMISE_KEY%%POST_CODE%" premiseKey="%PREMISE_KEY%" postCode="%POST_CODE%" class="%addressIntelHoverClass%">%INTEL_COUNT%</a></b></td>
-	<td valign="top"><b><a href="%PREMISE_KEY%%POST_CODE%" class="%addressSNTClass%">%LPA%</a></b></td>
+	<td valign="top"><b><a href="%LPA%" class="%addressSNTClass%">%LPA%</a></b></td>
 	<td valign="top">%SEARCH_ADDRESS%</td>	
 </tr>	
 </cfsavecontent>
@@ -178,7 +178,7 @@
 			<cfset thisAddress=ReplaceNoCase(thisAddress,'%OFFENCE_COUNT%',iif(OFFENCE_COUNT GT 0,de(OFFENCE_COUNT),de('')),"ALL")>
 			<cfset thisAddress=ReplaceNoCase(thisAddress,'%ORG_COUNT%',iif(ORG_COUNT GT 0,de(ORG_COUNT),de('')),"ALL")>
 			<cfset thisAddress=ReplaceNoCase(thisAddress,'%INTEL_COUNT%',iif(INTEL_COUNT GT 0,de(INTEL_COUNT),de('')),"ALL")>
-			<cfset thisAddress=ReplaceNoCase(thisAddress,'%LPA%',LPA,"ALL")>
+			<cfset thisAddress=ReplaceNoCase(thisAddress,'%LPA%',SNT_CODE,"ALL")>
 			
 			<cfif Len(POST_CODE) GT 0 AND POST_CODE IS NOT "*">
 				<cfset thisGoogleSearch = ReplaceNoCase(thisGoogleSearch,'%GOOGLE_LINK%',variables.googleLink)>

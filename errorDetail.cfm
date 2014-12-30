@@ -6,7 +6,19 @@
 
     <script>
 	 $(document).ready(function() {	
-		
+	     $("input[datepicker]").datepicker({dateFormat: 'dd/mm/yy'},{defaultDate:$.datepicker.parseDate('dd/mm/yyyy',$(this).val())});
+		 $('#resolvedBy').hrQuickSearch(
+			{
+				returnUserId: 'resolvedByUID',
+				returnFullName: 'resolvedByName',
+				returnCollarNo: 'resolvedByCollar',
+				returnForce: 'resolvedByForce',
+				searchBox: 'searchBoxresolvedBy',				
+				searchBoxName: 'resolvedBySearch',	
+				helpMessage: '',					
+				scrollToResults:false
+			}
+		);		
 	 })
 	</script>
 	<style>
@@ -17,6 +29,7 @@
 
 	<cfoutput query="qErrorDetails">
 	<h3 align="center">#ERROR_URN#</h3>	
+	<form id="errorDetailForm">
 	<table width="98%" align="center" class="nominalData">
 		<tr>		
 			<th width="20%" valign="top">Date/Time</th>
@@ -76,8 +89,60 @@
 				<textarea name="ajaxdata" rows="10" cols="40">#Replace(AJAX_DATA,",",chr(10),"ALL")#</textarea>
 			</td>
 		</tr>
+
+		<tr>
+			<th valign="top">Problem Type</th>
+			<td class="row_colour0">
+				<select name="problemType" id="problemType">
+					<option value="" #iif(PROBLEM_TYPE IS "",DE('selected'),de(''))#>-- Select --</option>
+					<option value="Bug - Coldfusion" #iif(PROBLEM_TYPE IS "Bug - Coldfusion",DE('selected'),de(''))#>Bug - Coldfusion</option>
+					<option value="Bug - Javascript" #iif(PROBLEM_TYPE IS "Bug - Javascript",DE('selected'),de(''))#>Bug - Javascript</option>
+					<option value="Bug - Oracle Query" #iif(PROBLEM_TYPE IS "Bug - Oracle Query",DE('selected'),de(''))#>Bug - Oracle Query</option>
+					<option value="Bug - Data" #iif(PROBLEM_TYPE IS "Bug - Data",DE('selected'),de(''))#>Bug - Data</option>
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<th valign="top">Problem / Resolution Notes</th>
+			<td class="row_colour1">
+				<textarea name="probNotes" id="probNotes" rows="5" cols="60">#RESOLUTION_TEXT#</textarea>
+			</td>
+		</tr>
+
+		<tr>
+			<th valign="top">Resolved</th>
+			<td class="row_colour0">
+				<select name="resolved" id="resolved">
+					<option value="" #iif(RESOLVED IS "",DE('selected'),de(''))#>-- Select --</option>
+					<option value="N" #iif(RESOLVED IS "N",DE('selected'),de(''))#>No</option>
+					<option value="Y" #iif(RESOLVED IS "Y",DE('selected'),de(''))#>Yes</option>
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
+			<th valign="top">Date Resolved</th>
+			<td class="row_colour1">
+				<input type="text" name="dateResolved" id="dateResolved" size="8" datepicker> 
+			</td>
+		</tr>
+		
+		<tr>
+			<th valign="top">Resolved By</th>
+			<td class="row_colour0">
+				<div id="resolvedBy"></div>
+			</td>
+		</tr>		
+		
+		<tr>
+			<td colpsan="2">
+				<input type="submit" name="btnSubSaveError" id="btnSubSaveError" value="SAVE">
+			</td>
+		</tr>
 				
 	</table>
-	
+ </form>
+ <br><br><br><br>	
 </cfoutput>
 	

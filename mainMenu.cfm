@@ -294,7 +294,8 @@ Revisions   :
 	   <li id="merges"><a href="mergeList.cfm?#session.URLToken#&actioned=N">Nominal Merges (S)</a></li>	
 	   </cfif>			  
 	   <cfif session.isGenieAdmin>
-	   <li id="errors"><a href="errorList.cfm?#session.URLToken#">GENIE Errors (E)</a></li>	   
+	   <li id="errors"><a href="errorList.cfm?#session.URLToken#">GENIE Errors (E)</a></li>
+	   <li id="bugs"><a href="bugList.cfm?#session.URLToken#">GENIE Bugs (B)</a></li>	   
 	   </cfif> 			     			   			   
    </ul> 
 

@@ -20,6 +20,19 @@
 	  <cfreturn errorXml>	
 		 
 	</cffunction>	
-	
+
+	<cffunction name="getBugList" access="remote" returntype="xml" output="false" hint="gets an xml list of genie bugs">
+  	  <cfargument name="bugUrn" type="string" required="true" hint="urn of the bug">
+	  <cfargument name="bugYear" type="string" required="true" hint="bug year">	    	  	  
+	  <cfargument name="dateFrom" type="string" required="true" hint="bug from date dd/mm/yyyy">
+	  <cfargument name="dateTo" type="string" required="true" hint="bug to date dd/mm/yyyy">
+	  <cfargument name="bugBy" type="string" required="true" hint="person who generated the bug">
+	  <cfargument name="status" type="string" required="true" hint="bug status">  	 
+	  
+	  <cfset var bugXml=application.genieErrorService.getBugList(bugUrn,bugYear,dateFrom,dateTo,bugBy,status)>	
+		 
+	  <cfreturn bugXml>	
+		 
+	</cffunction>		
 		
 </cfcomponent>

@@ -50,7 +50,7 @@ Revisions   :
 				<td><a href="#SNT_CODE#" class="genieAddressSNT">#SNT_CODE#</a></td>
 				<td>
 					<cfif Len(POST_CODE) GT 0 AND POST_CODE IS NOT "*">
-					<a href="#BUILDING_NUMBER# #STREET_1# #TOWN# #POST_CODE#" class="genieAddressMap">Map</a>
+					<a href="http://maps.google.com/?q=#BUILDING_NUMBER# #STREET_1# #TOWN# #POST_CODE#" class="genieAddressMap" target="_blank">Map</a>
 					</cfif>
 				</td>
 			 </tr>
