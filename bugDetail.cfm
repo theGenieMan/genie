@@ -6,6 +6,7 @@
 
     <script>
 	 $(document).ready(function() {	
+	 	 $('.savedDiv').hide();
 	     $("input[datepicker]").datepicker({dateFormat: 'dd/mm/yy'},{defaultDate:$.datepicker.parseDate('dd/mm/yyyy',$(this).val())});
 		 $('#fixedBy').hrQuickSearch(
 			{
@@ -19,11 +20,48 @@
 				scrollToResults:false
 			}
 		);
+		
+						
+		$(document).unbind('click.bugSave');
+		$(document).on('click.bugSave','#btnSubSaveBug',
+				function(e){
+					e.preventDefault();		
+					$('.savedDiv').hide();
+					var bugForm={};
+					    bugForm.replicated=$('#replicated').val();
+						bugForm.fixed=$('#fixed').val();
+						bugForm.dateFixed=$('#dateFixed').val();
+						bugForm.fixedVersion=$('#fixedVersion').val();
+						bugForm.fixedByUID=$('#fixedByUID').val();
+						bugForm.fixedByName=$('#fixedByName').val();
+						bugForm.fixedNotes=$('#fixNotes').val();		
+						bugForm.bugUrn=$('#thisBugUrn').val();		
+					
+					$.ajax({
+						 type: 'POST',
+						 url: '/genieErrorWebService.cfc?method=updateBug',						 
+						 contentType: "application/json",						 
+						 cache: false,
+						 async: true,		 
+						 data: JSON.stringify( bugForm ),
+						 success: function(data, status){
+						  	$('.savedDiv').show();
+						 }				 
+					});
+				}
+			);		
+		
 	 })
 	</script>
 
 	<cfoutput query="qBugDetails">
 	<h3 align="center">#BUG_URN#</h3>
+	<div class="savedDiv">	
+	<div class="error_title">
+		*********** DETAILS HAVE BEEN SAVED ***********
+	</div>	
+	<br>
+	</div>
 	<form id="bugForm">	
 	<table width="98%" align="center" class="nominalData">
 		<tr>		
@@ -96,12 +134,17 @@
 		
 		<tr>
 			<td colpsan="2">
-				<input type="submit" name="btnSubSaveBug" id="btnSubSaveBug" value="SAVE">
+				<input type="hidden" name="thisBurgUrn" id="thisBugUrn" value="#BUG_URN#">
+				<input type="button" name="btnSubSaveBug" id="btnSubSaveBug" value="SAVE">
 			</td>
 		</tr>
 				
-	</table>
- </form>	
- <br><br><br><br>
+	   </table>
+	 </form>	 
+	<div class="savedDiv">	
+	<div class="error_title">
+		*********** DETAILS HAVE BEEN SAVED ***********
+	</div>	
+	<br><br><br><br>
 </cfoutput>
 	

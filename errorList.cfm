@@ -55,6 +55,7 @@ Revisions   :
 				errorByUID=$('#errorByUID').val();																
 				errorStatus=$('#errorStatus').val();								
 				
+				$('#errorListDiv').show();
 				$('#errorLoadingDiv').show();
 				$('#errorTable').hide();
 				
@@ -206,7 +207,8 @@ Revisions   :
 		<input type="button" name="btnErrorFilter" id="btnErrorFilter" value="Apply Filter">
 	</form>
 	</div>
-	<br>
+	<div id="errorListDiv" style="display:none;">
+	<hr>
 	<b><span id="errorCount"></span></b>
 	<div id='errorLoadingDiv' style='width:100%; display:none' align='center'><h4>Loading, please wait</h4><div class='progressBar'></div></div>
 	<table width="95%" align="center" id="errorTable" class="genieData" style="display:none;">
@@ -221,5 +223,6 @@ Revisions   :
 	  </thead>		
 	</table>
     <br><br><br>
+	</div>
 </div>	
 </cfoutput>

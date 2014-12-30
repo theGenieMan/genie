@@ -34,5 +34,25 @@
 	  <cfreturn bugXml>	
 		 
 	</cffunction>		
+
+	<cffunction name="updateError" access="remote" returntype="String" output="false" hint="updates error details">
+  	  <cfset var errorData = deserializeJSON( toString( getHttpRequestData().content ) ) />
+  	  <cfset var returnVar=true>
+  	  	  
+	  <cfset application.genieErrorService.updateError(errorData)>	
+		 
+	  <cfreturn returnVar>	
+		 
+	</cffunction>	
+	
+	<cffunction name="updateBug" access="remote" returntype="String" output="false" hint="updates bug details">
+  	  <cfset var bugData = deserializeJSON( toString( getHttpRequestData().content ) ) />
+  	  <cfset var returnVar=true>
+  	  	  
+	  <cfset application.genieErrorService.updateBug(bugData)>	
+		 
+	  <cfreturn returnVar>	
+		 
+	</cffunction>	
 		
 </cfcomponent>
