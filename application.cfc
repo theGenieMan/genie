@@ -26,7 +26,7 @@
 	<cfset locale=SetLocale("English (UK)")>    
     
     <cfset adminObj = createObject("component","cfide.adminapi.administrator")>
-	<cfset adminObj.login("G3n13s3v3r","admin")>     
+	<cfset adminObj.login("G3n13s3rv3r","admin")>     
         
     <cfset cfserver = createObject("component","cfide.adminapi.runtime")>
 	<cfset cfserver.clearTrustedCache()>
