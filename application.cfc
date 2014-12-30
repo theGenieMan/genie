@@ -40,10 +40,13 @@
 	<!--- read in the environment details and set up the application scope --->
 	<cffile action="read" file="#application.confData.assetsDir#\lookups\environment\#application.env#.csv" variable="envData">
 	
+	<cflog file="genie" type="information" text="Application: Reading Config File #application.confData.assetsDir#\lookups\environment\#application.env#.csv">
+	
 	<cfloop list="#envData#" index="envItem" delimiters="#chr(10)#">
 		<cfset envItem=StripCR(Trim(envItem))>
 		<cfif Left(envItem,2) IS NOT "--">
 		  <cfset "Application.#ListGetAt(envItem,1,"|")#"=ListGetAt(envItem,2,"|")>
+		  <cflog file="genie" type="information" text="Application: App Var Application.#ListGetAt(envItem,1,"|")#=#ListGetAt(envItem,2,"|")#">
 		</cfif>
 	</cfloop>	
 	
