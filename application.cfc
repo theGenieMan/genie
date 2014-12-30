@@ -550,18 +550,18 @@
 
 <cffunction name="initConfigTimeouts" returnType="struct">
    <cfset var confReturn=StructNew()>	
-   <cfif SERVER_NAME IS "genie.intranet.wmcpolice" OR SERVER_NAME IS "SVR20623" 
-	  OR SERVER_NAME IS "SVR20424" OR SERVER_NAME IS "SVR20306" or SERVER_NAME IS "genieuat.intranet.wmcpolice"> 
+   <cfif SERVER_NAME IS "genie.intranet.wmcpolice" OR SERVER_NAME IS "SVR20306" or SERVER_NAME IS "genieuat.intranet.wmcpolice"> 
      <cfset confReturn.ENV="LIVE">
 	 <cfset confReturn.sessionTimespan="#createtimespan(0,4,0,0)#">
      <cfset confReturn.applicationTimespan="#createtimespan(0,2,0,0)#"> 
 	 <cfset confReturn.assetsDir="\\svr20200\g$\genie_assets">
-   <cfelseif SERVER_NAME IS "genie2.intranet.wmcpolice"
+   <cfelseif SERVER_NAME IS "genieuat.intranet.wmcpolice"
+           OR SERVER_NAME IS "SVR20623"
     	   OR SERVER_NAME IS "SVR20624">
 	 <cfset confReturn.ENV="LIVE_UAT">
 	 <cfset confReturn.sessionTimespan="#createtimespan(0,4,0,0)#">
      <cfset confReturn.applicationTimespan="#createtimespan(0,2,0,0)#">
-	 <cfset confReturn.assetsDir="\\svr20200\g$\genie_assets">   
+	 <cfset confReturn.assetsDir="\\svr20200\f$\genie_assets">   
    <cfelseif SERVER_NAME IS "geniedev.intranet.wmcpolice" OR SERVER_NAME IS "SVR20312" OR SERVER_NAME IS "SVR20031">
      <cfset confReturn.ENV="DEV">
 	 <cfset confReturn.sessionTimespan="#createtimespan(0,0,10,0)#">
