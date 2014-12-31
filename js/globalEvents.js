@@ -1004,6 +1004,29 @@ $(document).on('click','.clearLookup',
 	}
 );
 
+// event that captures a searchPaneToggle click
+$(document).on('click','.searchPaneToggle',
+	function(e){
+		e.preventDefault();
+		var action=$(this).attr('href');
+		var searchPane=$(this).attr('searchPane');
+		
+		if (action=='expandAll'){
+			expandAllSearchPanes(searchPane);
+		}
+
+		if (action=='expandData'){
+			expandDataSearchPanes(searchPane);
+		}
+
+		
+		if (action=='collapseAll'){
+			collapseAllSearchPanes(searchPane);
+		}
+				
+	}
+);
+
 $(document).on('dblclick','.showSession',
 	function(){
 	$('#sessionInfo').dialog({

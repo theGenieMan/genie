@@ -71,6 +71,11 @@
 		Date/Time From &amp; To and at least 1 Theme <b>must be completed</b>
 	  </div>
 	  <div class="spacer">&nbsp;</div>
+	  <div align="right">
+	  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
+		<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
+		<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
+	  </div>
 	  <div id="referencePane" class="ui-accordion searchPane" initOpen="true">
 	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Crime Browser <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent">

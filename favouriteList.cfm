@@ -82,12 +82,14 @@ ORDER BY DATE_ADDED DESC
 
 <cfoutput>
   <div style="padding:5px;" align="left">   
+   <!---
    <cfif session.loggedInUserDiv IS NOT "H">      
      <ul>
       <li><a href="javascript:void(0);" onClick="showVisor('#session.loggedInUserDiv#','#session.urlToken#')">View VISOR Nominals for #session.loggedInUserDiv# Division</a>
       <li><a href="javascript:void(0);" onClick="showPPO('#session.loggedInUserDiv#','#session.urlToken#')">View PPO Nominals for #session.loggedInUserDiv# Division</a>      
      </ul>
    </cfif>
+   --->
    
    <cfif qUserNoms.RecordCount GT 0>
        

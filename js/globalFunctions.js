@@ -10,12 +10,46 @@
 */
 
 // function that will collapse all search panes
-function collapseAllSearchPanes(searchPaneClass){
-	
+function collapseAllSearchPanes(searchPaneClass){	
 	$('.'+searchPaneClass).each(
 		function(){
 			if($(this).attr('class').indexOf('ui-state-active')>0){
 				$(this).trigger('click')
+			}
+		}
+	);
+	
+}
+
+// function that will expand all search panes
+function expandAllSearchPanes(searchPaneClass){
+	
+	$('.'+searchPaneClass).each(
+		function(){
+			if($(this).attr('class').indexOf('ui-state-default')>0){
+				$(this).trigger('click')
+			}
+		}
+	);
+	
+}
+
+// function that will expand all search panes with data
+function expandDataSearchPanes(searchPaneClass){
+	
+	$('.'+searchPaneClass).each(
+		function(){
+			var $searchPane=$(this);
+			if($(this).attr('class').indexOf('ui-state-default')>0){
+				var $thisPane=$(this).next('.searchPaneContent');
+				$thisPane.find('input, select, textarea, checkbox').each(
+					function(){							   										
+					   if ($(this).val().length > 0){
+						$searchPane.trigger('click')
+						return false;   	
+					   }							
+					}
+				)				
 			}
 		}
 	);

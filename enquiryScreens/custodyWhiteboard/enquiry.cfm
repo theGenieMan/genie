@@ -51,6 +51,11 @@
 		<strong>Select</strong> an option from the Custody Suite list to view people currently in Custody
 	  </div>
 	  <div class="spacer">&nbsp;</div>
+	  <div align="right">
+	  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
+		<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
+		<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
+	  </div>
 	  <div id="referencePane" class="ui-accordion searchPane" initOpen="true">
 	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Custody Suites <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent">

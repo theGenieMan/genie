@@ -56,6 +56,11 @@
 		Enter information into <b>at least one</b> of the search fields below.
 	  </div>
 	  <div class="spacer">&nbsp;</div>
+	  <div align="right">
+	  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
+		<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
+		<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
+	  </div>
 	  <div id="referencePane" class="ui-accordion searchPane" initOpen="true">
 	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Property Enquiry <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent">
@@ -146,9 +151,9 @@
 				<tr>
 					<td valign="top" width="15%"><label for="date_from1">Date From</label></td>
 					<td valign="top" colspan="4">						
-						<input name="date_from1" id="date_from1" displayInPane="Date From" size="10" value="01/11/2014" datepicker> 
+						<input name="date_from1" id="date_from1" displayInPane="Date From" size="10" value="" datepicker> 
 						<b>Date To</b> 
-						<input name="date_from2" id="date_from2" displayInPane="Date To" size="10" value="30/11/2014" datepicker>
+						<input name="date_from2" id="date_from2" displayInPane="Date To" size="10" value="" datepicker>
 					</td>										
 				</tr>			
 				<tr>

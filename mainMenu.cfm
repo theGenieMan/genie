@@ -288,8 +288,8 @@ Revisions   :
 <div align="center" id="homeTabs">
 		  	
    <ul>        		
-       <li id="main"><a href="##mainMenu">Main Menu (M)</a></li>
-	   <li id="nominals"><a href="favouriteList.cfm?#session.URLToken#">Nominals of Interest (N)</a></li>
+       <li id="main"><a href="##mainMenu" accesskey="M"><u>M</u>ain Menu</a></li>
+	   <li id="nominals"><a href="favouriteList.cfm?#session.URLToken#" accesskey="U">Fa<u>v</u>ourite Nominals</a></li>
 	   <cfif session.isNomMergeUser>
 	   <li id="merges"><a href="mergeList.cfm?#session.URLToken#&actioned=N">Nominal Merges (S)</a></li>	
 	   </cfif>			  

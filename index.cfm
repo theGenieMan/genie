@@ -254,9 +254,7 @@ Revisions   :
 
 	<input type="button" style="font-size:140%; font-weight:bold;" value="CLICK HERE TO LAUNCH GENIE (G)"
 			onClick="fullscreen('mainMenu.cfm?#session.URLToken#','genieMainMenu')" AccessKey="G">
-
-	<br><br>
-	<div align="center"><a href="/accessibility/home/accessibility.cfm">Customise Colour/Font Size</a></div>
+	<br>
 	</div>
 	
 	<div class="ui-state-highlight">
