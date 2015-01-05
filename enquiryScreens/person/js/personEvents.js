@@ -51,7 +51,7 @@ $(document).on('change','#dpaValid',function(){
 $(document).on('submit','.enquiryForm',
 	function(e){
 		e.preventDefault();
-		showFormDebug();
+		//showFormDebug();
 		
 		// hide errors
 		$('#errorDiv .error_text').html('')

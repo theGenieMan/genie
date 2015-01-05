@@ -553,7 +553,7 @@
 
 <cffunction name="initConfigTimeouts" returnType="struct">
    <cfset var confReturn=StructNew()>	
-   <cfif SERVER_NAME IS "genie.intranet.wmcpolice" OR SERVER_NAME IS "SVR20306" or SERVER_NAME IS "genieuat.intranet.wmcpolice"> 
+   <cfif SERVER_NAME IS "genie.intranet.wmcpolice" OR SERVER_NAME IS "SVR20306"> 
      <cfset confReturn.ENV="LIVE">
 	 <cfset confReturn.sessionTimespan="#createtimespan(0,4,0,0)#">
      <cfset confReturn.applicationTimespan="#createtimespan(0,2,0,0)#"> 

@@ -12,7 +12,7 @@
 			width:625,
 			height:250,
 			position: 'center',
-			reasonCodes: ['ENCOUNTER - General Person Enquiry','ENCOUNTER - Stop Search','ENCOUNTER - Anti-social behaviour','VULNERABLE PERSON - Domestic','VULNERABLE PERSON - Child Incident','VULNERABLE PERSON - Other','ROAD TRAFFIC - Driver Stop (S163)','ROAD TRAFFIC - Collision','ROAD TRAFFIC - Drink Drive','ROAD TRAFFIC - Vehicle Related Enquiries','STREET PROCESS DISPOSAL','POST CUSTODY - Bail Enquiries','POST CUSTODY - Warrant','CUSTODY','INVESTIGATION ENQUIRY','INTELLIGENCE ENQUIRY','OFFENCE ENQUIRY','PROPERTY ENQUIRY','OTHER'],
+			reasonCodes: ['ONGOING INCIDENT','ENCOUNTER - General Person Enquiry','ENCOUNTER - Stop Search','ENCOUNTER - Anti-social behaviour','VULNERABLE PERSON - Domestic','VULNERABLE PERSON - Child Incident','VULNERABLE PERSON - Other','ROAD TRAFFIC - Driver Stop (S163)','ROAD TRAFFIC - Collision','ROAD TRAFFIC - Drink Drive','ROAD TRAFFIC - Vehicle Related Enquiries','STREET PROCESS DISPOSAL','POST CUSTODY - Bail Enquiries','POST CUSTODY - Warrant','CUSTODY','INVESTIGATION ENQUIRY','INTELLIGENCE ENQUIRY','OFFENCE ENQUIRY','PROPERTY ENQUIRY','OTHER'],
 			ethnicCodes: ['W1-White British','W2-Irish','W9-Any Other White','A1-Indian','A2-Pakistani','A3-Bangladeshi','A9-Any Other Asian','B1-Caribbean','B2-African','B9-Any Other Black','M1-White and Black Caribbean','M2-White and Black African','M3-White and Asian','M9-Any Other Mixed','O1-Chinese','O9-Any other Ethnic','NS-Not Stated'],
 			requestById: 'dpaRequestFor',
 			reasonCodeTxt: 'dpaReasonCodeTxt',
@@ -148,7 +148,7 @@
 			change: function(e){
 					var reasonCode=$('#'+e.target.id).val();
 					this.dpaReasonSelect.val(reasonCode);								
-					if (reasonCode=='6' && this.options.enquiryScreen == 'Person'){
+					if (reasonCode=='7' && this.options.enquiryScreen == 'Person'){
 						this.dpaEthnicSelect.show();
 					}
 					else{
@@ -161,7 +161,7 @@
 			change: function(e){					
 					var reasonCode=$('#'+e.target.id).val();
 					this.dpaReasonTxt.val(reasonCode);					
-					if (reasonCode=='6' && this.options.enquiryScreen == 'Person'){
+					if (reasonCode=='7' && this.options.enquiryScreen == 'Person'){
 						this.dpaEthnicSelect.show();
 					}
 					else{
