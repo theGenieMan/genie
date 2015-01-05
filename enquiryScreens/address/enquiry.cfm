@@ -59,8 +59,8 @@
 		  		<tr>
 		  			<td width="15%"><b>Data Sources</b></td>
 					<td>
-						<input type="checkbox" name="wmpData" id="wmpData" displayInPane="WP/WMP" checked disabled noClear> WP/WMP 
-						<input type="checkbox" name="firearmsData" id="firearmsData" displayInPane="Firearms" checked noClear> Firearms
+						<input type="checkbox" name="wmpData" id="wmpData" displayInPane="WP/WMP" checked disabled noClear='yes'> WP/WMP 
+						<input type="checkbox" name="firearmsData" id="firearmsData" displayInPane="Firearms" checked noClear='yes'> Firearms
 						<cfif session.isWMidsUser>
 						<input type="checkbox" name="wMidsData" id="wMidsData" displayInPane="West Mids" noClear> West Mids
 						</cfif>	

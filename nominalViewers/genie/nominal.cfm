@@ -328,7 +328,7 @@ Revisions   :
 					<!--- threat to life RMP --->
 					<cfif nominal.getTTL_FLAG() IS "Y">
 					<div class="redWarningBox">
-						 SUBJECT OF RISK MANAGEMENT PLAN<br>
+						 SUBJECT OF RISK MAN PLAN<br>
 						 *** CONTACT FDI IF POLICE CONTACT ***
 						 <cfif isDefined('session.isFDI')>
 						 	<cfif session.isFDI>
