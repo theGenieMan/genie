@@ -1,10 +1,10 @@
 <!doctype html>
 <html>
 <head>
-	<title><cfoutput>GENIE Access Denied</cfoutput></title>
+	<title><cfoutput>GENIE - Access is Currently Disabled</cfoutput></title>
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/css/genie.css">	
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
-	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">				
 </head>
 
 <body>
@@ -18,9 +18,12 @@
 </div>
 <br>
 <cfoutput>
-<h1 align="center">User #session.user.getFullName()# (#session.user.getTrueUserId()#) is not authorised to use GENIE</h1>
+<h1 align="center">Access to GENIE #Application.Version# #Application.ENV# is current disabled</h1>
 </cfoutput>
 
-<cflog file="genie" type="information" text="Access Denied: #AUTH_USER# #session.user.getFullname()# (#session.user.getTrueUserId()#) has attempted to access GENIE and is not authorised">
+<cfif session.isGenieAdmin>
+<p align="center"><b><a href="/index.cfm?startAccess=go">Reenable User Access</a></b></p>	
+</cfif>	
+
 </body>
 </html>

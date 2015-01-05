@@ -83,7 +83,7 @@ Revisions        :
 </cfif>	
 <table width="100%" align="center">
 	<tr>		
-		<td width="50%">			
+		<td width="35%">			
 		<cfif showActionSelect>
 		  <span id="actionsDropDown">
 			   <b>Actions</b>:
@@ -110,8 +110,8 @@ Revisions        :
 		  </span>
 		 </cfif>			
 		</td>
-		<td width="50%" align="right">
-			<b>#Session.LoggedInUser#</b> on <span class="showSession">#session.server#</span>. <strong>Log Access Level :</strong> #Session.LoggedInUserLogAccess#. <a href="/mySettings.cfm?#session.urlToken#" class="mySettings">My Settings</a>
+		<td width="65%" align="right">
+			<b>#Session.LoggedInUser#</b> on <span class="showSession">#session.server#</span>. <strong>Log Access:</strong> #Session.LoggedInUserLogAccess#. <a href="/mySettings.cfm?#session.urlToken#" class="mySettings">My Settings</a>
 			<input type="hidden" id="genieCurrentUserId" value="#iif(session.user.getForceCode() IS '22',de(session.user.getUSERID()),de(session.user.getOTHERUSERID()))#">
 			<input type="hidden" id="genieCurrentUserIdWMP" value="#session.user.getUSERID()#">
 			<input type="hidden" id="genieCurrentUserName" value="#session.user.getFullName()#">

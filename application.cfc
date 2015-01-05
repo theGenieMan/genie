@@ -17,6 +17,8 @@
     
     <cfset application.confData=initConfigTimeouts()>
     <cfset application.Env=application.confData.Env>
+	<cfset application.accessStatus="go">
+	
     <cflog file="genie" type="information" text="onApplicationStart started">
     
     <cflog file="genie" type="information" text="Application: running session management setup for a #application.Env# Server">
@@ -203,6 +205,22 @@
   
   <cfif isDefined('resetSession') or isDefined('resetBoth')>
   	  <cfset onSessionStart()>
+  </cfif>
+  
+  <cfif isDefined('stopAccess')>
+  	  <cfset application.accessStatus="stop">
+  </cfif>
+  
+  <cfif isDefined('startAccess')>
+  	  <cfset application.accessStatus="go">
+  </cfif>
+  
+  <!--- the access to GENIE has been stopped so show the page saying access has stopped --->
+  <cfif application.accessStatus IS "stop" AND ListLast(SCRIPT_NAME,"/") IS NOT "noAccess.cfm">
+	<script>
+	   location.href='/noAccess.cfm'
+	</script>
+	<cfabort>  	  
   </cfif>
     
   <!--- is this page a logging page?

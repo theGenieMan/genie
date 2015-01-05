@@ -302,107 +302,104 @@ Revisions   :
    <div id="mainMenu">
 		<div style="padding:5px;">
 				
-		<input type="hidden" name="sessionInfo" value="#session.URLToken#">
+		<input type="hidden" name="sessionInfo" value="#session.URLToken#">		
 					
 		<br>
 		<table width="98%" align="center" cellspacing="20">
 		 <tr>
-		  <td width="24%" align="center">		   
+		  <td width="32%" align="center">		   
 			<button name="frm_PersonEnq" id="personEnquiryButton" 
 			        AccessKey="P" 
 				    onClick="fullscreen('/enquiryScreens/person/enquiry.cfm?#session.URLToken#')"><u>P</u>ERSON ENQUIRY</button>		   
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">		   
+		  <td width="2%">&nbsp;</td>
+		  <td width="32%" align="center">		   
 			<button name="frm_AddEnq" id="addressEnquiryButton" 
 			       AccessKey="A"
 				   onClick="fullscreen('/enquiryScreens/address/enquiry.cfm?#session.URLToken#')"><u>A</u>DDRESS ENQUIRY</button>		   
 		  </td>
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">
+		  <td width="2%">&nbsp;</td>
+		  <td width="32%" align="center">
 		   <button name="frm_CustEnq" id="custodyEnquiryButton"
 			       AccessKey="C"
 				   onClick="fullscreen('/enquiryScreens/custody/enquiry.cfm?#session.URLToken#')"><u>C</u>USTODY ENQUIRY</button>
 		   </form>		  	
-		  </td>  
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">
-		   <button name="frm_CustEnq" id="custodyWhiteboardButton" 
-			       value="" AccessKey="W"
-				   onClick="fullscreen('/enquiryScreens/custodyWhiteboard/enquiry.cfm?#session.URLToken#')">CUST <u>W</u>HITEBOARD</button		   
-		  </td>
+		  </td>  		  		  
 		 </tr>		
 		 <tr>
-		  <td width="24%" align="center">		   
+		  <td width="32%" align="center">
+		   <button name="frm_CustEnq" id="custodyWhiteboardButton" 
+			       value="" AccessKey="W"
+				   onClick="fullscreen('/enquiryScreens/custodyWhiteboard/enquiry.cfm?#session.URLToken#')">CUST <u>W</u>HITEBOARD</button>		   
+		  </td>
+		  <td width="2%">&nbsp;</td>	
+		  <td width="32%" align="center">		   
 			<button name="frm_ProcDecEnq" id="procDecEnquiryButton" 
 			        AccessKey="P" 
 				    onClick="fullscreen('/enquiryScreens/processDecision/enquiry.cfm?#session.URLToken#')">PROC<u>E</u>SS ENQUIRY</button>		   
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">		   
+		  <td width="2%">&nbsp;</td>		  
+		  <td width="32%" align="center">		   
 			<button name="frm_TelEnq" id="telephoneEnquiryButton" 
 			       AccessKey="T"
 				   onClick="fullscreen('/enquiryScreens/telephone/enquiry.cfm?#session.URLToken#')"><u>T</u>ELEPHONE ENQUIRY</button>		   
-		  </td>
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">
+		  </td>		  		  
+		 </tr>		
+		 <tr>
+		  <td width="32%" align="center">
 		   <button name="frm_VehEnq" id="vehicleEnquiryButton"
 			       AccessKey="V"
 				   onClick="fullscreen('/enquiryScreens/vehicle/enquiry.cfm?#session.URLToken#')"><u>V</u>EHICLE ENQUIRY</button>		   	  
 		  </td>  
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">
+		  <td width="2%">&nbsp;</td>
+		  <td width="32%" align="center">
 		   <button name="frm_OffEnq" id="offenceEnquiryButton" 
 			       value="" AccessKey="O"
 				   onClick="fullscreen('/enquiryScreens/offence/enquiry.cfm?#session.URLToken#')"><u>O</u>FFENCE ENQUIRY</button		   
 		  </td>
-		 </tr>		
-		 <tr>
-		  <td width="24%" align="center">		   
+		  <td width="2%">&nbsp;</td>	
+		  <td width="32%" align="center">		   
 			<button name="frm_IntelEnq" id="intelEnquiryButton" 
 			        AccessKey="I" 
 				    onClick="fullscreen('/enquiryScreens/intel/enquiry.cfm?#session.URLToken#')"><u>I</u>NTEL ENQUIRY</button>		   
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">		   
+		 </tr>	
+		 <tr>
+		  <td width="32%" align="center">		   
 			<button name="frm_IntelFreeEnq" id="intelFreeTextButton" 
 			       AccessKey="X"
 				   onClick="fullscreen('/enquiryScreens/intelFreeText/enquiry.cfm?#session.URLToken#')">INTEL FREE TE<u>X</u>T</button>		   
 		  </td>
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">
+		  <td width="2%">&nbsp;</td>
+		  <td width="32%" align="center">
 		   <button name="frm_CrimeBrow" id="crimeBrowserButton"
 			       AccessKey="V"
 				   onClick="fullscreen('/enquiryScreens/crimeBrowser/enquiry.cfm?#session.URLToken#')">CRIME <u>B</u>ROWSER</button>		   	  	
 		  </td>  
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">
+		  <td width="2%">&nbsp;</td>
+		  <td width="32%" align="center">
 		   <button name="frm_FirearmsEnq" id="firearmsEnquiryButton" 
 			       value="" AccessKey="F"
 				   onClick="fullscreen('/enquiryScreens/firearms/enquiry.cfm?#session.URLToken#')"><u>F</u>IREARMS ENQUIRY</button		   
-		  </td>
-		 </tr>	
+		  </td>		 	
+		 </tr>
 		 <tr>
-		  <td width="24%" align="center">		   
+		  <td width="32%" align="center">		   
 			<button name="frm_PropEnq" id="propertyEnquiryButton" 
 			        AccessKey="I" 
 				    onClick="fullscreen('/enquiryScreens/property/enquiry.cfm?#session.URLToken#')">PROPE<u>R</u>TY ENQUIRY</button>		   
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">		   
+		  <td width="2%">&nbsp;</td>
+		  <td width="32%" align="center">		   
 			<button name="frm_BailDiary" id="bailDiaryButton" 
 			       AccessKey="Y"
 				   onClick="fullscreen('/enquiryScreens/bailDiary/enquiry.cfm?#session.URLToken#')">BAIL DAIR<u>Y</u></button>		   
 		  </td>
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">
+		  <td width="2%">&nbsp;</td>
+		  <td width="32%" align="center">
 		   <button name="frm_WarningEnq" id="warningEnquiryButton"
 			       AccessKey="G"
 				   onClick="fullscreen('/enquiryScreens/warning/enquiry.cfm?#session.URLToken#')">WARNIN<u>G</u> ENQUIRY</button>		    	
 		  </td>  
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">
-		  	&nbsp;		   
-		  </td>
 		 </tr>
 		 <tr>
-		  <td width="24%" align="center">		 
+		  <td width="32%" align="center">		 
 		   <cfif session.isBailCondsUser>  
 			<button name="frm_BailConds" id="bailConditionsButton" 
 			        AccessKey="I" 
@@ -410,8 +407,8 @@ Revisions   :
 		   <cfelse>
 		   &nbsp;
 		   </cfif>		   
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">	
+		  <td width="2%">&nbsp;</td>
+		  <td width="32%" align="center">	
 		  	<cfif (   session.user.getDepartment() IS "Infrastructure" OR 
 			  	     session.user.getDepartment() IS "Public Contact" OR 
 					 session.user.getDepartment() IS "ES ICT" OR
@@ -424,8 +421,8 @@ Revisions   :
 			&nbsp;
 			</cfif>		   
 		  </td>
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">
+		  <td width="2%">&nbsp;</td>
+		  <td width="32%" align="center">
 		   <cfif Session.isNameUpdater IS "YES">   	
 		   <button name="frm_NamexUpdate" id="namexUpdateButton"
 			       AccessKey="G"
@@ -434,14 +431,10 @@ Revisions   :
 		   &nbsp;
 		   </cfif>
 		  </td>  
-		  <td width="1%">&nbsp;</td>
-		  <td width="24%" align="center">
-		  	&nbsp;		   
-		  </td>
 		 </tr>	
 		 			 		 	  		
 		 <tr>
-		  <td colspan="7" align="center">
+		  <td colspan="5" align="center">
 		   <button name="frm_UserNotes" id="userNotesButton"
 			       AccessKey="G"
 				   onClick="fullscreen('/help/Handout - GENIE User Notes.doc')">GENIE USER NOTES</button>			   	   

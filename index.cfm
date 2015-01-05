@@ -216,55 +216,66 @@ Revisions   :
 <br>
 
 <cfif AUTH_USER IS "westmerpolice01\n_bla003" OR AUTH_USER IS "westmerpolice01\n_bla005" OR AUTH_USER IS "westmerpolice01\p_pra002" OR AUTH_USER IS "westmerpolice01\m_wil012">
- <div align="center" style="font-weight:bold;">
-	Genie Service Version: Started @ #application.genieService.getDateServiceStarted()#,
-	Forms Service Version: Started @ #application.formService.getDateServiceStarted()#<br>
-	Server:#ListGetAt(CreateObject("java", "java.net.InetAddress").getLocalHost(),1,"/")#, Environment: #application.env#, Warehouse: #application.warehouseDSN#<br>
-	<a href="#SCRIPT_NAME#?#QUERY_STRING#&resetApplicationScope=YES&#session.URLToken#">Reset Application Scope</a> | <a href="#ListLast(SCRIPT_NAME,"/")#?#QUERY_STRING#&resetSessionScope=YES&#session.URLToken#">Reset Session Scope</a><br>
-	<a href="addSystemMessage.cfm?#session.UrlToken#" target="_blank">Add A System Message</a> 
-	<form action="#ListLast(SCRIPT_NAME,"/")#" method="post">
-		<b>Impersonate User</b>: <input type="text" name="impersonate" value="" size="10"> (WM format x_xxx001 WP format 2300xxxx(ss) Leave blank and click GO to reset to you)
-		<input type="hidden" name="resetSessionScope" value="YES">
-		<input type="submit" name="btnSubmit" value="GO">
-	</form>
+<div id="adminPane" class="ui-accordion searchPane" initOpen="false">	
+   <div class="ui-accordion-header ui-state-default searchPaneHeader"><span class="toggler">>></span> Admin Functions <span class="dataEntered"></span></div>
+	  <div class="ui-widget-content ui-accordion-content searchPaneContent" style="display:none" align="center">
+		 <br>
+			Genie Service Started @ <b>#application.genieService.getDateServiceStarted()#</b>,			
+			Server: <b>#ListGetAt(CreateObject("java", "java.net.InetAddress").getLocalHost(),1,"/")#</b>, Environment: <b>#application.env#</b>, Warehouse: <b>#application.warehouseDSN#</b><br>
+			<a href="#SCRIPT_NAME#?#QUERY_STRING#&resetApplicationScope=YES&#session.URLToken#" class="adminLink">Reset Application Scope</a> 
+			| <a href="#ListLast(SCRIPT_NAME,"/")#?#QUERY_STRING#&resetSessionScope=YES&#session.URLToken#" class="adminLink">Reset Session Scope</a>
+			| <a href="addSystemMessage.cfm?#session.UrlToken#" target="_blank" class="adminLink">Add A System Message</a>
+			| <a href="#SCRIPT_NAME#?&stopAccess=YES&#session.URLToken#" class="adminLink">Stop User Access</a> <br><Br>
+			<form action="#ListLast(SCRIPT_NAME,"/")#" method="post">
+				<b>Impersonate User</b>: <input type="text" name="impersonate" value="" size="10"> (WM format x_xxx001 WP format 2300xxxx(ss) Leave blank and click GO to reset to you)
+				<input type="hidden" name="resetSessionScope" value="YES">
+				<input type="submit" name="btnSubmit" value="GO">
+			</form>		
+		<br>
+	  </div>
+  </div>
 </div>
 <br>
 </cfif>
 
 <table width="100%">
 <tr>
- <td width="40%" valign="top" align="center">
+ <td width="35%" valign="top" align="center">
   <div align="center">
    <img src="/images/genie_bat.jpg" border="0" alt="GENIE Logo" onClick="fullscreen('/genie/code/index.cfm?#session.URLToken#','genie_window')"> 
   </div>
     <br>
-	<div style="font-size:120%; font-weight:bold;" class="ui-state-highlight" id="data_prot_message">
+	<div class="ui-state-highlight" id="data_prot_message">
 	 <div align="center">	 
+	 <b>
 	   Access to police systems is only permitted for official duties and in accordance with the Data Protection Act 1998, other associated legislation and Force Policies and Procedures.
 	 <br><br>
 	   Individuals are only authorised to access, browse, use or disclose personal data in the course of their official duties and for policing purposes only.  
 	 <br><br>
-	   Any improper use may leave you liable to criminal or misconduct proceedings	
+	   Any improper use may leave you liable to criminal or misconduct proceedings
+	 </b>  	
 	 </div>
 	</div>
 	
 	<div id="post_message" style="visibility:hidden;">
 	
-	<div align="center">
-
-	<input type="button" style="font-size:140%; font-weight:bold;" value="CLICK HERE TO LAUNCH GENIE (G)"
-			onClick="fullscreen('mainMenu.cfm?#session.URLToken#','genieMainMenu')" AccessKey="G">
-	<br>
-	</div>
+		<div align="center">
 	
-	<div class="ui-state-highlight">
-	<b>Every effort has been made to ensure that GENIE data is accurate and complete.  However, users are reminded that the relevant source systems remain the definitive record on which to base operational decisions.
-	<Br><br>
-	In the event that you identify data on GENIE that you believe to be inaccurate, you should contact the ICT Service Desk and report the matter on x5800.
-	</b>
-	<br><br>
-	<b>To report any application errors please ring the ICT Service Desk on x5800 or <a href="mailto:helpdesk.imtd.hq?Subject=GENIE">click here to email</a> the ICT Service Desk</b>
-    </div>
+		<input type="button" style="font-size:130%; font-weight:bold;" value="CLICK HERE TO LAUNCH GENIE (G)"
+				onClick="fullscreen('mainMenu.cfm?#session.URLToken#','genieMainMenu')" AccessKey="G">
+		<br><br>
+		</div>
+		
+		<div class="ui-state-highlight">
+		<b>Every effort has been made to ensure that GENIE data is accurate and complete.  However, users are reminded that the relevant source systems remain the definitive record on which to base operational decisions.
+		<Br><br>
+		In the event that you identify data on GENIE that you believe to be inaccurate, you should contact the ICT Service Desk and report the matter on x5800.
+		</b>
+		<br><br>
+		<b>To report any application errors please ring the ICT Service Desk on x5800 or <a href="mailto:helpdesk.imtd.hq?Subject=GENIE">click here to email</a> the ICT Service Desk</b>
+	    </div>
+	
+	</div>
 	
  </td>
  <td valign="top" align="center">
