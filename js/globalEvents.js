@@ -905,8 +905,7 @@ $(document).on('click','.clearEnquiryForm',
 		)
 		$('form.enquiryForm input[type=checkbox]').each(
 			function(){
-				var attr = $(this).attr('noClear');
-				alert($(this).attr('id') + ': '+$(this).attr('noClear'))
+				var attr = $(this).attr('noClear');				
 				// For some browsers, `attr` is undefined; for others,
 				// `attr` is false.  Check for both.
 				if (typeof attr == typeof undefined || attr == false) {
