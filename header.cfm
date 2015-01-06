@@ -116,6 +116,7 @@ Revisions        :
 			<input type="hidden" id="genieCurrentUserIdWMP" value="#session.user.getUSERID()#">
 			<input type="hidden" id="genieCurrentUserName" value="#session.user.getFullName()#">
 			<input type="hidden" id="genieCurrentUserCollar" value="#session.user.getCollar()#">	
+			<input type="hidden" id="dpaClear" value="#session.dpaClear#">	
 			<input type="hidden" id="genieUserMyFontSize" value="#session.userSettings.fontSize#">			
 		</td>
 	</tr>

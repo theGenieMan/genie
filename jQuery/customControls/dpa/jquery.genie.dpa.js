@@ -1,4 +1,4 @@
-
+/* rc1 reason codes reasonCodes: ['ONGOING INCIDENT','ENCOUNTER - General Person Enquiry','ENCOUNTER - Stop Search','ENCOUNTER - Anti-social behaviour','VULNERABLE PERSON - Domestic','VULNERABLE PERSON - Child Incident','VULNERABLE PERSON - Other','ROAD TRAFFIC - Driver Stop (S163)','ROAD TRAFFIC - Collision','ROAD TRAFFIC - Drink Drive','ROAD TRAFFIC - Vehicle Related Enquiries','STREET PROCESS DISPOSAL','POST CUSTODY - Bail Enquiries','POST CUSTODY - Warrant','CUSTODY','INVESTIGATION ENQUIRY','INTELLIGENCE ENQUIRY','OFFENCE ENQUIRY','PROPERTY ENQUIRY','OTHER'], */
 
 	// jquery.genie.personSearch widget
 	// allows users to search and select west mercia and warwickshire police genie system 
@@ -12,7 +12,7 @@
 			width:625,
 			height:250,
 			position: 'center',
-			reasonCodes: ['ONGOING INCIDENT','ENCOUNTER - General Person Enquiry','ENCOUNTER - Stop Search','ENCOUNTER - Anti-social behaviour','VULNERABLE PERSON - Domestic','VULNERABLE PERSON - Child Incident','VULNERABLE PERSON - Other','ROAD TRAFFIC - Driver Stop (S163)','ROAD TRAFFIC - Collision','ROAD TRAFFIC - Drink Drive','ROAD TRAFFIC - Vehicle Related Enquiries','STREET PROCESS DISPOSAL','POST CUSTODY - Bail Enquiries','POST CUSTODY - Warrant','CUSTODY','INVESTIGATION ENQUIRY','INTELLIGENCE ENQUIRY','OFFENCE ENQUIRY','PROPERTY ENQUIRY','OTHER'],
+			reasonCodes: ['TRANSACTION LOG AND OTHER AUDIT CHECKS','VEHICLE AND/OR PERSON STOPPED','MOVING VEHICLE','ABANDONED OR PARKED AND UNATTENDED VEHICLE','VEHICLES INVOLVED IN ROAD ACCIDENT','SUBJECT OF PROCESS OR INVESTIGATION','ADMINISTRATION - FOR NON-OPERATIONAL MATTERS','CHILD ACCESS ENQUIRIES','ON BEHALF OF OTHER AUTHORISED AGENCY','UPDATE/CONFIRM/BROADCAST','DRIVER STOP (S163)'],			
 			ethnicCodes: ['W1-White British','W2-Irish','W9-Any Other White','A1-Indian','A2-Pakistani','A3-Bangladeshi','A9-Any Other Asian','B1-Caribbean','B2-African','B9-Any Other Black','M1-White and Black Caribbean','M2-White and Black African','M3-White and Asian','M9-Any Other Mixed','O1-Chinese','O9-Any other Ethnic','NS-Not Stated'],
 			requestById: 'dpaRequestFor',
 			reasonCodeTxt: 'dpaReasonCodeTxt',
@@ -148,7 +148,7 @@
 			change: function(e){
 					var reasonCode=$('#'+e.target.id).val();
 					this.dpaReasonSelect.val(reasonCode);								
-					if (reasonCode=='7' && this.options.enquiryScreen == 'Person'){
+					if (reasonCode=='10' && this.options.enquiryScreen == 'Person'){
 						this.dpaEthnicSelect.show();
 					}
 					else{
@@ -161,7 +161,7 @@
 			change: function(e){					
 					var reasonCode=$('#'+e.target.id).val();
 					this.dpaReasonTxt.val(reasonCode);					
-					if (reasonCode=='7' && this.options.enquiryScreen == 'Person'){
+					if (reasonCode=='10' && this.options.enquiryScreen == 'Person'){
 						this.dpaEthnicSelect.show();
 					}
 					else{
@@ -217,6 +217,16 @@
 			$(this.element).dialog('close');		
 		},
 		
+		// function that allows dpa data to be set programatially
+		// requires an array an array of key/value pairs 
+		// key being id of input to be set and the value to set it to
+		setDPAData: function(optionsToSet){						
+			for (var i = 0; i < optionsToSet.length; i++) {			
+				this.element.find('#'+optionsToSet[i].key).val(optionsToSet[i].value).change();	    
+			}						
+			this.element.find('#hrSearchButton').trigger('click');
+		},
+		
 		show: function() {
 		// check if it's already a dialog box
 		// if it is just show it, if not create it
@@ -235,11 +245,15 @@
 						title: 'Genie - DPA',
 						open: function(event, ui){
 							thisDialog.find('#dpaError').hide();
+							if ( ! options.alwaysClear && thisDialog.find('#'+options.reasonCodeTxt).val().length > 0){
+								$("#dpaUpdateButton").focus();
+							}
 						},
 						close: function(event, ui){																	    										               
 																																													
 						},
-						buttons: [ { text: "Update", 
+						buttons: [ { text: "Update",
+						             id: "dpaUpdateButton",
 									 click: function() {
 									 	var reasonCode=thisDialog.find('#'+options.reasonCodeTxt).val();
 										var reasonText=thisDialog.find('#'+options.reasonText).val();
@@ -252,7 +266,7 @@
 										
 										if ((reasonCode.length == 0 || reasonText.length == 0 || requestFor.length==0)
 										    ||
-											(reasonCode==6 && ethnicCode.length==0 && options.enquiryScreen=='Person')
+											(reasonCode==10 && ethnicCode.length==0 && options.enquiryScreen=='Person')
 										   ){
 									 	    thisDialog.find('#dpaError').show();
 										    return false; 

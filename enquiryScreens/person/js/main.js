@@ -7,12 +7,14 @@ $(document).ready(function() {
 
 		// create results required
 		var $resultsTabs=$( "#resultsTabs" ).tabs();
-	
+		var dpaClear=($('#dpaClear').val()==='true');
+		
 		var $dpaBox=$('#dpa').dpa({
 					requestFor:{
 						initialValue:'',
 					},
 					enquiryScreen:'Person',
+					alwaysClear:dpaClear,
 					dpaUpdated: function(e,data){
 							// update the dpa boxes as per the values entered.
 							$('#reasonCode').val(data.reasonCode)
@@ -36,6 +38,6 @@ $(document).ready(function() {
 							
 					}
 					
-			})		
-	
+			});
+					
 });

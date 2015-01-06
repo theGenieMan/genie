@@ -57,7 +57,7 @@
 	<cfset Application.sCustodyTimespan=CreateTimeSpan(application.timespanCustodyDay,application.timespanCustodyHour,application.timespanCustodyMin,application.timespanCustodySec)>
     
     <!--- application vars that are the same regardless of environment --->
-    <cfset Application.Version="4.0 RC1">
+    <cfset Application.Version="4.0 RC1.1">
 	<cfset Application.dateStarted=now()>
 	<cfset Application.lis_Months="JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC">
 	<cfset Application.lis_MonthNos="01,02,03,04,05,06,07,08,09,10,11,12">
@@ -198,6 +198,10 @@
 
   <cfset var inet_address = CreateObject("java", "java.net.InetAddress")>   
   <cfset var lastSession = "">
+    
+  <cfif not isDefined('session.dpaClear')>
+  	  <cfset onSessionStart()>
+  </cfif>
   
   <cfif isDefined('resetApp') or isDefined('resetBoth')>
   	  <cfset onApplicationStart()>
@@ -485,6 +489,15 @@
 	        <cfset session.isOCC=false>
 	  </cfif>	
 	  
+	  <cfif isDefined('application.dpaExceptions')>
+		  <cfif ListContains(application.dpaExceptions,session.user.getDUTY(),",") GT 0>
+		  	  <cfset session.dpaClear=false>
+		  <cfelse>
+		  	  <cfset session.dpaClear=true>
+	  	  </cfif>
+	  <cfelse>
+	  	<cfset session.dpaClear=true>
+  	  </cfif>
 		
         <!--- user is valid so log the user in --->
         <cfset session.lastLoginDate=application.genieUserService.logUserIn(userId=session.user.getUSERID(),fullName=session.loggedInUser)>
