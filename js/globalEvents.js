@@ -12,7 +12,7 @@
 //open bug report window
 $(document).on('click','.bugReport',
 	function(){
-		window.open('bugReport.cfm');	
+		window.open('/bugReport.cfm');	
 	}
 );
 
