@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
 	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.js"></script>
 	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>
+	<script type="text/javascript" src="/jQuery/jquery.typing-0.2.0.min.js"></script>
 	<script type="text/javascript" src="/js/globalVars.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
@@ -102,7 +103,19 @@
 					<td>
 						<input type="text" name="pnc" id="pnc"  displayInPane="PNC Id">	<cfif session.isWMidsUser><b>WM</b></cfif>					
 					</td>					
-		  		</tr>				
+		  		</tr>	
+				<cfif session.isOCC>
+				<!---
+				<tr>
+		  			<td width="15%" valign="top"><label for="pncPaste">PNC Paste</label></td>
+					<td colspan="4">
+						<input type="text" name="pncPaste" id="pncPaste" displayInPane="PNC Paste" size="40"><br>
+						Format: Collar;Location;Reason Code;Ethnic Code;DATA block paste. <Br>
+						Eg. 4854;High St, Kidderminster;1;W1;DATA birch/eileen:19111991
+					</td>										
+		  		</tr>
+				--->	
+				</cfif>			
 		  	</table>			
 		</div>
 	  </div>

@@ -25,7 +25,12 @@ $(document).on('change','#dpaValid',function(){
 
 $(document).on('submit','.enquiryForm',
 	function(e){
-		e.preventDefault();		
+		e.preventDefault();	
+
+		$('.enquiryForm input[type=text]').val (function () {
+		    return this.value.trim().toUpperCase();
+		})		
+			
 		// hide errors
 		$('#errorDiv .error_text').html('')
 		$('#errorDiv').slideUp()

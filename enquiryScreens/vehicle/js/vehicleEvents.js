@@ -16,6 +16,10 @@ $(document).on('submit','.enquiryForm',
 	function(e){
 		e.preventDefault();
 		//showFormDebug();
+
+		$('.enquiryForm input[type=text]').val (function () {
+		    return this.value.trim().toUpperCase();
+		})
 		
 		// hide errors
 		$('#errorDiv .error_text').html('')
