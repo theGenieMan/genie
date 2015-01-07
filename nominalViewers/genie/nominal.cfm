@@ -263,7 +263,7 @@ Revisions   :
 						</div>												
 					</cfif>
 					<cfif Len(currentCustody.getCustody_Ref()) GT 0>						
-						<div class="redWarninbBox">
+						<div class="redWarningBox">
 						   <cfif currentCustody.getSTATUS() IS "C">
                              IN CUSTODY @ #currentCustody.getSTATION()#<Br>#currentCustody.getCUSTODY_REF()#
                            <cfelse>
