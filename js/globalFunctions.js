@@ -9,6 +9,13 @@
 	
 */
 
+// create a string.trim() function for IE8 and below
+if(typeof String.prototype.trim !== 'function') {
+  String.prototype.trim = function() {
+    return this.replace(/^\s+|\s+$/g, ''); 
+  }
+}
+
 // function that will collapse all search panes
 function collapseAllSearchPanes(searchPaneClass){	
 	$('.'+searchPaneClass).each(

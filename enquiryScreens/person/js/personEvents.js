@@ -44,6 +44,50 @@ $(document).on('change','#dpaValid',function(){
 	} 
 })
 
+$(document).on('change','#pncPaste',function(){
+	var pncPaste=$(this).val();
+	// chop up the pnc paste string;
+	var arrPnc=pncPaste.split(';');
+	var pncCollar=arrPnc[0];
+	var pncLocation=arrPnc[1];
+	var pncReason=arrPnc[2];
+	var pncEthnicity=arrPnc[3];
+	var pncData=arrPnc[4];
+	
+	// set the dpa data array up
+	var arrDpaToSet=[];
+	    arrDpaToSet[0]={ key: 'hrSearchText', value: pncCollar};
+		arrDpaToSet[1]={ key: 'dpaReasonText', value: pncLocation};
+		arrDpaToSet[2]={ key: 'dpaReasonCodeTxt', value: pncReason};
+		arrDpaToSet[3]={ key: 'dpaEthnicCodeSelect', value: pncEthnicity};
+		
+	// send the dpa data to be set
+	$('#dpa').dpa('setDPAData',arrDpaToSet);
+	
+	// populate the search fields on the data given by the pnc paste
+	var searchData=pncData.replace('DATA ','').split(':');
+	
+	var nameData=searchData[0];
+	var dobData='';
+	if (searchData.length>1){
+		dobData=searchData[1]
+	}
+	
+	var nameParts = nameData.split('/');
+	var surname = nameParts[0];
+	var forename = nameParts.length>1?nameParts[1]:'';
+	
+	if (dobData.length == 8){
+		$('#dobDay').val(dobData.substr(0,2));
+		$('#dobMonth').val(dobData.substr(2,2));
+		$('#dobYear').val(dobData.substr(4,4));
+	}
+	
+	$('#surname1').val(surname);
+	$('#forename1').val(forename);
+	
+})
+
 /*
  * User has clicked the start search button
  */
@@ -52,6 +96,10 @@ $(document).on('submit','.enquiryForm',
 	function(e){
 		e.preventDefault();
 		//showFormDebug();
+		
+		$('.enquiryForm input[type=text]').val (function () {
+		    return this.value.trim().toUpperCase();
+		})
 		
 		// hide errors
 		$('#errorDiv .error_text').html('')
