@@ -29,7 +29,7 @@ function getFormData(){
 			dobDay:$('#dobDay').val(),
 			dobMonth:$('#dobMonth').val(),
 			dobYear:$('#dobYear').val(),
-			exactDOB:$('#exactDOB').is(':checked')?'Y':'N',
+			exactDOB:$('#exactDOB').is(':checked')?'E':'N',
 			ageFrom:$('#ageFrom').val(),
 			ageTo:$('#ageTo').val(),
 			pob:$('#pob').val(),
