@@ -49,7 +49,7 @@
 			// create the search text box / search button / user results ara
 			this.searchBox= this.element.append('<input type="text" name="'+this.options.searchBox+'" id="'+this.options.searchBox+'" value="'+this.options.initialValue+'" class="'+this.options.searchBoxClass+'" size="'+this.options.searchBoxSize+'">');			
 			this.userResult = $("<span id='"+this.options.resultsDiv+"' style='display:none'></span>").insertAfter(this.element)
-			this.searchButton = $( "<input type='button' value='Find'>")
+			this.searchButton = $( "<input type='button' id='hrSearchButton' value='Find'>")
 			.appendTo( this.element );
 			
 			this.element.append('&nbsp;&nbsp;<span id="helpMessage" class="light">'+this.options.helpMessage+'</span>')			
