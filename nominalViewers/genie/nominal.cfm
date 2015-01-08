@@ -74,7 +74,7 @@ Revisions   :
 
 <html>	
 <head>
-	<title><cfoutput>#nominal.getFULL_NAME()#</cfoutput></title>
+	<title><cfoutput>#nominal.getFULL_NAME()# #nominal.getNOMINAL_REF()#</cfoutput></title>
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/css/genie.css">		
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/qTip2/jquery.qtip.css">		
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/customControls/dpa/css/dpa.css">
