@@ -248,7 +248,6 @@ AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sq
 		
 		<!--- output the document with the tags replaced for links --->
 		#s_Doc#
-		<textarea rows="20" cols="100">#s_Doc#</textarea>
 		
 		<cfif IsDefined ("SocoReports")>
 		
