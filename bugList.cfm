@@ -80,7 +80,7 @@ Revisions   :
 		
 		function updateBugTable(errorXml){
 				
-				var rowHTML='<tr class="row_colour%RowColour% bugRow" id="%bugUrn%"><td valign="top"><a href="%bugUrn%" class="genieBugLink">%bugUrn%</a></td><td valign="top">%bugDate%</td><td valign="top">%bugUser%</td><td valign="top">%bugDetails%</td><td valign="top">%status%</td></tr>'; 
+				var rowHTML='<tr class="row_colour%RowColour% bugRow" id="%bugUrn%"><td valign="top"><a href="%bugUrn%" class="genieBugLink">%bugUrn%</a></td><td valign="top">%bugDate%</td><td valign="top"><a href="mailto:%bugUserEmail%?subject=%bugUrn%" class="fakeLink">%bugUser%</a></td><td valign="top">%bugDetails%</td><td valign="top">%status%</td></tr>'; 
 				
 				var xmlDoc = $.parseXML( errorXml );
 				var $xml = $( xmlDoc );
@@ -93,6 +93,7 @@ Revisions   :
 					thisRowHTML=thisRowHTML.replace(/%bugUrn%/g,$(this).find("bugUrn").text());
 					thisRowHTML=thisRowHTML.replace('%bugDate%',$(this).find("bugDate").text());
 					thisRowHTML=thisRowHTML.replace('%bugUser%',$(this).find("bugBy").text());
+					thisRowHTML=thisRowHTML.replace('%bugUserEmail%',$(this).find("bugByEmail").text());
 					thisRowHTML=thisRowHTML.replace('%bugDetails%',$(this).find("bugDetails").text());
 					thisRowHTML=thisRowHTML.replace('%status%',$(this).find("bugStatus").text());
 					
@@ -199,10 +200,9 @@ Revisions   :
 		<b>Bug URN</b>:	<input type="text" name="bugUrn" id="bugUrn" value="#bugUrn#" size="8">
 		&nbsp;
 		<b>Status</b>:  <select name="bugStatus" id="bugStatus">
-							<option value="" selected>All</option>
-							<option value="OUTSTANDING">Outstanding</option>
-							<option value="REPLICATED">Replicated</option>
-							<option value="RESOLVED">Resolved</option>
+							<option value="">All</option>
+							<option value="OUTSTANDING" selected>Outstanding</option>
+							<option value="FIXED">Fixed</option>							
 						</select>
 		</div>		
 		<input type="button" name="btnBugFilter" id="btnBugFilter" value="Apply Filter">

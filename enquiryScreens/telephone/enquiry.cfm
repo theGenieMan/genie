@@ -19,7 +19,7 @@ Revisions   :
 
 --->
 
-<cfparam name="tel_No" default="0797672%" />
+<cfparam name="tel_No" default="" />
 	
 <html>	
 <head>

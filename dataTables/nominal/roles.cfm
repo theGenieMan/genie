@@ -44,6 +44,16 @@ $(document).ready(function() {
 </script>
 
 <cfset qry_CrimeDetails=Application.genieService.getWestMerciaNominalOffences(nominalRef=nominalRef,sort=sort)>
+
+<!--- create a query of part iv bail roles, to help us decide if we need to colour the
+      role as outstanding or not --->
+<cfquery name="qPart4" dbtype="query">
+	SELECT CRIME_NUMBER
+	FROM   qry_CrimeDetails
+	WHERE  ROLE_CODE='PTIV'
+</cfquery>
+<cfset lisPart4Crimes=ValueList(qPart4.CRIME_NUMBER,',')>      
+
 <div id="dataContainer"> 
   <div class="nominalTitle">
 		ROLES
@@ -80,7 +90,8 @@ $(document).ready(function() {
 					 <cfif Len(DATE_FILED) IS 0
 					   AND DETECTED_FLAG IS "2"
 					   AND ROLE_CODE IS "SUSP"
-					   AND DateDiff("d",CreateDate(2013,1,1),CREATED_DATE) GT 0>
+					   AND DateDiff("d",CreateDate(2013,1,1),CREATED_DATE) GT 0
+					   AND ListFind(lisPart4Crimes,CRIME_NUMBER) IS 0>
 					   	<cfset highlightCrime=true>
 					<cfelse>
 						<cfset highlightCrime=false>
