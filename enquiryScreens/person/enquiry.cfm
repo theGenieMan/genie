@@ -95,14 +95,14 @@
 					<td>
 						<input type="text" name="nominalRef" id="nominalRef" displayInPane="Nominal Ref">
 					</td>
-					<td><label for="cro">CRO</label></td>
-					<td>
-						<input type="text" name="cro" id="cro" displayInPane="CRO"> <cfif session.isWMidsUser><b>WM</b></cfif>						
-					</td>					
 					<td><label for="pnc">PNC ID</label></td>
 					<td>
 						<input type="text" name="pnc" id="pnc"  displayInPane="PNC Id">	<cfif session.isWMidsUser><b>WM</b></cfif>					
-					</td>					
+					</td>							
+					<td><label for="cro">CRO</label></td>
+					<td>
+						<input type="text" name="cro" id="cro" displayInPane="CRO"> <cfif session.isWMidsUser><b>WM</b></cfif>						
+					</td>								
 		  		</tr>	
 				<cfif session.isOCC>
 				<!---
