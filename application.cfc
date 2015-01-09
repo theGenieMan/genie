@@ -203,11 +203,11 @@
   	  <cfset onSessionStart()>
   </cfif>
   
-  <cfif isDefined('resetApp') or isDefined('resetBoth')>
+  <cfif isDefined('resetApplicationScope') or isDefined('resetBoth')>
   	  <cfset onApplicationStart()>
   </cfif>
   
-  <cfif isDefined('resetSession') or isDefined('resetBoth')>
+  <cfif isDefined('resetSessionScope') or isDefined('resetBoth')>
   	  <cfset onSessionStart()>
   </cfif>
   
@@ -507,43 +507,7 @@
          <cfset session.user.setDivision('D')>
         </cfif>
 		
-		<cfif Len(Session.LoggedInUserCollar) GT 0>
-		 <!--- go and find the log access level for this user --->
-		 <cftry>
-        
-		 <cfquery name="qry_LogAccess" datasource="#Application.WarehouseDSN#">
-		 SELECT ACCESS_LEVEL
-		 FROM  browser_owner.NOMINAL_DETAILS
-		 WHERE  USER_ID=<cfqueryparam value="#UCase(session.user.getUserId())#" cfsqltype="cf_sql_varchar">
-		 </cfquery>
-		  
-		 <cfif qry_LogAccess.RecordCount GT 0>
-		  <cfif Len(qry_LogAccess.Access_level) GT 0>
-		   <cfset Session.LoggedInUserLogAccess=qry_LogAccess.Access_Level>
-		  <cfelse>
-		   <cfset Session.LoggedInUserLogAccess=99>  
-		  </cfif>
-		 <cfelse>	
-		  <cfset Session.LoggedInUserLogAccess=99>
-		 </cfif>
-		 <cfcatch type="database">
-		  <cfset Session.LoggedInUserLogAccess=99>
-		 </cfcatch>
-		 </cftry>
-		<cfelse>
-		 <!--- couldn't find a collar no for the user, set log access to 99 --->
-		 <cfset Session.LoggedInUserLogAccess=99>
-		</cfif>
-        
-        <cfif session.user.getUserId() IS "n_bla003">
-         <cfset session.LoggedInUserLogAccess=99>
-        </cfif>                
-        
-        <!--- see if the user uses any of the large fonts --->
-        
-        
-        <cfset Session.usesLargeFont=false>
-   
+		<cfset session.LoggedInUserLogAccess=application.genieUserService.getUserLogAccessLevel(userId=UCase(session.user.getUserId()))>            
     
     <cfset Session.userSettings = application.genieUserService.getUserSettings(userId=session.user.getUserId(),userName=session.user.getFullName())>   
 	<cfset Session.hostName = Left(Replace(inet_address.getByName(REMOTE_ADDR).getHostName(),".","","ALL"),8)> 
