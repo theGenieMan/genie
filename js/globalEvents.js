@@ -703,7 +703,12 @@ $(document).on('change','#actionSelectDropDown',
 
 		// Stop Search Existing Nominal
 		if(actionType=='ssNominal'){
-
+			if (typeof nominalRef === typeof undefined){
+				nominalRef=''
+			}
+			if (typeof nominalName === typeof undefined){
+				nominalName=''
+			}
 			$('body').append('<div id="ssHolder" style="display:none"></div>');
 			// load the paste data into the div
 		    $('#ssHolder').load('/stopSearchNominal.cfm', {
@@ -915,6 +920,65 @@ $(document).on('click','.clearEnquiryForm',
 			}
 		)
 		resetSearchPanes();		
+	}
+)
+
+$(document).on('click','.newEnquiryButton',
+	function(e){		
+		$('form.enquiryForm input[type=text]').each(
+			function(){
+				var resetValue = $(this).attr('resetValue');
+				// For some browsers, `attr` is undefined; for others,
+				// `attr` is false.  Check for both.				
+				if (typeof resetValue !== typeof undefined && resetValue !== false) {
+				    $(this).val(resetValue)
+				}
+				else{
+					$(this).val('')
+				}
+			}
+		);
+		$('form.enquiryForm input[type=hidden][clearForm]').val('');
+		$('form.enquiryForm select').each(
+			function(){
+				
+				var attr = $(this).attr('initSelect');				
+				// For some browsers, `attr` is undefined; for others,
+				// `attr` is false.  Check for both.
+				if (typeof attr == typeof undefined || attr == false) {				
+				    $(':nth-child(1)', this).prop('selected', true);
+				}
+				else
+				{				
+					$('option[value="'+attr+'"]', this).prop('selected', true);			
+				}
+				
+				var multiple = $(this).attr('multiple');
+				if (typeof multiple !== typeof undefined && multiple !== false) {
+					$(this).val('')
+				}
+				
+				var removeOpts = $(this).attr('removeOpts');
+				if (typeof removeOpts !== typeof undefined && removeOpts !== false) {
+					$(this).find('option').remove()
+				}
+
+			}
+		)
+		$('form.enquiryForm input[type=checkbox]').each(
+			function(){
+				var attr = $(this).attr('noClear');				
+				// For some browsers, `attr` is undefined; for others,
+				// `attr` is false.  Check for both.
+				if (typeof attr == typeof undefined || attr == false) {
+				    $(this).prop('checked',false)
+				}
+				
+			}
+		)
+		resetResultPanes();
+		resetSearchPanes();		
+		$('#dpa').dpa('show');
 	}
 )
 
