@@ -879,7 +879,7 @@
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%relationship%'," ","ALL")>					
 			</cfif>
 			
-			<cfif NAME_TYPE IS "P">
+			<cfif NAME_TYPE IS "P" OR NAME_TYPE IS "T">
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalClass%','genieNominal',"ALL")>
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalHRef%','href="#NOMINAL_REF#" uuid="#arguments.uuid#"',"ALL")>
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%checkbox%','<input type="checkbox" id="chk_#NOMINAL_REF#">',"ALL")>
