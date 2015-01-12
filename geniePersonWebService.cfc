@@ -235,6 +235,8 @@
 	  </div>
 	  <div class="genieTooltipHolder">
 	  	%Address%
+		<br>
+		RECORDED: %DateAddressRecorded%
 	  </div>	  
 	</div>
 </div>
@@ -853,6 +855,7 @@
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%AGE%',"","ALL")>
 			</cfif>
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%Address%',ADDRESS,"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%DateAddressRecorded%',DATE_REC,"ALL")>
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%Warnings%',WARNINGS,"ALL")>
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%pTown%',POST_TOWN,"ALL")>
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%pob%',PLACE_OF_BIRTH,"ALL")>
