@@ -11,8 +11,11 @@
 	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
 	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.js"></script>
-	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>
-	<script type="text/javascript" src="/jQuery/jquery.typing-0.2.0.min.js"></script>
+	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>	
+	<script type="text/javascript" src="/jQuery/inputmask/jquery.inputmask.js"></script>
+	<script type="text/javascript" src="/jQuery/inputmask/jquery.inputmask.date.extensions.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.plugin.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.js"></script>
 	<script type="text/javascript" src="/js/globalVars.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
@@ -30,7 +33,9 @@
 	<div id="dpa" style="display:none;"></div>
 	<cfoutput>	
 	
+	<!---
 	<cfinclude template="/actionSelectJS.cfm">
+	--->
 	<cfset headerTitle="PERSON ENQUIRY">	
 	<cfinclude template="/header.cfm">
 	
