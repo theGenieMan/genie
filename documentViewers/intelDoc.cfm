@@ -50,19 +50,19 @@ WHERE LOG_REF=<cfqueryparam value="#logRef#" cfsqltype="cf_sql_integer">
 			<cfset iNextLog=iLogPos+1>
 			
 			<cfif iPrevLog GT 0>
-				<cfset logRef=ListGetAt(ListGetAt(logList,iPrevLog,chr(10)),1,"|","YES")>
+				<cfset pLogRef=ListGetAt(ListGetAt(logList,iPrevLog,chr(10)),1,"|","YES")>
 				<cfset sal=ListGetAt(ListGetAt(logList,iPrevLog,chr(10)),2,"|","YES")>
 				<cfset handcode=ListGetAt(ListGetAt(logList,iPrevLog,chr(10)),3,"|","YES")>	
 				<cfset handguidance=Replace(ListGetAt(ListGetAt(logList,iPrevLog,chr(10)),4,"|","YES"),"~",chr(10),"ALL")>	
-				<cfset prevLogLink='<a href="#logRef#" class="genieIntelLink" searchUUID="#searchUUID#" handCode="#handcode#" handGuide="#handguidance#" inList="Y"><b>&lt;&lt;&lt; Previous Log #logRef#</b></a>'>	
+				<cfset prevLogLink='<a href="#pLogRef#" class="genieIntelLink" searchUUID="#searchUUID#" handCode="#handcode#" handGuide="#handguidance#" inList="Y"><b>&lt;&lt;&lt; Previous Log #pLogRef#</b></a>'>	
 			</cfif>
 			
 			<cfif iNextLog LTE ListLen(logList,chr(10))>				
-				<cfset logRef=ListGetAt(ListGetAt(logList,iNextLog,chr(10)),1,"|","YES")>
+				<cfset nLogRef=ListGetAt(ListGetAt(logList,iNextLog,chr(10)),1,"|","YES")>
 				<cfset sal=ListGetAt(ListGetAt(logList,iNextLog,chr(10)),2,"|","YES")>
 				<cfset handcode=ListGetAt(ListGetAt(logList,iNextLog,chr(10)),3,"|","YES")>
 				<cfset handguidance=ListGetAt(ListGetAt(logList,iNextLog,chr(10)),4,"|","YES")>					
-				<cfset nextLogLink='<a href="#logRef#" class="genieIntelLink" searchUUID="#searchUUID#" handCode="#handcode#" handGuide="#handguidance#" inList="Y"><b>Next Log #logRef# &gt;&gt;&gt;</b></a>'>
+				<cfset nextLogLink='<a href="#nLogRef#" class="genieIntelLink" searchUUID="#searchUUID#" handCode="#handcode#" handGuide="#handguidance#" inList="Y"><b>Next Log #nLogRef# &gt;&gt;&gt;</b></a>'>
 			</cfif>
 		   </cfif>
 		  </cfif>
