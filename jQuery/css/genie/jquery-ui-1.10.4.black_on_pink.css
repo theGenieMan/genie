@@ -818,6 +818,14 @@ body .ui-tooltip {
 	color: #000000;
 	font-weight: bold;
 }
+
+.ui-widget-header-genie {
+	border: 1px solid #000000;
+	background: #FFCCCC;
+	color: #000000;
+	font-weight: bold;
+}
+
 .ui-widget-header a {
 	color: #000000;
 }
@@ -1631,7 +1639,7 @@ button{
 }
 
 .qtip{
-    max-width: 550px;
+    max-width: 350px;
 }
 
 pre.crime {

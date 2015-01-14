@@ -1,24 +1,25 @@
 /*
- * Module      : crimeBrowserEvents.js
+ * Module      : bailConditionsEvent.js
  * 
- * Application : GENIE - Crime Browser Events Javascript
+ * Application : GENIE - Bail Conditions Events Javascript
  * 
  * Author      : Nick Blackham
  * 
- * Date        : 16-Dec-2014
+ * Date        : 15-Dec-2014
  * 
  */
 
-// dpa has been completed so do the search
 /*
+// dpa has been completed so do the search
 $(document).on('change','#dpaValid',function(){
 	// the dataValid box has been updated, this means if the
 	// value of this hidden box is Y we can run the search
 	if($(this).val()=='Y'){
-		doCrimeBrowser();
+		doTestEnquiry();
 		collapseAllSearchPanes('searchPaneHeader')		
 	} 
-}) */
+})
+*/
 
 /*
  * User has clicked the start search button
@@ -27,7 +28,7 @@ $(document).on('change','#dpaValid',function(){
 $(document).on('submit','.enquiryForm',
 	function(e){
 		e.preventDefault();
-
+		
 		$('.enquiryForm input[type=text]').val (function () {
 		    return this.value.trim().toUpperCase();
 		})
@@ -47,7 +48,7 @@ $(document).on('submit','.enquiryForm',
 		
 		$.ajax({
 		 type: 'POST',
-		 url: '/genieOffenceWebService.cfc?method=validateCrimeBrowser',						 
+		 url: '/genieTestWebService.cfc?method=validateTestEnquiry',						 
 		 contentType: "application/json",						 
 		 cache: false,
 		 async: true,
@@ -60,40 +61,27 @@ $(document).on('submit','.enquiryForm',
 				$('#errorDiv').slideDown()
 			}
 			else{
-				// it's a valid enquiry and we are going to get some form of results
-				// run the search 
-				doCrimeBrowser();			
+				doTestEnquiry()			
 			}
 							  					  
 		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
-		 	alert('An error occurred validating the firearms enquiry: '+textStatus+', '+errorThrown)			
+		 	alert('An error occurred validating the inteliigence enquiry: '+textStatus+', '+errorThrown)			
 		 }*/
 		 });
 	}
 )
 
-$(document).on('dblclick','#frmSector',			
-			  function(){
-			  	var sAreaToAdd=$(this).val();
-				addArea(sAreaToAdd)
-			  }); // end sector double click
-			
-$(document).on('dblclick','#frmBeat',
-			  function(){
-			  	var sAreaToAdd=$(this).val();
-				addArea(sAreaToAdd)
-			  }); // end beat double click		
-			
-$(document).on('dblclick','#frmSnt',
-			  function(){
-			  	var sAreaToAdd=$(this).val();
-				addArea(sAreaToAdd)
-			  }	); // end snt double click	
-			
-$(document).on('dblclick','#frmPZ',
-			  function(){
-			  	var sAreaToAdd=$(this).val();
-				addArea(sAreaToAdd)
-			  }); // end snt double click	
-
+$(document).on('change','#pncData',
+	function(){
+		var pncObj=pncPasteRead($(this).val())
+		// set the dpa data array up
+		var arrDpaToSet=[];
+	    arrDpaToSet[0]={ key: 'hrSearchText', value: pncObj.collar};
+		arrDpaToSet[1]={ key: 'dpaReasonText', value: pncObj.detail};
+		arrDpaToSet[2]={ key: 'dpaReasonCodeTxt', value: pncObj.reason};
+		
+		$('#dpa').dpa('setDPAData',arrDpaToSet);
+		
+	}
+)

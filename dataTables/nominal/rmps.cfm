@@ -28,11 +28,13 @@ Revisions   :
 	 <table width="100%" class="genieData ninetypc">
 	   <thead>
 		 <tr>
-		  <th width="15%">RMP URN</th>
-		  <th width="20%">TYPE</th>				  
-		  <th width="15%">GENERATED</th>				  
-		  <th width="15%">DUE</th>				  
-		  <th width="15%">RECEIVED</th>
+		  <th width="10%">RMP URN</th>
+		  <th width="10%">TYPE</th>
+		  <th width="20%">VICTIM(S)</th>
+		  <th width="20%">OFFENDER(S)</th>				  
+		  <th width="10%">GENERATED</th>				  
+		  <th width="10%">DUE</th>				  
+		  <th width="10%">RECEIVED</th>
 		  <th width="10%">COMPLETED</th>
 		  <th>SNT</th>				  					
 		 </tr>
@@ -45,9 +47,38 @@ Revisions   :
 			 <cfelse>
 			 	 <cfset rowUrnStyle="">
 			 </cfif>
+			 <!--- process nominals so we have links available to other nominals on
+			       plans, format of a nominal is. MR. SURNAME, Forename (NominalRef)
+				   regex used to spot (nominalRef) --->			 
 		     <tr class='row_colour#i mod 2#'>
 			     <td valign="top" #rowUrnStyle#><b><a href="#rmp[i].getRMP_URN()#" class="genieRMPLink">#rmp[i].getRMP_URN()#</a></b></td>
 				 <td valign="top"><b>#rmp[i].getRMP_TYPE()#</b></td>
+				 <td valign="top">
+				 	<cfset sVictims=rmp[i].getVICTIMS()>
+					<cfset aVictimMatches=ReMatch("\([0-9]{1,7}[A-Z]\)",sVictims)>
+					<cfset listVicAlreadyMatched=nominalRef>
+				 	<cfloop from="1" to="#arrayLen(aVictimMatches)#" index="iVic">
+					 <cfset sMatchedNomRef=Replace(Replace(aVictimMatches[iVic],"(","","ALL"),")","","ALL")>
+					 <cfif ListFind(listVicAlreadyMatched,sMatchedNomRef,",") IS 0>
+					 	<cfset sVictims=Replace(sVictims,aVictimMatches[iVic],"(<a href='#sMatchedNomRef#' class='genieNominal'>#sMatchedNomRef#</a>)")>
+					    <cfset listVicAlreadyMatched=ListAppend(listVicAlreadyMatched,sMatchedNomRef,",")>
+					 </cfif>		 
+					</cfloop>
+				 	#sVictims#
+				 </td>
+				 <td valign="top">
+				 	<cfset sOffenders=rmp[i].getOFFENDERS()>
+					<cfset aOffenderMatches=ReMatch("\([0-9]{1,7}[A-Z]\)",sOffenders)>
+					<cfset listOffAlreadyMatched=nominalRef>
+				 	<cfloop from="1" to="#arrayLen(aOffenderMatches)#" index="iOff">
+					 <cfset sMatchedNomRef=Replace(Replace(aOffenderMatches[iOff],"(","","ALL"),")","","ALL")>
+					 <cfif ListFind(listOffAlreadyMatched,sMatchedNomRef,",") IS 0>
+					 	<cfset sOffenders=Replace(sOffenders,aOffenderMatches[iOff],"(<a href='#sMatchedNomRef#' class='genieNominal'>#sMatchedNomRef#</a>)")>
+					    <cfset listOffAlreadyMatched=ListAppend(listOffAlreadyMatched,sMatchedNomRef,",")>
+					 </cfif>		 
+					</cfloop>
+				 	#sOffenders#				 	
+				 </td>
 				 <td valign="top">#rmp[i].getDATE_GENERATED_TEXT()#</td>
 				 <td valign="top">#rmp[i].getDATE_DUE_TEXT()#</td>
 				 <td valign="top">#rmp[i].getDATE_RECEIVED_TEXT()#</td>

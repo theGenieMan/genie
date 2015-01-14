@@ -68,6 +68,9 @@ function getFormData(){
 function doCrimeBrowser(){
 
 	var dataToSend=getFormData();
+
+	// clear the interval for checking on search expiry
+	clearInterval(window.globalSearchButtonInterval)
 	
 	initWestMerciaTab();
 	
@@ -105,11 +108,19 @@ function doCrimeBrowser(){
 				$('#wmpPaste').attr('pasteUrl',$('#wmpPaste').attr('pasteUrl')+$('#wmpResultsData').find('#pastePath').val())
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
+			
+			// add this search to the previous search list
+			addPreviousSearch()			
 				  
 		 }
 		 });		
 
 	$('#resultsContainer').show()	
+
+   // set the last enquiry timestamp, so we can work out when to remove the button
+   $('#lastEnquiryTimestamp').val(getTimestamp());
+	
+   window.globalSearchButtonInterval=setInterval(checkButtonExpiry,150000);
 
 }
 
@@ -146,21 +157,21 @@ function initWestMerciaTab(){
 					imSelect.find('option[value=' + mySplitMarkers[i] + ']').attr('selected', true);
 				}
 			}
-			
-			/*
-		  	    
-			for ( var i = 0, l = imSelect.options.length, o; i < l; i++ ) 
+						
+		  	/*    
+			for ( var i = 0, l = imSelect..length, o; i < l; i++ ) 
 			    {   
 				    o = imSelect.options[i];
 			   
 					if ( optionsToSelect.indexOf( o.value ) != -1 )   
 					{     o.selected = true;   } 
 				} 
-		
-		    if (interestMarkers.length > 0)
+		    */
+			
+		    if (imSelect.length > 0)
 			{
-			    document.getElementById('frmHowToUseMarker').value='OR';
-			} */
+			    $('#frmHowToUseMarker').val('OR');
+			} 
 		
 	 }
 

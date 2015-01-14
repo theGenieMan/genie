@@ -202,6 +202,9 @@ Revisions   :
 					<option value="jquery-ui-1.10.4.custom.css"
 							style="color:black;background-color:gray" 
 					        #iif(session.userSettings.stylesheet IS "jquery-ui-1.10.4.custom.css",de('selected'),de(''))#>Default</option>
+					<option value="jquery-ui-1.10.4.retro.css"
+							style="color:white;background-color:navy" 
+					        #iif(session.userSettings.stylesheet IS "jquery-ui-1.10.4.retro.css",de('selected'),de(''))#>Retro Genie V3</option>							
 					<option value="jquery-ui-1.10.4.black_on_white.css" 
 					        style="color:black;background-color:white"
 					        #iif(session.userSettings.stylesheet IS "jquery-ui-1.10.4.black_on_white.css",de('selected'),de(''))#>Black On White</option>

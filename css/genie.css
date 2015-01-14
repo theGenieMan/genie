@@ -16,6 +16,7 @@ label{
 
 div.spacer{
 	height:2px;
+	clear:both;
 }
 
 .searchPaneHeader {
@@ -357,4 +358,16 @@ behavior: url(/csspie/PIE.htc);
 
 ol.bailConditions li {
 	margin-bottom:3px;
+}
+
+.searchButtonsDiv{
+	vertical-align:text-bottom;
+}
+
+.searchButtonsDiv .newEnquiryButton{
+	float:left;	
+}
+
+.searchButtonsDiv .searchButton{
+	float:right;	
 }

@@ -377,7 +377,7 @@ Revisions   :
 		  <td width="32%" align="center">
 		   <button name="frm_FirearmsEnq" id="firearmsEnquiryButton" 
 			       value="" AccessKey="F"
-				   onClick="fullscreen('/enquiryScreens/firearms/enquiry.cfm?#session.URLToken#')"><u>F</u>IREARMS ENQUIRY</button		   
+				   onClick="fullscreen('/enquiryScreens/firearms/enquiry.cfm?#session.URLToken#')"><u>F</u>IREARMS ENQUIRY</button>
 		  </td>		 	
 		 </tr>
 		 <tr>
@@ -432,6 +432,22 @@ Revisions   :
 		   </cfif>
 		  </td>  
 		 </tr>	
+		 <cfif session.isGenieAdmin>
+			<tr>
+			  <td width="32%" align="center">		 			   
+				<button name="frm_Test" id="testEnquiryButton" 
+				        AccessKey="Z" 
+					    onClick="fullscreen('/enquiryScreens/testEnquiry/enquiry.cfm?#session.URLToken#')">TEST ENQUIRY</button>			   		   
+			  <td width="2%">&nbsp;</td>
+			  <td width="32%" align="center">				  	
+				&nbsp;				
+			  </td>
+			  <td width="2%">&nbsp;</td>
+			  <td width="32%" align="center">			   
+			   &nbsp;			   
+			  </td>  
+			 </tr>			 
+		 </cfif>
 		 			 		 	  		
 		 <tr>
 		  <td colspan="5" align="center">

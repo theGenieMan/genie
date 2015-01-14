@@ -18,13 +18,15 @@ Revisions   :
 
 --->
 
+<!---
 <cfif isDefined('resetApplicationScope')> 
  <cfset onApplicationStart()>
  <cfset onSessionStart()>
 </cfif>
 <cfif isDefined('resetSessionScope')>
  <cfset onSessionStart()> 
-</cfif>  
+</cfif>
+--->  
 
 <html>
 <head>

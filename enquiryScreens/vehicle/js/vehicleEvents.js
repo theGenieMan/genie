@@ -1,4 +1,16 @@
+/*
+ * Module      : vehicleEvents.js
+ * 
+ * Application : GENIE - Vehicle Events Javascript
+ * 
+ * Author      : Nick Blackham
+ * 
+ * Date        : 05-Dec-2014
+ * 
+ */
 
+
+/*
 $(document).on('change','#dpaValid',function(){
 	// the dataValid box has been updated, this means if the
 	// value of this hidden box is Y we can run the search	
@@ -7,6 +19,7 @@ $(document).on('change','#dpaValid',function(){
 		collapseAllSearchPanes('searchPaneHeader')		
 	} 
 })
+*/
 
 /*
  * User has clicked the start search button
@@ -50,11 +63,8 @@ $(document).on('submit','.enquiryForm',
 			}
 			else{
 				// it's a valid enquiry and we are going to get some form of results
-				// so show the DPA box, when valid dpa data is put in then the DPA
-				// valid hidden input will be updated to Y, an event watches for this
-				// and runs the search when this occurs 
-				$('#dpa').dpa('show');
-			
+				// run the search 
+				doVehicleEnquiry();			
 			}
 							  					  
 		 }/*,
@@ -151,4 +161,37 @@ $(document).on('click','.wMidsVehicle',
 	
 		
 	});
+
+$(document).on('change','#pncData',
+	function(){
+	 if ($(this).val().length > 0) {
+	 	var pncObj = pncPasteRead($(this).val())
+	 	// set the dpa data array up
+			var arrDpaToSet = [];
+			arrDpaToSet[0] = {
+				key: 'hrSearchText',
+				value: pncObj.collar
+			};
+			arrDpaToSet[1] = {
+				key: 'dpaReasonText',
+				value: pncObj.detail
+			};
+			arrDpaToSet[2] = {
+				key: 'dpaReasonCodeTxt',
+				value: pncObj.reason
+			};
+			console.log(pncObj)
+			
+			if (pncObj.vrm.length > 0) {
+				$('#vrm').val(pncObj.vrm);
+			}
+			
+			$('#dpa').dpa('setDPAData', arrDpaToSet);
+			
+			// add a hidden element to say a pnc data search is ready to go so we can
+			// automatically run it when the dpa is done			
+			$('.enquiryForm').append('<input type="hidden" id="pncDataReady" name="pncDataReady" value="true">');
+		}	
+	}
+)
 			

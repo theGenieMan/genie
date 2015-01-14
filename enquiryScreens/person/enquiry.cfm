@@ -8,14 +8,14 @@
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">		
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/customControls/dpa/css/dpa.css">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/applications/cfc/hr_alliance/hrWidget.css">
-	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
-	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.min.js"></script>
+	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.min.js"></script>
 	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>	
 	<script type="text/javascript" src="/jQuery/inputmask/jquery.inputmask.js"></script>
 	<script type="text/javascript" src="/jQuery/inputmask/jquery.inputmask.date.extensions.js"></script>
-	<script type="text/javascript" src="/jQuery/time/jquery.plugin.js"></script>
-	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.plugin.min.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.min.js"></script>
 	<script type="text/javascript" src="/js/globalVars.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
@@ -55,10 +55,8 @@
 		
 		</div>
 	</div>
-	
-	<input type="button" class="clearEnquiryForm ui-button" value="CLEAR FORM">
-	<form class="enquiryForm" style="margin:2px 0px 0px 0px;">
-	<div id="searchPanes">	    
+		
+	<div id="searchPanes" style="">	    
 	  <div class="ui-state-highlight" align="center">
 		<strong>Either</strong> enter a unique ID number in one of the Reference Number fields   
 		<strong>or</strong> type data into <strong>one or more</strong> of the search fields in the Name / DOB / Additional Sections<br>
@@ -68,11 +66,26 @@
 		</cfif>
 	  </div>
 	  <div class="spacer">&nbsp;</div>
-	  <div align="right">
-	  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
-		<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
-		<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
-	  </div>
+	  <div class="searchButtonsDiv">
+		<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
+	  
+		  <div align="right">		    
+			<span id="prevSearchSpan" style="display:none">
+		  	<b>Previous Searches:</b>
+			<select name="prevSearch" id="prevSearch">
+				
+			</select>
+			&nbsp;
+			|
+			</span>
+			&nbsp;			
+		  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
+			<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
+			<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
+		  </div>
+	  </div>	  
+	  <div class="spacer">&nbsp;</div>
+	  <form class="enquiryForm" style="margin:2px 0px 0px 0px;">
 	  <div id="sourcePane" class="ui-accordion searchPane" initOpen="true">
 	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Data Sources <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent">
@@ -80,10 +93,10 @@
 		  		<tr>
 		  			<td width="15%"><b>Data Sources</b></td>
 					<td>
-						<input type="checkbox" name="wmpData" id="wmpData" displayInPane="WP/WMP" checked disabled noClear='yes'> WP/WMP 
-						<input type="checkbox" name="firearmsData" id="firearmsData" displayInPane="Firearms" checked noClear='yes'> Firearms
+						<input type="checkbox" name="wmpData" id="wmpData" displayInPane="WP/WMP" displayPrevSearch="N" checked disabled noClear='yes'> WP/WMP 
+						<input type="checkbox" name="firearmsData" id="firearmsData" displayInPane="Firearms" displayPrevSearch="N" checked noClear='yes'> Firearms
 						<cfif session.isWMidsUser>
-						<input type="checkbox" name="wMidsData" id="wMidsData" displayInPane="West Mids"> West Mids
+						<input type="checkbox" name="wMidsData" id="wMidsData" displayInPane="West Mids" displayPrevSearch="N"> West Mids
 						</cfif>	
 					</td>										
 		  		</tr>				
@@ -98,15 +111,15 @@
 		  		<tr>
 		  			<td width="15%"><label for="nominalRef">Nominal Ref</label></td>
 					<td>
-						<input type="text" name="nominalRef" id="nominalRef" displayInPane="Nominal Ref">
+						<input type="text" name="nominalRef" id="nominalRef" displayInPane="Nominal Ref" displayPrevSearch="Y">
 					</td>
 					<td><label for="pnc">PNC ID</label></td>
 					<td>
-						<input type="text" name="pnc" id="pnc"  displayInPane="PNC Id">	<cfif session.isWMidsUser><b>WM</b></cfif>					
+						<input type="text" name="pnc" id="pnc"  displayInPane="PNC Id" displayPrevSearch="Y">	<cfif session.isWMidsUser><b>WM</b></cfif>					
 					</td>							
 					<td><label for="cro">CRO</label></td>
 					<td>
-						<input type="text" name="cro" id="cro" displayInPane="CRO"> <cfif session.isWMidsUser><b>WM</b></cfif>						
+						<input type="text" name="cro" id="cro" displayInPane="CRO" displayPrevSearch="Y"> <cfif session.isWMidsUser><b>WM</b></cfif>						
 					</td>								
 		  		</tr>	
 				<cfif session.isOCC>
@@ -133,7 +146,7 @@
 		  		<tr>
 		  			<td width="15%"><label for="searchType">Search Type</label></td>
 					<td width="45%">
-						<select name="searchType" id="searchType" class="mandatory" displayInPane="Search Type">
+						<select name="searchType" id="searchType" class="mandatory" displayInPane="Search Type" displayPrevSearch="N">
 							<option value="Standard">Standard</option>
 							<option value="Wildcard">Wildcard</option>
 						</select>
@@ -154,41 +167,41 @@
 				<tr>
 					<td><label for="surname1">Surname / Maiden Name</label></td>
 					<td>
-						<input type="text" name="surname1" id="surname1" displayInPane="Surname 1">
+						<input type="text" name="surname1" id="surname1" displayInPane="Surname 1" displayPrevSearch="Y" initialFocus="true">
 						&nbsp;
-						<input type="text" name="surname2" id="surname2" displayInPane="Surname 2"> <cfif session.isWMidsUser><b>WM</b></cfif>
+						<input type="text" name="surname2" id="surname2" displayInPane="Surname 2" displayPrevSearch="Y"> <cfif session.isWMidsUser><b>WM</b></cfif>
 					</td>
 				</tr>
 				<tr>
 					<td><label for="forename1">Forename / Nickname</b></td>
 					<td>
-						<input type="text" name="forename1" id="forename1" displayInPane="Forename 1">
+						<input type="text" name="forename1" id="forename1" displayInPane="Forename 1" displayPrevSearch="Y">
 						&nbsp;
-						<input type="text" name="forename2" id="forename2" displayInPane="Forename 2"> <cfif session.isWMidsUser><b>WM</b></cfif>					
+						<input type="text" name="forename2" id="forename2" displayInPane="Forename 2" displayPrevSearch="Y"> <cfif session.isWMidsUser><b>WM</b></cfif>					
 					</td>
 				</tr>
 				<tr>
 					<td><label for="dobDay">DOB</label></td>
 					<td>
-						<input type="text" name="dobDay" id="dobDay" class="input2char" maxlength="2" displayInPane="DOB Day"> / 						
-						<select name="dobMonth" id="dobMonth" displayInPane="DOB Month">
+						<input type="text" name="dobDay" id="dobDay" class="input2char" maxlength="2" displayInPane="DOB Day" displayPrevSearch="Y"> / 						
+						<select name="dobMonth" id="dobMonth" displayInPane="DOB Month" displayPrevSearch="Y">
 						  <option value=""></option>
 						  <cfloop index="str_mon" list="#Application.lis_Months#" delimiters=",">
 							 <option value="#ListGetAt(Application.lis_MonthNos,ListFind(Application.lis_Months,str_Mon,","),",")#">#str_Mon#</option>
 						  </cfloop>							
 						</select> /						
-						<input type="text" name="dobYear" id="dobYear" class="input4char" maxlength="4" displayInPane="DOB Year">
+						<input type="text" name="dobYear" id="dobYear" class="input4char" maxlength="4" displayInPane="DOB Year" displayPrevSearch="Y">
 						&nbsp;&nbsp;
 						<cfif session.isWMidsUser><b>WM</b> | </cfif>
 						<label for="exactDOB">Exact DOB Match?</label>
-						<input type="checkbox" name="exactDOB" id="exactDOB" displayInPane="Exact DOB">
+						<input type="checkbox" name="exactDOB" id="exactDOB" displayInPane="Exact DOB" displayPrevSearch="Y">
 						
 					</td>
 				</tr>
 				<tr id="wMidsOrderTr" style="display:none;">
 					<td><label for="wMidsOrder">West Mids Order</label></td>
 					<td>
-						<select name="wMidsOrder" id="wMidsOrder" displayInPane="West Mids Order">
+						<select name="wMidsOrder" id="wMidsOrder" displayInPane="West Mids Order" displayPrevSearch="N">
 						  <option value="Name">Name</option>
 						  <option value="System">System</option>
 						  <option value="Force">Force</option>						  						
@@ -207,7 +220,7 @@
 		  		<tr>
 		  			<td width="15%"><label for="sex">Sex</label></td>
 					<td>
-						<select name="sex" id="sex" displayInPane="Sex">
+						<select name="sex" id="sex" displayInPane="Sex" displayPrevSearch="Y">
 		     			  <option value="">-- SELECT --</option>
 				 		  <cfloop query="application.qry_Sex">
 				  		   <option value="#rv_low_value#">#RV_MEANING#</option>				 
@@ -216,42 +229,43 @@
 					</td>
 					<td width="15%"><label for="ageFrom">Age</label></td>
 					<td>
-						<input type="text" name="ageFrom" id="ageFrom" class="input2char" displayInPane="Age From">
+						<input type="text" name="ageFrom" id="ageFrom" class="input2char" displayInPane="Age From" displayPrevSearch="Y">
 						-						
-						<input type="text" name="ageTo" id="ageTo" class="input2char" displayInPane="Age To"> <cfif session.isWMidsUser><b>WM</b></cfif>
+						<input type="text" name="ageTo" id="ageTo" class="input2char" displayInPane="Age To" displayPrevSearch="Y"> <cfif session.isWMidsUser><b>WM</b></cfif>
 					</td>					
 					<td width="15%"><label for="pob">Place of Birth</label></td>
 					<td>
-						<input type="text" name="pob" id="pob" displayInPane="Place of Birth">		
+						<input type="text" name="pob" id="pob" displayInPane="Place of Birth" displayPrevSearch="Y">		
 						<cfif session.isWMidsUser>WM</cfif>				
 					</td>					
 		  		</tr>		
 		  		<tr>
 		  			<td><label for="maiden">Maiden Name</label></td>
 					<td>
-						<input type="text" name="maiden" id="maiden" displayInPane="Maiden Name"> <cfif session.isWMidsUser><b>WM</b></cfif>
+						<input type="text" name="maiden" id="maiden" displayInPane="Maiden Name" displayPrevSearch="Y"> <cfif session.isWMidsUser><b>WM</b></cfif>
 					</td>
 					<td><label for="nickname">Nick name</label></td>
 					<td>
-						<input type="text" name="nickname" id="nickname" displayInPane="Nickname">						
+						<input type="text" name="nickname" id="nickname" displayInPane="Nickname" displayPrevSearch="Y">						
 					</td>					
 					<td><label for="pTown">Post Town</label></td>
 					<td>
-						<input type="text" name="pTown" id="pTown" displayInPane="Post Town"> <cfif session.isWMidsUser><b>WM</b></cfif>						
+						<input type="text" name="pTown" id="pTown" displayInPane="Post Town" displayPrevSearch="Y"> <cfif session.isWMidsUser><b>WM</b></cfif>						
 					</td>					
 		  		</tr>							
 		  	</table>			
 		</div>
 	  </div>	  
 	  <div class="spacer">&nbsp;</div>
-	  <div align="right">
-	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button">
+	  <div class="searchButtonsDiv">
+	  	<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
+	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button searchButton">
 	  </div>
     </div>		
 	</form>
 	</cfoutput>
 	<!--- section for results --->
-	<div id="resultsContainer" style="display:none;">
+	<div id="resultsContainer" style="display:none; clear:both">
 		
 		<!---  --->
 		<div id="resultsTabs">
@@ -320,6 +334,8 @@
 	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
 	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
 	<input type="hidden" name="requestForForce" id="requestForForce" value="">
+	<input type="hidden" name="lastEnquiryTimestamp" id="lastEnquiryTimestamp" value="">	
+	<input type="hidden" name="isOCC" id="isOCC" value="#session.isOCC#">
 		
 	<div id="wMidsDialog" style="display:none;">
 		<div id='wmLoadingDiv' style='width:100%' align='center'><h4>Loading, please wait</h4><div class='progressBar'></div></div>

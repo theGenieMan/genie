@@ -8,14 +8,14 @@
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">		
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/customControls/dpa/css/dpa.css">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/applications/cfc/hr_alliance/hrWidget.css">
-	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
-	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.min.js"></script>
+	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.min.js"></script>
 	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>
 	<script type="text/javascript" src="/jQuery/inputmask/jquery.inputmask.js"></script>
 	<script type="text/javascript" src="/jQuery/inputmask/jquery.inputmask.date.extensions.js"></script>
-	<script type="text/javascript" src="/jQuery/time/jquery.plugin.js"></script>
-	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.plugin.min.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.min.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
 	<script type="text/javascript" src="js/firearmsFunctions.js"></script>
@@ -43,18 +43,32 @@
 		
 		</div>
 	</div>
-	<input type="button" class="clearEnquiryForm ui-button" value="CLEAR FORM">
-	<form class="enquiryForm" style="margin:2px 0px 0px 0px;">
+		
 	<div id="searchPanes">	  
 	  <div class="ui-state-highlight" align="center">
 		Enter information into <b>at least one</b> of the search fields below.
 	  </div>
 	  <div class="spacer">&nbsp;</div>
-	  <div align="right">
-	  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
-		<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
-		<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
-	  </div>
+	   <div class="searchButtonsDiv">
+		<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
+	  
+		  <div align="right">		    
+			<span id="prevSearchSpan" style="display:none">
+		  	<b>Previous Searches:</b>
+			<select name="prevSearch" id="prevSearch">
+				
+			</select>
+			&nbsp;
+			|
+			</span>
+			&nbsp;			
+		  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
+			<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
+			<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
+		  </div>
+	   </div>	  
+	   <div class="spacer">&nbsp;</div>
+	  <form class="enquiryForm" style="margin:2px 0px 0px 0px;">
 	  <div id="referencePane" class="ui-accordion searchPane" initOpen="true">
 	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Firearms Enquiry <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent">
@@ -62,27 +76,28 @@
 		  		<tr>
 		  			<td valign="top" width="15%"><label for="certificate_no">Certificate No</label></td>
 					<td  valign="top">
-						<input name="certificate_no" id="certificate_no" displayInPane="Certificate No" size="20">						
+						<input name="certificate_no" id="certificate_no" displayInPane="Certificate No" displayPrevSearch="Y" initialFocus="true" size="20">						
 					</td>															
 		  		</tr>
 				<tr>
 		  			<td valign="top"><label for="serial_no">Serial No</label></td>
 					<td  valign="top">
-					<input name="serial_no" id="serial_no" displayInPane="Serial No" size="20">
+					<input name="serial_no" id="serial_no" displayInPane="Serial No" displayPrevSearch="Y" size="20">
 					</td>															
 		  		</tr>																
 		  	</table>			
 		</div>
 	  </div>	    
 	  <div class="spacer">&nbsp;</div>
-	  <div align="right">
-	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button">
+	  <div class="searchButtonsDiv">
+	  	<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
+	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button searchButton">
 	  </div>
     </div>		
 	</form>
 	</cfoutput>
 	<!--- section for results --->
-	<div id="resultsContainer" style="display:none;">
+	<div id="resultsContainer" style="display:none; clear:both;">
 		
 		<!---  --->
 		<div id="resultsTabs">
@@ -124,6 +139,7 @@
 	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
 	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
 	<input type="hidden" name="requestForForce" id="requestForForce" value="">
+	<input type="hidden" name="lastEnquiryTimestamp" id="lastEnquiryTimestamp" value="">	
 	</cfoutput>
 	
 </body>	

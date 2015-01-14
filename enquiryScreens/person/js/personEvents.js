@@ -1,3 +1,13 @@
+/*
+ * Module      : personEvent.js
+ * 
+ * Application : GENIE - Person Events Javascript
+ * 
+ * Author      : Nick Blackham
+ * 
+ * Date        : 05-Dec-2014
+ * 
+ */
 
 /* search type box change event 
  * all this does is change the help text shown
@@ -35,6 +45,7 @@ $(document).on('click','#wMidsData',
 	}
 );
 
+/*
 $(document).on('change','#dpaValid',function(){
 	// the dataValid box has been updated, this means if the
 	// value of this hidden box is Y we can run the search
@@ -42,51 +53,61 @@ $(document).on('change','#dpaValid',function(){
 		doPersonEnquiry();
 		collapseAllSearchPanes('searchPaneHeader')		
 	} 
-})
+}) */
 
-$(document).on('change','#pncPaste',function(){
-	var pncPaste=$(this).val();
-	// chop up the pnc paste string;
-	var arrPnc=pncPaste.split(';');
-	var pncCollar=arrPnc[0];
-	var pncLocation=arrPnc[1];
-	var pncReason=arrPnc[2];
-	var pncEthnicity=arrPnc[3];
-	var pncData=arrPnc[4];
-	
-	// set the dpa data array up
-	var arrDpaToSet=[];
-	    arrDpaToSet[0]={ key: 'hrSearchText', value: pncCollar};
-		arrDpaToSet[1]={ key: 'dpaReasonText', value: pncLocation};
-		arrDpaToSet[2]={ key: 'dpaReasonCodeTxt', value: pncReason};
-		arrDpaToSet[3]={ key: 'dpaEthnicCodeSelect', value: pncEthnicity};
-		
-	// send the dpa data to be set
-	$('#dpa').dpa('setDPAData',arrDpaToSet);
-	
-	// populate the search fields on the data given by the pnc paste
-	var searchData=pncData.replace('DATA ','').split(':');
-	
-	var nameData=searchData[0];
-	var dobData='';
-	if (searchData.length>1){
-		dobData=searchData[1]
+$(document).on('change','#pncData',
+	function(){
+	 if ($(this).val().length > 0) {
+	 	var pncObj = pncPasteRead($(this).val())
+	 	// set the dpa data array up
+			var arrDpaToSet = [];
+			arrDpaToSet[0] = {
+				key: 'hrSearchText',
+				value: pncObj.collar
+			};
+			arrDpaToSet[1] = {
+				key: 'dpaReasonText',
+				value: pncObj.detail
+			};
+			arrDpaToSet[2] = {
+				key: 'dpaReasonCodeTxt',
+				value: pncObj.reason
+			};
+			console.log(pncObj)
+			
+			if (pncObj.surname1.length > 0) {
+				$('#surname1').val(pncObj.surname1);
+			}
+			
+			if (pncObj.forename1.length > 0) {
+				$('#forename1').val(pncObj.forename1);
+			}
+			
+			if (pncObj.forename2.length > 0) {
+				$('#forename2').val(pncObj.forename2);
+			}
+			
+			if (pncObj.dobDay.length > 0) {
+				$('#dobDay').val(pncObj.dobDay);
+			}
+			
+			if (pncObj.dobMonth.length > 0) {
+				$('#dobMonth').val(pncObj.dobMonth);
+			}
+			
+			if (pncObj.dobYear.length > 0) {
+				$('#dobYear').val(pncObj.dobYear);
+			}
+			
+			$('#dpa').dpa('setDPAData', arrDpaToSet);
+			
+			// add a hidden element to say a pnc data search is ready to go so we can
+			// automatically run it when the dpa is done
+			
+			$('.enquiryForm').append('<input type="hidden" id="pncDataReady" name="pncDataReady" value="true">');
+		}	
 	}
-	
-	var nameParts = nameData.split('/');
-	var surname = nameParts[0];
-	var forename = nameParts.length>1?nameParts[1]:'';
-	
-	if (dobData.length == 8){
-		$('#dobDay').val(dobData.substr(0,2));
-		$('#dobMonth').val(dobData.substr(2,2));
-		$('#dobYear').val(dobData.substr(4,4));
-	}
-	
-	$('#surname1').val(surname);
-	$('#forename1').val(forename);
-	
-})
+)
 
 /*
  * User has clicked the start search button
@@ -130,11 +151,8 @@ $(document).on('submit','.enquiryForm',
 			}
 			else{
 				// it's a valid enquiry and we are going to get some form of results
-				// so show the DPA box, when valid dpa data is put in then the DPA
-				// valid hidden input will be updated to Y, an event watches for this
-				// and runs the search when this occurs 
-				$('#dpa').dpa('show');
-			
+				// run the search 
+				doPersonEnquiry();			
 			}
 							  					  
 		 }/*,

@@ -9,7 +9,7 @@
 		options:
 		{
 			debug:false,	
-			width:625,
+			width:645,
 			height:250,
 			position: 'center',
 			reasonCodes: ['TRANSACTION LOG AND OTHER AUDIT CHECKS','VEHICLE AND/OR PERSON STOPPED','MOVING VEHICLE','ABANDONED OR PARKED AND UNATTENDED VEHICLE','VEHICLES INVOLVED IN ROAD ACCIDENT','SUBJECT OF PROCESS OR INVESTIGATION','ADMINISTRATION - FOR NON-OPERATIONAL MATTERS','CHILD ACCESS ENQUIRIES','ON BEHALF OF OTHER AUTHORISED AGENCY','UPDATE/CONFIRM/BROADCAST','DRIVER STOP (S163)'],			
@@ -37,7 +37,8 @@
 			urlToOpen:'',
 			howToOpen:'',	
 			enquiryScreen:'',
-			alwaysClear:true				
+			alwaysClear:true,
+			showPNCPaste:false				
 		},
 		
 		// the constructor
@@ -60,7 +61,10 @@
 				dpaDivHtml += '    <option value="'+this.options.ethnicCodes[i].split('-')[0]+'">'+this.options.ethnicCodes[i]+'</option>';
 			}
 			dpaDivHtml += '      </select></span>';
-			dpaDivHtml += '<br><label for="'+this.options.reasonText+'">Details:</label><input type="text" name="'+this.options.reasonText+'" id="'+this.options.reasonText+'" class="mandatory" size="45" value="'+this.options.reasonTextValue+'">'			
+			dpaDivHtml += '<br><label for="'+this.options.reasonText+'">Details:</label><input type="text" name="'+this.options.reasonText+'" id="'+this.options.reasonText+'" class="mandatory" size="45" value="'+this.options.reasonTextValue+'">'
+			if (this.options.showPNCPaste){
+			dpaDivHtml += '<br><label for="pncPaste">PNC Paste:</label><textarea name="pncData" id="pncData" rows="2" cols="80"></textarea>'	
+			}			
 			dpaDivHtml += '<br><br><div id="dpaError" class="error" style="display:none">You must complete all DPA boxes</div>'			
 			dpaDivHtml += '</div>';
 			
@@ -79,13 +83,17 @@
 			*/
 			this.element.append(this.dpaBox);
 			
+			dpaReasonTxt=this.dpaReasonTxt;
 			this.element.find('#dpaRequestForSearch').hrQuickSearch(
 				{
 					returnUserId: this.options.requestFor.requestForUserId,
 					returnFullName: this.options.requestFor.requestForUserName,			
 					returnCollarNo: this.options.requestFor.requestForCollar,
 					returnForce: this.options.requestFor.requestForForce,		
-					initialValue: this.element.find('#dpaRequestForSearch').attr('initialValue')
+					initialValue: this.element.find('#dpaRequestForSearch').attr('initialValue'),
+					userSelected: function(e,data){
+						dpaReasonTxt.focus()
+					}
 				}
 			);
 			
@@ -224,7 +232,7 @@
 			for (var i = 0; i < optionsToSet.length; i++) {			
 				this.element.find('#'+optionsToSet[i].key).val(optionsToSet[i].value).change();	    
 			}						
-			this.element.find('#hrSearchButton').trigger('click');
+			this.element.find('#hrSearchButton').trigger('click');			
 		},
 		
 		show: function() {
@@ -235,19 +243,36 @@
 			var options=this.options;
 			var self=this;
 			if ($(this.element).hasClass('ui-dialog-content')) {
-			    $(this.element).dialog('open');
+				    $(this.element).dialog('open');
 			} else {
 			    $(this.element).dialog({
 						modal: true,
 						position: 'center',
 						height: this.options.height,
 						width: this.options.width,
+						closeOnEscape:false,
 						title: 'Genie - DPA',
 						open: function(event, ui){
+							
+							$(".ui-dialog-titlebar-close", this.parentNode).hide();
 							thisDialog.find('#dpaError').hide();
 							if ( ! options.alwaysClear && thisDialog.find('#'+options.reasonCodeTxt).val().length > 0){
 								$("#dpaUpdateButton").focus();
 							}
+							// bind a CTRL + U keypress to the update button
+							$(document).bind('keypress.ctrlU', function(event) {								
+							    if( event.which === 21 && event.ctrlKey ) {
+									if ( $('#pncData').length>0){
+										$('#pncData').blur();
+									}
+							    	$("#dpaUpdateButton").trigger('click');    
+							    }
+							});
+							// if we have the pnc data field ensure it's opened blank
+							if ( $('#pncData').length>0){
+									$('#pncData').val('');
+							}
+							
 						},
 						close: function(event, ui){																	    										               
 																																													
@@ -293,7 +318,8 @@
 											}
 											
 											// update the given destinations and hide the DPA dialog
-											thisDialog.find('#dpaError').hide();										
+											thisDialog.find('#dpaError').hide();	
+											$(document).unbind('keypress.ctrlU')									
 											self.hide();
 										}
 									 } 

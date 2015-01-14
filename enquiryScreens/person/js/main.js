@@ -1,20 +1,38 @@
+/*
+ * Module      : main.js
+ * 
+ * Application : GENIE - Person Enquiry
+ * 
+ * Author      : Nick Blackham
+ * 
+ * Date        : 08-Dec-2014
+ * 
+ */
+
 $(document).ready(function() {  		  
 
 		$.ajaxSetup ({
 		    // Disable caching of AJAX responses
 		    cache: false
 		});
+		
+		if (!window.console) console = {log: function() {}};
+		
+		window.globalSearchButtonInterval='';
+		window.globalPreviousSearchArray=[];
 
 		// create results required
 		var $resultsTabs=$( "#resultsTabs" ).tabs();
 		var dpaClear=($('#dpaClear').val()==='true');
+		var isOCC=$('#isOCC').val();
 		
-		var $dpaBox=$('#dpa').dpa({
+		$('#dpa').dpa({
 					requestFor:{
 						initialValue:'',
-					},
+					},					
 					enquiryScreen:'Person',
 					alwaysClear:dpaClear,
+					showPNCPaste:isOCC,
 					dpaUpdated: function(e,data){
 							// update the dpa boxes as per the values entered.
 							$('#reasonCode').val(data.reasonCode)
@@ -31,13 +49,30 @@ $(document).ready(function() {
 									 cache: false,
 									 async: false,							 
 									 success: function(data, status){							
-											$('#dpaValid').val('Y').change()			  					  
+										$('#startSearch').show();						
+										$('#dpa').dpa('hide');
+										// if there is an initial focus button set then focus it																						
+										if ($('.enquiryForm [initialFocus]').length>0){
+											$('.enquiryForm [initialFocus]').focus()
+										}			  					  
+										// if there is a pnc search ready then trigger the submit of
+										// the enquiryForm
+										if ($('.enquiryForm > #pncDataReady').length>0){
+											$('.enquiryForm').trigger('submit');
+											$('.enquiryForm > #pncDataReady').remove;
+										}
+										// if we have a prevSearch select box with more than one entry in then show that to
+										if ($('#prevSearch').length>0){
+											if($('#prevSearch option').length>1){
+												$('#prevSearchSpan').show()
+											}
+										}
 									 }
 							});								
 							
 							
 					}
 					
-			});
-					
+		});
+		$('#dpa').dpa('show')			
 });

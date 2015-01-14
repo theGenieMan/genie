@@ -60,11 +60,8 @@ $(document).on('submit','.enquiryForm',
 			}
 			else{
 				// it's a valid enquiry and we are going to get some form of results
-				// so show the DPA box, when valid dpa data is put in then the DPA
-				// valid hidden input will be updated to Y, an event watches for this
-				// and runs the search when this occurs 
-				$('#dpa').dpa('show');
-			
+				// run the search 
+				doProcessDecisionEnquiry();			
 			}
 							  					  
 		 }/*,

@@ -42,7 +42,10 @@ $(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
 	thisErrorPackage.ajaxType=settings.type;
 	thisErrorPackage.activeElementId=event.currentTarget.activeElement.id;
 	thisErrorPackage.activeElementHTML=event.currentTarget.activeElement.outerHTML;
-	thisErrorPackage.activeElementValue=event.currentTarget.activeElement.value;
+	thisErrorPackage.activeElementValue='';
+	if ('value' in event.currentTarget.activeElement) {
+		thisErrorPackage.activeElementValue = event.currentTarget.activeElement.value;
+	}
 	
 	// log the error
 	$.ajax({
@@ -1105,3 +1108,12 @@ $(document).on('dblclick','.showSession',
 		});
 }
 );
+
+$(document).on('change','#prevSearch',
+	function(){
+		var searchIndex=$(this).val();
+		if (searchIndex.length > 0) {
+			populateSearchDetails(window.globalPreviousSearchArray[searchIndex])
+		}
+	}
+)

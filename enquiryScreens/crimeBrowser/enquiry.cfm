@@ -29,14 +29,14 @@
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">		
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/customControls/dpa/css/dpa.css">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/applications/cfc/hr_alliance/hrWidget.css">
-	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.min.js"></script>
 	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.js"></script>
 	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>
 	<script type="text/javascript" src="/jQuery/inputmask/jquery.inputmask.js"></script>
 	<script type="text/javascript" src="/jQuery/inputmask/jquery.inputmask.date.extensions.js"></script>
-	<script type="text/javascript" src="/jQuery/time/jquery.plugin.js"></script>
-	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.plugin.min.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.min.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
 	<script type="text/javascript" src="js/crimeBrowserFunctions.js"></script>
@@ -64,44 +64,58 @@
 		
 		</div>
 	</div>
-	<input type="button" class="clearEnquiryForm ui-button" value="CLEAR FORM">
-	<form class="enquiryForm" style="margin:2px 0px 0px 0px;">
+		
 	<div id="searchPanes">	  
 	  <div class="ui-state-highlight" align="center">
 		Date/Time From &amp; To and at least 1 Theme <b>must be completed</b>
 	  </div>
 	  <div class="spacer">&nbsp;</div>
-	  <div align="right">
-	  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
-		<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
-		<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
-	  </div>
+	  <div class="searchButtonsDiv">
+		<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
+	  
+		  <div align="right">		    
+			<span id="prevSearchSpan" style="display:none">
+		  	<b>Previous Searches:</b>
+			<select name="prevSearch" id="prevSearch">
+				
+			</select>
+			&nbsp;
+			|
+			</span>
+			&nbsp;			
+		  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
+			<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
+			<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
+		  </div>
+	  </div>	 
+	  <div class="spacer">&nbsp;</div>
+	  <form class="enquiryForm" style="margin:2px 0px 0px 0px;">
 	  <div id="referencePane" class="ui-accordion searchPane" initOpen="true">
 	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Crime Browser <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent">
 			<table width="98%" align="center">
-		  		<tr>
-		  			<td valign="top" width="15%"><label for="frmDateFrom">Dates</label></td>
-					<td  valign="top">
-						From: <input name="frmDateFrom" id="frmDateFrom" displayInPane="Date From" size="10" datepicker value="#frmDateFrom#" resetValue="#frmDateFrom#">
-						      <input name="frmTimeFrom" id="frmTimeFrom" displayInPane="Time From" size="5" timepicker value="#frmTimeFrom#" resetValue="#frmTimeFrom#">
-						To: <input name="frmDateTo" id="frmDateTo" displayInPane="Date To" size="10" datepicker value="#frmDateTo#" resetValue="#frmDateTo#">
-						    <input name="frmTimeTo" id="frmTimeTo" displayInPane="Time To" size="5" timepicker value="#frmTimeTo#" resetValue="#frmTimeTo#">						
-					</td>															
-		  		</tr>
 				<tr>
-		  			<td valign="top"><label for="serial_no">Date To Use</label></td>
+		  			<td valign="top" width="15%"><label for="serial_no">Date To Use</label></td>
 					<td  valign="top">
-			           <select name="frmDateType" id="frmDateType" displayInPane="Date To Use">        
+			           <select name="frmDateType" id="frmDateType" displayInPane="Date To Use" displayPrevSearch="Y" initialiFocus="true">        
             		       <option value="DATE_CREATED" #iif(frmDateType IS "DATE_CREATED",de('selected'),de(''))#>Date Crime Created</option>
                    		   <option value="DATE_OFFENCE" #iif(frmDateType IS "DATE_OFFENCE",de('selected'),de(''))#>Date Of Offence</option>
                  	   </select>
 					</td>															
-		  		</tr>		
+		  		</tr>					
+		  		<tr>
+		  			<td valign="top"><label for="frmDateFrom">Dates</label></td>
+					<td  valign="top">
+						From: <input name="frmDateFrom" id="frmDateFrom" displayInPane="Date From" displayPrevSearch="Y" size="10" datepicker value="#frmDateFrom#" resetValue="#frmDateFrom#">
+						      <input name="frmTimeFrom" id="frmTimeFrom" displayInPane="Time From" displayPrevSearch="Y" size="5" timepicker value="#frmTimeFrom#" resetValue="#frmTimeFrom#">
+						To: <input name="frmDateTo" id="frmDateTo" displayInPane="Date To" displayPrevSearch="Y" size="10" datepicker value="#frmDateTo#" resetValue="#frmDateTo#">
+						    <input name="frmTimeTo" id="frmTimeTo" displayInPane="Time To" displayPrevSearch="Y" size="5" timepicker value="#frmTimeTo#" resetValue="#frmTimeTo#">						
+					</td>															
+		  		</tr>	
 				<tr>
 		  			<td valign="top"><label for="frmArea">Area</label></td>
 					<td  valign="top">
-			          <input type="text" id="frmArea" name="frmArea" size="20" displayInPane="Area" value="#frmArea#">
+			          <input type="text" id="frmArea" name="frmArea" size="20" displayInPane="Area" displayPrevSearch="Y" value="#frmArea#">
 					    <span id="helpTooltip" style="cursor:hand" title="(Leave blank for Force Wide, C for C TPU, CA for CA Sector, CA01 for a beat. For a list of beats, sectors or snts enter seperated by comma. ie. DA,DD or DA01,DA02. <br>Note you cannot mix Sectors, Beats or SNTS ie DA,DB01,DB02,PAD13 is not possible)"><u>Help</u></span>
 						<br>
 						<select id="frmSector" name="frmSector" multiple="true" size="5">
@@ -205,14 +219,15 @@
 		</div>
 	  </div>	    
 	  <div class="spacer">&nbsp;</div>
-	  <div align="right">
-	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button">
+	  <div class="searchButtonsDiv">
+	  	<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
+	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button searchButton">
 	  </div>
     </div>		
 	</form>
 	</cfoutput>
 	<!--- section for results --->
-	<div id="resultsContainer" style="display:none;">
+	<div id="resultsContainer" style="display:none; clear:both">
 		
 		<!---  --->
 		<div id="resultsTabs">
@@ -254,6 +269,7 @@
 	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
 	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
 	<input type="hidden" name="requestForForce" id="requestForForce" value="">
+	<input type="hidden" name="lastEnquiryTimestamp" id="lastEnquiryTimestamp" value="">	
 	</cfoutput>
 	
 </body>	

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>	
 <html>	
 <head>
-	<title>GENIE - Process Decision Enquiry</title>
+	<title>GENIE - Test Enquiry</title>
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/qTip2/jquery.qtip.css">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/css/genie.css">	
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
@@ -18,13 +18,13 @@
 	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.min.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
-	<script type="text/javascript" src="js/procDecEnquiryFunctions.js"></script>
-	<script type="text/javascript" src="js/procDecEnquiryEvents.js"></script>
-	<script type="text/javascript" src="/jQuery/customControls/dpa/jquery.genie.dpa.js"></script>
+	<script type="text/javascript" src="/jQuery/customControls/dpa/jquery.genie.dpa.js"></script>	
 	<script type="text/javascript" src="/applications/cfc/hr_alliance/hrBean.js"></script>
 	<script type="text/javascript" src="/jQuery/highlight/jquery.highlight.js"></script>
 	<script type="text/javascript" src="/applications/cfc/hr_alliance/jquery.hrQuickSearch.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/testEnquiryFunctions.js"></script>
+	<script type="text/javascript" src="js/testEnquiryEvents.js"></script>
 </head>
 
 <cfset sessionId=createUUID()>
@@ -32,12 +32,8 @@
 	<div id="dpa" style="display:none;"></div>
 	<cfoutput>	
 		
-	<cfset headerTitle="PROCESS DECISION ENQUIRY">	
+	<cfset headerTitle="TEST ENQUIRY">	
 	<cfinclude template="/header.cfm">
-	
-	<div style="padding-top:2px;" align="center">
-	 <a href="/help/procdec_enquiry_info.cfm?#Session.URLToken#" target="_blank">What am I Searching? Click here for information</a>
-	</div>
 	
 	<div id="errorDiv" style="display:none;">
 		<div class="error_title">
@@ -47,12 +43,11 @@
 		
 		</div>
 	</div>
-		
+	<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">	
 	<div id="searchPanes">	  
 	  <div class="ui-state-highlight" align="center">
-		Enter information into <b>at least one</b> of the search fields below.
+		Some highlight text
 	  </div>
-	  <div class="spacer">&nbsp;</div>
 	  <div class="searchButtonsDiv">
 		<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
 	  
@@ -74,68 +69,60 @@
 	  <div class="spacer">&nbsp;</div>
 	  <form class="enquiryForm" style="margin:2px 0px 0px 0px;">
 	  <div id="referencePane" class="ui-accordion searchPane" initOpen="true">
-	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Process Decision Enquiry <span class="dataEntered"></span></div>
+	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Test Enquiry Data <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent">
 			<table width="98%" align="center">
 		  		<tr>
-		  			<td width="15%"><label for="pd_ref">Process No</label></td>
-					<td width="30%">
-						<input name="pd_ref" id="pd_ref" displayInPane="Process No" displayPrevSearch="Y" size="15" value="" initialFocus="true">
+		  			<td valign="top" width="15%"><label for="textField1">Text Field 1</label></td>
+					<td  valign="top" width="30%">
+						<input type="text" name="textField1" id="textField1" displayInPane="Text Field 1" displayPrevSearch="Y" size="12" value="" class="mandatory">						
 					</td>
-					<td width="5%">&nbsp;</td>
-					<td width="15%"><label for="case_org">Case No</label></td>
-					<td>
-						<input name="case_org" id="case_org" displayInPane="Case Org" displayPrevSearch="Y" size="4" value="">
-						/
-						<input name="case_serial" id="case_serial" displayInPane="Case Serial" displayPrevSearch="Y" size="7" value="">
-						/
-						<input name="case_year" id="case_year" displayInPane="Case Year" displayPrevSearch="Y" size="2" value="">
-					</td>										
+					<td colspan="3">&nbsp;</td>															
+		  		</tr>
+				<tr>
+		  			<td valign="top"><label for="textField2">Text Field 2</label></td>
+					<td  valign="top">
+						<input type="text" name="textField2" id="textField2" displayInPane="Text Field 2" displayPrevSearch="Y" size="12" value="" class="mandatory">
+					</td>
+					<td colspan="3">&nbsp;</td>															
 		  		</tr>		
 				<tr>
-					<td><label for="custody_ref">Custody No</label></td>
-					<td>
-						<input name="custody_ref" id="custody_ref" displayInPane="Custody No" displayPrevSearch="Y" size="12" value="">
-					</td>	
-					<td>&nbsp;</td>	
-					<td><label for="decision">Decision</label></td>
-					<td>
-						<input name="decision" id="decision" displayInPane="Decision" displayPrevSearch="Y" size="20" value="">
-					</td>								
-				</tr>	
+		  			<td valign="top"><label for="selectField1">Select Field 1</label></td>
+					<td  valign="top">
+						<select name="selectField1" id="selectField1" displayInPane="Select Field 1" displayPrevSearch="Y" class="mandatory">
+							<option value="Option 1">Option 1</option>
+							<option value="Option 2">Option 2</option>
+							<option value="Option 3">Option 3</option>
+							<option value="Option 4">Option 4</option>
+						</select>
+					</td>
+					<td colspan="3">&nbsp;</td>															
+		  		</tr>			
 				<tr>
-					<td><label for="nominal_ref">Nominal Ref</label></td>
-					<td>
-						<input name="nominal_ref" id="nominal_ref" displayInPane="Nominal Ref" displayPrevSearch="Y" size="10" value="">
-					</td>	
-					<td>&nbsp;</td>	
-					<td><label for="arrest_summons_no">Arrest Summons No</label></td>
-					<td>
-						<input name="arrest_summons_no" id="arrest_summons_no" displayInPane="Arrest Summons No" displayPrevSearch="Y" size="15" value="">
-					</td>								
-				</tr>					
-				<tr>
-					<td><label for="formalisedFrom">Formalised</label></td>
-					<td colspan="4">
-						<b>Between/On</b> 
-						<input name="date_form1" id="date_form1" displayInPane="Formalised Between/On" displayPrevSearch="Y" size="10" value="" datepicker> 
-						<b>And</b> 
-						<input name="date_form2" id="date_form2" displayInPane="Formalised To" displayPrevSearch="Y" size="10" value="" datepicker>
-					</td>										
-				</tr>	
+		  			<td valign="top"><label for="checkField1">Check Field 1</label></td>
+					<td  valign="top">
+						<input type="checkbox" name="checkField1" id="checkField2" displayInPane="check Field 1" displayPrevSearch="Y" value="Check">							
+					</td>
+					<td colspan="3">&nbsp;</td>															
+		  		</tr>																				
 		  	</table>			
 		</div>
 	  </div>	    
 	  <div class="spacer">&nbsp;</div>
-	  <div class="searchButtonsDiv">
-	  	<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
-	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button searchButton">
+	  <div>
+	  	<table width="100%">
+	  		<tr>
+	  			<td width="50%" align="left"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY"></td>
+				<td width="50%" align="right"><input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button"></td>
+	  		</tr>
+	  	</table>	  	
 	  </div>
+	  </form>
     </div>		
-	</form>
+	
 	</cfoutput>
 	<!--- section for results --->
-	<div id="resultsContainer" style="display:none; clear:both;">
+	<div id="resultsContainer" style="display:none;">
 		
 		<!---  --->
 		<div id="resultsTabs">
@@ -150,7 +137,7 @@
 			<div id="wmpResults" style='display:none;'>
 			   	<div id="wmpResultsButtons" class="genieResultButtons">			   					   		
 					<input type="button" id="wmpPrint" name="wmpPrint" class="printButton" value="Print (P)" accesskey="P" 
-					       printDiv="wmpResults" printTitle="GENIE Custody Enquiry Results" printUser="#session.user.getFullName()# - #sessionId#">
+					       printDiv="wmpResults" printTitle="GENIE Test Enquiry Results" printUser="#session.user.getFullName()# - #sessionId#">
 			   	</div>
 				<div id="wmpResultsData" class="resultsDiv">
 					
@@ -166,25 +153,18 @@
 	
 	<cfoutput>
 	<input type="hidden" name="sessionId" id="sessionId" value="#sessionId#">
-	<input type="hidden" name="sessionId" id="terminalId" value="#session.hostName#">
+	<input type="hidden" name="terminalId" id="terminalId" value="#session.hostName#">	
 	<input type="hidden" name="enquiryUser" id="enquiryUser" value="#session.user.getUserId()#">
 	<input type="hidden" name="enquiryUserName" id="enquiryUserName" value="#session.user.getFullName()#">
 	<input type="hidden" name="enquiryUserDept" id="enquiryUserDept" value="#session.user.getDepartment()#">
 	<input type="hidden" name="requestFor" id="requestFor" value="">
 	<input type="hidden" name="reasonCode" id="reasonCode" value="">
 	<input type="hidden" name="reasonText" id="reasonText" value="">
-	<input type="hidden" name="reasonText" id="dpaValid" value="N">
+	<input type="hidden" name="reasonText" id="dpaValid" value="N">	
 	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
 	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
-	<input type="hidden" name="requestForForce" id="requestForForce" value="">
+	<input type="hidden" name="requestForForce" id="requestForForce" value="">	
 	<input type="hidden" name="lastEnquiryTimestamp" id="lastEnquiryTimestamp" value="">	
-	
-	
-	<div id="pdOffencesDialog" style="display:none;">
-		<div id='onLoadingDiv' style='width:100%' align='center'><h4>Loading, please wait</h4><div class='progressBar'></div></div>
-		<div id='onData' style="display:none;"></div>
-	</div>
-		
 	</cfoutput>
 	
 </body>	

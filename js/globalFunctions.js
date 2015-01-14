@@ -290,3 +290,290 @@ function resetSearchPanes(){
 		}
 	)
 }
+
+function resetResultPanes(){
+	$('#resultsContainer').hide();
+	if ( $('#wmpResultsDiv').length>0 ){
+		initWestMerciaTab()
+	}
+	if ( $('#firearmsResultsDiv').length>0 ){
+		initFirearmsTab()
+	}
+	if ( $('#wMidsResultsDiv').length>0 ){
+		initWMidsTab()
+	}
+	if ( $('#htcuResultsDiv').length>0 ){
+		initHTCUTab()
+	}
+}
+
+function pncPasteRead(pncData){
+	
+		var pncObj={
+			collar:'',
+			detail:'',
+			reason:'',
+			dataBlock:'',
+			hashType:'',
+			vrm:'',
+			forename1:'',
+			forename2:'',
+			surname1:'',
+			dobDay:'',
+			dobMonth:'',
+			dobYear:''
+		};
+	
+		// find the # for query type
+		var hashIdx=pncData.indexOf('#')
+		var hashType=pncData.substr(hashIdx+1,2).replace(/\./g,' ').trim().toUpperCase();
+		pncObj.hashType=hashType;
+		console.log('hastype='+hashType)					
+		// find the word ORIG
+		var origIdx=pncData.indexOf('ORIG')
+		console.log('origIdx='+origIdx)					
+		
+		// find the word REASON
+		var reasonIdx=pncData.indexOf('REASON')
+		console.log('reasonIdx='+reasonIdx)
+		
+		// find the word DATA
+		var dataIdx=pncData.indexOf('DATA')
+		console.log('dataIdx='+dataIdx)
+		
+		// find the word PTR
+		var ptrIdx=pncData.indexOf('PTR')
+		
+		var origData=pncData.slice(origIdx+5,reasonIdx-1).replace(/\./g,' ').trim();
+		console.log('origData=/'+origData+'/')
+		
+		var reasonData=pncData.substr(reasonIdx+7,2).replace('.','').trim();
+		pncObj.reason=reasonData;
+		console.log('reasonData=/'+reasonData+'/')
+		
+		var dataBlock=pncData.slice(dataIdx+5,ptrIdx-1).trim();
+		pncObj.dataBlock=dataBlock
+		console.log('dataBlock=/'+dataBlock+'/')
+		
+		//in orig data find the first space
+		var origSpIdx=origData.indexOf(' ');
+		
+		var collar='';
+		var detail='';
+		
+		if ( origSpIdx != -1){
+			collar=origData.slice(0,origSpIdx).trim()
+			
+			if (isNaN(collar)){
+				collar='';
+				detail=origData
+			}
+			
+			detail=origData.substr(origSpIdx,origData.length-origSpIdx).trim();	
+		}
+		else
+		{
+			detail=origData
+		}
+		
+		pncObj.collar=collar;
+		pncObj.detail=detail;
+		
+		console.log('collar=/'+collar+'/')
+		console.log('detail=/'+detail+'/')		
+		
+		// now look at the data block for the hash type
+		// #ve is a vehicle enquiry
+		// #dl and #ne are person enquiries
+		
+				
+		if (hashType=='VE'){
+			/*
+			 * example of #VE data blocks
+			 * 
+			 * TCODE #VE ORIG 2596 ....LAGLEY GREEN................................ REASON 2. 
+ 			 * DATA K68VHA                                                              
+			 * 
+			 */
+			pncObj.vrm=dataBlock
+		}
+		
+		if (hashType=='NE' || hashType=='DL'){
+			/* 
+			 * example of a NE or DL datablock
+			 * 
+			 * TCODE #NE ORIG 3302 WIDEMARSH ST  HEREFORD.......................... REASON 1. 
+ 			 * DATA JONES/PETER:25041969:::                                             PTR N 
+			 * 
+			 * #DL
+			 * TCODE #DL ORIG 3302 WIDEMARSH ST  HEREFORD.......................... REASON 1. 
+ 			 * DATA JONES/PETER/ALAN:25041969:M:N::Y:N                                       PTR N 			 
+			 */
+			
+			// split on the / to find names and DOB
+			var namesArray=dataBlock.split('/');
+			var dobPart='';
+			
+			// 2 parts to the array so we have a surname and a forename
+			if (namesArray.length == 2){
+				pncObj.surname1=namesArray[0];
+				forenameDobPart=namesArray[1];
+				
+				forenameDobArray=forenameDobPart.split(':')
+				
+				if (forenameDobArray.length >= 2){
+					pncObj.forename1=forenameDobArray[0];
+					var dobPart=forenameDobArray[1];
+					
+					if (dobPart.length == 8 && !isNaN(dobPart)){
+						pncObj.dobDay=dobPart.substr(0,2);
+						pncObj.dobMonth=dobPart.substr(2,2);
+						pncObj.dobYear=dobPart.substr(4,4);
+					}
+					
+				}
+				
+			}
+			
+			// 2 parts to the array so we have a surname and a forename
+			if (namesArray.length == 3){
+				pncObj.surname1=namesArray[0];
+				pncObj.forename1=namesArray[1];
+				forenameDobPart=namesArray[2];
+				
+				forenameDobArray=forenameDobPart.split(':')
+				
+				if (forenameDobArray.length >= 2){
+					pncObj.forename2=forenameDobArray[0];
+					var dobPart=forenameDobArray[1];
+					
+					if (dobPart.length == 8 && !isNaN(dobPart)){
+						pncObj.dobDay=dobPart.substr(0,2);
+						pncObj.dobMonth=dobPart.substr(2,2);
+						pncObj.dobYear=dobPart.substr(4,4);
+					}
+					
+				}
+			}
+			
+		}
+		
+		return pncObj			
+	
+}
+
+function checkButtonExpiry(){
+	var lastEnqTimestamp=$('#lastEnquiryTimestamp').val();
+	var dateNow=new Date();
+	
+	lYear=parseInt(lastEnqTimestamp.slice(0,4));
+	lMon=parseInt(lastEnqTimestamp.slice(4,6))-1;
+	lDay=parseInt(lastEnqTimestamp.slice(6,8));
+	lHour=lastEnqTimestamp.slice(8,10);
+	lMin=lastEnqTimestamp.slice(10,12);
+	lSec=lastEnqTimestamp.slice(12,14);
+	
+	var lastEnqDate=new Date(lYear, lMon, lDay, lHour, lMin, lSec, 0);
+		
+	var diffMs=(dateNow-lastEnqDate);
+	var diffMins=Math.floor(((diffMs % 86400000) % 3600000) / 60000);
+	
+	// diff is greater than the timeout for this type of enq so
+	// hide the start button so a new query is required
+	if (diffMins >= 5){
+		$('#startSearch').hide();
+		$('#prevSearchSpan').hide();
+		clearInterval(window.globalSearchButtonInterval)	
+	}
+	
+}
+
+function addPreviousSearch(){
+	var $enqForm=$('.enquiryForm');
+	var thisSearchArray=[];
+	$enqForm.find('input[type=text], input[type=checkbox], select').each(
+		function(){			
+			
+				thisElem={}
+				thisElem['id']=$(this).attr('id');
+				thisElem['value']=$(this).val();
+				if (this.tagName == 'INPUT'){
+					if ($(this).attr('type')=='text'){
+						thisElem['type']='TEXT'
+						thisElem['value']=$(this).val();
+					}
+					if ($(this).attr('type')=='checkbox'){
+						thisElem['type']='CHECKBOX'
+						thisElem['value']=$(this).is(':checked');
+					}
+				}
+				else
+				{
+						thisElem['type']='SELECT'
+						var thisVal=$(this).val();		
+										
+						if (thisVal !== null) {							
+							thisElem['value'] = thisVal;
+						}
+						else
+						{							
+							thisElem['value'] = '';
+						}						
+						
+				}
+				thisElem['display']=$(this).attr('displayInPane');
+				thisElem['displayInString']=$(this).attr('displayPrevSearch');
+				thisSearchArray.push(thisElem)				
+			
+			
+		}
+	)
+	window.globalPreviousSearchArray.unshift(thisSearchArray)
+	drawPreviousSearch();
+}
+
+function drawPreviousSearch(){
+	
+	$('#prevSearch').find('option').remove();
+	$('#prevSearch').append('<option value=""></option>')
+	
+	var aPS=window.globalPreviousSearchArray;
+	
+	for (i = 0; i < aPS.length; i++) {
+		thisPS=aPS[i];
+	    var dispString=''	
+    	for (j = 0; j < thisPS.length; j++) {
+		 if((thisPS[j].value.length>0 || thisPS[j].value==true) && thisPS[j].displayInString == 'Y'){
+		  if (dispString.length>0){
+		  	dispString += ', ';
+		  }
+    	  dispString += thisPS[j].display+':'+thisPS[j].value;		
+		 }		
+		}		
+		if (dispString.length>75){
+			dispString=dispString.slice(0,71)+' ...';
+		}
+		$('#prevSearch').append('<option value="'+i+'">'+dispString+'</option>')
+	}
+	$('#prevSearchSpan').show();
+}
+
+function populateSearchDetails(arrSD){
+	
+	$('.enquiryForm').trigger("reset");
+	for (i = 0; i < arrSD.length; i++) {
+		console.log(i+': '+arrSD[i].id);
+		console.log(i+': '+arrSD[i].type);
+		console.log(i+': '+arrSD[i].value);
+		
+		if (arrSD[i].type=='TEXT' || arrSD[i].type=='SELECT'){
+			$('#'+arrSD[i].id).val(arrSD[i].value)
+			console.log('1 settting')
+		}
+		if (arrSD[i].type=='CHECKBOX'){
+			console.log('2 settting')
+			$('#'+arrSD[i].id).prop('checked',arrSD[i].value)
+		}
+		
+	}
+}

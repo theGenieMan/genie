@@ -15,6 +15,11 @@ $(document).ready(function() {
 		    cache: false
 		});
 		
+		if (!window.console) console = {log: function() {}};
+		
+		window.globalSearchButtonInterval='';
+		window.globalPreviousSearchArray=[];		
+		
 		// setup masked date boxes
 		 $("input[datepicker]").inputmask("dd/mm/yyyy");
 		 $('input[timepicker]').timeEntry({show24Hours:true,spinnerImage:''});	
@@ -23,10 +28,11 @@ $(document).ready(function() {
 		var $resultsTabs=$( "#resultsTabs" ).tabs();
 	
 	    var dpaClear=($('#dpaClear').val()==='true');	
-		var $dpaBox=$('#dpa').dpa({
+		$('#dpa').dpa({
 					requestFor:{
 						initialValue:'',
 					},
+					showPNCPaste:false,
 					alwaysClear:dpaClear,			
 					dpaUpdated: function(e,data){
 							// update the dpa boxes as per the values entered.
@@ -44,7 +50,24 @@ $(document).ready(function() {
 									 cache: false,
 									 async: false,							 
 									 success: function(data, status){							
-											$('#dpaValid').val('Y').change()			  					  
+										$('#startSearch').show();						
+										$('#dpa').dpa('hide');
+										// if there is an initial focus button set then focus it																						
+										if ($('.enquiryForm [initialFocus]').length>0){
+											$('.enquiryForm [initialFocus]').focus()
+										}			  					  
+										// if there is a pnc search ready then trigger the submit of
+										// the enquiryForm
+										if ($('.enquiryForm > #pncDataReady').length>0){
+											$('.enquiryForm').trigger('submit');
+											$('.enquiryForm > #pncDataReady').remove;
+										}
+										// if we have a prevSearch select box with more than one entry in then show that to
+										if ($('#prevSearch').length>0){
+											if($('#prevSearch option').length>1){
+												$('#prevSearchSpan').show()
+											}
+										}			  					  
 									 }
 							});								
 							
@@ -52,7 +75,9 @@ $(document).ready(function() {
 					}
 					
 			})	
-			
+		$('#dpa').dpa('show')
+		
+		// size the selected warning box to match the list of warnings box 	
 		$('#frmWarning').width($('#frmWarningList').width());		
 	
 });

@@ -97,6 +97,15 @@
 				}
 			});
 	
+			// search box data has changed
+			this._on ( this.searchBox , {
+				change: function(){
+				  if (this.element.find('#'+this.options.searchBox).val().length != 0) {
+				  	this.searchButton.trigger('click');
+				  }
+				}
+			})
+	
 			// click event for the search button
 			this._on( this.searchButton, {
 			// _on won't call random when widget is disabled
@@ -289,6 +298,10 @@
 			
 			//this.userResult.append(displayHtml).append(this.resetButton).append(hidUserId).append(hidFullName).append(hidPersonId);
 			this.userResult.show();		
+			
+			this._trigger("userSelected", null, {
+												userId:	this.userResult.find('#'+this.options.returnUserId).val()					
+											});
 			
 			this.element.hide();
 			

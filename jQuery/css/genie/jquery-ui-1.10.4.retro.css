@@ -1,15 +1,11 @@
 /*! jQuery UI - v1.10.4 - 2014-06-16
 * http://jqueryui.com
 * Includes: jquery.ui.core.css, jquery.ui.resizable.css, jquery.ui.selectable.css, jquery.ui.accordion.css, jquery.ui.autocomplete.css, jquery.ui.button.css, jquery.ui.datepicker.css, jquery.ui.dialog.css, jquery.ui.menu.css, jquery.ui.progressbar.css, jquery.ui.slider.css, jquery.ui.spinner.css, jquery.ui.tabs.css, jquery.ui.tooltip.css, jquery.ui.theme.css
+* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Arial&fwDefault=normal&fsDefault=11pt&cornerRadius=5px&bgColorHeader=%230C5C99&bgTextureHeader=flat&bgImgOpacityHeader=55&borderColorHeader=%230C5C99&fcHeader=%23ffffff&iconColorHeader=%230C5C99&bgColorContent=%23ffffff&bgTextureContent=flat&bgImgOpacityContent=100&borderColorContent=%230C5C99&fcContent=%23000000&iconColorContent=%230C5C99&bgColorDefault=%23dfeffc&bgTextureDefault=flat&bgImgOpacityDefault=85&borderColorDefault=%230C5C99&fcDefault=%230C5C99&iconColorDefault=%230C5C99&bgColorHover=%23d0e5f5&bgTextureHover=flat&bgImgOpacityHover=75&borderColorHover=%230C5C99&fcHover=%230C5C99&iconColorHover=%23217bc0&bgColorActive=%23f5f8f9&bgTextureActive=flat&bgImgOpacityActive=100&borderColorActive=%230C5C99&fcActive=%23FF0000&iconColorActive=%23FF0000&bgColorHighlight=%23fbec88&bgTextureHighlight=flat&bgImgOpacityHighlight=55&borderColorHighlight=%23fad42e&fcHighlight=%23363636&iconColorHighlight=%232e83ff&bgColorError=%23ff0000&bgTextureError=flat&bgImgOpacityError=95&borderColorError=%23cd0a0a&fcError=%23ffffff&iconColorError=%23ffffff&bgColorOverlay=%23aaaaaa&bgTextureOverlay=flat&bgImgOpacityOverlay=0&opacityOverlay=30&bgColorShadow=%23aaaaaa&bgTextureShadow=flat&bgImgOpacityShadow=0&opacityShadow=30&thicknessShadow=8px&offsetTopShadow=-8px&offsetLeftShadow=-8px&cornerRadiusShadow=8px
 * Copyright 2014 jQuery Foundation and other contributors; Licensed MIT */
 
 /* Layout helpers
 ----------------------------------*/
-
-body{
-	background-color:#FFFFFF;
-	color:#000000;
-}
 
 .ui-helper-hidden {
 	display: none;
@@ -478,6 +474,7 @@ button.ui-button::-moz-focus-inner {
 .ui-dialog .ui-dialog-titlebar {
 	padding: .4em 1em;
 	position: relative;
+	background-color:#000080
 }
 .ui-dialog .ui-dialog-title {
 	float: left;
@@ -788,7 +785,7 @@ body .ui-tooltip {
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	/*font-family: Arial;*/
+	/* font-family: Arial; */
 	font-size: 100%;
 }
 
@@ -805,7 +802,7 @@ body .ui-tooltip {
 } */
 
 .ui-widget-content {
-	border: 1px solid #000000;
+	border: 1px solid #B8B8B8;
 	background: #FFFFFF;
 	color: #000000;
 }
@@ -813,21 +810,21 @@ body .ui-tooltip {
 	color: #000000;
 }
 .ui-widget-header {
-	border: 1px solid #000000;
-	background: #FFFFFF;
-	color: #000000;
+	border: 1px solid #B8B8B8;
+	background: #C1C1C1;
+	color: #ffffff;
 	font-weight: bold;
 }
 
 .ui-widget-header-genie {
-	border: 1px solid #000000;
-	background: #FFFFFF;
-	color: #000000;
+	border: 1px solid #000080;
+	background: #000080;
+	color: #ffffff;
 	font-weight: bold;
 }
 
 .ui-widget-header a {
-	color: #000000;
+	color: #ffffff;
 }
 
 /* Interaction states
@@ -835,15 +832,15 @@ body .ui-tooltip {
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
-	border: 1px solid #000000;
-	background: #FFFFFF;
-	font-weight: normal;
-	color: #000000;
+	border: 1px solid #999999;
+	background: #E4E4E4;
+	font-weight: bold;
+	color: #000080;
 }
 .ui-state-default a,
 .ui-state-default a:link,
 .ui-state-default a:visited {
-	color: #000000;
+	color: #000080;
 	text-decoration: none;
 }
 .ui-state-hover,
@@ -852,10 +849,10 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-	border: 1px solid #000000;
-	background: #FFFFFF;
-	font-weight: normal;
-	color: #000000;
+	border: 1px solid #999999;
+	background: #DEDDDE;
+	font-weight: bold;
+	color: #000080;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -865,21 +862,21 @@ body .ui-tooltip {
 .ui-state-focus a:hover,
 .ui-state-focus a:link,
 .ui-state-focus a:visited {
-	color: #000000;
+	color: #000080;
 	text-decoration: none;
 }
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
-	border: 1px solid #000000;
+	border: 1px solid #999999;
 	background: #FFFFFF;
-	font-weight: normal;
-	color: #000000;
+	font-weight: bold;
+	color: #FF0000;
 }
 .ui-state-active a,
 .ui-state-active a:link,
 .ui-state-active a:visited {
-	color: #000000;
+	color: #FF0000;
 	text-decoration: none;
 }
 
@@ -888,31 +885,31 @@ body .ui-tooltip {
 .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
-	border: 1px solid #000000;
-	background: #FFFFFF;
-	color: #000000;	
+	border: 1px solid #fad42e;
+	background: #fbec88;
+	color: #363636;	
 }
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,
 .ui-widget-header .ui-state-highlight a {
-	color: #000000;
+	color: #363636;
 }
 .ui-state-error,
 .ui-widget-content .ui-state-error,
 .ui-widget-header .ui-state-error {
-	border: 1px solid #000000;
-	background: #FFFFFF;
-	color: #000000;
+	border: 1px solid #cd0a0a;
+	background: #ff0000;
+	color: #ffffff;
 }
 .ui-state-error a,
 .ui-widget-content .ui-state-error a,
 .ui-widget-header .ui-state-error a {
-	color: #000000;
+	color: #ffffff;
 }
 .ui-state-error-text,
 .ui-widget-content .ui-state-error-text,
 .ui-widget-header .ui-state-error-text {
-	color: #000000;
+	color: #ffffff;
 }
 .ui-priority-primary,
 .ui-widget-content .ui-priority-primary,
@@ -929,12 +926,13 @@ body .ui-tooltip {
 .ui-state-disabled,
 .ui-widget-content .ui-state-disabled,
 .ui-widget-header .ui-state-disabled {
-	opacity: .35;
+	opacity: .35;	
 	filter:Alpha(Opacity=35);
 	background-image: none;
 }
 .ui-state-disabled .ui-icon {
 	filter:Alpha(Opacity=35); /* For IE8 - See #6059 */
+	color:#B8B8B8 !important;
 }
 
 /* Icons
@@ -950,7 +948,7 @@ body .ui-tooltip {
 	background-image: url("images/ui-icons_0C5C99_256x240.png");
 }
 .ui-widget-header .ui-icon {
-	background-image: url("images/ui-icons_0C5C99_256x240.png");
+	background-color: url("images/ui-icons_0C5C99_256x240.png");
 }
 .ui-state-default .ui-icon {
 	background-image: url("images/ui-icons_0C5C99_256x240.png");
@@ -1180,71 +1178,83 @@ body .ui-tooltip {
 
 /* Overlays */
 .ui-widget-overlay {
-	background: #FFFFFF;
+	background: #aaaaaa url("images/ui-bg_flat_0_aaaaaa_40x100.png") 50% 50% repeat-x;
 	opacity: .3;
 	filter: Alpha(Opacity=30);
 }
 .ui-widget-shadow {
 	margin: -8px 0 0 -8px;
 	padding: 8px;
-	background: #FFFFFF;
+	background: #aaaaaa url("images/ui-bg_flat_0_aaaaaa_40x100.png") 50% 50% repeat-x;
 	opacity: .3;
 	filter: Alpha(Opacity=30);
 	border-radius: 8px;
 }
 
 /* SPECIFIC TO GENIE STUFF */
-table.genieData, table.wmpData, table.nominalData {
+
+table.genieData, table.wmpData {
 	border-spacing: 2px;
+	border-collapse: separate;	
+}
+
+table.nominalData {
+	border-spacing: 0px;
 	border-collapse: separate;	
 }
 
 table.genieData td, table.wmpData td {
 	padding: 3px;
-	border:1px solid #000000;
 }
 
-table.genieData thead th, table.wmpData thead th {
-	background-color:#FFFFFF;
-	color:#000000;
+table.genieData thead th, table.wmpData thead th, table.wmpData th {
+	background-color:#000080;
+	color:white;
 	font-weight:bold;
 }	
 
 table.nominalData {
-	border:1px solid #000000;
-	font-size:90%;
+	border:1px solid #000080;	
 }
 
 table.nominalData th {
-	background-color:#FFFFFF;
-	color:#000000;
+	/*
+	background-color:#000080;
+	*/
+	border:1px solid #000080;
+	color:black;
 	font-weight:bold;
 	text-align:left;
 	padding:2px;
-}	
-table.nominalData td {	
+	font-size:90%
+}
+
+table.nominalData td {
+	border:1px solid #000080;
+	color:black;	
 	font-size:90%
 }		
 
-.row_colour0
+table.genieData tr.row_colour0
 {
-	background-color : #FFFFFF;
+	background-color : #FFFFC6;
 }
 
-.row_colour1
+table.genieData tr.row_colour1
 {
-	background-color : #FFFFFF;	
+	background-color : #CACACA;
 }
+
 .mandatory{
-	background-color : #FFFFFF;
+	background-color : #FFFFC6;
 }
 
 input[type=text] {
-	border:1px solid #000000;
+	border:1px solid #808080;
 }
 
 .notification{
-	border: 1px solid #000000;		
+	border: 1px solid #808080;;		
 	padding: 5px;
 	margin:5px;		 
 	width: 475px;
@@ -1256,7 +1266,6 @@ input[type=text] {
 	-moz-box-shadow: #666 0px 2px 3px;
 	box-shadow: #666 0px 2px 3px;
 	background: #FFFFFF;
-	color:#000000;
 	position:relative;
 	z-index: 0;
 	behavior: url('/csspie/PIE.htc');
@@ -1266,10 +1275,10 @@ input[type=text] {
 .ncHeader{
 	width:510px; 
 	padding:2px 0px 0px 6px; 
-	border-top:1px solid #000000; 
-	border-left:1px solid #000000; 
-	border-right:1px solid #000000; 
-	background-color:#FFFFFF; 
+	border-top:1px solid #808080; 
+	border-left:1px solid #808080; 
+	border-right:1px solid #808080; 
+	background-color:#d8d8d8; 
 	height:20px; 
 	z-index:0;
 	text-align:left;
@@ -1277,9 +1286,9 @@ input[type=text] {
 
 .ncContainer{
 	width:510px; 
-	border:1px solid #000000; 
+	border:1px solid #808080; 
 	padding:3px; 
-	background-color:#FFFFFF; 
+	background-color:#d8d8d8; 
 	height:335px; 
 	overflow:auto
 }	
@@ -1304,7 +1313,7 @@ input[type=text] {
 }
 
 .ncUpdate{
-  border-bottom:1px solid #000000;
+  border-bottom:1px solid #808080;
   
 }
 
@@ -1317,42 +1326,18 @@ input[type=text] {
 	cursor:hand;
 }
 
-a {
-	color:#000000
-}
-
-a.visited{
-	color:#000000
-}
-
-a.active{
-	color:#000000
-}
-
-input{
-	border:1px solid #000000;
-	background:#ffffff;
-	color:#000000;
-}
-
-select{
-	border:1px solid #000000;
-	background:#ffffff;
-	color:#000000;
-}
-
 .error_title {
 text-align:left;
 font-weight:bold;
-background-color:#FFFFFF;
-color:#000000;
+background-color:#FF0000;
+color:#FFFFFF;
 font-size:100%;
 }
 
 .error_text {
 text-align:left;
 font-weight:bold;
-color:#000000;
+color:#FF0000;
 font-size:90%;
 }
 
@@ -1364,37 +1349,37 @@ font-size:90%;
 .genieAttachedDocument, .genieCustodySummary, .genieTelephoneIntelLink, .genieNFLMSNominal,
 .genieHTCULink, .geniePDOffences, #searchHelp, .closePopup, .wmcHOOCLookupCode, .wmcHOMCLookupCode,
 .wmcRecRepLookupCode, .propCategoryLookupCode, .propSubCategoryLookupCode, .propManufacturerLookupCode,
-.genieErrorLink, .wMidsAddress, .wMidsTelephone, .wMidsVehicle, .fakeLink, .genieBugLink {
+.genieErrorLink, .wMidsAddress, .wMidsTelephone, .wMidsVehicle, .fakeLink, .genieBugLink, .adminLink {
 	cursor:hand;
-	color:#000000 !important;
+	color:#000080 !important;
 	text-decoration:underline;
 	font-weight:bold;
 }
 
 .firearmsNominal{
 	cursor:hand;
-	color:#000000 !important;
+	color:#000080 !important;
 	text-decoration:underline;
 	font-weight:bold;
 }
 
 .genieNominalAlias{
 	cursor:hand;
-	color:#000000 !important;
+	color:#000080 !important;
 	text-decoration:underline;
 	font-weight:bold;
 }
 
 .wMidsNominal{
 	cursor:hand;
-	color:#000000 !important;
+	color:#000080 !important;
 	text-decoration:underline;
 	font-weight:bold;
 }
 
 .genieTooltipHeader{
-	background-color:#FFFFFF;
-	color:#000000;
+	background-color:#FF0000;
+	color:white;
 	font-size:100%;
 	font-weight:bold;	
 	padding:2px;	
@@ -1402,249 +1387,13 @@ font-size:90%;
 
 .genieTooltipHolder{
 	font-size:100%;
-	background-color:#FFFFFF;
-	color:#000000;	
+	background-color:#FFCC99;	
 	padding:2px;	
-}
-
-.photo_title
-{
-	background-color : #000000;
-	color : #FFFFFF;
-    line-height:1.3em;
-	font-size:90%;
-	text-align:left;
-	font-weight:bold;
-	width:250;
-	text-align:center;
-}
-
-/* Default tooltip style */
-.qtip{
-    max-width: 350px;
-}
-
-.qtip-default{
-	border-width: 1px;
-	border-style: solid;
-	border-color: #000000;
-
-	background-color: #FFFFFF;
-	color: #000000;
-}
-
-.qtip-default .qtip-titlebar{
-	background-color: #FFFFFF;
-}
-
-.qtip-default .qtip-icon{
-	border-color: #000000;
-	background: #FFFFFF;
-	color: #000000;
-}
-
-.qtip-default .qtip-titlebar .qtip-close{
-	border-color: #000000;
-	color: #000000;
-}
-
-button#personEnquiryButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#addressEnquiryButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#custodyEnquiryButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#custodyWhiteboardButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#telephoneEnquiryButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#vehicleEnquiryButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#procDecEnquiryButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#offenceEnquiryButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#intelEnquiryButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#intelFreeTextButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#crimeBrowserButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#firearmsEnquiryButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#propertyEnquiryButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#bailDiaryButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#warningEnquiryButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#bailConditionsButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#recentSearchesButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#namexUpdateButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:left;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button#userNotesButton{
-    background: #FFFFFF;
-	border:1px solid #000000;
-    text-align:center;
-    height: 30px;
-	font-size:130%; 
-	font-weight:bold; 
-	width:250px
-}
-
-button{
-	cursor:hand;
 }
 
 .warningTitle
 {
-  	background-color : #000;
+  	background-color : #F00;
 	color : #FFF;
   	line-height:1.1em;	
 	padding:1px;
@@ -1655,7 +1404,7 @@ button{
 
 .warningTab
 {
-  	background-color : #000;
+  	background-color : #F00;
 	color : #FFF;
   	line-height:1.1em;	
 	padding:1px;
@@ -1671,38 +1420,255 @@ button{
 	font-size:90%;
 }
 
+button#personEnquiryButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#addressEnquiryButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#custodyEnquiryButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#custodyWhiteboardButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#telephoneEnquiryButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#vehicleEnquiryButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#procDecEnquiryButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#offenceEnquiryButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#intelEnquiryButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#intelFreeTextButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#crimeBrowserButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#firearmsEnquiryButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#propertyEnquiryButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#bailDiaryButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#warningEnquiryButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#bailConditionsButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#recentSearchesButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#namexUpdateButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#userNotesButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:center;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button#testEnquiryButton{
+    background: #DEDDDE no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:center;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
+button{
+	cursor:hand;
+}
+
+.qtip{
+    max-width: 350px;
+}
+
+pre.crime {
+    white-space: pre-line;       /* CSS 3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+	font-family : Arial,Helvetica,sans-serif;	
+}
+
 .ninetypc{
 	font-size:90%
 }
 
 .thSorted{
-	color:#000000 !important;
+	color:yellow !important;
 }
 
 .thSortable{
-	color:#000000 !important;
+	color:red !important;
 	cursor:hand;
 	text-decoration:underline;
 }
 
 .loadingDiv{
-	border:2px solid #000000; 
+	border:2px solid #000080; 
 	padding:5px;
 	text-align:center;
 	width:200px;
 	height:100px;
-	background-color:#FFFFFF;
+	background-color:white;
 	z-index:0;
 }
 
 div.geniePanel{
-	border:1px solid #000000;
+	border:1px solid #000080;
 	padding:2px;
 }	
 
 div.geniePanel .header{
-	background-color:#000000;
-	color:#FFFFFF;
+	background-color:#000080;
+	color:white;
 	font-size:110%;
 	font-weight:bold;
 	padding:2px;
@@ -1712,8 +1678,8 @@ div.geniePanel .header{
 .nominalTitle{
 	font-size:120%;
 	font-weight:bold;
-	background-color:#000000;
-	color:#FFFFFF;
+	background-color:#000080;
+	color:white;
 }
 
 .deceasedTitle{
@@ -1814,11 +1780,6 @@ div.geniePanel .header{
 	display:inline-block;
 }
 
-
-.warningBoxIOM4 a{
-	color:white !important;
-}
-
 .highlightCrime{
 	background-color:red !important;
 	color:white !important;
@@ -1845,7 +1806,7 @@ input[readonly]{
 }
 
 .bailHour{
-	background-color:#FFFFFF;
+	background-color:#000080;
 	color:white;
 	font-weight:bold;	
 }
@@ -1867,4 +1828,27 @@ input[readonly]{
 
 .undetected{
 	background-color:#009900;
+}
+
+.photo_title
+{
+	background-color : #000080;
+	color : #FFF;
+    line-height:1.3em;
+	font-size:90%;
+	text-align:left;
+	font-weight:bold;
+	width:250;
+	text-align:center;
+}
+
+.bugReport{
+	color:white;
+	text-decoration:underline;
+	cursor:hand;
+}
+
+.standOut{
+	font-size:110% !important;
+	font-weight:bold !important;
 }

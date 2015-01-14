@@ -814,6 +814,15 @@ body .ui-tooltip {
 	color: #ffffff;
 	font-weight: bold;
 }
+
+.ui-widget-header-genie {
+	border: 1px solid #0C5C99;
+	background: #0C5C99;
+	color: #ffffff;
+	font-weight: bold;
+}
+
+
 .ui-widget-header a {
 	color: #ffffff;
 }
@@ -1590,12 +1599,22 @@ button#userNotesButton{
 	width:225px
 }
 
+button#testEnquiryButton{
+    background: #d0e5f5;
+	border:1px solid #0C5C99;
+    text-align:center;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:225px
+}
+
 button{
 	cursor:hand;
 }
 
 .qtip{
-    max-width: 550px;
+    max-width: 350px;
 }
 
 pre.crime {
@@ -1816,4 +1835,9 @@ input[readonly]{
 	color:white;
 	text-decoration:underline;
 	cursor:hand;
+}
+
+.standOut{
+	font-size:110% !important;
+	font-weight:bold !important;
 }

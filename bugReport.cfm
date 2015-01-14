@@ -99,7 +99,7 @@ Revisions        :
 
 <cfoutput>
 <body>
-<div class="ui-widget-header" align="center">
+<div class="ui-widget-header-genie" align="center">
  GENIE #application.version# #application.ENV# - Bug Report</td>
 </div>	
 <div id="bugReportDiv">

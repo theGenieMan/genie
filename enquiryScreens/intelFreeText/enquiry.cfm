@@ -8,14 +8,14 @@
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">		
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/customControls/dpa/css/dpa.css">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/applications/cfc/hr_alliance/hrWidget.css">
-	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
-	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.min.js"></script>
+	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.min.js"></script>
 	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>
 	<script type="text/javascript" src="/jQuery/inputmask/jquery.inputmask.js"></script>
 	<script type="text/javascript" src="/jQuery/inputmask/jquery.inputmask.date.extensions.js"></script>
-	<script type="text/javascript" src="/jQuery/time/jquery.plugin.js"></script>
-	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.plugin.min.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.min.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
 	<script type="text/javascript" src="js/intelFTSFunctions.js"></script>
@@ -47,18 +47,32 @@
 		
 		</div>
 	</div>
-	<input type="button" class="clearEnquiryForm ui-button" value="CLEAR FORM">
-	<form class="enquiryForm" style="margin:2px 0px 0px 0px;">
+		
 	<div id="searchPanes">	  
 	  <div class="ui-state-highlight" align="center">
 		Enter information into <b>at least one</b> of the search fields below.
 	  </div>
 	  <div class="spacer">&nbsp;</div>
-	  <div align="right">
-	  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
-		<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
-		<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
-	  </div>
+	  <div class="searchButtonsDiv">
+		<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
+	  
+		  <div align="right">		    
+			<span id="prevSearchSpan" style="display:none">
+		  	<b>Previous Searches:</b>
+			<select name="prevSearch" id="prevSearch">
+				
+			</select>
+			&nbsp;
+			|
+			</span>
+			&nbsp;			
+		  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
+			<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
+			<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
+		  </div>
+	  </div>	  
+	  <div class="spacer">&nbsp;</div>
+	  <form class="enquiryForm" style="margin:2px 0px 0px 0px;">
 	  <div id="referencePane" class="ui-accordion searchPane" initOpen="true">
 	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Intel Free Text Search <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent">
@@ -66,13 +80,13 @@
 		  		<tr>
 		  			<td valign="top" width="15%"><label for="search_text">Search Text</label></td>
 					<td  colspan="4" valign="top" width="30%">
-						<input type="text" name="search_text" id="search_text" size="75" displayInPane="Search Text"> <span id="searchHelp"><u>Help</u></span>
+						<input type="text" name="search_text" id="search_text" size="75" displayInPane="Search Text" displayPrevSearch="Y"> <span id="searchHelp"><u>Help</u></span>
 					</td>									
 		  		</tr>	
 				<tr>
 					<td valign="top"><label for="division">Policing Area</label></td>
 					<td valign="top" colspan="4">
-						<select name="division" id="division" displayInPane="Policing Area">
+						<select name="division" id="division" displayInPane="Policing Area" displayPrevSearch="Y">
 							<option value="">-- Select --</option>							
 							<cfloop query="Application.qry_Division">
 							<option value="#ORG_CODE#">#Replace(ORG_NAME,' POLICING AREA','')#</option>		
@@ -84,15 +98,15 @@
 					<td valign="top" ><label for="date_created1">Created</label></td>
 					<td valign="top" wisth="30%" colspan="4">
 						<b>Between/On</b> 
-						<input name="date_created1" id="date_created1" displayInPane="Created Between/On" size="10" value="" datepicker> 
+						<input name="date_created1" id="date_created1" displayInPane="Created Between/On" displayPrevSearch="Y" size="10" value="" datepicker> 
 						<b>And</b> 
-						<input name="date_created2" id="date_created2" displayInPane="Created To" size="10" value="" datepicker>
+						<input name="date_created2" id="date_created2" displayInPane="Created To" displayPrevSearch="Y" size="10" value="" datepicker>
 					</td>										
 				</tr>	
 				<tr>
 					<td valign="top" width="15%"><label for="relevance">Relevance</label></td>
 					<td valign="top" width="30%">
-					   <select name="relevance" id="relevance" displayInPane="Relevance" initSelect="70">	
+					   <select name="relevance" id="relevance" displayInPane="Relevance" displayPrevSearch="Y" initSelect="70">	
 					      <option value="">-- Select --</option>
 						  <cfloop list="#Application.relevanceScores#" index="rScore" delimiters=",">
 						  	  <option value="#rScore#" #iif(rScore IS 70,de('selected'),de(''))#>#rScore#</option>
@@ -102,7 +116,7 @@
 					<td width="5%">&nbsp;</td>						
 					<td valign="top" width="15%"><label for="sort_order">Sort Order</label></td>
 					<td valign="top">
-						<select name="sort_order" id="sort_order" displayInPane="Sort Order" initSelect="Date">
+						<select name="sort_order" id="sort_order" displayInPane="Sort Order" displayPrevSearch="Y" initSelect="Date">
 							<option value="Date" selected>Date (Newest First)</option>
 						    <option value="Relevance">Relevance</option>									
 						</select>
@@ -112,14 +126,15 @@
 		</div>
 	  </div>	    
 	  <div class="spacer">&nbsp;</div>
-	  <div align="right">
-	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button">
+	  <div class="searchButtonsDiv">
+	  	<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
+	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button searchButton">
 	  </div>
     </div>		
 	</form>
 	</cfoutput>
 	<!--- section for results --->
-	<div id="resultsContainer" style="display:none;">
+	<div id="resultsContainer" style="display:none; clear:both;">
 		
 		<!---  --->
 		<div id="resultsTabs">
@@ -162,6 +177,7 @@
 	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
 	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
 	<input type="hidden" name="requestForForce" id="requestForForce" value="">
+	<input type="hidden" name="lastEnquiryTimestamp" id="lastEnquiryTimestamp" value="">	
 	
 	
 	<div id="searchTextPopup" style="display:none">

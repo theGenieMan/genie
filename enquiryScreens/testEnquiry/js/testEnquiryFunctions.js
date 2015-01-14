@@ -1,11 +1,11 @@
 /*
- * Module      : firearmsFunctions.js
+ * Module      : testEnquiryFunctions.js
  * 
- * Application : GENIE - Firearms Specific Functions
+ * Application : GENIE - Test Enquiry Specific Functions
  * 
  * Author      : Nick Blackham
  * 
- * Date        : 16-Dec-2014
+ * Date        : 15-Dec-2014
  * 
  */
 
@@ -31,25 +31,21 @@ function showFormDebug(){
 function getFormData(){	
 	
 	var dataToSend={
-			certificate_no:$('#certificate_no').val().toUpperCase(),						
-			serial_no:$('#serial_no').val().toUpperCase()			
-			};
+		testData:'yes please'
+	};
 	
 	return dataToSend
 }
 
-function doFirearmsSearch(){
+function doTestEnquiry(){
 
 	var dataToSend=getFormData();
 	
-	// clear the interval for checking on search expiry
-	clearInterval(window.globalSearchButtonInterval)
-	
 	initWestMerciaTab();
-	
+		
 	$.ajax({
 		 type: 'POST',
-		 url: '/genieFirearmsWebService.cfc?method=doFirearmsEnquiry',						 
+		 url: '/genieTestWebService.cfc?method=doTestEnquiry',						 
 		 contentType: "application/json",						 
 		 cache: false,
 		 async: true,		 
@@ -96,7 +92,6 @@ function doFirearmsSearch(){
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
 			
-			// add this search to the previous search list
 			addPreviousSearch()
 				  
 		 }/*,
@@ -105,11 +100,14 @@ function doFirearmsSearch(){
 		 }*/
 		 });		
 
-	$('#resultsContainer').show();
-	// set the last enquiry timestamp, so we can work out when to remove the button
-    $('#lastEnquiryTimestamp').val(getTimestamp());
+	$('#resultsContainer').show()	
 	
-    window.globalSearchButtonInterval=setInterval(checkButtonExpiry,150000);	
+	// set the last enquiry timestamp, so we can work out when to remove the button
+	$('#lastEnquiryTimestamp').val(getTimestamp());
+	
+	/*
+	searchButtonInterval=setInterval(checkButtonExpiry,10000);
+	*/
 
 }
 

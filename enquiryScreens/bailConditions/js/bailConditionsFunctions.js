@@ -41,6 +41,9 @@ function getFormData(){
 }
 
 function doBailConditions(){
+	
+	// clear the interval for checking on search expiry
+	clearInterval(window.globalSearchButtonInterval)	
 
 	var dataToSend=getFormData();
 	
@@ -97,6 +100,9 @@ function doBailConditions(){
 				$('#wmpPaste').attr('pasteUrl',$('#wmpPaste').attr('pasteUrl')+$('#wmpResultsData').find('#pastePath').val())
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
+			
+			// add this search to the previous search list
+			addPreviousSearch()
 				  
 		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
@@ -104,7 +110,12 @@ function doBailConditions(){
 		 }*/
 		 });		
 
-	$('#resultsContainer').show()	
+	$('#resultsContainer').show();
+	
+	// set the last enquiry timestamp, so we can work out when to remove the button
+    $('#lastEnquiryTimestamp').val(getTimestamp());
+	
+     window.globalSearchButtonInterval=setInterval(checkButtonExpiry,150000);	
 
 }
 

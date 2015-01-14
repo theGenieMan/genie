@@ -49,7 +49,10 @@ function getFormData(){
 function doWarningEnquiry(){
 
 	var dataToSend=getFormData();
-	showFormDebug();
+	
+	// clear the interval for checking on search expiry
+	clearInterval(window.globalSearchButtonInterval)
+	
 	initWestMerciaTab();
 	
 	$.ajax({
@@ -100,6 +103,9 @@ function doWarningEnquiry(){
 				$('#wmpPaste').attr('pasteUrl',$('#wmpPaste').attr('pasteUrl')+$('#wmpResultsData').find('#pastePath').val())
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
+			
+			// add this search to the previous search list
+			addPreviousSearch()			
 				  
 		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
@@ -107,7 +113,14 @@ function doWarningEnquiry(){
 		 }*/
 		 });		
 
-	$('#resultsContainer').show()	
+   // now all the searches have been sent and the right tabs initialised 
+   // show the results container   
+   $('#resultsContainer').show();
+   
+   // set the last enquiry timestamp, so we can work out when to remove the button
+   $('#lastEnquiryTimestamp').val(getTimestamp());
+	
+   window.globalSearchButtonInterval=setInterval(checkButtonExpiry,150000);	
 
 }
 

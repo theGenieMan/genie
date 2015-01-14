@@ -1,7 +1,8 @@
 div.dpaBox label{
-	width:110px;
+	width:80px;
 	display:inline-block;
 	padding:5px;
+	vertical-align:top;
 }
 
 div.dpaBox .dpaPersonSearchBox{	
@@ -12,4 +13,9 @@ div.dpaBox .dpaPersonSearchBox{
 .error{
 	font-weight:bold;
 	color:red;
+}
+
+#pncData{
+	font-family:"Courier New", Courier, monospace;
+	font-size:7.5pt;
 }

@@ -30,9 +30,9 @@ Revisions   :
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">		
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/customControls/dpa/css/dpa.css">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/applications/cfc/hr_alliance/hrWidget.css">
-	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
-	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.min.js"></script>
+	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.min.js"></script>
 	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
@@ -57,19 +57,33 @@ Revisions   :
 	<div style="padding-top:2px;" align="center">
 		<a href="/help/vehicle_enquiry_info.cfm?#Session.URLToken#" target="_blank">What am I Searching? Click here for information</a>
 	</div>
+		
 	
-	<input type="button" class="clearEnquiryForm ui-button" value="CLEAR FORM">
-	<form class="enquiryForm" style="margin:2px 0px 0px 0px;">
 	<div id="searchPanes">		  
 	  <div class="ui-state-highlight" align="center">
 		Enter information into <b>at least one</b> of the search fields below.
 	  </div>
 	  <div class="spacer">&nbsp;</div>
-	  <div align="right">
-	  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
-		<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
-		<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
+	  <div class="searchButtonsDiv">
+		<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
+	  
+		  <div align="right">		    
+			<span id="prevSearchSpan" style="display:none">
+		  	<b>Previous Searches:</b>
+			<select name="prevSearch" id="prevSearch">
+				
+			</select>
+			&nbsp;
+			|
+			</span>
+			&nbsp;			
+		  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
+			<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
+			<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
+		  </div>
 	  </div>	  
+	  <div class="spacer">&nbsp;</div>	
+	  <form class="enquiryForm" style="margin:2px 0px 0px 0px;">  
 	  <div id="sourcePane" class="ui-accordion searchPane" initOpen="true">
 	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Data Sources <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent">
@@ -77,9 +91,9 @@ Revisions   :
 		  		<tr>
 		  			<td width="15%"><b>Data Sources</b></td>
 					<td>
-						<input type="checkbox" name="wmpData" id="wmpData" displayInPane="WP/WMP" checked disabled noClear='yes'> WP/WMP 						
+						<input type="checkbox" name="wmpData" id="wmpData" displayInPane="WP/WMP" displayPrevSearch="N" checked disabled noClear='yes'> WP/WMP 						
 						<cfif session.isWMidsUser>
-						<input type="checkbox" name="wMidsData" id="wMidsData" displayInPane="West Mids"> West Mids
+						<input type="checkbox" name="wMidsData" id="wMidsData" displayInPane="West Mids" displayPrevSearch="N"> West Mids
 						</cfif>	
 					</td>										
 		  		</tr>				
@@ -103,44 +117,44 @@ Revisions   :
 		  		<tr>
 		  			<td width="15%"><label for="vrm">VRM</label></td>
 					<td width="25%" colspan="3">
-						<input name="vrm" id="vrm" displayInPane="VRM" size="8" value="#vrm#"> <cfif session.isWMidsUser><b>WM</b></cfif>
+						<input name="vrm" id="vrm" displayInPane="VRM" displayPrevSearch="Y" size="8" value="#vrm#" initialFocus="true"> <cfif session.isWMidsUser><b>WM</b></cfif>
 						&nbsp;&nbsp;Special Search Available (eg. T%*312*%Y - NB. *ANYORDER*, Warks / West Mercia Data Only)						
 					</td>																							
 		  		</tr>	
 		  		<tr>
 		  			<td width="15%"><label for="manu">Manufacturer</label></td>
 					<td width="25%">
-						<input name="manufacturer" id="manufacturer" displayInPane="Manufacturer" size="25">
+						<input name="manufacturer" id="manufacturer" displayInPane="Manufacturer" displayPrevSearch="Y" size="25">
 					</td>
 					<td width="15%"><label for="model">Model</label></td>
 					<td>
-						<input name="model" id="model" displayInPane="Model" size="25">						
+						<input name="model" id="model" displayInPane="Model" displayPrevSearch="Y" size="25">						
 					</td>																		
 		  		</tr>	
 		  		<tr>
 		  			<td><label for="body_type">Body Type</label></td>
 					<td>
-						<input name="body_type" id="body_type" displayInPane="Body Type" size="25">						
+						<input name="body_type" id="body_type" displayInPane="Body Type" displayPrevSearch="Y" size="25">						
 					</td>																
 		  			<td><label for="shade">Shade</label></td>
 					<td>
-						<input name="shade" id="shade" displayInPane="district" size="25">						
+						<input name="shade" id="shade" displayInPane="Shade" displayPrevSearch="Y" size="25">						
 					</td>																
 		  		</tr>
 		  		<tr>
 		  			<td><label for="primary_col">Primary Colour</label></td>
 					<td>
-						<input name="primary_col" id="primary_col" displayInPane="Primary Colour" size="25">						
+						<input name="primary_col" id="primary_col" displayInPane="Primary Colour" displayPrevSearch="Y" size="25">						
 					</td>																		  		
 		  			<td><label for="secondary_col">Secondary Colour</label></td>
 					<td>
-						<input name="secondary_col" id="secondary_col" displayInPane="Secondary Colour" size="25">						
+						<input name="secondary_col" id="secondary_col" displayInPane="Secondary Colour" displayPrevSearch="Y" size="25">						
 					</td>																
 		  		</tr>	
 		  		<tr>
 		  			<td width="15%"><label for="text">Text</label></td>
 					<td width="25%" colspan="3">
-						<input name="text" id="text" displayInPane="Text" size="50" value=""> 					
+						<input name="text" id="text" displayInPane="Text" displayPrevSearch="Y" size="50" value=""> 					
 					</td>																							
 		  		</tr>																										
 		  	</table>
@@ -148,17 +162,18 @@ Revisions   :
 		  </div>		
 	  </div>		 	  
 	  <div class="spacer">&nbsp;</div>
-	  <div align="right">
+	  <div class="searchButtonsDiv">
 	  	<cfif isDefined('startSearch')>
 		 <input type="hidden" name="doSearch" id="doSearch" value="true">  	
 		</cfif>
-	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button">
-	  </div>
+	  	<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
+	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button searchButton">
+	  </div>	  
     </div>		
 	</form>
 	</cfoutput>
 	<!--- section for results --->
-	<div id="resultsContainer" style="display:none;">
+	<div id="resultsContainer" style="display:none; clear:both">
 		
 		<!---  --->
 		<div id="resultsTabs">
@@ -213,7 +228,8 @@ Revisions   :
 	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
 	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
 	<input type="hidden" name="requestForForce" id="requestForForce" value="">
-	
+	<input type="hidden" name="lastEnquiryTimestamp" id="lastEnquiryTimestamp" value="">	
+	<input type="hidden" name="isOCC" id="isOCC" value="#session.isOCC#">
 	
 	<div id="vehicleDetailsDialog" style="display:none;">
 		<div id='onLoadingDiv' style='width:100%' align='center'><h4>Loading, please wait</h4><div class='progressBar'></div></div>

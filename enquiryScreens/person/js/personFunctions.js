@@ -1,3 +1,14 @@
+/*
+ * Module      : personFunctions.js
+ * 
+ * Application : GENIE - Person Enquiry Specific Functions
+ * 
+ * Author      : Nick Blackham
+ * 
+ * Date        : 16-Dec-2014
+ * 
+ */
+
 function showFormDebug(){
 	var dataToShow=''
 	$('form.enquiryForm').find('input,select').each(
@@ -57,6 +68,9 @@ function getFormData(){
 
 function doPersonEnquiry(){
 	
+	// clear the interval for checking on search expiry
+	clearInterval(window.globalSearchButtonInterval)
+	
 	// get the search form data
 	var dataToSend=getFormData();
 	
@@ -110,6 +124,9 @@ function doPersonEnquiry(){
 				$('#wmpPaste').attr('pasteUrl',$('#wmpPaste').attr('pasteUrl')+$('#wmpResultsData').find('#pastePath').val())
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
+			
+			// add this search to the previous search list
+			addPreviousSearch()
 			
 			// we have one result, if the nominal ref column has a link in it then click it on the users behalf
 			// and the west mids button has not been checked.
@@ -261,9 +278,14 @@ function doPersonEnquiry(){
    }	
    
    // now all the searches have been sent and the right tabs initialised 
-   // show the results container
+   // show the results container   
+   $('#resultsContainer').show();
    
-   $('#resultsContainer').show()
+   // set the last enquiry timestamp, so we can work out when to remove the button
+   $('#lastEnquiryTimestamp').val(getTimestamp());
+	
+   window.globalSearchButtonInterval=setInterval(checkButtonExpiry,150000);
+	
 	
 }
 

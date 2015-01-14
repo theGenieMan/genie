@@ -30,14 +30,14 @@ Revisions   :
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">		
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/customControls/dpa/css/dpa.css">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/applications/cfc/hr_alliance/hrWidget.css">
-	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
-	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.min.js"></script>
+	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.min.js"></script>
 	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>
 	<script type="text/javascript" src="/jQuery/inputmask/jquery.inputmask.js"></script>
 	<script type="text/javascript" src="/jQuery/inputmask/jquery.inputmask.date.extensions.js"></script>
-	<script type="text/javascript" src="/jQuery/time/jquery.plugin.js"></script>
-	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.plugin.min.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.min.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
 	<script type="text/javascript" src="js/telephoneFunctions.js"></script>
@@ -61,19 +61,33 @@ Revisions   :
 	<div style="padding-top:2px;" align="center">
 		<a href="/help/telephone_enquiry_info.cfm?#Session.URLToken#" target="_blank">What am I Searching? Click here for information</a>
 	</div>
+		
 	
-	<input type="button" class="clearEnquiryForm ui-button" value="CLEAR FORM">
-	<form class="enquiryForm" style="margin:2px 0px 0px 0px;">
 	<div id="searchPanes">		  
 	  <div class="ui-state-highlight" align="center">
 		Enter information into <b>at least one</b> of the search fields below.
 	  </div>
 	  <div class="spacer">&nbsp;</div>
-	  <div align="right">
-	  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
-		<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
-		<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
-	  </div>
+	  <div class="searchButtonsDiv">
+		<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
+	  
+		  <div align="right">		    
+			<span id="prevSearchSpan" style="display:none">
+		  	<b>Previous Searches:</b>
+			<select name="prevSearch" id="prevSearch">
+				
+			</select>
+			&nbsp;
+			|
+			</span>
+			&nbsp;			
+		  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
+			<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
+			<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
+		  </div>
+	  </div>	  
+	  <div class="spacer">&nbsp;</div>
+	  <form class="enquiryForm" style="margin:2px 0px 0px 0px;">
 	  <div id="sourcePane" class="ui-accordion searchPane" initOpen="true">
 	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Data Sources <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent">
@@ -81,13 +95,13 @@ Revisions   :
 		  		<tr>
 		  			<td width="15%"><b>Data Sources</b></td>
 					<td>
-						<input type="checkbox" name="wmpData" id="wmpData" displayInPane="WP/WMP" checked disabled noClear='yes'> WP/WMP 						
-						<input type="checkbox" name="firearmsData" id="firearmsData" displayInPane="Firearms" checked noClear='yes'> Firearms
+						<input type="checkbox" name="wmpData" id="wmpData" displayInPane="WP/WMP" displayPrevSearch="N" checked disabled noClear='yes'> WP/WMP 						
+						<input type="checkbox" name="firearmsData" id="firearmsData" displayInPane="Firearms" displayPrevSearch="N" checked noClear='yes'> Firearms
 						<cfif session.isWMidsUser>
-						<input type="checkbox" name="wMidsData" id="wMidsData" displayInPane="West Mids"> West Mids
+						<input type="checkbox" name="wMidsData" id="wMidsData" displayInPane="West Mids" displayPrevSearch="N"> West Mids
 						</cfif>	
 						<cfif session.isHTCUUser>
-						<input type="checkbox" name="htcuData" id="htcuData" displayInPane="HTCU"> HTCU
+						<input type="checkbox" name="htcuData" id="htcuData" displayInPane="HTCU" displayPrevSearch="N"> HTCU
 						</cfif>
 					</td>										
 		  		</tr>				
@@ -111,13 +125,13 @@ Revisions   :
 		  		<tr>
 		  			<td width="15%"><label for="tel_no">Number</label></td>
 					<td width="25%" colspan="3">
-						<input name="tel_no" id="tel_no" displayInPane="Number" size="15" value="#tel_no#"> <cfif session.isWMidsUser><b>WM</b></cfif>						
+						<input name="tel_no" id="tel_no" displayInPane="Number" displayPrevSearch="Y" size="15" value="#tel_no#"> <cfif session.isWMidsUser><b>WM</b></cfif>						
 					</td>																							
 		  		</tr>	
 		  		<tr>
 		  			<td><label for="phone_type">Phone Type</label></td>
 					<td colspan="4">
-						<select name="phone_type" id="phone_type" displayInPane="Phone Type">
+						<select name="phone_type" id="phone_type" displayInPane="Phone Type" displayPrevSearch="Y">
 							<option value="">-- Select --</option>
 							<cfloop query="application.qry_PhoneType">
 								<option value="#DESCRIPTION#">#DESCRIPTION#</option>	
@@ -128,7 +142,7 @@ Revisions   :
 		  		<tr>
 		  			<td><label for="body_type">Airtime Supplier</label></td>
 					<td colspan="4">
-						<select name="supplier" id="supplier" displayInPane="Phone Type">
+						<select name="supplier" id="supplier" displayInPane="Airtime Supplier" displayPrevSearch="Y">
 							<option value="">-- Select --</option>
 							<cfloop query="application.qry_PhoneAirtime">
 								<option value="#DESCRIPTION#">#DESCRIPTION#</option>	
@@ -139,13 +153,13 @@ Revisions   :
 		  		<tr>
 		  			<td><label for="elec_comms">Elec Comms</label></td>
 					<td colspan="4">
-						<input name="elec_comms" id="elec_comms" displayInPane="Elec Comms" size="25">						
+						<input name="elec_comms" id="elec_comms" displayInPane="Elec Comms" displayPrevSearch="Y" size="25">						
 					</td>																		  																	
 		  		</tr>	
 		  		<tr>
 		  			<td><label for="text">Stolen</label></td>
 					<td colspan="4">
-						<select name="stolen" id="stolen" displayInPane="Stolen">
+						<select name="stolen" id="stolen" displayInPane="Stolen" displayPrevSearch="Y">
 							<option value="">-- Select --</option>
 							<option value="N">NO</option>				 
 							<option value="Y">YES</option>				 				 
@@ -156,24 +170,24 @@ Revisions   :
 					<td><label for="dob">Date Created</label></td>
 					<td colspan="4">
 						<b>Between/On</b> 
-						<input name="createdFrom" id="createdFrom" displayInPane="Created Between/On" size="10" value="" datepicker> 
+						<input name="createdFrom" id="createdFrom" displayInPane="Created Between/On" displayPrevSearch="Y" size="10" value="" datepicker> 
 						<b>And</b> 
-						<input name="createdTo" id="createdTo" displayInPane="Created To" size="10" value="" datepicker>
+						<input name="createdTo" id="createdTo" displayInPane="Created To" displayPrevSearch="Y" size="10" value="" datepicker>
 					</td>										
 				</tr>	
 				<tr>
 					<td><label for="dob">Date Terminated</label></td>
 					<td colspan="4">
 						<b>Between/On</b> 
-						<input name="terminatedFrom" id="terminatedFrom" displayInPane="Terminated Between/On" size="10" value="" datepicker> 
+						<input name="terminatedFrom" id="terminatedFrom" displayInPane="Terminated Between/On" displayPrevSearch="Y" size="10" value="" datepicker> 
 						<b>And</b> 
-						<input name="terminatedTo" id="terminatedTo" displayInPane="Terminated To" size="10" value="" datepicker>
+						<input name="terminatedTo" id="terminatedTo" displayInPane="Terminated To" size="10" displayPrevSearch="Y" value="" datepicker>
 					</td>										
 				</tr>			
 		  		<tr>
 		  			<td><label for="notes">Notes</label></td>
 					<td colspan="4">
-						<input name="notes" id="notes" displayInPane="Notes" size="50">						
+						<input name="notes" id="notes" displayInPane="Notes" displayPrevSearch="Y" size="50">						
 					</td>																		  																	
 		  		</tr>																													
 		  	</table>
@@ -181,19 +195,19 @@ Revisions   :
 		  </div>		
 	  </div>		 	  
 	  <div class="spacer">&nbsp;</div>
-	  <div align="right">
+	  <div class="searchButtonsDiv">
 	  	<cfif isDefined('startSearch')>
 		 <input type="hidden" name="doSearch" id="doSearch" value="true">  	
 		</cfif>
-	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button">
-	  </div>
+	  	<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
+	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button searchButton">
+	  </div>	  
     </div>		
 	</form>
 	</cfoutput>
 	<!--- section for results --->
-	<div id="resultsContainer" style="display:none;">
-		
-		<!---  --->
+	<div id="resultsContainer" style="display:none; clear:both">
+				
 		<div id="resultsTabs">
 			
 		   <ul>        		
@@ -272,7 +286,7 @@ Revisions   :
 	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
 	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
 	<input type="hidden" name="requestForForce" id="requestForForce" value="">
-	
+	<input type="hidden" name="lastEnquiryTimestamp" id="lastEnquiryTimestamp" value="">
 	
 	<div id="vehicleDetailsDialog" style="display:none;">
 		<div id='onLoadingDiv' style='width:100%' align='center'><h4>Loading, please wait</h4><div class='progressBar'></div></div>

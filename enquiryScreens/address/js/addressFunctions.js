@@ -46,6 +46,9 @@ function getFormData(){
 
 function doAddressEnquiry(){
 	
+	// clear the interval for checking on search expiry
+	clearInterval(window.globalSearchButtonInterval)	
+	
 	// get the search form data
 	var dataToSend=getFormData();
 	
@@ -220,6 +223,9 @@ function doAddressEnquiry(){
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
 			
+			// add this search to the previous search list
+			addPreviousSearch()
+			
 			// now a search has been performed show the actions drop down
 			if ($('#actionsDropDown').length > 0) {
 				$('#actionsDropDown').show();
@@ -367,6 +373,11 @@ function doAddressEnquiry(){
    // show the results container
    
    $('#resultsContainer').show()
+   
+   // set the last enquiry timestamp, so we can work out when to remove the button
+   $('#lastEnquiryTimestamp').val(getTimestamp());
+	
+   window.globalSearchButtonInterval=setInterval(checkButtonExpiry,150000);
 	
 }
 

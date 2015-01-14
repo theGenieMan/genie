@@ -1,3 +1,14 @@
+/*
+ * Module      : main.js
+ * 
+ * Application : GENIE - Vehicle Enquiry
+ * 
+ * Author      : Nick Blackham
+ * 
+ * Date        : 08-Dec-2014
+ * 
+ */
+
 $(document).ready(function() {  		  
 
 		$.ajaxSetup ({
@@ -5,15 +16,23 @@ $(document).ready(function() {
 		    cache: false
 		});
 
+		if (!window.console) console = {log: function() {}};
+		
+		window.globalSearchButtonInterval='';
+		window.globalPreviousSearchArray=[];
+
 		// create results required
 		var $resultsTabs=$( "#resultsTabs" ).tabs();
 		
 		var dpaClear=($('#dpaClear').val()==='true');		
-		var $dpaBox=$('#dpa').dpa({
+		var isOCC=$('#isOCC').val();
+		
+		$('#dpa').dpa({
 					requestFor:{
 						initialValue:'',
 					},
 					alwaysClear:dpaClear,
+					showPNCPaste:isOCC,
 					dpaUpdated: function(e,data){
 							// update the dpa boxes as per the values entered.
 							$('#reasonCode').val(data.reasonCode)
@@ -30,18 +49,40 @@ $(document).ready(function() {
 									 cache: false,
 									 async: false,							 
 									 success: function(data, status){							
-											$('#dpaValid').val('Y').change()			  					  
+										$('#startSearch').show();						
+										$('#dpa').dpa('hide');
+										// if there is an initial focus button set then focus it																						
+										if ($('.enquiryForm [initialFocus]').length>0){
+											$('.enquiryForm [initialFocus]').focus()
+										}			  					  
+										// if there is a pnc search ready then trigger the submit of
+										// the enquiryForm
+										if ($('.enquiryForm > #pncDataReady').length>0){
+											$('.enquiryForm').trigger('submit');
+											$('.enquiryForm > #pncDataReady').remove;
+										}
+										// if we have a prevSearch select box with more than one entry in then show that to
+										if ($('#prevSearch').length>0){
+											if($('#prevSearch option').length>1){
+												$('#prevSearchSpan').show()
+											}
+										}		  					  
 									 }
 							});								
 							
 							
 					}
 					
-			});
+			});		
 			
 		// see if we are running a search automatically
+		// if we are then run it, no need to show the DPA box
 		if( $('#doSearch').length>0 ){
 			$('.enquiryForm').submit();
 		}		
+		else{
+		// not an auto search, show the DPA
+			$('#dpa').dpa('show')
+		}
 	
 });

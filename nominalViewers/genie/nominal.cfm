@@ -81,12 +81,12 @@ Revisions   :
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/applications/cfc/hr_alliance/hrWidget.css">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">
-	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
-	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.min.js"></script>
+	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.min.js"></script>
 	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>
-	<script type="text/javascript" src="/jQuery/time/jquery.plugin.js"></script>
-	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.plugin.min.js"></script>
+	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.min.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
 	<script type="text/javascript" src="/jQuery/customControls/dpa/jquery.genie.dpa.js"></script>
@@ -126,7 +126,7 @@ Revisions   :
 
 <div id="personalDetails">
 <div class="#iif(nominal.getDECEASED() IS "Y",de('deceasedTitle'),de('nominalTitle'))#" align="center">
-<cfif nominal.getDECEASED() IS "Y">**** DECEASED **** - </cfif>#nominal.getFULL_NAME()# (#nominal.getNOMINAL_REF()#)<cfif nominal.getDECEASED() IS "Y"> - **** DECEASED ****</cfif>
+<cfif nominal.getDECEASED() IS "Y">**** DECEASED **** - </cfif>#nominal.getFULL_NAME()# #IIf(Len(nominal.getDATE_OF_BIRTH_TEXT()) IS 0,DE("&nbsp;"),DE(' - '&nominal.getDATE_OF_BIRTH_TEXT()))# (#nominal.getNOMINAL_REF()#)<cfif nominal.getDECEASED() IS "Y"> - **** DECEASED ****</cfif>
 </div>
 
 <table width="100%" border=0 height="300px" id="nominalDetailsTable">
@@ -152,16 +152,16 @@ Revisions   :
 		  <div id="nominalInfoHolder">	
 			<table width="98%" class="nominalData">
 				<tr>
-					<th valign="top" width="16%">Nominal Ref</th>
-					<td valign="top" class="row_colour0" width="17%"><b>#IIf(Len(nominal.getNominal_Ref()) IS 0,DE("&nbsp;"),DE(nominal.getNominal_Ref()))#</b></td>
-					<th valign="top" width="16%">PNC ID</th>
-					<td valign="top" class="row_colour0" width="17%"><b>#IIf(Len(nominal.getPNCID_NO()) IS 0,DE("&nbsp;"),DE(nominal.getPNCID_NO()))#</b></td>
-					<th valign="top" width="16%">CRO</th>
-					<td valign="top" class="row_colour0" width="17%"><b>#IIf(Len(nominal.getCRO()) IS 0,DE("&nbsp;"),DE(nominal.getCRO()))#</b></td>
+					<th valign="top" width="15%">Nominal Ref</th>
+					<td valign="top" class="row_colour0 standOut" width="18%">#IIf(Len(nominal.getNominal_Ref()) IS 0,DE("&nbsp;"),DE(nominal.getNominal_Ref()))#</td>
+					<th valign="top" width="15%">PNC ID</th>
+					<td valign="top" class="row_colour0 standOut" width="18%"><b>#IIf(Len(nominal.getPNCID_NO()) IS 0,DE("&nbsp;"),DE(nominal.getPNCID_NO()))#</b></td>
+					<th valign="top" width="15%">CRO</th>
+					<td valign="top" class="row_colour0" width="18%"><b>#IIf(Len(nominal.getCRO()) IS 0,DE("&nbsp;"),DE(nominal.getCRO()))#</b></td>
 				</tr>
 				<tr>
 					<th valign="top">DOB</th>
-					<td valign="top" class="row_colour1">#IIf(Len(nominal.getDATE_OF_BIRTH_TEXT()) IS 0,DE("&nbsp;"),DE(nominal.getDATE_OF_BIRTH_TEXT()))#
+					<td valign="top" class="row_colour1 standOut">#IIf(Len(nominal.getDATE_OF_BIRTH_TEXT()) IS 0,DE("&nbsp;"),DE(nominal.getDATE_OF_BIRTH_TEXT()))#
                         #IIf(nominal.getDOB_ESTIMATE_FLAG() IS 'Y',DE("(Estimated)"),DE("&nbsp;"))#</td>
 					<th valign="top">Age</th>
 					<td valign="top" class="row_colour1">#IIf(Len(nominal.getAge()) IS 0,DE("&nbsp;"),DE(nominal.getAge()))#</td>
@@ -177,11 +177,10 @@ Revisions   :
 					<td valign="top" class="row_colour0">#IIf(Len(nominal.getBUILD()) IS 0,DE("&nbsp;"),DE(nominal.getBUILD()))#</td>
 				</tr>	
 				<tr>
-					<th valign="top">Ethnic 6<br>Ethnic 16</th>
-					<td valign="top" class="row_colour1" colspan="3">
-						#IIf(Len(nominal.getETHNICITY_6()) IS 0,DE("&nbsp;"),DE(nominal.getETHNICITY_6()))#<br>
-						#IIf(Len(nominal.getETHNICITY_16()) IS 0,DE("&nbsp;"),DE(nominal.getETHNICITY_16()))#
-					</td>					
+					<th valign="top">Hand</th>
+					<td valign="top" class="row_colour1">#IIf(Len(nominal.getHANDED()) IS 0,DE("&nbsp;"),DE(nominal.getHANDED()))#</td>
+					<th valign="top">Accent</th>
+					<td valign="top" class="row_colour1">#IIf(Len(nominal.getACCENT()) IS 0,DE("&nbsp;"),DE(nominal.getACCENT()))#</td>																
 					<th valign="top">Glasses</th>
 					<td valign="top" class="row_colour1">#IIf(Len(nominal.getGLASSES_USED()) IS 0,DE("&nbsp;"),DE('Used: '&nominal.getGLASSES_WORN()))# #IIf(Len(nominal.getGLASSES_WORN()) IS 0,DE("&nbsp;"),DE('Worn: '&nominal.getGLASSES_USED()))#</td>
 				</tr>	
@@ -200,10 +199,11 @@ Revisions   :
 				<tr>
 					<th valign="top">MOPI Group</th>
 					<td valign="top" class="row_colour0">#IIf(Len(nominal.getMOPI_GROUP()) IS 0,DE("&nbsp;"),DE(nominal.getMOPI_GROUP()))#</td>
-					<th valign="top">Hand</th>
-					<td valign="top" class="row_colour1">#IIf(Len(nominal.getHANDED()) IS 0,DE("&nbsp;"),DE(nominal.getHANDED()))#</td>
-					<th valign="top">Accent</th>
-					<td valign="top" class="row_colour1">#IIf(Len(nominal.getACCENT()) IS 0,DE("&nbsp;"),DE(nominal.getACCENT()))#</td>					
+			        <th valign="top">Ethnic 6<br>Ethnic 16</th>
+					<td valign="top" class="row_colour1" colspan="3">
+						#IIf(Len(nominal.getETHNICITY_6()) IS 0,DE("&nbsp;"),DE(nominal.getETHNICITY_6()))#<br>
+						#IIf(Len(nominal.getETHNICITY_16()) IS 0,DE("&nbsp;"),DE(nominal.getETHNICITY_16()))#
+					</td>	
 				</tr>		
 			</table>
 			

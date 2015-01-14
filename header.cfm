@@ -65,7 +65,7 @@ Revisions        :
 
 <cfset inet_address = CreateObject("java", "java.net.InetAddress")>
 <cfoutput>
-<div class="ui-widget-header" align="center">
+<div class="ui-widget-header-genie" align="center">
  <table width="99%" cellpadding=0 cellspacing=0 align="center"> 
  	<tr>
  		<td width="10%" valign="top" align="left">

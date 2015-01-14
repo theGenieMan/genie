@@ -45,7 +45,7 @@ Revisions   :
 <cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"ADDRESS DETAILS (address_details.cfm)",str_SearchParams,"",0,session.user.getDepartment())>
 
 <!--- get the address details again --->
- <CFQUERY NAME = "qry_Address" DATASOURCE="#Application..WarehouseDSN#" cachedwithin="#Application.sTimespan#">
+ <CFQUERY NAME = "qry_Address" DATASOURCE="#Application.WarehouseDSN#" cachedwithin="#Application.sTimespan#">
  SELECT         DECODE(PART_ID,'','',PART_ID||', ')||
 				DECODE(BUILDING_NAME,'','',BUILDING_NAME||', ')||
 				DECODE(BUILDING_NUMBER,'','',BUILDING_NUMBER||', ')||
@@ -61,7 +61,7 @@ Revisions   :
  </cfquery>
 
 <!--- get all the offences linked to the address ref passed in --->
-<CFQUERY NAME = "qry_OffenceResults" DATASOURCE="#Application..WarehouseDSN#" cachedwithin="#Application.sTimespan#">
+<CFQUERY NAME = "qry_OffenceResults" DATASOURCE="#Application.WarehouseDSN#" cachedwithin="#Application.sTimespan#">
 	SELECT ORG_CODE||'/'||SERIAL_NO||'/'||DECODE(LENGTH(YEAR),1, '0' || YEAR, YEAR) AS CRIME_NO,
            DECODE(O.LAST_COMMITTED,'', TO_CHAR(O.FIRST_COMMITTED,'DD/MM/YYYY HH24:MI'),
            TO_CHAR(O.FIRST_COMMITTED,'DD/MM/YYYY HH24:MI') || ' and ' ||    TO_CHAR(O.LAST_COMMITTED,'DD/MM/YYYY HH24:MI')) Committed,	       
@@ -75,7 +75,7 @@ Revisions   :
 </cfquery>
 
 <!--- get all the nominals lined to the address ref passed in --->
-<CFQUERY NAME = "qry_NominalResults" DATASOURCE="#Application..WarehouseDSN#" cachedwithin="#Application.sTimespan#">	
+<CFQUERY NAME = "qry_NominalResults" DATASOURCE="#Application.WarehouseDSN#" cachedwithin="#Application.sTimespan#">	
 	SELECT nom.NOMINAL_REF,
     	   REPLACE(REPLACE(LTRIM(
 		                   RTRIM(nomd.TITLE)||' '||
@@ -114,10 +114,11 @@ Revisions   :
  <cfif ListLen(lis_NomRefsV7,",") GT 0>
 
 <!--- get all the warnings for these nominals --->
-  <cfquery name="qry_WarnDetails" datasource="#Application..WarehouseDSN#" cachedwithin="#Application.sTimespan#">
+  <cfquery name="qry_WarnDetails" datasource="#Application.WarehouseDSN#" cachedwithin="#Application.sTimespan#">
 	 SELECT w.NOMINAL_REF, '<b>'||w.WSC_DESC||'</b>-'||TO_CHAR(w.DATE_MARKED,'DD/MM/YYYY') AS WARNING_TEXT
 	 FROM browser_owner.GE_WARNINGS w
 	 WHERE NOMINAL_REF IN (#PreserveSingleQuotes(lis_NomRefsV7)#)
+	 AND   END_DATE IS NULL OR (TRUNC(END_DATE) >= TRUNC(SYSDATE))
 	 ORDER BY DATE_MARKED DESC
   </cfquery> 		
   <!--- V8 <cfqueryparam value="#PreserveSingleQuotes(lis_NomRefs)#" cfsqltype="cf_sql_varchar" list="true">--->
@@ -125,7 +126,7 @@ Revisions   :
  </cfif>
 
 <!--- get all the organisation lined to the address ref passed in --->
-<CFQUERY NAME = "qry_Organisations" DATASOURCE="#Application..WarehouseDSN#" cachedwithin="#Application.sTimespan#">	
+<CFQUERY NAME = "qry_Organisations" DATASOURCE="#Application.WarehouseDSN#" cachedwithin="#Application.sTimespan#">	
 	SELECT   ORG_CODE,ORG_TYPE,NAME, TO_CHAR(RECORDED,'DD/MM/YYYY') AS DATE_REC
 	FROM     browser_owner.GE_ADD_ORG a_org
 	WHERE    a_org.PREMISE_KEY='#PREMISE_KEY#'
@@ -134,7 +135,7 @@ Revisions   :
 </cfquery>
 
 <!--- get all the intel linked to the address ref passed in --->
-<CFQUERY NAME = "qry_Intel" DATASOURCE="#Application..WarehouseDSN#" cachedwithin="#Application.sTimespan#">	
+<CFQUERY NAME = "qry_Intel" DATASOURCE="#Application.WarehouseDSN#" cachedwithin="#Application.sTimespan#">	
   SELECT int.*
   FROM   browser_owner.INTELL_SEARCH int, browser_owner.INTELL_ADDS addr
   WHERE  addr.LOG_REF=int.LOG_REF
