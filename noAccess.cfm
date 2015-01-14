@@ -18,7 +18,7 @@
 </div>
 <br>
 <cfoutput>
-<h1 align="center">Access to GENIE #Application.Version# #Application.ENV# is currently disabled</h1>
+<h1 align="center">Access to GENIE #Application.Version# #Application.ENV# is currently disabled<br><br>Please close all your GENIE windows</h1>
 </cfoutput>
 
 <cfif session.isGenieAdmin>
