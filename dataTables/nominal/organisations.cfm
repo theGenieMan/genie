@@ -20,7 +20,7 @@ Revisions   :
 <cfset qry_Organisations=application.genieService.getWestMerciaNominalOrganisations(nominalRef=nominalRef)>
 
 <div id="dataContainer">
-<div class="nominalTitle">
+<div class="dataTableTitle">
 ORGANIASTIONS
 </div>
  

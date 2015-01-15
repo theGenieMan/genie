@@ -103,7 +103,7 @@ Revisions   :
 <cfset qry_NominalRelationships=Application.genieService.getWestMerciaNominalAssociates(nominalRef=nominalRef,orderBy=IIf(isDefined("orderBy"),DE(orderBy),DE("surname")))>
 
 <div id="dataContainer">
-<div class="nominalTitle">
+<div class="dataTableTitle">
 ASSOCIATES
 </div>
 

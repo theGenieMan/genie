@@ -1736,17 +1736,24 @@ div.geniePanel .header{
 }
 
 .nominalTitle{
-	font-size:120%;
+	font-size:150%;
 	font-weight:bold;
 	background-color:#000000;
 	color:#FFCCCC;
 }
 
 .deceasedTitle{
-	font-size:120%;
+	font-size:150%;
 	font-weight:bold;
 	background-color:#FF0000;
 	color:white;
+}
+
+.dataTableTitle{
+	font-size:120%;
+	font-weight:bold;
+	background-color:#000000;
+	color:#FFCCCC;
 }
 
 .redWarningBox{

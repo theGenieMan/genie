@@ -18,7 +18,7 @@ Revisions   :
 
 <cfset qry_AddressDetails=Application.genieService.getWestMerciaNominalAddresses(nominalRef=nominalRef)>
 <div id="dataContainer">
- <div class="nominalTitle">
+ <div class="dataTableTitle">
  ADDRESSES
  </div>
  

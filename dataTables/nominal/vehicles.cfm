@@ -18,7 +18,7 @@ Revisions   :
 
 <cfset arr_Vehicles=Application.genieService.getWestMerciaNominalVehicles(nominalRef=nominalRef)>
 <div id="dataContainer">
-  <div class="nominalTitle">
+  <div class="dataTableTitle">
 		VEHICLES
   </div>
 

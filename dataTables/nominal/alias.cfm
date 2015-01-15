@@ -18,7 +18,7 @@ Revisions   :
 
 <cfset qry_NominalRelationships=Application.genieService.getWestMerciaNominalAlias(nominalRef=nominalRef)>
 <div id="dataContainer">
-<div class="nominalTitle">
+<div class="dataTableTitle">
 ALIASES
 </div>
 

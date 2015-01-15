@@ -20,7 +20,7 @@ Revisions   :
  
 <div id="dataContainer">
 	
-<div class="nominalTitle">
+<div class="dataTableTitle">
 WARNINGS FULL HISTORY
 </div>
 	<cfif ArrayLen(warnings) GT 0>	

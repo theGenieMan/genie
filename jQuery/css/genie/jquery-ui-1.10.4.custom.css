@@ -1345,6 +1345,10 @@ font-size:90%;
 	font-weight:bold;
 }
 
+.genieLinkVisited{
+	color:#800080 !important;
+}
+
 .firearmsNominal{
 	cursor:hand;
 	color:#0000FF !important;
@@ -1665,16 +1669,28 @@ div.geniePanel .header{
 }
 
 .nominalTitle{
-	font-size:120%;
+	font-size:150%;
 	font-weight:bold;
+	/*
 	background-color:#0C5C99;
 	color:white;
+	*/
+	background-color:#d0e5f5;
+	color:#0C5C99;
+	border:1px solid #0C5C99;	
 }
 
 .deceasedTitle{
-	font-size:120%;
+	font-size:150%;
 	font-weight:bold;
 	background-color:#FF0000;
+	color:white;
+}
+
+.dataTableTitle{
+	font-size:120%;
+	font-weight:bold;	
+	background-color:#0C5C99;
 	color:white;
 }
 

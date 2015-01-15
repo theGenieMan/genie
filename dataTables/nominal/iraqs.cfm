@@ -72,7 +72,7 @@ $(document).ready(function() {
 </cfloop>
 
 <div id="dataContainer">
-	<div class="nominalTitle">
+	<div class="dataTableTitle">
 	INTELLIGENCE
 	</div>
 	<cfif isDefined("str_Message")>

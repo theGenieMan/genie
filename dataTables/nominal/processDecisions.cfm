@@ -18,7 +18,7 @@ Revisions   :
 
 <cfset procDec=Application.genieService.getWestMerciaNominalProcDecs(nominalRef=nominalRef)>
 <div id="dataContainer">
-  <div class="nominalTitle">
+  <div class="dataTableTitle">
   PROCESS DECISIONS
   </div>
   

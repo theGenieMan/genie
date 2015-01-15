@@ -18,7 +18,7 @@ Revisions   :
 
 <cfset variables.qry_NominalTelNos=Application.genieService.getWestMerciaNominalTelephones(nominalRef=nominalRef)>
 <div id="dataContainer">
-  <div class="nominalTitle">
+  <div class="dataTableTitle">
 	TELEPHONE NUMBERS
   </div>
   <cfoutput>

@@ -18,7 +18,7 @@ Revisions   :
 
 <cfset qry_Documents=Application.genieService.getWestMerciaNominalDocuments(nominalRef=nominalRef)>
 <div id="dataContainer">
-  <div class="nominalTitle">
+  <div class="dataTableTitle">
 	DOCUMENTS
   </div>
   

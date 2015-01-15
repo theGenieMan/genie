@@ -19,7 +19,7 @@ Revisions   :
 <cfset stopSearches=Application.genieService.getWestMerciaNominalStopSearch(nominalRef=nominalRef)>
 <cfset searchUUID=createUUID()>
 <div id="dataContainer"> 
-	<div class="nominalTitle">
+	<div class="dataTableTitle">
 		STOP SEARCHES
 	</div>
 	

@@ -18,7 +18,7 @@ Revisions   :
 
 <cfset custodies=application.genieService.getWestMerciaNominalCustodies(nominalRef=nominalRef)>
 <div id="dataContainer">
-  <div class="nominalTitle">
+  <div class="dataTableTitle">
 		CUSTODIES
   </div>
 

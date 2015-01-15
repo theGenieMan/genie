@@ -20,7 +20,7 @@ Revisions   :
  
 <div id="dataContainer">
 	
-	<div class="nominalTitle">
+	<div class="dataTableTitle">
 	MISSING PERSON
 	</div>
 	<cfif qry_MisPer.RecordCount GT 0>	

@@ -1612,6 +1612,36 @@ button#userNotesButton{
 	width:250px
 }
 
+.warningTitle
+{
+  	background-color : #FFFFCC;
+	color : #00F;
+  	line-height:1.1em;	
+	padding:1px;
+	text-align:center;
+	font-weight:bold;	 	  
+	margin:2px;
+}
+
+.warningTab
+{
+  	background-color : #FFFFCC;
+	color : #00F;
+  	line-height:1.1em;	
+	padding:1px;
+	text-align:center;
+	font-weight:bold;	  
+	margin:2px;
+}
+
+.warningText
+{
+	padding-top:2px;
+	text-align:left;
+	font-size:90%;
+}
+
+
 button{
 	cursor:hand;
 }
@@ -1628,3 +1658,207 @@ pre.crime {
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 	font-family : Arial,Helvetica,sans-serif;	
 }
+
+.ninetypc{
+	font-size:90%
+}
+
+.thSorted{
+	color:#000000 !important;
+}
+
+.thSortable{
+	color:#000000 !important;
+	cursor:hand;
+	text-decoration:underline;
+}
+
+.loadingDiv{
+	border:2px solid #0000FF; 
+	padding:5px;
+	text-align:center;
+	width:200px;
+	height:100px;
+	background-color:#FFFFCC;
+	z-index:0;
+}
+
+div.geniePanel{
+	border:1px solid #0000FF;
+	padding:2px;
+}	
+
+div.geniePanel .header{
+	background-color:#0000FF;
+	color:#FFFFCC;
+	font-size:110%;
+	font-weight:bold;
+	padding:2px;
+	margin-bottom:2px;
+}
+
+.nominalTitle{
+	font-size:150%;
+	font-weight:bold;
+	background-color:#0000FF;
+	color:#FFFFCC;
+}
+
+.deceasedTitle{
+	font-size:150%;
+	font-weight:bold;
+	background-color:#FF0000;
+	color:white;
+}
+
+.dataTableTitle{
+	font-size:120%;
+	font-weight:bold;
+	background-color:#0000FF;
+	color:#FFFFCC;
+}
+
+.redWarningBox{
+	font-weight:bold;
+	background-color:#FF0000;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	float:left;
+}
+
+.greenWarningBox{
+	font-weight:bold;
+	background-color:#009900;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.blueWarningBox{
+	font-weight:bold;
+	background-color:#000099;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.warningBoxIOM1{
+	font-weight:bold;
+	background-color:#FF0000;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.warningBoxIOM2{
+	font-weight:bold;
+	background-color:orange;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.warningBoxIOM3{
+	font-weight:bold;
+	background-color:#009900;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+.warningBoxIOM4{
+	font-weight:bold;
+	background-color:#000000;
+	color:white;
+	font-size:90%;
+	width:175px;
+	height:50px;
+	text-align:center;
+	padding-top:5px;
+	margin:0px 2px 2px 2px;
+	display:inline-block;
+}
+
+
+.warningBoxIOM4 a{
+	color:white !important;
+}
+
+.highlightCrime{
+	background-color:red !important;
+	color:white !important;
+	font-weight:bold !important;
+}
+
+.popupSearchResults{
+	border:1px solid black;
+	width:350px;
+	height:150px;
+	position:absolute;
+	overflow:auto;
+	z-index:9999;
+	margin-top:10px;
+	background-color:white;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+input[readonly]{
+	background-color:#aaa;
+	color:black;
+	font-weight:bold;
+}
+
+.bailHour{
+	background-color:#FFFFCC;
+	color:white;
+	font-weight:bold;	
+}
+
+.bailRow{
+	height:40px;
+}
+
+.clearLookup{
+	font-size:90%;
+	font-weight:bold;
+	color:red;
+	cursor:hand;	
+}
+
+.detected{
+	background-color:#FF0000;
+}
+
+.undetected{
+	background-color:#009900;

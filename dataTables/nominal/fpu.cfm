@@ -20,7 +20,7 @@ Revisions   :
 <cfset famProt=Application.genieService.getWestMerciaNominalFamilyProtection(nominalRef=nominalRef)>
 
 <div id="dataContainer">
-	<div class="nominalTitle">
+	<div class="dataTableTitle">
 	FAMILY PROTECTION
 	</div>
 	  <cfif ArrayLen(famProt) GT 0>

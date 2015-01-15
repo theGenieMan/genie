@@ -110,7 +110,7 @@ Revisions   :
 </cfif>	
 <cfinclude template="/header.cfm">	
 
-<div style="clear:all;">
+<div style="clear:all;" class="nominalNextPrevLinks">
 	<cfif isDefined('prevNomLink')>
 		<div style="float:left; width:48%">
 		 #prevNomLink#

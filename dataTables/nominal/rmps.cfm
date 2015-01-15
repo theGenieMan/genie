@@ -20,7 +20,7 @@ Revisions   :
 <cfset rmp=Application.genieService.getWestMerciaNominalRMP(nominalRef=nominalRef)>
 
 <div id="dataContainer"> 
-	<div class="nominalTitle">
+	<div class="dataTableTitle">
 	RISK MANAGEMENT PLANS
 	</div>
     

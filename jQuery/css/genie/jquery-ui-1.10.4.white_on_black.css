@@ -1659,6 +1659,35 @@ button#userNotesButton{
 	width:250px
 }
 
+.warningTitle
+{
+  	background-color : #FFF;
+	color : #000;
+  	line-height:1.1em;	
+	padding:1px;
+	text-align:center;
+	font-weight:bold;	 	  
+	margin:2px;
+}
+
+.warningTab
+{
+  	background-color : #FFF;
+	color : #000;
+  	line-height:1.1em;	
+	padding:1px;
+	text-align:center;
+	font-weight:bold;	  
+	margin:2px;
+}
+
+.warningText
+{
+	padding-top:2px;
+	text-align:left;
+	font-size:90%;
+}
+
 button{
 	cursor:hand;
 }
@@ -1716,17 +1745,24 @@ div.geniePanel .header{
 }
 
 .nominalTitle{
-	font-size:120%;
+	font-size:150%;
 	font-weight:bold;
 	background-color:#000000;
 	color:#FFFFFF;
 }
 
 .deceasedTitle{
-	font-size:120%;
+	font-size:150%;
 	font-weight:bold;
 	background-color:#FF0000;
 	color:white;
+}
+
+.dataTableTitle{
+	font-size:120%;
+	font-weight:bold;
+	background-color:#000000;
+	color:#FFFFFF;
 }
 
 .redWarningBox{

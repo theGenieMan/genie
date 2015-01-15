@@ -23,7 +23,7 @@ Revisions   :
 
 <div id="dataContainer">
 <cfif not isDefined("str_IsInsertNominal")>
-<div class="nominalTitle">
+<div class="dataTableTitle">
 FEATURES
 </div>
 <br>

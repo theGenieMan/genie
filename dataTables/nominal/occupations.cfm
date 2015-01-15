@@ -20,7 +20,7 @@ Revisions   :
  
 <div id="dataContainer">
 	
-<div class="nominalTitle">
+<div class="dataTableTitle">
 OCCUPATIONS
 </div>
 

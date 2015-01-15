@@ -18,7 +18,7 @@ Revisions   :
 
 <cfset arr_Warrants=application.genieService.getWestMerciaNominalWarrants(nominalRef=nominalRef)>
 <div id="dataContainer">
-<div class="nominalTitle">
+<div class="dataTableTitle">
 WARRANTS
 </div>
 

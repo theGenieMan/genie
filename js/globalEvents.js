@@ -236,7 +236,9 @@ $(document).on('click','.genieNominal',
 						fullscreen(url, 'nominal' + nominalRef)
 					}
 				}		
-			}			
+			}		
+			
+			$('a[href="'+$(this).attr('href')+'"]').addClass('genieLinkVisited');				
 			
 		}
 )
@@ -253,6 +255,8 @@ $(document).on('click','.genieFirearmsNominal',
 			var url='/nominalViewers/nflms/nominal.cfm?person_urn='+personURN;
 			
 			fullscreen(url, 'nflms' + personURN)
+			
+			$('a[href="'+$(this).attr('href')+'"]').addClass('genieLinkVisited');
 
 		}
 )
@@ -303,6 +307,8 @@ $(document).on('click','.genieCustodyLink',
 					window.open(url);
 				}
 			}
+			
+			$('a[href="'+$(this).attr('href')+'"]').addClass('genieLinkVisited');
 			
 		}
 );
@@ -370,6 +376,9 @@ $(document).on('click','.genieIntelLink',
 			 		window.open(url);
 			 	}
 			 }
+			 
+			 $('a[href="'+$(this).attr('href')+'"]').addClass('genieLinkVisited');			 
+			 
 			}
 			
 			
@@ -416,6 +425,9 @@ $(document).on('click','.genieCrimeLink',
 					window.open(url);
 				}
 			}	
+			
+			$('a[href="'+$(this).attr('href')+'"]').addClass('genieLinkVisited');
+			
 		});
 
 // event that fires when a link with the class of genieOISLink
@@ -430,6 +442,8 @@ $(document).on('click','.genieOISLink',
 			var url = '/documentViewers/oisDoc.cfm?incNo='+incNo
 			
 			window.open(url);
+			
+			$('a[href="'+$(this).attr('href')+'"]').addClass('genieLinkVisited');
 				
 		});
 
@@ -479,6 +493,8 @@ $(document).on('click','.genieCaseLink',
 				}
 			}
 			
+			$('a[href="'+$(this).attr('href')+'"]').addClass('genieLinkVisited');
+			
 		}
 );
 
@@ -494,6 +510,8 @@ $(document).on('click','.genieMisperLink',
 			var url = '/documentViewers/misperDoc.cfm?caseNo='+caseNo
 			
 			window.open(url);
+			
+			$('a[href="'+$(this).attr('href')+'"]').addClass('genieLinkVisited');
 				
 		});
 		
@@ -509,6 +527,8 @@ $(document).on('click','.genieSTEPLink',
 			var url = '/redirector/redirector.cfm?type=STEP&ref='+stepUrn
 			
 			window.open(url);
+			
+			$('a[href="'+$(this).attr('href')+'"]').addClass('genieLinkVisited');
 				
 		});		
 
@@ -526,6 +546,8 @@ $(document).on('click','.genieCrashLink',
 			var url = '/documentViewers/crashDoc.cfm?crashRef='+crashRef+'&crashDate='+crashDate; 
 				
 			window.open(url);
+			
+			$('a[href="'+$(this).attr('href')+'"]').addClass('genieLinkVisited');
 			
 		}
 );
@@ -564,6 +586,9 @@ $(document).on('click','.genieStopSearchLink',
 					window.open(url);
 				}
 			}	
+			
+			$('a[href="'+$(this).attr('href')+'"]').addClass('genieLinkVisited');
+			
 		});
 
 // event that fires when a link with the class of genieRMPLink
@@ -578,6 +603,8 @@ $(document).on('click','.genieRMPLink',
 			var url = '/redirector/redirector.cfm?type=RMP&ref='+rmpUrn
 			
 			window.open(url);
+			
+			$('a[href="'+$(this).attr('href')+'"]').addClass('genieLinkVisited');
 				
 		});		
 

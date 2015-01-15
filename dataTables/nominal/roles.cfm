@@ -55,7 +55,7 @@ $(document).ready(function() {
 <cfset lisPart4Crimes=ValueList(qPart4.CRIME_NUMBER,',')>      
 
 <div id="dataContainer"> 
-  <div class="nominalTitle">
+  <div class="dataTableTitle">
 		ROLES
   </div>
 

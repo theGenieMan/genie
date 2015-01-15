@@ -371,3 +371,7 @@ ol.bailConditions li {
 .searchButtonsDiv .searchButton{
 	float:right;	
 }
+
+.nominalNextPrevLinks {
+	font-size:90%;
+}

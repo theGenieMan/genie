@@ -18,7 +18,7 @@ Revisions   :
 
 <cfset bails=Application.genieService.getWestMerciaNominalBails(nominalRef=nominalRef)>
 <div id="dataContainer">
-  <div class="nominalTitle">
+  <div class="dataTableTitle">
 		BAILS
   </div>
   
