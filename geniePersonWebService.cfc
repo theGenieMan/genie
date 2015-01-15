@@ -544,6 +544,7 @@
 	  <cfset var iTableCreateEnd="">
 	    
 	  <cfset iFuncStart=getTickCount()> 
+	  <cflog file="geniePersonWebService" type="information" text="==================================================================================" >  
 	  
 	    <cfset keyPair = StructNew()>
 		<cfset keyPair.key = "P_NOMINAL_REF">
@@ -658,6 +659,8 @@
                                                                                   searchUUID=thisUUID)>
 		<cfset iServiceCallEnd=getTickCount()>																				      
 		
+		<cflog file="geniePersonWebService" type="information" text="Service Call = #iServiceCallEnd-iServiceCallStart# ms #thisUUID#" >
+		
 		<cfset iTableCreateStart=getTickCount()>
 		<cfif searchData.resultType IS "XML">
 		
@@ -683,13 +686,11 @@
 		</cfif>
 		
 		<cfset iTableCreateEnd=getTickCount()>				
-		
-		<cfset iFuncEnd=getTickCount()>
-		
-		<cflog file="geniePersonWebService" type="information" text="==================================================================================" >
-		<cflog file="geniePersonWebService" type="information" text="Person Search Total = #iFuncEnd-iFuncStart# ms #thisUUID#" >
-		<cflog file="geniePersonWebService" type="information" text="Service Call = #iServiceCallEnd-iServiceCallStart# ms #thisUUID#" >
 		<cflog file="geniePersonWebService" type="information" text="Table Create = #iTableCreateEnd-iTableCreateStart# ms #thisUUID#" >
+		
+		<cfset iFuncEnd=getTickCount()>		
+		
+		<cflog file="geniePersonWebService" type="information" text="Person Search Total = #iFuncEnd-iFuncStart# ms #thisUUID#" >
 		<cflog file="geniePersonWebService" type="information" text="==================================================================================" >
 																  
 		<cfreturn returnTable>																		  		
