@@ -535,6 +535,15 @@
 	  <cfset var auditData=createAuditStructure(searchData)>   
 	  <cfset var thisUUID=createUUID()>
 	  <cfset var returnTable=''>
+	    
+	  <cfset var iFuncStart="">
+	  <cfset var iFuncEnd="">
+	  <cfset var iServiceCallStart="">
+	  <cfset var iServiceCallEnd="">
+	  <cfset var iTableCreateStart="">
+	  <cfset var iTableCreateEnd="">
+	    
+	  <cfset iFuncStart=getTickCount()> 
 	  
 	    <cfset keyPair = StructNew()>
 		<cfset keyPair.key = "P_NOMINAL_REF">
@@ -642,11 +651,14 @@
 		<cfset keyPair.value = searchData.exactDOB>
 		<cfset searchFields[18] = keyPair>
 	
+	    <cfset iServiceCallStart=getTickCount()>
 		<cfset westMerResults = application.genieService.doWestMerciaPersonSearch(searchTerms=searchFields, 
 		                                                                          pasteReq='Y',
 																				  auditReq='Y',
-                                                                                  searchUUID=thisUUID)>  
+                                                                                  searchUUID=thisUUID)>
+		<cfset iServiceCallEnd=getTickCount()>																				      
 		
+		<cfset iTableCreateStart=getTickCount()>
 		<cfif searchData.resultType IS "XML">
 		
 		<cfelseif searchData.resultType IS "Short Table">
@@ -668,7 +680,17 @@
 				
 		<cfelse>
 			<cfset returnTable = 'No Valid Return Format Specified, options are XML,Short Table,Long Table'>
-		</cfif>				
+		</cfif>
+		
+		<cfset iTableCreateEnd=getTickCount()>				
+		
+		<cfset iFuncEnd=getTickCount()>
+		
+		<cflog file="geniePersonWebService" type="information" text="==================================================================================" >
+		<cflog file="geniePersonWebService" type="information" text="Person Search Total = #iFuncEnd-iFuncStart# ms #thisUUID#" >
+		<cflog file="geniePersonWebService" type="information" text="Service Call = #iServiceCallEnd-iServiceCallStart# ms #thisUUID#" >
+		<cflog file="geniePersonWebService" type="information" text="Table Create = #iTableCreateEnd-iTableCreateStart# ms #thisUUID#" >
+		<cflog file="geniePersonWebService" type="information" text="==================================================================================" >
 																  
 		<cfreturn returnTable>																		  		
    
