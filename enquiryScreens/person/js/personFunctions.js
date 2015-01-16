@@ -293,8 +293,8 @@ function doPersonEnquiry(){
 function initWestMerciaTab(){
 
 	$('#wmpResults').hide();
-	$('#wmpSearchingDiv').show();
-	$('#wmpResultsData').html('');
+	$('#wmpSearchingDiv').show();	
+	$('#wmpResultsData').prop('innerHTML','');
 	$('#wmpSpinner').show();
 	$('#wmpResultsCount').hide().html('')	
 	
@@ -304,13 +304,11 @@ function initWestMerciaTab(){
 function initFirearmsTab(){
 	
 	$('#firearmsResults').hide();
-	$('#firearmsSearchingDiv').show();	
-	$('#firearmsResultsData').html('');
+	$('#firearmsSearchingDiv').show();		
+	$('#firearmsResultsData').prop('innerHTML','');		
 	$('#firearmsSpinner').show();
 	$('#firearmsResultsCount').hide().html('')
-	$('#firearmsLi').show();
-	$( "#resultsTabs" ).tabs('refresh');	
-	
+	$('#firearmsLi').show();	
 }
 
 // function that initialises the West Mids Results Tab
@@ -318,11 +316,10 @@ function initWMidsTab(){
 	
 	$('#wMidsResults').hide();
 	$('#wMidsSearchingDiv').show();
-	$('#wMidsResultsData').html('');
+	$('#wMidsResultsData').prop('innerHTML','');;
 	$('#wMidsSpinner').show();	
 	$('#wMidsResultsCount').hide().html('');
-	$('#wMidsLi').show();	
-	$( "#resultsTabs" ).tabs('refresh');
+	$('#wMidsLi').show();		
 }
 
 

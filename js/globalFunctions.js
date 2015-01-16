@@ -292,7 +292,9 @@ function resetSearchPanes(){
 }
 
 function resetResultPanes(){
-	$('#resultsContainer').hide();
+	//$('#resultsContainer').hide();
+	$('#resultsContainer').css({'display':'none'});
+	/*
 	if ( $('#wmpResultsDiv').length>0 ){
 		initWestMerciaTab()
 	}
@@ -304,7 +306,7 @@ function resetResultPanes(){
 	}
 	if ( $('#htcuResultsDiv').length>0 ){
 		initHTCUTab()
-	}
+	}*/
 }
 
 function pncPasteRead(pncData){

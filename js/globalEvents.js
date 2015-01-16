@@ -1006,9 +1006,9 @@ $(document).on('click','.newEnquiryButton',
 				
 			}
 		)
-		resetResultPanes();
-		resetSearchPanes();		
 		$('#dpa').dpa('show');
+		resetResultPanes();
+		resetSearchPanes();				
 	}
 )
 

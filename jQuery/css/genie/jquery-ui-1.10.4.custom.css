@@ -1670,11 +1670,7 @@ div.geniePanel .header{
 
 .nominalTitle{
 	font-size:150%;
-	font-weight:bold;
-	/*
-	background-color:#0C5C99;
-	color:white;
-	*/
+	font-weight:bold;	
 	background-color:#d0e5f5;
 	color:#0C5C99;
 	border:1px solid #0C5C99;	
