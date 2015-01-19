@@ -111,6 +111,7 @@ function doBailConditions(){
 		 });		
 
 	$('#resultsContainer').show();
+	collapseAllSearchPanes('searchPaneHeader');
 	
 	// set the last enquiry timestamp, so we can work out when to remove the button
     $('#lastEnquiryTimestamp').val(getTimestamp());
@@ -121,10 +122,9 @@ function doBailConditions(){
 
 // function that initialises the West Mercia Results Tab
 function initWestMerciaTab(){
-
 	$('#wmpResults').hide();
 	$('#wmpSearchingDiv').show();
-	$('#wmpResultsData').html('');
+	$('#wmpResultsData').prop('innerHTML','');
 	$('#wmpSpinner').show();
 	$('#wmpResultsCount').hide().html('')	
 	

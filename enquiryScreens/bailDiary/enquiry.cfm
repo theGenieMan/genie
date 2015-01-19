@@ -49,25 +49,25 @@
 		Enter information into <b>both</b> of the search fields below.
 	  </div>
 	  <div class="spacer">&nbsp;</div>
-	   <div class="searchButtonsDiv">
-		<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
-	  
-		  <div align="right">		    
-			<span id="prevSearchSpan" style="display:none">
-		  	<b>Previous Searches:</b>
-			<select name="prevSearch" id="prevSearch">
-				
-			</select>
-			&nbsp;
-			|
-			</span>
-			&nbsp;			
-		  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
-			<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
-			<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
-		  </div>
-	   </div>	  
-	  <div class="spacer">&nbsp;</div>	  	  	  
+	  <table width="100%" class="searchButtonsTable">
+	  	<tr>
+	  		<td width="1" valign="bottom"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY"></td>
+			<td align="right" valign="bottom">
+				<span id="prevSearchSpan" style="display:none">
+			  	<b>Previous Searches:</b>
+				<select name="prevSearch" id="prevSearch">
+					
+				</select>
+				&nbsp;
+				|
+				</span>
+				&nbsp;			
+			  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
+				<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
+				<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>				
+			</td>
+	  	</tr>
+	  </table>    	  	  
 	  <form class="enquiryForm" style="margin:2px 0px 0px 0px;">
 	  <div id="referencePane" class="ui-accordion searchPane" initOpen="true">
 	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Bail Diary <span class="dataEntered"></span></div>
@@ -96,10 +96,12 @@
 		</div>
 	  </div>	    
 	  <div class="spacer">&nbsp;</div>
-	  <div class="searchButtonsDiv">
-	  	<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
-	  	<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button searchButton">
-	  </div>
+  	  <table width="100%" class="searchButtonsTable">
+	  		<tr>
+	  			<td width="50%" align="left"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY"></td>
+				<td width="50%" align="right"><input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button"></td>
+	  		</tr>
+	  </table>
     </div>		
 	</form>
 	</cfoutput>

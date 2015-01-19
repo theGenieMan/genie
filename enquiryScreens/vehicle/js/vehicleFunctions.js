@@ -174,6 +174,7 @@ function doVehicleEnquiry(){
    // now all the searches have been sent and the right tabs initialised 
    // show the results container   
    $('#resultsContainer').show();
+   collapseAllSearchPanes('searchPaneHeader');
    
    // set the last enquiry timestamp, so we can work out when to remove the button
    $('#lastEnquiryTimestamp').val(getTimestamp());
@@ -184,13 +185,11 @@ function doVehicleEnquiry(){
 
 // function that initialises the West Mercia Results Tab
 function initWestMerciaTab(){
-
 	$('#wmpResults').hide();
 	$('#wmpSearchingDiv').show();
-	$('#wmpResultsData').html('');
+	$('#wmpResultsData').prop('innerHTML','');
 	$('#wmpSpinner').show();
 	$('#wmpResultsCount').hide().html('')	
-	
 }
 
 // function that initialises the Firearms Results Tab
@@ -198,12 +197,10 @@ function initFirearmsTab(){
 	
 	$('#firearmsResults').hide();
 	$('#firearmsSearchingDiv').show();	
-	$('#firearmsResultsData').html('');
+	$('#firearmsResultsData').prop('innerHTML','');	
 	$('#firearmsSpinner').show();
 	$('#firearmsResultsCount').hide().html('')
-	$('#firearmsLi').show();
-	$( "#resultsTabs" ).tabs('refresh');	
-	
+	$('#firearmsLi').show();	
 }
 
 // function that initialises the West Mids Results Tab
@@ -211,9 +208,8 @@ function initWMidsTab(){
 	
 	$('#wMidsResults').hide();
 	$('#wMidsSearchingDiv').show();
-	$('#wMidsResultsData').html('');
+	$('#wMidsResultsData').prop('innerHTML','');
 	$('#wMidsSpinner').show();	
 	$('#wMidsResultsCount').hide().html('');
-	$('#wMidsLi').show();	
-	$( "#resultsTabs" ).tabs('refresh');
+	$('#wMidsLi').show();		
 }

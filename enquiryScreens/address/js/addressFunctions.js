@@ -219,7 +219,10 @@ function doAddressEnquiry(){
 			}
 			else
 			{
-				$('#wmpPaste').attr('pasteUrl',$('#wmpPaste').attr('pasteUrl')+$('#wmpResultsData').find('#pastePath').val())
+				// remove any existing url file name
+				var filePath=$('#wmpPaste').attr('pasteUrl');
+				filePath=filePath.replace(/([^\/]*)$/,'');
+				$('#wmpPaste').attr('pasteUrl',filePath+$('#wmpResultsData').find('#pastePath').val())
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
 			
@@ -371,8 +374,8 @@ function doAddressEnquiry(){
   
    // now all the searches have been sent and the right tabs initialised 
    // show the results container
-   
-   $('#resultsContainer').show()
+   $('#resultsContainer').show();
+   collapseAllSearchPanes('searchPaneHeader');
    
    // set the last enquiry timestamp, so we can work out when to remove the button
    $('#lastEnquiryTimestamp').val(getTimestamp());
@@ -386,7 +389,7 @@ function initWestMerciaTab(){
 
 	$('#wmpResults').hide();
 	$('#wmpSearchingDiv').show();
-	$('#wmpResultsData').html('');
+	$('#wmpResultsData').prop('innerHTML','');
 	$('#wmpSpinner').show();
 	$('#wmpResultsCount').hide().html('')	
 	
@@ -397,11 +400,10 @@ function initFirearmsTab(){
 	
 	$('#firearmsResults').hide();
 	$('#firearmsSearchingDiv').show();	
-	$('#firearmsResultsData').html('');
+	$('#firearmsResultsData').prop('innerHTML','');	
 	$('#firearmsSpinner').show();
 	$('#firearmsResultsCount').hide().html('')
-	$('#firearmsLi').show();
-	$( "#resultsTabs" ).tabs('refresh');	
+	$('#firearmsLi').show();		
 	
 }
 
@@ -410,9 +412,8 @@ function initWMidsTab(){
 	
 	$('#wMidsResults').hide();
 	$('#wMidsSearchingDiv').show();
-	$('#wMidsResultsData').html('');
+	$('#wMidsResultsData').prop('innerHTML','');
 	$('#wMidsSpinner').show();	
 	$('#wMidsResultsCount').hide().html('');
-	$('#wMidsLi').show();	
-	$( "#resultsTabs" ).tabs('refresh');
+	$('#wMidsLi').show();		
 }

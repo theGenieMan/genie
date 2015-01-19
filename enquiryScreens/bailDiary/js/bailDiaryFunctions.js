@@ -102,6 +102,7 @@ function doBailDiary(){
 		 });		
 
 	$('#resultsContainer').show();
+	collapseAllSearchPanes('searchPaneHeader');
    // set the last enquiry timestamp, so we can work out when to remove the button
    $('#lastEnquiryTimestamp').val(getTimestamp());
 	
@@ -114,7 +115,7 @@ function initWestMerciaTab(){
 
 	$('#wmpResults').hide();
 	$('#wmpSearchingDiv').show();
-	$('#wmpResultsData').html('');
+    $('#wmpResultsData').prop('innerHTML','');
 	$('#wmpSpinner').show();
 	$('#wmpResultsCount').hide().html('')	
 	

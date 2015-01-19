@@ -305,6 +305,7 @@ function doTelephoneEnquiry(){
    // now all the searches have been sent and the right tabs initialised 
    // show the results container   
    $('#resultsContainer').show();
+   collapseAllSearchPanes('searchPaneHeader');
    
    // set the last enquiry timestamp, so we can work out when to remove the button
    $('#lastEnquiryTimestamp').val(getTimestamp());
@@ -318,7 +319,7 @@ function initWestMerciaTab(){
 
 	$('#wmpResults').hide();
 	$('#wmpSearchingDiv').show();
-	$('#wmpResultsData').html('');
+	$('#wmpResultsData').prop('innerHTML','');
 	$('#wmpSpinner').show();
 	$('#wmpResultsCount').hide().html('')	
 	
@@ -329,24 +330,22 @@ function initFirearmsTab(){
 	
 	$('#firearmsResults').hide();
 	$('#firearmsSearchingDiv').show();	
-	$('#firearmsResultsData').html('');
+	$('#firearmsResultsData').prop('innerHTML','');		
 	$('#firearmsSpinner').show();
 	$('#firearmsResultsCount').hide().html('')
-	$('#firearmsLi').show();
-	$( "#resultsTabs" ).tabs('refresh');	
+	$('#firearmsLi').show();		
 	
 }
 
-// function that initialises the Firearms Results Tab
+// function that initialises the HTCU Results Tab
 function initHTCUTab(){
 	
 	$('#htcuResults').hide();
 	$('#htcuSearchingDiv').show();	
-	$('#htcuResultsData').html('');
+	$('#htcuResultsData').prop('innerHTML','');
 	$('#htcuSpinner').show();
 	$('#htcuResultsCount').hide().html('')
-	$('#htcuLi').show();
-	$( "#resultsTabs" ).tabs('refresh');	
+	$('#htcuLi').show();		
 	
 }
 
@@ -355,9 +354,9 @@ function initWMidsTab(){
 	
 	$('#wMidsResults').hide();
 	$('#wMidsSearchingDiv').show();
-	$('#wMidsResultsData').html('');
+	$('#wMidsResultsData').prop('innerHTML','');
 	$('#wMidsSpinner').show();	
 	$('#wMidsResultsCount').hide().html('');
 	$('#wMidsLi').show();	
-	$( "#resultsTabs" ).tabs('refresh');
+	
 }

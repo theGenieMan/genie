@@ -145,6 +145,7 @@ function doOffenceEnquiry(){
    // now all the searches have been sent and the right tabs initialised 
    // show the results container   
    $('#resultsContainer').show();
+   collapseAllSearchPanes('searchPaneHeader');
    
    // set the last enquiry timestamp, so we can work out when to remove the button
    $('#lastEnquiryTimestamp').val(getTimestamp());
@@ -157,7 +158,7 @@ function initWestMerciaTab(){
 
 	$('#wmpResults').hide();
 	$('#wmpSearchingDiv').show();
-	$('#wmpResultsData').html('');
+	$('#wmpResultsData').prop('innerHTML','');
 	$('#wmpSpinner').show();
 	$('#wmpResultsCount').hide().html('')	
 	

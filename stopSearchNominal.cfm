@@ -33,7 +33,8 @@ Revisions   :
 				searchBox: 'searchBox',				
 				searchBoxName: 'ssBySearch',	
 				helpMessage: '',					
-				scrollToResults:false
+				scrollToResults:false,
+				initialValue:$('#searchBy').attr('initialValue')
 			}
 		);	
 		
@@ -130,11 +131,11 @@ Revisions   :
 	<table width="95%">
 		<tr>
 			<td><label for="searchBox">Officer Searching</label></td>
-			<td><div id="searchBy"></div></td>
+			<td><div id="searchBy" initialValue="#session.audit_for_collar#"></div></td>
 		</tr>
 		<tr>
 			<td><label for="ssLocation">Location</label></td>
-			<td><input type="text" name="ssLocation" id="ssLocation" size="35" value=""></td>
+			<td><input type="text" name="ssLocation" id="ssLocation" size="35" value="#session.audit_details#"></td>
 		</tr>
 		<tr>
 			<td><label for="ssDate">Date/Time</label></td>

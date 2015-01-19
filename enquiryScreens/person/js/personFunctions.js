@@ -121,7 +121,10 @@ function doPersonEnquiry(){
 			}
 			else
 			{
-				$('#wmpPaste').attr('pasteUrl',$('#wmpPaste').attr('pasteUrl')+$('#wmpResultsData').find('#pastePath').val())
+				// remove any existing url file name
+				var filePath=$('#wmpPaste').attr('pasteUrl');
+				filePath=filePath.replace(/([^\/]*)$/,'');
+				$('#wmpPaste').attr('pasteUrl',filePath+$('#wmpResultsData').find('#pastePath').val())				
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
 			
@@ -281,6 +284,8 @@ function doPersonEnquiry(){
    // show the results container   
    $('#resultsContainer').show();
    
+   collapseAllSearchPanes('searchPaneHeader');
+   
    // set the last enquiry timestamp, so we can work out when to remove the button
    $('#lastEnquiryTimestamp').val(getTimestamp());
 	
@@ -316,7 +321,7 @@ function initWMidsTab(){
 	
 	$('#wMidsResults').hide();
 	$('#wMidsSearchingDiv').show();
-	$('#wMidsResultsData').prop('innerHTML','');;
+	$('#wMidsResultsData').prop('innerHTML','');
 	$('#wMidsSpinner').show();	
 	$('#wMidsResultsCount').hide().html('');
 	$('#wMidsLi').show();		

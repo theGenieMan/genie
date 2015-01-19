@@ -16,7 +16,7 @@ label{
 
 div.spacer{
 	height:2px;
-	clear:both;
+	clear:all;
 }
 
 .searchPaneHeader {
@@ -360,16 +360,24 @@ ol.bailConditions li {
 	margin-bottom:3px;
 }
 
-.searchButtonsDiv{
+.searchButtonsTable{
+	margin:0px;
+	border-spacing: 0px;
+	border-collapse: separate;
+	padding:0px;
+	border:0px;	
+}
+
+.searchButtonsDiv{	
 	vertical-align:text-bottom;
 }
 
 .searchButtonsDiv .newEnquiryButton{
-	float:left;	
+	
 }
 
 .searchButtonsDiv .searchButton{
-	float:right;	
+		
 }
 
 .nominalNextPrevLinks {

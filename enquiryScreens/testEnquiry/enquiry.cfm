@@ -43,33 +43,34 @@
 		
 		</div>
 	</div>
-	<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">	
+	
 	<div id="searchPanes">	  
 	  <div class="ui-state-highlight" align="center">
 		Some highlight text
 	  </div>
-	  <div class="searchButtonsDiv">
-		<input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY">
-	  
-		  <div align="right">		    
-			<span id="prevSearchSpan" style="display:none">
-		  	<b>Previous Searches:</b>
-			<select name="prevSearch" id="prevSearch">
-				
-			</select>
-			&nbsp;
-			|
-			</span>
-			&nbsp;			
-		  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
-			<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
-			<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>
-		  </div>
-	  </div>	  
+	  <table width="100%">
+	  	<tr>
+	  		<td width="1"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY"></td>
+			<td align="right" valign="bottom">
+				<span id="prevSearchSpan" style="display:none">
+			  	<b>Previous Searches:</b>
+				<select name="prevSearch" id="prevSearch">
+					
+				</select>
+				&nbsp;
+				|
+				</span>
+				&nbsp;			
+			  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
+				<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
+				<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>				
+			</td>
+	  	</tr>
+	  </table>  
 	  <div class="spacer">&nbsp;</div>
 	  <form class="enquiryForm" style="margin:2px 0px 0px 0px;">
 	  <div id="referencePane" class="ui-accordion searchPane" initOpen="true">
-	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Test Enquiry Data <span class="dataEntered"></span></div>
+	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler">&lt;&lt;</span> Test Enquiry Data <span class="dataEntered"></span></div>
 		<div class="ui-widget-content ui-accordion-content searchPaneContent">
 			<table width="98%" align="center">
 		  		<tr>
@@ -109,20 +110,18 @@
 		</div>
 	  </div>	    
 	  <div class="spacer">&nbsp;</div>
-	  <div>
-	  	<table width="100%">
+  	  <table width="100%">
 	  		<tr>
 	  			<td width="50%" align="left"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY"></td>
 				<td width="50%" align="right"><input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button"></td>
 	  		</tr>
-	  	</table>	  	
-	  </div>
+	  </table>
 	  </form>
     </div>		
 	
 	</cfoutput>
 	<!--- section for results --->
-	<div id="resultsContainer" style="display:none;">
+	<div id="resultsContainer" style="display:none; clear:all;">
 		
 		<!---  --->
 		<div id="resultsTabs">
