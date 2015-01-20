@@ -449,27 +449,27 @@ Revisions   :
 <input type="hidden" name="disableTabs" id="disableTabs" value="#disableTabs#">
 <div id="nominalTabs" style="display:none;">
   <ul>
-	<li><a href="/dataTables/nominal/roles.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>R</u>oles</a></li>
-	<li><a href="/dataTables/nominal/addresses.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>A</u>ddr</a></li>
-	<li><a href="/dataTables/nominal/bails.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>B</u>ail</a></li>
-	<li><a href="/dataTables/nominal/processdecisions.cfm?nominalRef=#nominal.getNominal_Ref()#">Pr D<u>e</u>c</a></li>
-	<li><a href="/dataTables/nominal/vehicles.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>V</u>eh</a></li>
-	<li><a href="/dataTables/nominal/telephones.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>T</u>el</a></li>
-	<li><a href="/dataTables/nominal/documents.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>D</u>oc</a></li>
-	<li><a href="/dataTables/nominal/alias.cfm?nominalRef=#nominal.getNominal_Ref()#">A<u>l</u>ias</a></li>
-	<li><a href="/dataTables/nominal/associates.cfm?nominalRef=#nominal.getNominal_Ref()#">A<u>s</u>soc</a></li>
-	<li><a href="/dataTables/nominal/custodies.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>C</u>ust</a></li>
-	<li><a href="/dataTables/nominal/features.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>F</u>eat</a></li>
-	<li><a href="/dataTables/nominal/warrants.cfm?nominalRef=#nominal.getNominal_Ref()#">Wr<u>n</u>t</a></li>
-	<li><a href="/dataTables/nominal/organisations.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>O</u>rgs</a></li>
-	<li><a href="/dataTables/nominal/fpu.cfm?nominalRef=#nominal.getNominal_Ref()#">FP<u>U</u></a></li>
-	<li><a href="/dataTables/nominal/iraqs.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>I</u>raq</a></li>	
-	<li><a href="/dataTables/nominal/misper.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>M</u>isp</a></li>
-	<li><a href="/dataTables/nominal/step.cfm?nominalRef=#nominal.getNominal_Ref()#">Pac<u>k</u></a></li>
-	<li><a href="/dataTables/nominal/occupations.cfm?nominalRef=#nominal.getNominal_Ref()#">Occ<u>J</u></a></li>
-	<li><a href="/dataTables/nominal/warnings.cfm?nominalRef=#nominal.getNominal_Ref()#"><u>W</u>arn</a></li>
-	<li><a href="/dataTables/nominal/stopsearch.cfm?nominalRef=#nominal.getNominal_Ref()#">Src<u>h</u></a></li>
-	<li><a href="/dataTables/nominal/rmps.cfm?nominalRef=#nominal.getNominal_Ref()#">RM<u>P</u></a></li>		
+	<li><a href="/dataTables/nominal/roles.cfm?nominalRef=#nominalRef#"><u>R</u>oles</a></li>
+	<li><a href="/dataTables/nominal/addresses.cfm?nominalRef=#nominalRef#"><u>A</u>ddr</a></li>
+	<li><a href="/dataTables/nominal/bails.cfm?nominalRef=#nominalRef#"><u>B</u>ail</a></li>
+	<li><a href="/dataTables/nominal/processdecisions.cfm?nominalRef=#nominalRef#">Pr D<u>e</u>c</a></li>
+	<li><a href="/dataTables/nominal/vehicles.cfm?nominalRef=#nominalRef#"><u>V</u>eh</a></li>
+	<li><a href="/dataTables/nominal/telephones.cfm?nominalRef=#nominalRef#"><u>T</u>el</a></li>
+	<li><a href="/dataTables/nominal/documents.cfm?nominalRef=#nominalRef#"><u>D</u>oc</a></li>
+	<li><a href="/dataTables/nominal/alias.cfm?nominalRef=#nominalRef#">A<u>l</u>ias</a></li>
+	<li><a href="/dataTables/nominal/associates.cfm?nominalRef=#nominalRef#">A<u>s</u>soc</a></li>
+	<li><a href="/dataTables/nominal/custodies.cfm?nominalRef=#nominalRef#"><u>C</u>ust</a></li>
+	<li><a href="/dataTables/nominal/features.cfm?nominalRef=#nominalRef#"><u>F</u>eat</a></li>
+	<li><a href="/dataTables/nominal/warrants.cfm?nominalRef=#nominalRef#">Wr<u>n</u>t</a></li>
+	<li><a href="/dataTables/nominal/organisations.cfm?nominalRef=#nominalRef#"><u>O</u>rgs</a></li>
+	<li><a href="/dataTables/nominal/fpu.cfm?nominalRef=#nominalRef#">FP<u>U</u></a></li>
+	<li><a href="/dataTables/nominal/iraqs.cfm?nominalRef=#nominalRef#"><u>I</u>raq</a></li>	
+	<li><a href="/dataTables/nominal/misper.cfm?nominalRef=#nominalRef#"><u>M</u>isp</a></li>
+	<li><a href="/dataTables/nominal/step.cfm?nominalRef=#nominalRef#">Pac<u>k</u></a></li>
+	<li><a href="/dataTables/nominal/occupations.cfm?nominalRef=#nominalRef#">Occ<u>J</u></a></li>
+	<li><a href="/dataTables/nominal/warnings.cfm?nominalRef=#nominalRef#"><u>W</u>arn</a></li>
+	<li><a href="/dataTables/nominal/stopsearch.cfm?nominalRef=#nominalRef#">Src<u>h</u></a></li>
+	<li><a href="/dataTables/nominal/rmps.cfm?nominalRef=#nominalRef#">RM<u>P</u></a></li>		
   </ul>
 </div>	
 
