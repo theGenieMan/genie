@@ -648,9 +648,11 @@ $(document).on('click','.genieAttachedDocument',
 			var hrefLink=$(this).attr('href');
 			
 			getAppVar('CRIMESAttachmentsDir').done(function(result) {
-				var docLink=result+hrefLink								
-				theWin=window.open(docLink)
-				theWin.focus()    
+				var docLink=result+hrefLink												
+				w = screen.availWidth-200;
+			    h = screen.availHeight-200;
+				thisfeatures = 'width='+w+',height='+h;
+				window.open(docLink,'doclink',thisfeatures)
 			})
 				
 });		
