@@ -338,7 +338,7 @@ AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sq
 			<tr class="row_colour#iAtt MOD 2#">
 				<td>#attachments[iAtt].getDOC_TYPE()#</td>
 				<td>#user.getFullName()#</td>
-				<td><a href="#qry_CrimeDetails.REC_YEAR#\#qry_CrimeDetails.REC_MON#\#qry_CrimeDetails.REC_DAY#\#qry_CrimeDetails.CRIME_REF#\#attachments[iAtt].getFILE_NAME()#" class="genieAttachedDocument" target="_blank">#attachments[iAtt].getFILE_NAME()#</a></td>
+				<td><a href="#qry_CrimeDetails.REC_YEAR#\#qry_CrimeDetails.REC_MON#\#qry_CrimeDetails.REC_DAY#\#qry_CrimeDetails.CRIME_REF#\#attachments[iAtt].getDOCUMENT_NO()#_#attachments[iAtt].getFILE_NAME()#" class="genieAttachedDocument" target="_blank">#attachments[iAtt].getFILE_NAME()#</a></td>
 				<td>#attachments[iAtt].getDATE_CREATED_TEXT()#</td>
 			</tr>		
 			</cfloop>	
