@@ -30,7 +30,7 @@ Revisions   :
 
 <html>
 <head>
-	<title><cfoutput>#Application.Form_Title#</cfoutput></title>
+	<title>GENIE <cfoutput>#application.version# #application.ENV#</cfoutput></title>
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/css/genie.css">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">
