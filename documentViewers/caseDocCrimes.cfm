@@ -130,54 +130,58 @@ AND CASE_YEAR=<cfqueryparam value="#Int(ListGetAt(caseRef,3,"/"))#" cfsqltype="c
 
 <br>
 <div id="caseDocument">
-<!--- Custody Front Sheet Details --->
-<a name="front_sheet"><div align="right">
-<a href="##top" class="tabs">Back To Top</a>
-<h2 align="center">CASE</h2></div>
-</a>
-#XmlTransform(xmldoc, xml_case_details)#
+ <div>
+	<!--- Custody Front Sheet Details --->
+	<a name="front_sheet"><div align="right">
+	<a href="##top" class="tabs">Back To Top</a></div>
+	<h2 align="center">CASE</h2>
+	</a>
+	#XmlTransform(xmldoc, xml_case_details)#
 
-<cfif isDefined("s_Defs")>
-<!--- Court Bail Details --->
-<hr>
-<a name="defs"><div align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CASE FILE DEFENDANTS</h2></div></a>
+	<cfif isDefined("s_Defs")>
+	<!--- Court Bail Details --->
+	<hr>
+	<a name="defs"><div align="right">
+	<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CASE FILE DEFENDANTS</h2></a>
+	
+	<cfloop from="1" to="#ArrayLen(arr_Defs)#" index="x">
+	 <div style="width:95%; border:1px solid; padding:2px">
+	  <table width="100%" align="center">
+	   #XmlTransform(XMLParse(arr_Defs[x]), xml_defendant_details)#
+	  </table>  	
+	
+	 <cfset arr_PDecs = XmlSearch(XMLParse(arr_defs[x]), "Defendants/Process_Decision")>
+	
+	 <cfloop from="1" to="#ArrayLen(arr_PDecs)#" index="y">
+	 <hr>
+	  <cfset s_ProcDecPath=arr_PDecs[y].XmlChildren[2].XmlText>
+	
+			<!--- setup Soco report to parse --->
+			<cfset xmltoparse=Application.str_CRIMES_Cust & "process\" & Trim(s_ProcDecPath) & ".xml">
+	
+			<cfif FileExists(#xmltoparse#)>
+				
+				<div align="left">				
+					<cfset xmlpddoc=XmlParse(xmltoparse)>
+					#XmlTransform(xmlpddoc, xml_proc_decs)#
+				</div>
+			</cfif>
+	 </cfloop>
+	  </div>
+	</cfloop>
+	
+	</cfif>
 
-<cfloop from="1" to="#ArrayLen(arr_Defs)#" index="x">
- <div style="width:95%; border:1px solid; padding:2px">
-  <table width="100%" align="center">
-   #XmlTransform(XMLParse(arr_Defs[x]), xml_defendant_details)#
-  </table>  	
-
- <cfset arr_PDecs = XmlSearch(XMLParse(arr_defs[x]), "Defendants/Process_Decision")>
-
- <cfloop from="1" to="#ArrayLen(arr_PDecs)#" index="y">
- <hr>
-  <cfset s_ProcDecPath=arr_PDecs[y].XmlChildren[2].XmlText>
-
-		<!--- setup Soco report to parse --->
-		<cfset xmltoparse=Application.str_CRIMES_Cust & "process\" & Trim(s_ProcDecPath) & ".xml">
-
-		<cfif FileExists(#xmltoparse#)>
-			
-			<div align="left">				
-				<cfset xmlpddoc=XmlParse(xmltoparse)>
-				#XmlTransform(xmlpddoc, xml_proc_decs)#
-			</div>
-		</cfif>
- </cfloop>
-  </div>
-</cfloop>
-
-</cfif>
-
-<cfif isDefined("s_Flocs")>
-<!--- POlice Bail Details --->
-<hr> 
-<a name="flocs"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CASE FILE LOCATIONS</h2></div></a>
-#XmlTransform(xmldoc, xml_flocs)#
-</cfif>
+	<cfif isDefined("s_Flocs")>
+	<!--- POlice Bail Details --->
+	<hr> 
+	<a name="flocs"><div style="width:95%" align="right">
+	<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CASE FILE LOCATIONS</h2></a>
+	<div style="width:95%; border:1px solid; padding:2px">
+	#XmlTransform(xmldoc, xml_flocs)#
+	</div>
+	</cfif>
+ </div>
 </div>
 </cfoutput>
 </body>

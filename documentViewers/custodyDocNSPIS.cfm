@@ -299,16 +299,16 @@ WHERE CUSTODY_REF=<cfqueryparam value="#custodyRef#" cfsqltype="cf_sql_varchar">
 <cfoutput>
 <a name="front_sheet">&nbsp</a>
 <div id="custodyDocument">
+<div>
 <!--- Custody Front Sheet Details --->
 <h3 align="center">RESTRICTED</h3>	
-<div  align="right">
 <div align="center">
 <br>
 <b>ALL TIMES IN THIS DOCUMENT ARE IN GMT<br>
 IF THE EVENTS DETAILED TOOK PLACE DURING BRITISH SUMMER TIME, ONE HOUR SHOULD BE ADDED TO EACH OF THE TIMES INDICATED</b>
 </div>	
 <br>
-<h2 align="center">CUSTODY RECORD FRONT SHEET</h2></div>
+<h2 align="center">CUSTODY RECORD FRONT SHEET</h2>
 </a>
 #XmlTransform(xmldoc, xml_custody_details)#
 
@@ -328,12 +328,12 @@ IF THE EVENTS DETAILED TOOK PLACE DURING BRITISH SUMMER TIME, ONE HOUR SHOULD BE
 <!--- Detainee Details --->
 <hr>
 <a name="detainee"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD DETAINEE DETAILS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD DETAINEE DETAILS</h2></a>
 #XmlTransform(xmldoc, xml_detainee_details)#
 
 <cfif isDefined("s_AppropAdult")>
 <a name="appropadult"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD APPROPRIATE ADULT</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD APPROPRIATE ADULT</h2></a>
 #XmlTransform(xmldoc, xml_appropriateadult_details)#
 </cfif>
 
@@ -351,7 +351,7 @@ IF THE EVENTS DETAILED TOOK PLACE DURING BRITISH SUMMER TIME, ONE HOUR SHOULD BE
 <!--- Charge Details --->
 <hr>
 <a name="charges"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD CHARGES</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD CHARGES</h2></a>
 #XmlTransform(xmldoc, xml_charge_details)#
 </cfif>
 
@@ -359,7 +359,7 @@ IF THE EVENTS DETAILED TOOK PLACE DURING BRITISH SUMMER TIME, ONE HOUR SHOULD BE
 <!--- Caution Details --->
 <hr>
 <a name="cautions"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD CAUTIONS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD CAUTIONS</h2></a>
 #XmlTransform(xmldoc, xml_caution_details)#
 </cfif>
 
@@ -367,7 +367,7 @@ IF THE EVENTS DETAILED TOOK PLACE DURING BRITISH SUMMER TIME, ONE HOUR SHOULD BE
 <!--- Reprimand Details --->
 <hr>
 <a name="reprimands"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD REPRIMANDS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD REPRIMANDS</h2></a>
 #XmlTransform(xmldoc, xml_reprimand_details)#
 </cfif>
 
@@ -375,7 +375,7 @@ IF THE EVENTS DETAILED TOOK PLACE DURING BRITISH SUMMER TIME, ONE HOUR SHOULD BE
 <!--- Reprimand Details --->
 <hr>
 <a name="finalwarning"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD FINAL WARNINGS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD FINAL WARNINGS</h2></a>
 #XmlTransform(xmldoc, xml_finalwarning_details)#
 </cfif>
 
@@ -383,7 +383,7 @@ IF THE EVENTS DETAILED TOOK PLACE DURING BRITISH SUMMER TIME, ONE HOUR SHOULD BE
 <!--- Other Disp Details --->
 <hr>
 <a name="refusecharge"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD REFUSED CHARGE</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD REFUSED CHARGE</h2></a>
 #XmlTransform(xmldoc, xml_refusecharge_details)#
 </cfif>
 
@@ -391,7 +391,7 @@ IF THE EVENTS DETAILED TOOK PLACE DURING BRITISH SUMMER TIME, ONE HOUR SHOULD BE
 <!--- Other Disp Details --->
 <hr>
 <a name="otherdisp"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD OTHER DISPOSALS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD OTHER DISPOSALS</h2></a>
 #XmlTransform(xmldoc, xml_otherdisp_details)#
 </cfif>
 
@@ -399,7 +399,7 @@ IF THE EVENTS DETAILED TOOK PLACE DURING BRITISH SUMMER TIME, ONE HOUR SHOULD BE
 <!--- Court Bail Details --->
 <hr>
 <a name="cbails"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD COURT BAILS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD COURT BAILS</h2></a>
 #XmlTransform(xmldoc, xml_courtbail_details)#
 
 </cfif>
@@ -408,7 +408,7 @@ IF THE EVENTS DETAILED TOOK PLACE DURING BRITISH SUMMER TIME, ONE HOUR SHOULD BE
 <!--- POlice Bail Details --->
 <hr> 
 <a name="pbails"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD POLICE BAILS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD POLICE BAILS</h2></a>
 
 <cfset arr_PBailsOut = XmlSearch(xmldoc, "CUSTODY_RECORD/POLICE_BAIL")>
 
@@ -426,6 +426,7 @@ IF THE EVENTS DETAILED TOOK PLACE DURING BRITISH SUMMER TIME, ONE HOUR SHOULD BE
 </cfif>
 <h3 align="center">RESTRICTED</h3>
 </cfoutput> 
+</div>
 </div>
 </body>
 

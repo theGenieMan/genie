@@ -10,13 +10,13 @@
 	<!ENTITY pound  "&#163;">
 	<!ENTITY euro   "&#8364;">
 ]>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dt="http://xsltsl.org/date-time">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:include href="transforms/string.xsl"/>
 <xsl:include href="transforms/date-time.xsl"/>
 <xsl:include href="transforms/crm_custody_common.xsl"/>
 
-<xsl:output method="html" encoding="iso-8859-1" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
+<xsl:output method="html" />
 
 <xsl:template match="/">	
 

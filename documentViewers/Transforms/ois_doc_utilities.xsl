@@ -16,16 +16,15 @@
 <xsl:include href="transforms/date-time.xsl"/>
 <xsl:include href="transforms/crm_custody_common.xsl"/>
 
-<xsl:output method="html" encoding="iso-8859-1" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
+<xsl:output method="html" />
 
 <xsl:template match="/">	
 
-
  <div style="width:100%">
- 
+ <hr />
  <table border="0" width="100%">
  <tr>
-  <td class="SmallTitle" colspan="4">UTILITIES :</td>
+  <td class="SmallTitle" colspan="4"><b>UTILITIES :</b></td>
  </tr>
  <tr>
    <td width="25%"><b>Service</b></td>

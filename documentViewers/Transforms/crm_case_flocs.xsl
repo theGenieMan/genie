@@ -19,7 +19,6 @@
 
 <xsl:template match="/">
 
- <div style="width:100%; border:1px solid; padding:2px">
   <table width="100%">
   <xsl:for-each select="Case_Document/File_Locations">
 	 <tr>
@@ -57,7 +56,7 @@
 	 </tr>
   </xsl:for-each>
  </table>
- </div>
+ 
 
 </xsl:template>
 	

@@ -117,7 +117,8 @@ AND CASE_YEAR=<cfqueryparam value="#Int(ListGetAt(caseRef,3,"/"))#" cfsqltype="c
 <!--- Case Front Sheet Details --->
 <a name="front_sheet"><div align="right">
 <a href="##top" class="tabs">Back To Top</a>
-<h2 align="center">CASE RECORD FRONT SHEET</h2></div>
+</div>
+<h2 align="center">CASE RECORD FRONT SHEET</h2>
 </a>
 #XmlTransform(xmldoc, xml_case_details)#
 

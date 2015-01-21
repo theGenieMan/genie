@@ -178,10 +178,11 @@ WHERE CUSTODY_REF=<cfqueryparam value="#custodyRef#" cfsqltype="cf_sql_varchar">
 
 <br>
 <div id="custodyDocument">
+<div>
 <!--- Custody Front Sheet Details --->
 <a name="front_sheet"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a>
-<h2 align="center">CUSTODY RECORD FRONT SHEET</h2></div>
+<a href="##top" class="tabs">Back To Top</a></div>
+<h2 align="center">CUSTODY RECORD FRONT SHEET</h2>
 </a>
 #XmlTransform(xmldoc, xml_custody_details)#
 
@@ -202,19 +203,19 @@ WHERE CUSTODY_REF=<cfqueryparam value="#custodyRef#" cfsqltype="cf_sql_varchar">
 <!--- Detainee Details --->
 <hr>
 <a name="detainee"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD DETAINEE DETAILS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD DETAINEE DETAILS</h2></a>
 #XmlTransform(xmldoc, xml_detainee_details)#
 
 <hr>
 <a name="detentions"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">DETENTION DETAILS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">DETENTION DETAILS</h2></a>
 #XmlTransform(xmldoc, xml_detention_details)#
 
 <cfif isDefined("s_CourtBails")>
 <!--- Court Bail Details --->
 <hr>
 <a name="cbails"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD COURT BAILS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD COURT BAILS</h2></a>
 #XmlTransform(xmldoc, xml_courtbail_details)#
 
 </cfif>
@@ -223,7 +224,7 @@ WHERE CUSTODY_REF=<cfqueryparam value="#custodyRef#" cfsqltype="cf_sql_varchar">
 <!--- POlice Bail Details --->
 <hr> 
 <a name="pbails"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD POLICE BAILS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD POLICE BAILS</h2></a>
 #XmlTransform(xmldoc, xml_policebail_details)#
 
 </cfif>
@@ -231,7 +232,7 @@ WHERE CUSTODY_REF=<cfqueryparam value="#custodyRef#" cfsqltype="cf_sql_varchar">
 <cfif isDefined("s_ProcDecs")>
 
  <a name="pdecs"><div style="width:95%" align="right">
- <a href="##top" class="tabs">Back To Top</a><h2 align="center">PROCESS DECISIONS</h2></div></a>
+ <a href="##top" class="tabs">Back To Top</a></div><h2 align="center">PROCESS DECISIONS</h2></a>
  
 
 	<cfloop index="i" from="1" to="#ArrayLen(arr_PDecs)#"> 
@@ -257,7 +258,7 @@ WHERE CUSTODY_REF=<cfqueryparam value="#custodyRef#" cfsqltype="cf_sql_varchar">
 <!--- Interest Markers --->
 <hr> 
 <a name="imark"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD INTEREST MAKERS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD INTEREST MAKERS</h2></a>
 #XmlTransform(xmldoc, xml_interest_markers)#
 
 </cfif>
@@ -266,7 +267,7 @@ WHERE CUSTODY_REF=<cfqueryparam value="#custodyRef#" cfsqltype="cf_sql_varchar">
 <!--- Interest Markers --->
 <hr> 
 <a name="notes"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD NOTES</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD NOTES</h2></a>
 #XmlTransform(xmldoc, xml_notes)#
 
 </cfif>
@@ -275,7 +276,7 @@ WHERE CUSTODY_REF=<cfqueryparam value="#custodyRef#" cfsqltype="cf_sql_varchar">
 <!--- Executed Warrants --->
 <hr> 
 <a name="notes"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD EXECUTED WARRANTS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD EXECUTED WARRANTS</h2></a>
 #XmlTransform(xmldoc, xml_warrants)#
 
 </cfif>
@@ -284,7 +285,7 @@ WHERE CUSTODY_REF=<cfqueryparam value="#custodyRef#" cfsqltype="cf_sql_varchar">
 <!--- Reviews --->
 <hr> 
 <a name="notes"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD REVIEWS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD REVIEWS</h2></a>
 #XmlTransform(xmldoc, xml_reviews)#
 
 </cfif>
@@ -293,7 +294,7 @@ WHERE CUSTODY_REF=<cfqueryparam value="#custodyRef#" cfsqltype="cf_sql_varchar">
 <!--- Extensions --->
 <hr> 
 <a name="notes"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD EXTENSIONS</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD EXTENSIONS</h2></a>
 #XmlTransform(xmldoc, xml_extensions)#
 
 </cfif>
@@ -302,11 +303,11 @@ WHERE CUSTODY_REF=<cfqueryparam value="#custodyRef#" cfsqltype="cf_sql_varchar">
 <!--- Extensions --->
 <hr> 
 <a name="notes"><div style="width:95%" align="right">
-<a href="##top" class="tabs">Back To Top</a><h2 align="center">CUSTODY RECORD INTIMATE SEARCH</h2></div></a>
+<a href="##top" class="tabs">Back To Top</a></div><h2 align="center">CUSTODY RECORD INTIMATE SEARCH</h2></a>
 #XmlTransform(xmldoc, xml_intsearch)#
 
 </cfif>
-
+</div>
 </div>
 </cfoutput> 
 

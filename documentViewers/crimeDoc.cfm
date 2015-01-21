@@ -157,7 +157,7 @@ AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sq
 		  
 		
 		<div id="crimeFullDocument">
-		
+		<div>
 		<h4 align="center">RESTRICTED<br></h4>
 
 		<cfset s_Doc=XmlTransform(xmldoc, xml_crime_docdetails)>
@@ -286,6 +286,7 @@ AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sq
 		<p>
 		The above information is subject to the provisions of the Data Protection Act, 1998 and must not be used for any purpose other than that for which it is requested. The Data must not be disclosed to an unauthorised person and there is an obligation on you to ensure that the appropriate security measures are taken in respect of it and its disposal. 
 		</p>
+		</div>
 		</div>
 	</div>
 	

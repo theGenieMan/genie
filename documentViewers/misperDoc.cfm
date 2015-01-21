@@ -67,7 +67,9 @@ WHERE CASE_NO=<cfqueryparam value="#caseNo#" cfsqltype="cf_sql_vharchar">
      <cfset s_Doc=XmlTransform(xmldoc, xml_misper_details)>
      
    <div id="misperDocument">   
+   	<div>
      #s_Doc#
+    </div>  
    </div>  
 <cfelse>  
      <h3 align="center">No Document Available For This Missing Persons Record '#caseNo#'</h3>

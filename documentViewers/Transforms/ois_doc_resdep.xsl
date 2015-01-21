@@ -10,22 +10,22 @@
 	<!ENTITY pound  "&#163;">
 	<!ENTITY euro   "&#8364;">
 ]>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dt="http://xsltsl.org/date-time">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:include href="transforms/string.xsl"/>
 <xsl:include href="transforms/date-time.xsl"/>
 <xsl:include href="transforms/crm_custody_common.xsl"/>
 
-<xsl:output method="html" encoding="iso-8859-1" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
+<xsl:output method="html" />
 
 <xsl:template match="/">	
 
-
- <div style="width:100%">
  
+ <div style="width:100%">
+ <hr />
  <table border="0" width="100%">
  <tr>
-  <td class="SmallTitle" colspan="8">RESOURCE DEPLOYMENT:</td>
+  <td class="SmallTitle" colspan="8"><b>RESOURCE DEPLOYMENT:</b></td>
  </tr>
  <tr>
   <td width="12.5%"><b>Resource</b></td>

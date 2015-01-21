@@ -113,7 +113,9 @@ Revisions   :
  </cfif>
 
  <div id="crashDocument">
-  #s_Doc#    
+  <div>
+  	#s_Doc#
+  </div>    
  </div>
 
 <cfelse>

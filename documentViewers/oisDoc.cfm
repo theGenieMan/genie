@@ -129,20 +129,15 @@ Revisions   :
 		</cfloop>
 		
 		<div id="oisDocument">
-		#s_Doc#
-		<hr>
+		#s_Doc#		
 		#XmlTransform(xmldoc, xml_ois_resdep)#
-		<cfif hasSummary IS "YES">
-		<hr>
+		<cfif hasSummary IS "YES">		
 		#XmlTransform(xmldoc, xml_ois_summary)#
 		</cfif>
-		<cfif hasUtil IS "YES">
-		<hr>
+		<cfif hasUtil IS "YES">		
 		#XmlTransform(xmldoc, xml_ois_utils)#
-		</cfif>
-		<hr>
-		#XmlTransform(xmldoc, xml_ois_narrative)#
-		<hr>
+		</cfif>		
+		#XmlTransform(xmldoc, xml_ois_narrative)#		
 		
 		<table border="0" width="95%">
 		 <tr>
