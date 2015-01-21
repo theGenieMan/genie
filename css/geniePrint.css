@@ -9,8 +9,29 @@ body{
 	font-size:9pt;
 }
 
+h2 {
+	font-size:13pt;
+	font-weight:bold;
+}
+
 .genieResultButtons{
 	display:none;
+}
+
+.tabs {
+	display:none;
+}
+
+a {
+	text-decoration:none;
+}
+
+pre.crime {
+    white-space: pre-line;       /* CSS 3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
 .genieCamera {display:none;}
