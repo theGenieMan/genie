@@ -30,6 +30,7 @@ Revisions   :
 
 <html>
 <head>
+	<meta http-equiv="X-UA-Compatible" content="IE=9">	
 	<title>GENIE <cfoutput>#application.version# #application.ENV#</cfoutput></title>
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/css/genie.css">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
