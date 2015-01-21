@@ -123,6 +123,10 @@ Revisions        :
 </table>
 
 <div style="display:none" id="sessionInfo">
+  <cfif SCRIPT_NAME IS "index.cfm">	
 	<cfdump var="#session#">
+  <cfelse>
+    <p>Only available on the homepage</p>
+  </cfif>
 </div>	
 </cfoutput>
