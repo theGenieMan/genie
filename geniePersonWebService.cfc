@@ -1013,11 +1013,17 @@
 																				 fromWebService='Y',
 																				 wsAudit=auditData)>
 	
-	    <cflog file="geniePersonWS" type="information" text="xxx#searchData.wMidsOrder#xxx" />
-		<cfset westMidsNominalsGrouped = application.genieService.doWestMidsNominalGrouping(nominals=westMidsResults.nominals, 
+	    <cfif westMidsResults.searchOk>
+        	<!--- search is ok, so format the results --->			
+			<cfset westMidsNominalsGrouped = application.genieService.doWestMidsNominalGrouping(nominals=westMidsResults.nominals, 
 		                                                                                    group=searchData.wMidsOrder)>
 	
-		<cfset westMidsHTML = formatWestMidsResults(westMidsNominalsGrouped, searchData.wMidsOrder)>
+			<cfset westMidsHTML = formatWestMidsResults(westMidsNominalsGrouped, searchData.wMidsOrder)>
+		<cfelse>
+			<!--- search is no good so send back the error --->
+			<cflog file="genieWestMidsPersonSearchErrors" type="information" text="Error = #westMidsResult.errorText#, Xml Search was = #searchXml#" />
+			<cfset westMidsHTML = "<p>"&westMidsResult.errorText&"</p>">	
+		</cfif>
 	
 		<cfreturn westMidsHTML>
 	
