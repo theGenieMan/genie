@@ -95,8 +95,6 @@ Revisions   :
 </cfif>
 
 <cfloop query="qry_NominalWarnings" startrow="#i_Start#" endrow="#i_End#">
-
-<cfoutput>#i_Start# - #i_End#</cfoutput>
                        
 <cfset arr_Lines[i_Line]=" | Signal Code ">
     
@@ -233,7 +231,7 @@ Revisions   :
 
 <cfoutput>
 <pre>
-#Replace(str_Text,"~","<br>","ALL")#
+#Replace(str_Text,"~","","ALL")#
 </pre>
 </cfoutput>
 

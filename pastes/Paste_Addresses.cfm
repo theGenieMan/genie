@@ -153,7 +153,7 @@ ORDER BY RECORDED DESC
    <cfset arr_Lines[i_line]=" +----------------------------------------------------------------------------+ "&chr(13)&chr(10)>
    <cfset str_Text=ArrayToList(arr_Lines,"~")>
    <cfoutput>
-   <pre>#Trim(Replace(str_Text,"~","<br>","ALL"))#</pre>
+   <pre>#Trim(Replace(str_Text,"~","","ALL"))#</pre>
    </cfoutput>
     <cfset i_Page=i_page+1>
 	<cfset arr_Lines=ArrayNew(1)>

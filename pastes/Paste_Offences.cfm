@@ -128,5 +128,5 @@ ORDER BY DATE_FIRST_COMMITED DESC
 <cfset str_Text=ArrayToList(arr_Lines,"~")>
 
 <cfoutput>
-<pre>#Replace(str_Text,"~","<br>","ALL")#</pre>
+<pre>#Replace(str_Text,"~","","ALL")#</pre>
 </cfoutput>

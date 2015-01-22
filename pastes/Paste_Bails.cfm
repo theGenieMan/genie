@@ -88,7 +88,7 @@ WHERE  bail_ref='#bailRef#'
 			</cfloop>
 			
 			<cfif LEN(BAIL_ANSWERED) GT 0>
-			<cfset str_BailText=str_BailText&" Cancel/Answered Bail "&BAIL_ANSWERED&" |">
+			<cfset str_BailText=str_BailText&" Cancel/Answered Bail "&BAIL_ANSWERED&" |"&chr(13)&chr(10)>
 			<cfelse>
 			<cfset str_BailText=str_BailText&" Cancel/Answered Bail   | "&chr(13)&chr(10)>
 			</cfif>			
@@ -244,5 +244,5 @@ WHERE  bail_ref='#bailRef#'
 <cfset str_Text=ArrayToList(arr_Lines,"~")>
 
 <cfoutput>
-<pre>#Replace(str_Text,"~","<br>","ALL")#</pre>
+<pre>#Replace(str_Text,"~","","ALL")#</pre>
 </cfoutput>
