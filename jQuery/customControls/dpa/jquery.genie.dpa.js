@@ -38,7 +38,8 @@
 			howToOpen:'',	
 			enquiryScreen:'',
 			alwaysClear:true,
-			showPNCPaste:false				
+			showPNCPaste:false,
+			loggedInUser:''				
 		},
 		
 		// the constructor
@@ -64,8 +65,10 @@
 			dpaDivHtml += '<br><label for="'+this.options.reasonText+'">Details:</label><input type="text" name="'+this.options.reasonText+'" id="'+this.options.reasonText+'" class="mandatory" size="45" value="'+this.options.reasonTextValue+'">'
 			if (this.options.showPNCPaste){
 			dpaDivHtml += '<br><label for="pncPaste">PNC Paste:</label><textarea name="pncData" id="pncData" rows="2" cols="80"></textarea>'	
-			}			
-			dpaDivHtml += '<br><br><div id="dpaError" class="error" style="display:none">You must complete all DPA boxes</div>'			
+			}		
+					
+			dpaDivHtml += '<br><br><div id="dpaError" class="error" style="display:none">You must complete all DPA boxes</div>';
+			dpaDivHtml += '<input type="hidden" name="hidFirstTime" id="hidFirstTime">';			
 			dpaDivHtml += '</div>';
 			
 			this.dpaBox= $(dpaDivHtml);
@@ -235,14 +238,26 @@
 			this.element.find('#hrSearchButton').trigger('click');			
 		},
 		
-		show: function() {
+		show: function(firstTime) {
 		// check if it's already a dialog box
 		// if it is just show it, if not create it
 		    var thisDialog=this.element;
 			this.element.find(':input:enabled:visible:first').focus();
 			var options=this.options;
 			var self=this;
+			
+			// no first time passed in, so assume it's false
+		    if ('undefined' === typeof firstTime) {
+		        firstTime=true;
+		    }
+			else{
+				firstTime=firstTime;
+			}
+					
+			$('#hidFirstTime').data('firstTime',firstTime);			
+						
 			if ($(this.element).hasClass('ui-dialog-content')) {
+
 				    $(this.element).dialog('open');
 			} else {
 			    $(this.element).dialog({
@@ -251,21 +266,39 @@
 						height: this.options.height,
 						width: this.options.width,
 						closeOnEscape:false,
-						title: 'Genie - DPA',
+						title: 'Genie - DPA (Press CTRL + M to mark Requestor for as yourself)',
 						open: function(event, ui){
+							var firstTime=$('#hidFirstTime').data('firstTime');
+									
+							if (firstTime===true) {								
+								$(".ui-dialog-titlebar-close", this.parentNode).hide();
+							}
+							else
+							{
+								$(".ui-dialog-titlebar-close", this.parentNode).show();
+							}
 							
-							$(".ui-dialog-titlebar-close", this.parentNode).hide();
 							thisDialog.find('#dpaError').hide();
-							if ( ! options.alwaysClear && thisDialog.find('#'+options.reasonCodeTxt).val().length > 0){
+							
+							if (!options.alwaysClear && thisDialog.find('#' + options.reasonCodeTxt).val().length > 0) {								
 								$("#dpaUpdateButton").focus();
 							}
-							// bind a CTRL + U keypress to the update button
-							$(document).bind('keypress.ctrlU', function(event) {								
+							else if (thisDialog.find('#' + options.requestFor.requestForUserId).val().length > 0 && thisDialog.find('#' + options.reasonCodeTxt).val().length == 0) 
+							    {									
+									thisDialog.find('#' + options.reasonCodeTxt).focus();
+								}
+							// bind a CTRL + U and CTRL + M keypress to the update button
+							$(document).bind('keypress.ctrlU', function(event) {
+																
 							    if( event.which === 21 && event.ctrlKey ) {
 									if ( $('#pncData').length>0){
 										$('#pncData').blur();
 									}
 							    	$("#dpaUpdateButton").trigger('click');    
+							    }
+								
+								if( event.which === 13 && event.ctrlKey ) {
+									thisDialog.find('#dpaRequestForSearch').hrQuickSearch('doSearch',options.loggedInUser)  
 							    }
 							});
 							// if we have the pnc data field ensure it's opened blank
@@ -311,10 +344,12 @@
 											
 											// clear the dpa down
 											if (options.alwaysClear) {
-												thisDialog.find('#' + options.reasonCodeTxt).val('').change()
+												thisDialog.find('#' + options.reasonCodeTxt).val('').change();
 												thisDialog.find('#' + options.reasonText).val('')
 												thisDialog.find('#' + options.ethnicCodeSelect).val('')
-												thisDialog.find('#dpaRequestForSearch').hrQuickSearch('doReset')
+												if (options.requestFor.initialValue.length == 0) {
+													thisDialog.find('#dpaRequestForSearch').hrQuickSearch('doReset')
+												}
 											}
 											
 											// update the given destinations and hide the DPA dialog

@@ -68,7 +68,7 @@
 	  <div class="spacer">&nbsp;</div>
 	  <table width="100%" class="searchButtonsTable">
 	  	<tr>
-	  		<td width="1" valign="bottom"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY"></td>
+	  		<td width="1" valign="bottom"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY" accesskey="N"></td>
 			<td align="right" valign="bottom">
 				<span id="prevSearchSpan" style="display:none">
 			  	<b>Previous Searches:</b>
@@ -259,8 +259,8 @@
 	  <div class="spacer">&nbsp;</div>
   	  <table width="100%" class="searchButtonsTable">
 	  		<tr>
-	  			<td width="50%" align="left"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY"></td>
-				<td width="50%" align="right"><input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button"></td>
+	  			<td width="50%" align="left"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY" accesskey="N"></td>
+				<td width="50%" align="right"><input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button" accesskey="S"></td>
 	  		</tr>
 	  </table>
 	  </form>

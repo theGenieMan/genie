@@ -27,15 +27,22 @@ $(document).ready(function() {
 		var $resultsTabs=$( "#resultsTabs" ).tabs();
 	
 		var dpaClear=($('#dpaClear').val()==='true');
+		var isOCC=$('#isOCC').val();
+		var initialUserId='';
+		var loggedInUser=$('#enquiryUser').val();
+		if (isOCC=='false'){
+			initialUserId=loggedInUser;
+		}
 		
 		$('#dpa').dpa({
-					reasonTextValue:'test',
-					reasonCodeValue:'1',
+					reasonTextValue:'',
+					reasonCodeValue:'',
 					requestFor:{
-						initialValue:'n_bla003'						
+						initialValue:initialUserId						
 					},
 					showPNCPaste:true,
 					alwaysClear:dpaClear,
+					loggedInUser: loggedInUser,
 					dpaUpdated: function(e,data){
 							// update the dpa boxes as per the values entered.
 							$('#reasonCode').val(data.reasonCode)

@@ -25,14 +25,20 @@ $(document).ready(function() {
 		var $resultsTabs=$( "#resultsTabs" ).tabs();
 		var dpaClear=($('#dpaClear').val()==='true');
 		var isOCC=$('#isOCC').val();
+		var initialUserId='';
+		var loggedInUser=$('#enquiryUser').val();
+		if (isOCC=='false'){
+			initialUserId=loggedInUser;
+		}
 		
 		$('#dpa').dpa({
 					requestFor:{
-						initialValue:'',
+						initialValue:initialUserId
 					},					
 					enquiryScreen:'Person',
 					alwaysClear:dpaClear,
 					showPNCPaste:isOCC,
+					loggedInUser: loggedInUser,
 					dpaUpdated: function(e,data){
 							// update the dpa boxes as per the values entered.
 							$('#reasonCode').val(data.reasonCode)
@@ -74,5 +80,5 @@ $(document).ready(function() {
 					}
 					
 		});
-		$('#dpa').dpa('show')			
+		$('#dpa').dpa('show',true)
 });

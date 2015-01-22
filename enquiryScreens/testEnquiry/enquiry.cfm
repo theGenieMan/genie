@@ -50,7 +50,7 @@
 	  </div>
 	  <table width="100%">
 	  	<tr>
-	  		<td width="1"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY"></td>
+	  		<td width="1"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY" accesskey="N"></td>
 			<td align="right" valign="bottom">
 				<span id="prevSearchSpan" style="display:none">
 			  	<b>Previous Searches:</b>
@@ -76,7 +76,7 @@
 		  		<tr>
 		  			<td valign="top" width="15%"><label for="textField1">Text Field 1</label></td>
 					<td  valign="top" width="30%">
-						<input type="text" name="textField1" id="textField1" displayInPane="Text Field 1" displayPrevSearch="Y" size="12" value="" class="mandatory">						
+						<input type="text" name="textField1" id="textField1" displayInPane="Text Field 1" displayPrevSearch="Y" size="12" value="" class="mandatory" initialFocus="true">						
 					</td>
 					<td colspan="3">&nbsp;</td>															
 		  		</tr>
@@ -112,8 +112,8 @@
 	  <div class="spacer">&nbsp;</div>
   	  <table width="100%">
 	  		<tr>
-	  			<td width="50%" align="left"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY"></td>
-				<td width="50%" align="right"><input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button"></td>
+	  			<td width="50%" align="left"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY" accesskey="N"></td>
+				<td width="50%" align="right"><input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button" accesskey="S"></td>
 	  		</tr>
 	  </table>
 	  </form>
@@ -163,6 +163,7 @@
 	<input type="hidden" name="ethnicCode" id="ethnicCode" value="">
 	<input type="hidden" name="requestForCollar" id="requestForCollar" value="">
 	<input type="hidden" name="requestForForce" id="requestForForce" value="">	
+	<input type="hidden" name="isOCC" id="isOCC" value="#session.isOCC#">	
 	<input type="hidden" name="lastEnquiryTimestamp" id="lastEnquiryTimestamp" value="">	
 	</cfoutput>
 	
