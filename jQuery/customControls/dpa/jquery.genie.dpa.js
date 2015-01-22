@@ -9,8 +9,8 @@
 		options:
 		{
 			debug:false,	
-			width:645,
-			height:250,
+			width:685,
+			height:275,
 			position: 'center',
 			reasonCodes: ['TRANSACTION LOG AND OTHER AUDIT CHECKS','VEHICLE AND/OR PERSON STOPPED','MOVING VEHICLE','ABANDONED OR PARKED AND UNATTENDED VEHICLE','VEHICLES INVOLVED IN ROAD ACCIDENT','SUBJECT OF PROCESS OR INVESTIGATION','ADMINISTRATION - FOR NON-OPERATIONAL MATTERS','CHILD ACCESS ENQUIRIES','ON BEHALF OF OTHER AUTHORISED AGENCY','UPDATE/CONFIRM/BROADCAST','DRIVER STOP (S163)'],			
 			ethnicCodes: ['W1-White British','W2-Irish','W9-Any Other White','A1-Indian','A2-Pakistani','A3-Bangladeshi','A9-Any Other Asian','B1-Caribbean','B2-African','B9-Any Other Black','M1-White and Black Caribbean','M2-White and Black African','M3-White and Asian','M9-Any Other Mixed','O1-Chinese','O9-Any other Ethnic','NS-Not Stated'],
@@ -48,7 +48,7 @@
 			var dpaDivHtml = '';
 			dpaDivHtml  = '<div class="dpaBox" style="width:'+this.options.width+'; height:'+this.options.height+'">';
 			dpaDivHtml += '    <label for="'+this.options.requestFor.requestForUserId+'">Requestor:</label><div id="dpaRequestForSearch" class="dpaPersonSearchBox" initialValue="'+this.options.requestFor.initialValue+'"></div>';
-			dpaDivHtml += '<br><label for="'+this.options.reasonCodeTxt+'">Reason:</label><input type="text" name="'+this.options.reasonCodeTxt+'" id="'+this.options.reasonCodeTxt+'" class="mandatory" size="1" value="'+this.options.reasonCodeValue+'">';
+			dpaDivHtml += '<br><label for="'+this.options.reasonCodeTxt+'">Reason:</label><input type="text" name="'+this.options.reasonCodeTxt+'" id="'+this.options.reasonCodeTxt+'" class="mandatory" size="1" maxlength="2" value="'+this.options.reasonCodeValue+'">';
 			dpaDivHtml += '      <select name="'+this.options.reasonCodeSelect+'" id="'+this.options.reasonCodeSelect+'" class="mandatory">';
 			dpaDivHtml += '        <option value=""></option>';
 			for (var i = 0; i < this.options.reasonCodes.length; i++) {
@@ -67,7 +67,8 @@
 			dpaDivHtml += '<br><label for="pncPaste">PNC Paste:</label><textarea name="pncData" id="pncData" rows="2" cols="80"></textarea>'	
 			}		
 					
-			dpaDivHtml += '<br><br><div id="dpaError" class="error" style="display:none">You must complete all DPA boxes</div>';
+			dpaDivHtml += '<div id="dpaError" class="error" style="display:none">You must complete all DPA boxes</div>';
+			dpaDivHtml += '<div id="reasonCodeError" class="error" style="display:none">Reason code is not valid</div>';
 			dpaDivHtml += '<input type="hidden" name="hidFirstTime" id="hidFirstTime">';			
 			dpaDivHtml += '</div>';
 			
@@ -279,6 +280,7 @@
 							}
 							
 							thisDialog.find('#dpaError').hide();
+							thisDialog.find('#reasonCodeError').hide();
 							
 							if (!options.alwaysClear && thisDialog.find('#' + options.reasonCodeTxt).val().length > 0) {								
 								$("#dpaUpdateButton").focus();
@@ -322,12 +324,19 @@
 										var urlToOpen=self.options.urlToOpen;
 										var howToOpen=self.options.howToOpen;
 										
+										thisDialog.find('#dpaError').hide();
+										thisDialog.find('#reasonCodeError').hide();
+										
 										if ((reasonCode.length == 0 || reasonText.length == 0 || requestFor.length==0)
 										    ||
-											(reasonCode==10 && ethnicCode.length==0 && options.enquiryScreen=='Person')
+											(reasonCode==10 && ethnicCode.length==0 && options.enquiryScreen=='Person')										
 										   ){
 									 	    thisDialog.find('#dpaError').show();
 										    return false; 
+										}
+										else if ( reasonCode.length > 0 && isNaN(reasonCode)) {
+											thisDialog.find('#reasonCodeError').show();
+										    return false;
 										}
 										else{
 											
