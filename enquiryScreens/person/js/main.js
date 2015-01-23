@@ -64,8 +64,9 @@ $(document).ready(function() {
 										// if there is a pnc search ready then trigger the submit of
 										// the enquiryForm
 										if ($('.enquiryForm > #pncDataReady').length>0){
-											$('.enquiryForm').trigger('submit');
-											$('.enquiryForm > #pncDataReady').remove;
+											console.log('PNC Data is ready triggering a form submit');
+											$('.enquiryForm > #pncDataReady').remove();
+											$('.enquiryForm').trigger('submit');											
 										}
 										// if we have a prevSearch select box with more than one entry in then show that to
 										if ($('#prevSearch').length>0){
