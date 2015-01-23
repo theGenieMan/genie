@@ -125,7 +125,7 @@ Revisions   :
 		  		<tr>
 		  			<td width="15%"><label for="tel_no">Number</label></td>
 					<td width="25%" colspan="3">
-						<input name="tel_no" id="tel_no" displayInPane="Number" displayPrevSearch="Y" size="15" value="#tel_no#"> <cfif session.isWMidsUser><b>WM</b></cfif>						
+						<input name="tel_no" id="tel_no" displayInPane="Number" displayPrevSearch="Y" size="15" value="#tel_no#" initialFocus="true"> <cfif session.isWMidsUser><b>WM</b></cfif>						
 					</td>																							
 		  		</tr>	
 		  		<tr>

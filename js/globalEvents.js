@@ -623,6 +623,22 @@ $(document).on('click','.genieANPRSearch',
 				
 		});	
 
+// event that fires when a link with the class of genieTelSearchLink
+// is clicked. the href of the link should be a valid tel no
+// opens the telephone search with the tel no field pre populated and the
+// search button triggered
+$(document).on('click','.genieTelNoSearchLink',
+	    function(e){
+			e.preventDefault();
+			
+			var tel_no=$(this).attr('href').toUpperCase();
+			
+			var url = '/enquiryScreens/telephone/enquiry.cfm?startSearch=true&tel_no='+tel_no
+			
+			fullscreen(url, 'tel_no' + tel_no)
+				
+});		
+
 // event that fires when a link with the class of genieVehicleSearchLink
 // is clicked. the href of the link should be a valid VRM
 // opens the vehicle search with the vrm field pre populated and the
@@ -637,7 +653,7 @@ $(document).on('click','.genieVehicleSearchLink',
 			
 			fullscreen(url, 'vrm' + vrm)
 				
-});		
+});	
 
 // event that fires when a link with the class of genieAttachedDocument
 // is clicked. the href of the link should be a valid path
