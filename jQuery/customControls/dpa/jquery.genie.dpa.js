@@ -95,9 +95,11 @@
 					returnCollarNo: this.options.requestFor.requestForCollar,
 					returnForce: this.options.requestFor.requestForForce,		
 					initialValue: this.element.find('#dpaRequestForSearch').attr('initialValue'),
+					helpMessage: 'Enter collar and press Tab or CTRL+M for you',
+					findButton:false,
 					userSelected: function(e,data){
 						dpaReasonTxt.focus()
-					}
+					}					
 				}
 			);
 			
@@ -183,7 +185,8 @@
 			});
 			
 		},		
-			
+		
+		/*	
 		// function to force a search with terms after object initialisation
 		doSearch: function(searchTerm){			
 			this.element.find('#'+this.options.searchBox).val(searchTerm);			
@@ -193,7 +196,7 @@
 		// function to force a search with terms after object initialisation
 		doReset: function(){									
 			this.resetButton.trigger('click');
-		},		
+		},*/		
 
 		// function to force a search with terms after object initialisation
 		_doDebug: function(debugText){		
@@ -289,20 +292,53 @@
 							    {									
 									thisDialog.find('#' + options.reasonCodeTxt).focus();
 								}
+							/*
 							// bind a CTRL + U and CTRL + M keypress to the update button
 							$(document).bind('keypress.ctrlU', function(event) {
-																
-							    if( event.which === 21 && event.ctrlKey ) {
+								console.log('Key '+event.which+' Ctrl:'+event.ctrlKey+' Alt:'+event.altKey)	
+								// || (event.which===13 && (! event.ctrlKey && ! event.altKey ) )															
+							    if( (event.which === 21 && event.ctrlKey)  ) {
+									if ( $('#pncData').length>0){
+										$('#pncData').blur();
+										$("#dpaUpdateButton").focus();
+									}
+									event.preventDefault();
+									console.log('click is trigger')
+							    	$("#dpaUpdateButton").trigger('click');    
+							    }
+								
+								if( event.which === 13 && event.ctrlKey ) {
+									console.log('CTRL+M running')
+									thisDialog.find('#dpaRequestForSearch').hrQuickSearch('doSearch',options.loggedInUser)  
+							    }
+							});*/
+							
+							// bind a CTRL + U and CTRL + M keypress to the update button
+							$(document).bind('keypress.ctrlU', function(event) {
+															
+							    if( event.which === 21 && event.ctrlKey ||
+								    (    event.which === 13 
+									  && !event.ctrlKey 
+									  && document.activeElement.id!='hrResetButton' 
+									  && document.activeElement.id!='hrSearchButton')
+								  ) {									
+									event.preventDefault();
 									if ( $('#pncData').length>0){
 										$('#pncData').blur();
 									}
 							    	$("#dpaUpdateButton").trigger('click');    
 							    }
 								
-								if( event.which === 13 && event.ctrlKey ) {
+								if( event.which === 13 && event.ctrlKey ) {									
+									var elemz=document.activeElement;
+									if (document.activeElement.id=='dpaUpdateButton'){										
+										thisDialog.find('#' + options.reasonCodeTxt).focus();
+									}
 									thisDialog.find('#dpaRequestForSearch').hrQuickSearch('doSearch',options.loggedInUser)  
 							    }
 							});
+							
+							
 							// if we have the pnc data field ensure it's opened blank
 							if ( $('#pncData').length>0){
 									$('#pncData').val('');
@@ -314,15 +350,20 @@
 						},
 						buttons: [ { text: "Update",
 						             id: "dpaUpdateButton",
-									 click: function() {
+									 click: function() {									 	
 									 	var reasonCode=thisDialog.find('#'+options.reasonCodeTxt).val();
 										var reasonText=thisDialog.find('#'+options.reasonText).val();
+										var reasonSelect=thisDialog.find('#'+options.reasonCodeSelect).val();										
 										var requestFor=thisDialog.find('#'+options.requestFor.requestForUserName).val();
 										var requestForCollar=thisDialog.find('#'+options.requestFor.requestForCollar).val();
 										var requestForForce=thisDialog.find('#'+options.requestFor.requestForForce).val();
 										var ethnicCode=thisDialog.find('#'+options.ethnicCodeSelect).val();
 										var urlToOpen=self.options.urlToOpen;
 										var howToOpen=self.options.howToOpen;
+										
+										if (reasonSelect == null){
+											reasonSelect='';
+										}
 										
 										thisDialog.find('#dpaError').hide();
 										thisDialog.find('#reasonCodeError').hide();
@@ -334,11 +375,13 @@
 									 	    thisDialog.find('#dpaError').show();
 										    return false; 
 										}
-										else if ( reasonCode.length > 0 && isNaN(reasonCode)) {
+										else if ( reasonCode.length > 0 && isNaN(reasonCode) || (reasonCode.length>0 && reasonSelect.length==0) ) {
 											thisDialog.find('#reasonCodeError').show();
 										    return false;
 										}
 										else{
+											
+											$(document).unbind('keypress.ctrlU')	
 											
 											self._trigger("dpaUpdated", null, {
 												reasonCode: reasonCode,
@@ -362,8 +405,7 @@
 											}
 											
 											// update the given destinations and hide the DPA dialog
-											thisDialog.find('#dpaError').hide();	
-											$(document).unbind('keypress.ctrlU')									
+											thisDialog.find('#dpaError').hide();																				
 											self.hide();
 										}
 									 } 
