@@ -199,7 +199,7 @@
   <cfset var inet_address = CreateObject("java", "java.net.InetAddress")>   
   <cfset var lastSession = "">
     
-  <cfif not isDefined('session.dpaClear')>
+  <cfif not isDefined('session.dpaClear') or not isDefined('session.isFDI')>
   	  <cfset onSessionStart()>
   </cfif>
   
@@ -488,6 +488,16 @@
 	  <cfelse>
 	        <cfset session.isOCC=false>
 	  </cfif>	
+	  
+  	  <cfif session.user.getDuty() IS "INSPECTOR OCC"
+	  	 OR session.user.getDuty() IS "INSPECTOR OCC RELIEF"
+		 OR session.user.getDuty() IS "ANALYST PROGRAMMER"
+		 OR session.user.getDuty() IS "SYSTEMS SUPPORT ANALYST">  
+	     <cfset session.isFDI=true>
+	  <cfelse>
+	  	 <cfset session.isFDI=false>
+	  </cfif>
+
 	  
 	  <cfif isDefined('application.dpaExceptions')>
 		  <cfif ListContains(application.dpaExceptions,session.user.getDUTY(),",") GT 0>
