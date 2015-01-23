@@ -733,7 +733,7 @@ $(document).on('change','#actionSelectDropDown',
 			});
 		}
 
-		// Stop Search Existing Nominal
+		// Stop Search Nominal
 		if(actionType=='ssNominal'){
 			if (typeof nominalRef === typeof undefined){
 				nominalRef=''
@@ -743,16 +743,52 @@ $(document).on('change','#actionSelectDropDown',
 			}
 			$('body').append('<div id="ssHolder" style="display:none"></div>');
 			// load the paste data into the div
+			
+			// find out what type of stop search we are doing
+			// if it's from a defined nominal then supply nominalRef and nominalName
+			// if we have a surname1 text box then it means we are on a person enq
+			// and a stop search can be supplied
+			
+			if ($('#surname1').length==0){
+				surname1='';
+				surname2='';
+				forename1='';
+				forename2='';
+				dob=''
+			}
+			else{
+				surname1=$('#surname1').val();
+				surname2=$('#surname2').val();
+				forename1=$('#forename1').val();
+				forename2=$('#forename2').val();
+				if ($('#dobDay').val().length>0 && $('#dobMonth').val().length>0 && $('#dobYear').val().length>0){
+					dob=$('#dobDay').val()+'/'+$('#dobMonth').val()+'/'+$('#dobYear').val();
+				}
+				else{
+					dob='';
+				}
+				nominalName  = forename1;
+				nominalName += forename2.length>0?' '+forename2:'';
+				nominalName += surname1.length>0?' '+surname1:'';
+				nominalName += surname2.length>0?'-'+surname2:'';
+				nominalName += dob.length>0?' '+dob:'';
+			}
+			
 		    $('#ssHolder').load('/stopSearchNominal.cfm', {
 				nominalRef: nominalRef,
-				nominalName: nominalName
+				nominalName: nominalName,
+				ssSurname1: surname1,
+				ssSurname2: surname2,
+				ssForename1: forename1,
+				ssForename2: forename2,
+				ssDob: dob
 			},
 			 function(){
 			 	$('#ssHolder').dialog({
 						modal: true,
 						position: 'center',
-						height: 250,
-						width: 600,
+						height: 225,
+						width: 700,
 						title: 'Genie - Create Stop Search',
 						open: function(event, ui){
 							disableNominalKeyPress()							
