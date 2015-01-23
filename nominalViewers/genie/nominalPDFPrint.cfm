@@ -263,6 +263,8 @@ nominalData.select('##detailsColumn').attr('width','90%');
 <cfloop from="1" to="#arrayLen(arrayHtml)#" index="i">
 	<cfif i GT 1 AND ListContains(printOptions,'pagebreak')>
 		<cfdocumentitem type="pagebreak" />
+	<cfelse>
+		<Br>
 	</cfif>
 	#arrayHtml[i]#	
 </cfloop>	
