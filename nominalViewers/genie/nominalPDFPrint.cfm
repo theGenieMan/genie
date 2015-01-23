@@ -206,7 +206,7 @@ nominalData.select('##detailsColumn').attr('width','90%');
 
 <cfoutput>
 		
-<cfdocument format="PDF" orientation="portrait" pagetype="A4" margintop="0.75" marginleft="0.25" marginright="0.25" scale="95">
+<cfdocument format="PDF" orientation="landscape" pagetype="A4" margintop="0.75" marginleft="0.25" marginright="0.25" scale="95">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -255,8 +255,10 @@ nominalData.select('##detailsColumn').attr('width','90%');
 #nominalData[1].html()#
 <Br>
 #warnings[1].html()#
-
+<br>
+<!---
 <cfdocumentitem type="pagebreak" />
+--->
 
 <cfloop from="1" to="#arrayLen(arrayHtml)#" index="i">
 	<cfif i GT 1 AND ListContains(printOptions,'pagebreak')>

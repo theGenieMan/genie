@@ -357,10 +357,14 @@ Revisions   :
 					</div>			
 					</cfif>
                     
-                    <cfif nominal.getTACAD_FLAG() IS "Y" and session.loggedInUserLogAccess LTE 20>
+                    <cfif nominal.getTACAD_FLAG() IS "Y">
 					<div class="redWarningBox">
 						   SUBJECT OF TACTICAL ADVICE<br>
+						   <cfif session.loggedInUserLogAccess LTE 20 or session.isFDI>
                            <a href="#Application.TACAD_Link##nominalRef#" target="_blank">Click Here For More Information</a>
+                           <cfelse>
+						   *** CONTACT FDI IF POLICE CONTACT ***
+						   </cfif>
 					</div>						
                     </cfif>
                     
