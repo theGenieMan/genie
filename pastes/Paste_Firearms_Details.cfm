@@ -196,7 +196,7 @@ WHERE  PERSON_URN='#PERSON_URN#'
 <cfset str_Text=ArrayToList(arr_Lines,"~")>
 
 <cfoutput>
-<pre>#Replace(str_Text,"~","<br>","ALL")#</pre>
+<pre>#Replace(str_Text,"~","","ALL")#</pre>
 </cfoutput>
 
 <!--- now do certificates --->
@@ -326,7 +326,7 @@ WHERE  PERSON_URN='#PERSON_URN#'
 <cfset str_Text=ArrayToList(arr_Lines,"~")>
 
 <cfoutput>
-<pre>#Replace(str_Text,"~","<br>","ALL")#</pre>
+<pre>#Replace(str_Text,"~","","ALL")#</pre>
 </cfoutput>
 <cfset i_Page-i_Page+1>
 </cfloop>

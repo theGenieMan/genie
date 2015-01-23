@@ -85,6 +85,15 @@ WHERE  PERSON_URN='#PERSON_URN#'
 <body>
 			
 <cfinclude template="/header.cfm">	
+
+<cfoutput>
+<form action="/pastes/paste_firearms_details.cfm?PERSON_URN=#qry_NominalDetails.PERSON_URN#" 
+      method="post"
+	  target="_blank"
+	  style="margin-bottom:5px;">
+	<input type="submit" name="oisPaste" id="oisPaste" value="OIS Paste">	  	
+</form>
+</cfoutput>
 			
   <div class="nominalTitle">
 	<cfoutput>
