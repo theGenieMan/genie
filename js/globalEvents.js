@@ -618,7 +618,7 @@ $(document).on('click','.genieANPRSearch',
 			var vrm=$(this).attr('href').toUpperCase();
 			
 			var url = '/redirector/redirector.cfm?type=anprSearch&ref='+vrm
-			alert(url)
+			
 			window.open(url);
 				
 		});	
