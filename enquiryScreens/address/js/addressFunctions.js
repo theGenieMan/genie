@@ -220,9 +220,10 @@ function doAddressEnquiry(){
 			else
 			{
 				// remove any existing url file name
+				/*
 				var filePath=$('#wmpPaste').attr('pasteUrl');
 				filePath=filePath.replace(/([^\/]*)$/,'');
-				$('#wmpPaste').attr('pasteUrl',filePath+$('#wmpResultsData').find('#pastePath').val())
+				$('#wmpPaste').attr('pasteUrl',filePath+$('#wmpResultsData').find('#pastePath').val()) */
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
 			
