@@ -29,8 +29,7 @@ Revisions   :
 --->  
 
 <html>
-<head>
-	<meta http-equiv="X-UA-Compatible" content="IE=9">	
+<head>		
 	<title>GENIE <cfoutput>#application.version# #application.ENV#</cfoutput></title>
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/css/genie.css">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
@@ -148,14 +147,17 @@ Revisions   :
 							$('#reasonCode').val(data.reasonCode)
 							$('#reasonText').val(data.reasonText)
 							$('#requestFor').val(data.requestFor)
-							$('#dpaValid').val('Y').change()							
+							$('#requestForCollar').val(data.requestForCollar)
+							$('#requestForForce').val(data.requestForForce)
+							$('#ethnicCode').val(data.ethnicCode)
+														
 							var urlToOpen=data.urlToOpen;
 							var howToOpen=data.howToOpen;
 							// send the data to the session update function in the genie service
 							
 							$.ajax({
 									 type: 'POST',
-									 url: '/genieSessionWebService.cfc?method=updateSession&reasonCode='+data.reasonCode+'&reasonText='+data.reasonText+'&requestFor='+data.requestFor,						 							  
+									 url: '/genieSessionWebService.cfc?method=updateSession&reasonCode='+data.reasonCode+'&reasonText='+data.reasonText+'&requestFor='+data.requestFor+'&ethnicCode='+data.ethnicCode+'&requestForCollar='+data.requestForCollar+'&requestForForce='+data.requestForForce,						 							  
 									 cache: false,
 									 async: false,							 
 									 success: function(data, status){									 				

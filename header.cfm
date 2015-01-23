@@ -85,7 +85,7 @@ Revisions        :
 	<tr>		
 		<td width="35%">			
 		<cfif showActionSelect>
-		  <span id="actionsDropDown">
+		  <span id="actionsDropDown" #iif(SCRIPT_NAME IS NOT '/nominalViewers/genie/nominal.cfm',de('style="display:none;"'),de(''))#>
 			   <b>Actions</b>:
 			   <cfif isDefined('nominalRef') && isDefined('nominal')>
 			   	   <cfset nominalInfo='nominalRef="'&nominalRef&'" nominalName="'&nominal.getFULL_NAME()&'"'>
