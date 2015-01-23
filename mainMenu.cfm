@@ -400,7 +400,7 @@ Revisions   :
 		 </tr>
 		 <tr>
 		  <td width="32%" align="center">		 
-		   <cfif session.isBailCondsUser>  
+		   <cfif session.isBailCondsUser or session.user.getTrueUserId() IS "n_bla005">  
 			<button name="frm_BailConds" id="bailConditionsButton" 
 			        AccessKey="I" 
 				    onClick="fullscreen('/enquiryScreens/bailConditions/enquiry.cfm?#session.URLToken#')">BAIL CONDITIONS</button>
@@ -432,7 +432,7 @@ Revisions   :
 		   </cfif>
 		  </td>  
 		 </tr>	
-		 <cfif session.isGenieAdmin>
+		 <cfif session.isGenieAdmin or session.user.getTrueUserId() IS "n_bla005">
 			<tr>
 			  <td width="32%" align="center">		 			   
 				<button name="frm_Test" id="testEnquiryButton" 
