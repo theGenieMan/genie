@@ -389,7 +389,7 @@ Revisions   :
 		  <td width="32%" align="center">		   
 			<button name="frm_BailDiary" id="bailDiaryButton" 
 			       AccessKey="Y"
-				   onClick="fullscreen('/enquiryScreens/bailDiary/enquiry.cfm?#session.URLToken#')">BAIL DAIR<u>Y</u></button>		   
+				   onClick="fullscreen('/enquiryScreens/bailDiary/enquiry.cfm?#session.URLToken#')">BAIL DIAR<u>Y</u></button>		   
 		  </td>
 		  <td width="2%">&nbsp;</td>
 		  <td width="32%" align="center">
