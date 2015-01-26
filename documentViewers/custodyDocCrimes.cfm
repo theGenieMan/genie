@@ -342,3 +342,5 @@ WHERE CUSTODY_REF=<cfqueryparam value="#custodyRef#" cfsqltype="cf_sql_varchar">
 </html>
 </cfoutput>
 </cfif>
+
+<cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"View Custody","","#custodyRef#",0,session.user.getDepartment())>

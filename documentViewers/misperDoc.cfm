@@ -79,3 +79,5 @@ WHERE CASE_NO=<cfqueryparam value="#caseNo#" cfsqltype="cf_sql_vharchar">
 
 </body>
 </html>
+
+<cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"View Misper","","#caseNo#",0,session.user.getDepartment())>

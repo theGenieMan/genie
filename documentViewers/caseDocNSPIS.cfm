@@ -183,3 +183,4 @@ AND CASE_YEAR=<cfqueryparam value="#Int(ListGetAt(caseRef,3,"/"))#" cfsqltype="c
 </html>
 </cfoutput>
 </cfif>
+<cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"View Case","","#caseRef#",0,session.user.getDepartment())>

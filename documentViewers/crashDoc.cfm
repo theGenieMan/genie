@@ -128,3 +128,5 @@ Revisions   :
 
 </body>
 </html>
+
+<cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"View RTC","","#crashRef#",0,session.user.getDepartment())>

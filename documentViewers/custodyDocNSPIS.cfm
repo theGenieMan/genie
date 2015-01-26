@@ -461,6 +461,8 @@ IF THE EVENTS DETAILED TOOK PLACE DURING BRITISH SUMMER TIME, ONE HOUR SHOULD BE
 </cfoutput>
 </cfif>
 
+<cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"View Custody","","#custodyRef#",0,session.user.getDepartment())>
+
 <cfset xml_custody_doctitle="">
 <cfset xml_custody_details="">
 <cfset xml_detainee_details="">

@@ -131,3 +131,5 @@ WHERE   SS_URN=<cfqueryparam value="#URN#" cfsqltype="cf_sql_varchar">
 
 </body>
 </html>
+
+<cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"View Stop Search","","#urn#",0,session.user.getDepartment())>

@@ -16,8 +16,8 @@ Date        : 10/11/2014
 Revisions   : 
 
 --->
-<cfsetting showdebugoutput="false" 
-		   >
+<cfsetting showdebugoutput="false">
+
 <cffile action="read" file="#getDirectoryFromPath(getCurrentTemplatePath())#Transforms\crimedoc_details.xsl"  variable="xml_crime_docdetails">
 <cffile action="read" file="#getDirectoryFromPath(getCurrentTemplatePath())#Transforms\crimedoc_summary.xsl"  variable="xml_crime_summary">
 <cffile action="read" file="#getDirectoryFromPath(getCurrentTemplatePath())#Transforms\forensicsdoc_details.xsl"  variable="xml_forensics_docdetails">
@@ -354,3 +354,6 @@ AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sq
 
 </body>
 </html>
+
+<!--- audit --->
+<cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"View Crime","","#crimeNo#",0,session.user.getDepartment())>

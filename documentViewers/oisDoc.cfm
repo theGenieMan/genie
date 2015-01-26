@@ -192,3 +192,5 @@ Revisions   :
 
 </body>
 </html>
+
+<cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"View OIS","","#incNo#",0,session.user.getDepartment())>

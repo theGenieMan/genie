@@ -237,3 +237,5 @@ WHERE LOG_REF=<cfqueryparam value="#logRef#" cfsqltype="cf_sql_integer">
 
 </cfif>
 </cfoutput>     
+
+<cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"View Intel","","#logRef#",0,session.user.getDepartment())>
