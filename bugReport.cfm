@@ -97,6 +97,9 @@ Revisions        :
 	</script>
 </head>
 
+<cfset lisBugScreen="Home Page|My Settings|Main Menu|Nominal|Nominal Firearms|Person Enquiry|Address Enquiry|Custody Enquiry|Custody Whiteboard|Process Enquiry|Telephone Enquiry|Vehicle Enquiry|Offence Enquiry|Intel Enquiry|Intel Free Text|Crime Browser|Firearms Enquiry|Property Enquiry|Bail Diary|Warning Enquiry|Print Screen|Print PDF|Intel Package|Crime Document|OIS Document|Custody Document|Case Document|Intel Document|Misper Document|West Mids - Person|West Mids - Address|West Mids - Telephone|West Mids - Vehicle|West Mids - Document (Crime/Intel etc..)|Other">
+<cfset lisBugType="Bug|Functionality Difference|Data Difference|I Cant Find|Suggestion|Other">
+
 <cfoutput>
 <body>
 <div class="ui-widget-header-genie" align="center">
@@ -124,40 +127,9 @@ Revisions        :
 				<td>
 					<select name="bugScreen" id="bugScreen" class="mandatory">
 						<option value="">-- Select --</option>
-						<option value="Home Page">Home Page</option>
-						<option value="My Settings">My Settings</option>
-						<option value="Main Menu">Main Menu</option>
-						<option value="Nominal">Nominal</option>
-						<option value="Nominal Firearms">Nominal Firearms</option>
-						<option value="Person Enquiry">Person Enquiry</option>
-						<option value="Address Enquiry">Address Enquiry</option>
-						<option value="Custody Enquiry">Custody Enquiry</option>
-						<option value="Custody Whiteboard">Custody Whiteboard</option>
-						<option value="Process Enquiry">Process Enquiry</option>
-						<option value="Telephone Enquiry">Telephone Enquiry</option>
-						<option value="Vehicle Enquiry">Vehicle Enquiry</option>
-						<option value="Offence Enquiry">Offence Enquiry</option>
-						<option value="Intel Enquiry">Intel Enquiry</option>
-						<option value="Intel Free Text">Intel Free Text</option>
-						<option value="Crime Browser">Crime Browser</option>
-						<option value="Firearms Enquiry">Firearms Enquiry</option>
-						<option value="Property Enquiry">Property Enquiry</option>
-						<option value="Bail Diary">Bail Diary</option>
-						<option value="Warning Enquiry">Warning Enquiry</option>
-						<option value="Print Screen">Print Screen</option>
-						<option value="Print PDF">Print PDF</option>
-						<option value="Intel Package">Intel Package</option>
-						<option value="Crime Document">Crime Document</option>
-						<option value="OIS Document">OIS Document</option>
-						<option value="Custody Document">Custody Document</option>
-						<option value="Case Document">Case Document</option>
-						<option value="Intel Document">Intel Document</option>
-						<option value="Misper Document">Misper Document</option>
-						<option value="West Mids - Person">West Mids - Person</option>
-						<option value="West Mids - Address">West Mids - Address</option>
-						<option value="West Mids - Telephone">West Mids - Telephone</option>
-						<option value="West Mids - Vehicle">West Mids - Vehicle</option>
-						<option value="West Mids - Document">West Mids - Document (Crime/Intel etc..)</option>						
+						<cfloop list="#lisBugScreen#" index="thisBugScreen" delimiters="|">
+						 <option value="#thisBugScreen#" #iif(thisBugScreen IS bugScreen,DE('selected'),de(''))#>#thisBugScreen#</option>
+						</cfloop>						
 					</select>
 				</td>
 			</tr>
@@ -166,12 +138,9 @@ Revisions        :
 				<td>
 					<select name="bugType" id="bugType" class="mandatory">
 						<option value="">-- Select --</option>
-						<option value="Bug">Bug</option>
-						<option value="Functionality Difference">Functionality Difference</option>
-						<option value="Data Difference">Data Difference</option>
-						<option value="I Cant Find">I Can't Find</option>
-						<option value="Suggestion">Suggestion</option>
-						<option value="Other">Other</option>
+						<cfloop list="#lisBugType#" index="thisBugType" delimiters="|">
+						 <option value="#thisBugType#" #iif(thisBugType IS bugType,DE('selected'),de(''))#>#thisBugType#</option>
+						</cfloop>						
 					</select>
 					<b><span id="bugTypeDesc"></span></b>
 				</td>
@@ -179,7 +148,7 @@ Revisions        :
 			<tr>
 				<th valign="top">Description</th>
 				<td>
-					<textarea id="bugDesc" name="bugDesc"></textarea>
+					<textarea id="bugDesc" name="bugDesc">#bugDesc#</textarea>
 				</td>
 			</tr>
 			<tr>

@@ -610,6 +610,9 @@
 			
 				<cfset sDobPart = searchData.dobDay & "%" & searchData.dobMonth & "%" & searchData.dobYear>
 			</cfif>
+			<cfif Find('%%',sDobPart) GT 0>
+			 <cfset sDobPart=Replace(sDobPart,'%%','%')>
+			</cfif>
 		</cfif>	
 	
 		<cfset keyPair = StructNew()>
