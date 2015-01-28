@@ -14,7 +14,7 @@
 	 // first time in so if we have no photos remove the links
 	 // completely, otherwise display relevant next / prev links
 	 
-	 if (noPhotos > 0 && arrayPhotos.length-1>0){
+	 if (noPhotos > 0 && arrayPhotos.length>0){
 	 	$('#currentPhoto').html('1')
 		$('#totalPhotos').html(noPhotos);
 	 	$('#photoScrollingLinks').show();
