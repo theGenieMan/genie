@@ -57,7 +57,7 @@
 	<cfset Application.sCustodyTimespan=CreateTimeSpan(application.timespanCustodyDay,application.timespanCustodyHour,application.timespanCustodyMin,application.timespanCustodySec)>
     
     <!--- application vars that are the same regardless of environment --->
-    <cfset Application.Version="4.0 RC2.3">
+    <cfset Application.Version="4.0 RC2.4">
 	<cfset Application.dateStarted=now()>
 	<cfset Application.lis_Months="JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC">
 	<cfset Application.lis_MonthNos="01,02,03,04,05,06,07,08,09,10,11,12">
@@ -182,7 +182,9 @@
 		<cfset Application.formService=CreateObject("component","applications.cfc.forms.formService").init(formsBaseDir=application.formsBaseDir,
 		                                                                                                   formsMasterFile=application.formsMasterFile)>                                                                                                                                                                                                                                                                                                                                                                                                                    
 		<cfset Application.genieMessageService=CreateObject("component","genieObj.genieMessageService").init(dsn=application.warehouseDSN)>
-		<cfset Application.genieUserService=CreateObject("component","genieObj.genieUserService").init(warehouseDSN=application.warehouseDSN,warehouseDSN2=application.warehouseDSN2)>
+		<cfset Application.genieUserService=CreateObject("component","genieObj.genieUserService").init(warehouseDSN=application.warehouseDSN,
+																									   warehouseDSN2=application.warehouseDSN2,
+																									   defaultDPATimeout=application.DPATimeout)>
 		<cfset Application.genieVarService=CreateObject("component","genieObj.genieVarService").init()>  
 		<cfset Application.genieErrorService=CreateObject("component","genieObj.genieErrorService").init(warehouseDSN=application.warehouseDSN,
 																										 warehouseDSN2=application.warehouseDSN2,
@@ -199,7 +201,7 @@
   <cfset var inet_address = CreateObject("java", "java.net.InetAddress")>   
   <cfset var lastSession = "">
     
-  <cfif not isDefined('session.dpaClear') or not isDefined('session.isFDI')>
+  <cfif not isDefined('session.userSettings.peType')>
   	  <cfset onSessionStart()>
   </cfif>
   
@@ -417,7 +419,8 @@
       <cfset var qry_LogAccess=''>
       <cfset var sUserStyleFile=Replace(GetTemplatePath(),"index.cfm","accessibility/user_styles.txt")>
       <cfset var iFind=''>
-      <cfset var inet_address = CreateObject("java", "java.net.InetAddress")>     
+      <cfset var inet_address = CreateObject("java", "java.net.InetAddress")>   
+	  <cfset var roleSettings="">  
 	    	  
 	  <cfif isDefined('impersonate')>
 	  	<cfif Len(impersonate) GT 0>
@@ -447,7 +450,9 @@
 		</cfif>   
 	    
 	  <cfset session.ISNameUpdater=application.hrService.isMemberOf(groups=lis_NameGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+	  <!---
 	  <cfset session.ISDVSUser=application.hrService.isMemberOf(groups=lis_DVSGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+	  --->
       <cfset session.isWMidsUser=application.hrService.isMemberOf(groups=lis_WMidsGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
       <cfset session.isHTCUUser=application.hrService.isMemberOf(groups=lis_HTCUGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
 	  <cfset session.isNomMergeUser=application.hrService.isMemberOf(groups=lis_NomMergeGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
@@ -498,7 +503,11 @@
 	  	 <cfset session.isFDI=false>
 	  </cfif>
 
-	  
+	  <!--- get the users dpa retention and timeout settings --->
+	  <cfset roleSettings=application.genieUserService.getUserRoleSettings(session.user.getDUTY())>
+	  <cfset session.dpaClear=roleSettings.dpaClear>
+	  <cfset session.dpaTimeout=roleSettings.dpaTimeout>	
+	  <!---
 	  <cfif isDefined('application.dpaExceptions')>
 		  <cfif ListContains(application.dpaExceptions,session.user.getDUTY(),",") GT 0>
 		  	  <cfset session.dpaClear=false>
@@ -508,6 +517,7 @@
 	  <cfelse>
 	  	<cfset session.dpaClear=true>
   	  </cfif>
+	  --->
 		
         <!--- user is valid so log the user in --->
         <cfset session.lastLoginDate=application.genieUserService.logUserIn(userId=session.user.getUSERID(),fullName=session.loggedInUser)>
