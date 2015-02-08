@@ -62,7 +62,7 @@ AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sq
       so work out the previous crime and next crime and display links to them
 	  searchUUID file contains a csv list of crime nos and refs --->
 <cfif isDefined('searchUUID')>
-  <cfif Len(searchUUID) GT 0>
+  <cfif Len(searchUUID) GT 0>   
    <cfif FileExists(application.crimeTempDir&searchUUID&".txt")>
 	<cffile action="read" file="#application.crimeTempDir##searchUUID#.txt" variable="fileCrimeList">
 	<cfset crimeList=StripCr(Trim(fileCrimeList))>
@@ -71,15 +71,15 @@ AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sq
 	<cfset iNextCrime=iCrimePos+1>
 	
 	<cfif iPrevCrime GT 0>
-		<cfset crimeNo=ListGetAt(ListGetAt(crimeList,iPrevCrime,","),1,"|")>
-		<cfset crimeRef=ListGetAt(ListGetAt(crimeList,iPrevCrime,","),2,"|")>			
-		<cfset prevCrimeLink='<a href="#crimeNo#" class="genieCrimeLink" crimeRef="#crimeRef#" searchUUID="#searchUUID#" inList="Y"><b>&lt;&lt;&lt; Previous Crime #crimeNo#</b></a>'>
+		<cfset prevCrimeNo=ListGetAt(ListGetAt(crimeList,iPrevCrime,","),1,"|")>
+		<cfset prevCrimeRef=ListGetAt(ListGetAt(crimeList,iPrevCrime,","),2,"|")>			
+		<cfset prevCrimeLink='<a href="#prevCrimeNo#" class="genieCrimeLink" crimeRef="#prevCrimeRef#" searchUUID="#searchUUID#" inList="Y"><b>&lt;&lt;&lt; Previous Crime #prevCrimeNo#</b></a>'>
 	</cfif>
 	
 	<cfif iNextCrime LTE ListLen(crimeList,",")>
-		<cfset crimeNo=ListGetAt(ListGetAt(crimeList,iNextCrime,","),1,"|")>
-		<cfset crimeRef=ListGetAt(ListGetAt(crimeList,iNextCrime,","),2,"|")>			
-		<cfset nextCrimeLink='<a href="#crimeNo#" class="genieCrimeLink" crimeRef="#crimeRef#" searchUUID="#searchUUID#" inList="Y"><b>Next Crime #crimeNo# &gt;&gt;&gt;</b></a>'>
+		<cfset nextCrimeNo=ListGetAt(ListGetAt(crimeList,iNextCrime,","),1,"|")>
+		<cfset nextCrimeRef=ListGetAt(ListGetAt(crimeList,iNextCrime,","),2,"|")>			
+		<cfset nextCrimeLink='<a href="#nextCrimeNo#" class="genieCrimeLink" crimeRef="#nextCrimeRef#" searchUUID="#searchUUID#" inList="Y"><b>Next Crime #nextCrimeNo# &gt;&gt;&gt;</b></a>'>
 	</cfif>
   	</cfif>
   </cfif>

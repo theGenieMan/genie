@@ -122,6 +122,7 @@ $(document).ready(function() {
 					  </tr>					
 					<cfset j=j+1>
 				 </cfloop>	
+			<cffile action="write" file="#application.crimeTempDir##searchUUID#.txt" output="#lisCrimes#">	 
 		 </tbody>
 	  </table>	
    <cfelse>
