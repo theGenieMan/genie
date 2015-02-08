@@ -1699,7 +1699,7 @@ button{
 }
 
 pre.crime {
-    white-space: pre-line;       /* CSS 3 */
+    white-space: pre-line;        CSS 3 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
