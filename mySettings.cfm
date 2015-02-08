@@ -97,13 +97,13 @@ Revisions   :
 	  
 	  )
 	  
-	  $(document).on('click','#saveSettings',
+	  $(document).on('click','.saveSettingsBtn',
 	  	function(){
 			$('#settingsSaved').hide();
 			
 			$.ajax({
 					 type: 'POST',
-					 url: '/genieSessionWebService.cfc?method=updateUserSettings&font='+$('#font').val()+'&stylesheet='+$('#colourScheme').val()+'&openNewWindow='+$('#openNewWindow').val()+'&fontSize='+$('#myFontSize').val()+'&userId='+$('#userId').val()+'&userName='+$('#userName').val(),						 							  
+					 url: '/genieSessionWebService.cfc?method=updateUserSettings&font='+$('#font').val()+'&stylesheet='+$('#colourScheme').val()+'&peType='+$('#peType').val()+'&fontSize='+$('#myFontSize').val()+'&userId='+$('#userId').val()+'&userName='+$('#userName').val(),						 							  
 					 cache: false,
 					 async: false,							 
 					 success: function(data, status){							
@@ -148,15 +148,16 @@ Revisions   :
 	
 	<h3>Personlisation Options</h3>
 	
-	<table width="600">
+	<input type="button" id="saveSettingsTop" name="saveSettings" class="saveSettingsBtn" value="Save My Settings">
+	<table width="700">
 		
 		<tr>
-			<td width="150"><b>Open Enquiry Screens In A New Window?</b></td>
+			<td width="275"><b>Default Person Enquiry Search Type</b></td>
 			<td width="10">&nbsp;</td>
 		    <td colspan="3">
-				<select id="openNewWindow" name="openNewWindow">
-					<option value="N" #iif(session.userSettings.openNewWindow IS "N",de('selected'),de(''))#>No</option>
-					<option value="Y" #iif(session.userSettings.openNewWindow IS "Y",de('selected'),de(''))#>Yes</option>
+				<select id="peType" name="peType">
+					<option value="Standard" #iif(session.userSettings.peType IS "Standard",de('selected'),de(''))#>Standard</option>
+					<option value="Wildcard" #iif(session.userSettings.peType IS "Wildcard",de('selected'),de(''))#>Wildcard</option>
 				</select>
 			</td>
 		</tr>
@@ -256,7 +257,7 @@ Revisions   :
 		</tr>		
 		
 	</table>	
-	<input type="button" id="saveSettings" name="saveSettings" value="Save My Settings">
+	<input type="button" id="saveSettingsBottom" name="saveSettings" class="saveSettingsBtn" value="Save My Settings">
 </body>	
 </cfoutput>
 </html>

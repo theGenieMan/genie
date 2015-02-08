@@ -1175,11 +1175,29 @@ $(document).on('click','.searchPaneToggle',
 	}
 );
 
+// event that captures a clearForm click
+$(document).on('click','.clearFormLink',
+	function(e){		
+		e.preventDefault();
+		var formToClear=$(this).attr('href');		
+		$('.'+formToClear)[0].reset();		
+		resetResultPanes();
+		resetSearchPanes();				
+	}
+);
+
+$(document).on('focus','.clearFormLink',
+	function(){
+		$(this).blur();
+		$(this).click();
+	}	
+);
+
 $(document).on('dblclick','.showSession',
 	function(){
 	$('#sessionInfo').dialog({
 			resizable: false,
-			height: 650,
+			height: 350,
 			width: 675,
 			modal: true,
 			title: 'Session Information',

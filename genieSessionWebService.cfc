@@ -34,16 +34,16 @@
 	<cffunction name="updateUserSettings" access="remote" output="false" returntype="string">
 		<cfargument name="font" type="string" required="true" hint="user settings update font">
 		<cfargument name="stylesheet" type="string" required="true" hint="user settings update stylesheet">
-		<cfargument name="openNewWindow" type="string" required="true" hint="uset settings update openNewWindow">
+		<cfargument name="peType" type="string" required="true" hint="uset settings update person search type">
 		<cfargument name="fontSize" type="string" required="true" hint="user settings update font size">
 		<cfargument name="userId" type="string" required="true" hint="user settings userid to update">
-		<cfargument name="userName" type="string" required="true" hint="user settings user name to update">
+		<cfargument name="userName" type="string" required="true" hint="user settings user name to update">		
 	 	
 	 	<cfset application.genieUserService.updateUserSettings(userId=arguments.userId,
 															   userName=arguments.userName,
 															   font=arguments.font,
 															   stylesheet=arguments.stylesheet,
-                                                               openNewWindow=arguments.openNewWindow,
+                                                               peType=arguments.peType,
 															   fontSize=arguments.fontSize)>
 	 	
 	 	<cfreturn true>	

@@ -16,20 +16,6 @@ Revisions        :
 
 <script>
 	$(document).ready(function() {
-	   $(document).on('dblclick','.showSession',
-	 	function(){
-			$('#sessionInfo').dialog({
-					resizable: false,
-					height: 650,
-					width: 675,
-					modal: true,
-					title: 'Session Information',
-					close: function(){
-						$(this).dialog('destroy');
-					}
-				});
-			}
-		 );
 		 		
 		if ( $('#genieUserMyFontSize').length>0 ) {
 			var fontSize=parseInt($('#genieUserMyFontSize').val())		
@@ -111,20 +97,61 @@ Revisions        :
 		 </cfif>			
 		</td>
 		<td width="65%" align="right">
-			<b>#Session.LoggedInUser#</b> on <span class="showSession">#session.server#</span>. <strong>Log Access:</strong> #Session.LoggedInUserLogAccess#. <a href="/mySettings.cfm?#session.urlToken#" class="mySettings">My Settings</a>
+			<b><span class="showSession">#Session.LoggedInUser#</span></b>. <strong>Log Access:</strong> #Session.LoggedInUserLogAccess#. <a href="/mySettings.cfm?#session.urlToken#" class="mySettings">My Settings</a>
 			<input type="hidden" id="genieCurrentUserId" value="#iif(session.user.getForceCode() IS '22',de(session.user.getUSERID()),de(session.user.getOTHERUSERID()))#">
 			<input type="hidden" id="genieCurrentUserIdWMP" value="#session.user.getUSERID()#">
 			<input type="hidden" id="genieCurrentUserName" value="#session.user.getFullName()#">
 			<input type="hidden" id="genieCurrentUserCollar" value="#session.user.getCollar()#">	
 			<input type="hidden" id="dpaClear" value="#session.dpaClear#">	
+			<input type="hidden" id="dpaTimeout" value="#session.dpaTimeout#">	
 			<input type="hidden" id="genieUserMyFontSize" value="#session.userSettings.fontSize#">			
 		</td>
 	</tr>
 </table>
 
 <div style="display:none" id="sessionInfo">
-  <cfif SCRIPT_NAME IS "index.cfm">	
-	<cfdump var="#session#">
+  <cfif SCRIPT_NAME IS "/index.cfm">	
+	<table width="90%" class="nominalData">
+		<tr>
+			<th>Role</th>
+			<td>#Session.user.getDUTY()#</td>
+		</tr>
+		<tr>
+			<th>Server / Start</th>
+			<td>#session.server# / #session.startTime#</td>
+		</tr>
+		<tr>
+			<th>DPA Clear / Timeout</th>
+			<td>#session.dpaClear# / #session.dpaTimeout#</td>
+		</tr>
+		<tr>
+			<th>West Mids?</th>
+			<td>#session.isWmidsUser#</td>
+		</tr>
+		<tr>
+			<th>FDI?</th>
+			<td>#session.isFDI#</td>
+		</tr>
+		<tr>
+			<th>OCC?</th>
+			<td>#session.isOCC#</td>
+		</tr>
+		<tr>
+			<th>Nom Merge?</th>
+			<td>#session.isNomMergeUser#</td>
+		</tr>
+		<tr>
+			<th>Intel Package?</th>
+			<td>#session.isPDFPackageUser#</td>
+		</tr>
+		<tr>
+			<th valign="top">Settings</th>
+			<td>Font size: #session.userSettings.fontSize#<br>
+			    Font : #session.userSettings.font#<br>
+				Stylesheet : #session.userSettings.stylesheet#<br>
+				PE Search Type : #session.userSettings.peType#
+			</td>
+	</table>
   <cfelse>
     <p>Only available on the homepage</p>
   </cfif>

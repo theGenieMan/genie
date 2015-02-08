@@ -309,7 +309,7 @@ function resetResultPanes(){
 	}*/
 }
 
-function pncPasteRead(pncData){
+function pncPasteRead(pncData, operatorCollar){
 	
 		var pncObj={
 			collar:'',
@@ -362,7 +362,7 @@ function pncPasteRead(pncData){
 		
 		var collar='';
 		var detail='';
-		
+		console.log('origSpidx=/'+origSpIdx+'/')
 		if ( origSpIdx != -1){
 			collar=origData.slice(0,origSpIdx).trim()
 			
@@ -372,6 +372,31 @@ function pncPasteRead(pncData){
 			}
 			
 			detail=origData.substr(origSpIdx,origData.length-origSpIdx).trim();	
+			
+			// see if there is another space in the details, if so then the format of the
+			// query might have been user collar followed by officers collar, see if we can
+			// find that
+			
+			var nextCollarIdx=origData.indexOf(' ',origSpIdx+1);
+			console.log('nextcollaridx=/'+nextCollarIdx+'/')
+			if ( nextCollarIdx != -1){
+				// get the data to next space
+				nextCollar=origData.slice(origSpIdx+1,nextCollarIdx).trim();
+				
+				if ( ! isNaN(nextCollar) ){
+					// next space contains a number, might be a collar.
+					// check this next number isn't the operators collar
+					console.log('2nd collar=/'+nextCollar+'/')
+					console.log('operator collar=/'+operatorCollar+'/')
+					
+					if ( nextCollar != operatorCollar){
+						collar=nextCollar;
+						detail=origData.substr(nextCollarIdx,origData.length-nextCollarIdx).trim();
+					}
+					
+				}	
+			}			
+			
 		}
 		else
 		{
@@ -464,7 +489,7 @@ function pncPasteRead(pncData){
 	
 }
 
-function checkButtonExpiry(){
+function checkButtonExpiry(dpaTimeout){
 	var lastEnqTimestamp=$('#lastEnquiryTimestamp').val();
 	var dateNow=new Date();
 	
@@ -482,7 +507,7 @@ function checkButtonExpiry(){
 	
 	// diff is greater than the timeout for this type of enq so
 	// hide the start button so a new query is required
-	if (diffMins >= 5){
+	if (diffMins >= dpaTimeout){
 		$('#startSearch').hide();
 		$('#prevSearchSpan').hide();
 		clearInterval(window.globalSearchButtonInterval)	
