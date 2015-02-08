@@ -78,7 +78,8 @@
 				&nbsp;
 				|
 				</span>
-				&nbsp;			
+				&nbsp;
+				<a href="enquiryForm" class="clearFormLink" accesskey="C">Clear Form</a> | 			
 			  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
 				<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
 				<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>				
@@ -104,9 +105,9 @@
 		</div>
 	  </div>
 	  <div class="spacer">&nbsp;</div>
-	  <div id="referencePane" class="ui-accordion searchPane" initOpen="false">
-	  	<div class="ui-accordion-header ui-state-default searchPaneHeader"><span class="toggler">>></span> Reference Nos <span class="dataEntered"></span></div>
-		<div class="ui-widget-content ui-accordion-content searchPaneContent" style="display:none">
+	  <div id="referencePane" class="ui-accordion searchPane" initOpen="true">
+	  	<div class="ui-accordion-header ui-state-active searchPaneHeader"><span class="toggler"><<</span> Reference Nos <span class="dataEntered"></span></div>
+		<div class="ui-widget-content ui-accordion-content searchPaneContent">
 			<table width="98%" align="center">
 		  		<tr>
 		  			<td width="15%"><label for="nominalRef">Nominal Ref</label></td>
@@ -147,8 +148,8 @@
 		  			<td width="15%"><label for="searchType">Search Type</label></td>
 					<td width="45%">
 						<select name="searchType" id="searchType" class="mandatory" displayInPane="Search Type" displayPrevSearch="N">
-							<option value="Standard">Standard</option>
-							<option value="Wildcard">Wildcard</option>
+							<option value="Standard" #iif(session.userSettings.peType IS "Standard",de('selected'),de(''))#>Standard</option>
+							<option value="Wildcard" #iif(session.userSettings.peType IS "Wildcard",de('selected'),de(''))#>Wildcard</option>
 						</select>
 					</td>					
 					<td valign="top" rowspan="4" align="right">						

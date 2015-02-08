@@ -58,7 +58,8 @@ $(document).on('change','#dpaValid',function(){
 $(document).on('change','#pncData',
 	function(){
 	 if ($(this).val().length > 0) {
-	 	var pncObj = pncPasteRead($(this).val())
+	 	var operatorCollar=$('#genieCurrentUserCollar').val();
+	 	var pncObj = pncPasteRead($(this).val(), operatorCollar)
 	 	// set the dpa data array up
 			var arrDpaToSet = [];
 			arrDpaToSet[0] = {
@@ -151,7 +152,7 @@ $(document).on('submit','.enquiryForm',
 			}
 			else{
 				// it's a valid enquiry and we are going to get some form of results
-				// run the search 
+				// run the search 				
 				doPersonEnquiry();			
 			}
 							  					  

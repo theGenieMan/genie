@@ -58,6 +58,7 @@
 				|
 				</span>
 				&nbsp;			
+				<a href="enquiryForm" class="clearFormLink" accesskey="C">Clear Form</a> | 		
 			  	<a href="expandAll" class="searchPaneToggle" searchPane="searchPaneHeader">Expand All</a> | 
 				<a href="expandData" class="searchPaneToggle" searchPane="searchPaneHeader">Expand With Data</a> | 
 				<a href="collapseAll" class="searchPaneToggle" searchPane="searchPaneHeader">Collapse All</a>				

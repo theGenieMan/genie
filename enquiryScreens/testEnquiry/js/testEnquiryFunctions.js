@@ -106,9 +106,10 @@ function doTestEnquiry(){
 	// set the last enquiry timestamp, so we can work out when to remove the button
 	$('#lastEnquiryTimestamp').val(getTimestamp());
 	
-	/*
-	searchButtonInterval=setInterval(checkButtonExpiry,10000);
-	*/
+    userDPATimeout=parseInt($('#dpaTimeout').val());			
+    window.globalSearchButtonInterval=setInterval(function(){
+   		checkButtonExpiry(userDPATimeout)
+   	},150000);
 
 }
 

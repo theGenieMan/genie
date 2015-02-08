@@ -23,7 +23,7 @@ $(document).ready(function() {
 
 		// create results required
 		var $resultsTabs=$( "#resultsTabs" ).tabs();
-		var dpaClear=($('#dpaClear').val()==='true');
+		var dpaClear=($('#dpaClear').val()==='true');		
 		var isOCC=$('#isOCC').val();
 		var initialUserId='';
 		var loggedInUser=$('#enquiryUser').val();

@@ -80,7 +80,10 @@ function doCustodyWhiteboard(){
 	// set the last enquiry timestamp, so we can work out when to remove the button
     $('#lastEnquiryTimestamp').val(getTimestamp());
 	
-    window.globalSearchButtonInterval=setInterval(checkButtonExpiry,150000);	
+    userDPATimeout=parseInt($('#dpaTimeout').val());			
+    window.globalSearchButtonInterval=setInterval(function(){
+   		checkButtonExpiry(userDPATimeout)
+   	},150000);
 
 }
 
