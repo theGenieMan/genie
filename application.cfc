@@ -200,10 +200,6 @@
 
   <cfset var inet_address = CreateObject("java", "java.net.InetAddress")>   
   <cfset var lastSession = "">
-    
-  <cfif not isDefined('session.userSettings.peType')>
-  	  <cfset onSessionStart()>
-  </cfif>
   
   <cfif isDefined('resetApplicationScope') or isDefined('resetBoth')>
   	  <cfset onApplicationStart()>
@@ -282,6 +278,10 @@
   <cfargument name = "targetPage" type="String" required="false">
   
   <!--- <cfset onApplicationStart()> --->
+      
+  <cfif not isDefined('session.userSettings.peType')>
+  	  <cfset onSessionStart()>
+  </cfif>
   
     <cfif application.ENV IS "TRAIN" OR application.ENV IS "TRAIN_TEST">
 	
