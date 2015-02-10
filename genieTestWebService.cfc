@@ -312,10 +312,10 @@ Margaret Reyes,31/05/58,36991 Rowland Court,Maroon
 <table width="98%" align="center" class="dataTable genieData">
   <thead>
     <tr>
-		<th width="25%">Test Column 1</th>
+		<th width="25%" data-sort="string">Test Column 1</th>
 		<th width="25%">Test Column 2</th>
 		<th width="25%">Test Column 3</th>		
-		<th width="25%">Test Column 4</th>						
+		<th width="25%" data-sort="string">Test Column 4</th>						
     </tr>
   </thead>
   <tbody>	

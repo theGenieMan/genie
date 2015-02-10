@@ -29,6 +29,10 @@ $(document).on('submit','.enquiryForm',
 		e.preventDefault();
 		
 		var custSuite=$('#custSuite').val()
+		
+		if (custSuite == null ){
+			custSuite=$('#custSuite option:first').val();			
+		}
 			
 		// hide errors
 		$('#errorDiv .error_text').html('')
@@ -49,7 +53,7 @@ $(document).on('submit','.enquiryForm',
 			else {
 				// it's a valid enquiry and we are going to get some form of results
 				// run the search 
-				doCustodyWhiteboard();
+				doCustodyWhiteboard(custSuite);
 			}				
 		
 	}

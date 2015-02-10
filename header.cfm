@@ -4,7 +4,7 @@ Name             :  Header.cfm
 
 Application      :  GENIE
 
-Purpose          :  Displays the Header bar and menu options for the structured search
+Purpose          :  Displays the Header bar and menu options
 
 Date             :  03/09/2014
 
@@ -13,6 +13,7 @@ Author           :  Nick Blackham
 Revisions        :
 
 --->
+
 
 <script>
 	$(document).ready(function() {
@@ -82,11 +83,14 @@ Revisions        :
 				  <option value="nominalPrint">Print</option>
 				  <option value="OIS Paste">OIS Paste</option>
 				  <option value="Favourite">Add as Favourite</option>
+				  <option value="PNC Wanted">Submit PNC Wanted</option>
 				  </cfif> 
-			      <option value="NIR">Submit NIR</option>  
-				  <cfif showActionExtras>
-				  <option value="ssNominal">Submit Stop Search</option>	  		 		  	   		  		  
-				  <option value="drinkDrive">Submit Drink Drive</option>		  				   			  	  
+			      <option value="NIR">Submit NIR</option>				    
+				  <cfif showActionExtras>				  
+				  <option value="ssNominal">Submit Stop Search</option>
+				  <!---	  		 		  	   		  		  
+				  <option value="drinkDrive">Submit Drink Drive</option>
+				  --->		  				   			  	  
 				  </cfif>		  
 				  <cfif SCRIPT_NAME IS '/enquiryScreens/person/enquiry.cfm' OR SCRIPT_NAME IS '/nominalViewers/genie/nominal.cfm'>
 				  <option value="nominalMerge">Submit Nominal Merge</option>	
@@ -97,14 +101,23 @@ Revisions        :
 		 </cfif>			
 		</td>
 		<td width="65%" align="right">
-			<b><span class="showSession">#Session.LoggedInUser#</span></b>. <strong>Log Access:</strong> #Session.LoggedInUserLogAccess#. <a href="/mySettings.cfm?#session.urlToken#" class="mySettings">My Settings</a>
+			<b><span class="showSession">#Session.LoggedInUser#</span></b>. <strong>Log Access:</strong> #Session.LoggedInUserLogAccess#.
+			<!--- 
+			<a href="/mySettings.cfm?#session.urlToken#" class="mySettings">My Settings</a>
+			--->
+			<form action="/mySettings.cfm?#session.urlToken#" method="get" style="display:inline-block">
+				<input type="submit" id="mySettingsBtn" name="mySettingsBtn" class="mySettingsBtn" value="My Settings (M)" accesskey="M">
+			</form>
+			<cfif SCRIPT_NAME IS NOT "/index.cfm">
+			<input type="button" id="closeWinBtn" name="closeWinBtn" class="closeWinBtn" value="Close (X)" accesskey="X">
+			</cfif>
 			<input type="hidden" id="genieCurrentUserId" value="#iif(session.user.getForceCode() IS '22',de(session.user.getUSERID()),de(session.user.getOTHERUSERID()))#">
 			<input type="hidden" id="genieCurrentUserIdWMP" value="#session.user.getUSERID()#">
 			<input type="hidden" id="genieCurrentUserName" value="#session.user.getFullName()#">
 			<input type="hidden" id="genieCurrentUserCollar" value="#session.user.getCollar()#">	
 			<input type="hidden" id="dpaClear" value="#session.dpaClear#">	
 			<input type="hidden" id="dpaTimeout" value="#session.dpaTimeout#">	
-			<input type="hidden" id="genieUserMyFontSize" value="#session.userSettings.fontSize#">			
+			<input type="hidden" id="genieUserMyFontSize" value="#session.userSettings.fontSize#">						
 		</td>
 	</tr>
 </table>

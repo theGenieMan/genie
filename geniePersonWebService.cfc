@@ -77,14 +77,14 @@
   <thead>
     <tr>
 		<th width='5%'>Nom Ref</th>
-		<th width='28%'>Name</th>
+		<th width='28%' data-sort='int' class="thSorted">Name</th>
 		<th width='2%'>Sex</th>		
 		<th width='1%'>W</th>
 		<th width='1%'>&nbsp;</th>
 		<th width='8%'>DOB</th>
-		<th width='2%'>Age</th>
-		<th width='12%'>Birth Place</th>
-		<th width='12%'>Post Town</th>
+		<th width='2%' data-sort='int' class="thSortable">Age</th>
+		<th width='12%' data-sort='string' class="thSortable">Birth Place</th>
+		<th width='12%' data-sort='string' class="thSortable">Post Town</th>
 		<th width='1%'>&nbsp;</th>
 		<th width='2%'>NT</th>
 		<th width='16%'>Ethnic App</th>
@@ -98,14 +98,14 @@
 <cfsavecontent variable="variables.nominalLongTableRow">
 <tr id="%nameType%_%nominalRef%">
 	<td valign="top"><a %nominalHRef% class='%nominalClass%' %targetInfo%>%nominalRef%</a></td>
-	<td valign="top" class="fullName"><a %nominalHRef% class='%nominalClass%' %targetInfo%>%fullName%</a></td>
+	<td valign="top" class="fullName" data-sort-value='%nominalCount%'><a %nominalHRef% class='%nominalClass%' %targetInfo%>%fullName%</a></td>
 	<td valign="top">%SEX%</td>	
 	<td valign="top" align="center">%warningData%</td>
 	<td valign="top" align="center">%photoData%</td>
 	<td valign="top">%DOB%</td>
 	<td valign="top">%AGE%</td>
-	<td valign="top">%pob%</td>
-	<td valign="top">%ptown%</td>	
+	<td valign="top" data-sort-value='%pobVal%'>%pob%</td>
+	<td valign="top" data-sort-value='%pTownVal%'>%ptown%</td>	
 	<td valign="top" align="center">%addressData%</td>	
 	<td valign="top">%nametype%</td>
 	<td valign="top">%ethnicapp%</td>
@@ -831,6 +831,7 @@
 	<cfset var thisNominal="">  
 	<cfset var str_Name="">
 	<cfset var lisNominals="">
+    <cfset var iNom=1>
 	
 		<cfset returnTable  =duplicate(variables.nominalLongTableHeader)>
 		<cfloop query="nominalQuery">		  	  	
@@ -855,7 +856,8 @@
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%clickData%',variables.clickData,"ALL")>
 			<cfelse>
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%clickData%','',"ALL")>
-			</cfif>					
+			</cfif>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalCount%',iNom,"ALL")>					
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%nominalRef%',NOMINAL_REF,"ALL")>
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%forename1%',FORENAME_1,"ALL")>				
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%surname1%',SURNAME_1,"ALL")>	
@@ -884,7 +886,9 @@
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%DateAddressRecorded%',DATE_REC,"ALL")>
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%Warnings%',WARNINGS,"ALL")>
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%pTown%',POST_TOWN,"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%pTownVal%',IIf(Len(POST_TOWN) GT 0,de(POST_TOWN),de('ZZZZZZZ')),"ALL")>
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%pob%',PLACE_OF_BIRTH,"ALL")>
+			<cfset thisNominal=ReplaceNoCase(thisNominal,'%pobVal%',IIf(Len(PLACE_OF_BIRTH) GT 0,de(PLACE_OF_BIRTH),de('ZZZZZZZ')),"ALL")>
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%sex%',SEX,"ALL")>
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%photoUrl%',PHOTO_URL,"ALL")>
 			<cfset thisNominal=ReplaceNoCase(thisNominal,'%photoDate%',PHOTO_DATE,"ALL")>
@@ -921,7 +925,8 @@
 				<cfset thisNominal=ReplaceNoCase(thisNominal,'%checkbox%','',"ALL")>
 			</cfif>								
 			
-			<cfset returnTable &= thisNominal>			  
+			<cfset returnTable &= thisNominal>	
+			<cfset iNom++>		  
 		</cfloop>				
 	    <Cfset returnTable &=duplicate(variables.nominalLongTableFooter)>	
 		

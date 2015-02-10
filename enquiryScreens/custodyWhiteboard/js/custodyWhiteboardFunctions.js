@@ -9,9 +9,9 @@
  * 
  */
 
-function doCustodyWhiteboard(){
+function doCustodyWhiteboard(custSuite){
 
-	var custSuite=$('#custSuite').val();
+	// var custSuite=$('#custSuite').val();
 	
 	// clear the interval for checking on search expiry
 	clearInterval(window.globalSearchButtonInterval)
@@ -41,7 +41,23 @@ function doCustodyWhiteboard(){
 								                  at: 'right center',
 								                  viewport: $(window)         
 											   	}											  															    
-									  });				
+									  });	
+									  
+ 			var $sortTable = $resultsTable.stupidtable();
+								
+				$sortTable.bind('aftertablesort', function (event, data) {
+				    // data.column - the index of the column sorted after a click
+				    // data.direction - the sorting direction (either asc or desc)
+				    // $(this) - this table object
+				
+				    $(this).find("tbody tr:even").removeClass().addClass('row_colour0');
+					$(this).find("tbody tr:odd").removeClass().addClass("row_colour1");
+										
+					$(this).find('th.thSorted').removeClass().addClass('thSortable');
+					$(this).find('th:eq('+data.column+')').removeClass().addClass('thSorted');
+						
+				});											  
+									  			
 			$('#wmpResultsData').append($resultsTable);
 			$('#wmpSpinner').hide();
 			$('#wmpSearchingDiv').hide();

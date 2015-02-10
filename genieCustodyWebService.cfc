@@ -23,9 +23,10 @@
 	  <th valign="top" width="10%">Ref</th>
 	  <th valign="top" width="25%">Name</th>
 	  <th valign="top" width="2%"></th>
-	  <th valign="top" width="5%">DOB/Age</th>		 
+	  <th valign="top" width="5%">DOB/Age</th>
+	  <th valign="top" width="10%">Arrested</th>		 
 	  <th valign="top" width="10%">Review</th>
-	  <th valign="top" width="15%">Status</th>		 		 		 		 	  
+	  <th valign="top" width="10%">Status</th>		 		 		 		 	  
 	  <th valign="top">Officers</td>	
     </tr>
   </thead>
@@ -52,6 +53,7 @@
 	</td>
 	<td valign="top">%warningData%</td>
 	<td valign="top">%cDob%<br>Age:%cAge%</td>
+	<td valign="top">%timeOfArrest%</td>
 	<td valign="top">%reviewDate%</td>
 	<td valign="top">
 		<strong>Absent</strong> : %cAbsent%<br>
@@ -64,14 +66,17 @@
 	</td>		
 </tr>	
 <tr id="%custodyRefRP%_2">
-	<td colspan="8">
-		<b>Time of Arrest</b>: %timeOfArrest%<Br>
+	<td colspan="9">		
 		<b>Arrest Reason(s)</b>: %arrestReasons%<br>
 		<b>Place of Arrest</b>: %placeOfArrest%
 		<hr>
 	</td>
 </tr>	
 </cfsavecontent>
+
+<!---
+		<b>Time of Arrest</b>: %timeOfArrest%<Br>
+		--->
 
 <cfsavecontent variable="variables.whtbPhotoDiv">
 <div align="center">
@@ -398,11 +403,11 @@ width="100%" border="1" cellpadding="3" cellspacing="0" bordercolor="000000" sty
 			<cfset thisCustody=ReplaceNoCase(thisCustody,'%cDob%',custodies[iCust].getDOB_TEXT(),"ALL")>
 			<cfset thisCustody=ReplaceNoCase(thisCustody,'%cAge%',custodies[iCust].getAGE(),"ALL")>			
 			<cfset thisCustody=ReplaceNoCase(thisCustody,'%placeOfArrest%',custodies[iCust].getPLACE_OF_ARREST(),"ALL")>
-			<cfset thisCustody=ReplaceNoCase(thisCustody,'%timeOfArrest%',custodies[iCust].getARREST_TIME_TEXT(),"ALL")>
+			<cfset thisCustody=ReplaceNoCase(thisCustody,'%timeOfArrest%',custodies[iCust].getARREST_TIME_TEXT(),"ALL")>			
 			<cfset thisCustody=ReplaceNoCase(thisCustody,'%cAbsent%',iif(custodies[iCust].getSTATUS() IS "C",de('N'),de('Y')),"ALL")>
 			<cfset thisCustody=ReplaceNoCase(thisCustody,'%cCharged%',custodies[iCust].getCHARGED(),"ALL")>
 			<cfset thisCustody=ReplaceNoCase(thisCustody,'%cRights%',custodies[iCust].getRIGHTS(),"ALL")>
-			<cfset thisCustody=ReplaceNoCase(thisCustody,'%reviewDate%',custodies[iCust].getNEXT_REVIEW_DATE_TEXT(),"ALL")>
+			<cfset thisCustody=ReplaceNoCase(thisCustody,'%reviewDate%',custodies[iCust].getNEXT_REVIEW_DATE_TEXT(),"ALL")>			
 			<cfset thisCustody=ReplaceNoCase(thisCustody,'%aoBadge%',custodies[iCust].getAO_BADGE(),"ALL")>
 			<cfset thisCustody=ReplaceNoCase(thisCustody,'%aoName%',custodies[iCust].getAO_NAME(),"ALL")>
 			<cfset thisCustody=ReplaceNoCase(thisCustody,'%oicBadge%',custodies[iCust].getOIC_BADGE(),"ALL")>

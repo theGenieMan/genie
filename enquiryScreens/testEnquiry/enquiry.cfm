@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="/jQuery/inputmask/jquery.inputmask.date.extensions.js"></script>
 	<script type="text/javascript" src="/jQuery/time/jquery.plugin.min.js"></script>
 	<script type="text/javascript" src="/jQuery/time/jquery.timeentry.min.js"></script>
+	<script type="text/javascript" src="/jQuery/stupidTable/stupidtable.min.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
 	<script type="text/javascript" src="/jQuery/customControls/dpa/jquery.genie.dpa.js"></script>	

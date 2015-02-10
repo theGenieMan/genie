@@ -858,6 +858,18 @@ $(document).on('change','#actionSelectDropDown',
 			
 		}
 		
+		// PNC Wanted Submission
+		if(actionType=='PNC Wanted'){
+			
+			pncWantedLink=''
+			
+			getAppVar('stepPNCWantedLink').done(function(result) {				
+				pncWantedLink=result+nominalRef
+				window.open(pncWantedLink)    
+			})
+			
+		}		
+		
 		// Nominal Merge Form
 		if(actionType=='nominalMerge'){
 			window.open('/nominalViewers/genie/nominalMergeCO6.cfm?incomingNominalRef='+nominalRef)
@@ -1213,6 +1225,21 @@ $(document).on('change','#prevSearch',
 		var searchIndex=$(this).val();
 		if (searchIndex.length > 0) {
 			populateSearchDetails(window.globalPreviousSearchArray[searchIndex])
+		}
+	}
+)
+
+// close window button
+$(document).on('click','.closeWinBtn',
+	function(){
+		// see if the opening window still exists, if it does
+		// then focus on that before closing this window
+		if ( window.opener && !window.opener.closed ){			
+			window.opener.focus();
+			window.close();			
+		}
+		else{			
+			window.close();
 		}
 	}
 )

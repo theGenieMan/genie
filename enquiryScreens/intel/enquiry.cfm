@@ -87,12 +87,15 @@
 					<td width="5%">&nbsp;</td>
 					<td width="15%"><label for="source_doc_ref">Src Doc</label></td>
 					<td valign="top">
+						<input name="source_doc_ref" id="source_doc_ref" displayInPane="Src Doc" displayPrevSearch="Y" size="25">
+						<!---
 						<select name="source_doc_ref" id="source_doc_ref" displayInPane="Src Doc" displayPrevSearch="Y">
 							<option value="">-- Select --</option>
 							<cfloop query="Application.qry_SrcDoc">
 							<option value="#DOCUMENT_CODE#">#DESCRIPTION#</option>		
 							</cfloop>
 						</select>
+						--->
 					</td>										
 		  		</tr>		
 				<tr>

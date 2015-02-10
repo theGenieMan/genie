@@ -68,7 +68,19 @@ function doTestEnquiry(){
 								                  at: 'right center',
 								                  viewport: $(window)         
 											   	}											  															    
-									  });				
+									  });	
+									  
+			    var $sortTable = $resultsTable.stupidtable();
+								
+				$sortTable.bind('aftertablesort', function (event, data) {
+				    // data.column - the index of the column sorted after a click
+				    // data.direction - the sorting direction (either asc or desc)
+				    // $(this) - this table object
+				
+				    $(this).find("tbody tr:even").removeClass().addClass('row_colour0');
+					$(this).find("tbody tr:odd").removeClass().addClass("row_colour1");	
+				});
+									  			
 			$('#wmpResultsData').append($resultsTable);
 			$('#wmpSpinner').hide();
 			$('#wmpSearchingDiv').hide();

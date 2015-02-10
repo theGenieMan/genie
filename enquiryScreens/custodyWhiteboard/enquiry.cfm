@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.min.js"></script>
 	<script type="text/javascript" src="/jQuery/qTip2/jquery.qtip.min.js"></script>
 	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>
+	<script type="text/javascript" src="/jQuery/stupidTable/stupidtable.min.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
 	<script type="text/javascript" src="js/custodyWhiteboardFunctions.js"></script>
@@ -76,9 +77,10 @@
 		<div class="ui-widget-content ui-accordion-content searchPaneContent">
 			<table width="98%" align="center">
 		  		<tr>
-		  			<td width="15%"><label for="custSuite">Custody Suite</label></td>
+		  			<td width="15%" valign="top"><label for="custSuite">Custody Suite</label></td>
 					<td>
-						<select name="custSuite" id="custSuite" class="mandatory" displayInPane="Custody Suite" displayPrevSearch="Y" initialFocus="true">							
+						<select name="custSuite" id="custSuite" class="mandatory" displayInPane="Custody Suite" 
+						        displayPrevSearch="Y" multiple="true" size="12" initialFocus="true">							
 							<option value="ALLCUST">All Warwickshire and West Mercia</option>
 							<option value="ALLWP">All Warwickshire</option>
 							<cfloop query="application.qry_CustodyStation">
@@ -93,7 +95,8 @@
 								</cfif>														
 							</cfloop>
 						</select>
-						
+						<br>
+						To select multiple custody suites hold down CTRL and click left mouse button. Click again to deselect.
 					</td>										
 		  		</tr>				
 		  	</table>			
