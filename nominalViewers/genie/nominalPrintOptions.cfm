@@ -128,6 +128,16 @@ Revisions   :
 		 </div>
 		</cfif>
 		
+		<cfif session.isMopiDisclosureUser>
+		 <br><br>
+		 <div align="center"> 
+			<form action="/nominalViewers/genie/mopiDisclosure.cfm?#session.urlToken#" method="post" target="_blank">
+				<input type="hidden" name="nominalRef" value="#nominalRef#">				
+				<input type="submit" name="frm_BtnCreateMopiDisc" value="MOPI DISCLOSURE"><br>
+			</form>	 
+		 </div>			
+		</cfif>
+		
 	 </div>
 	 
 </div>

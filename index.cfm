@@ -226,7 +226,7 @@ Revisions   :
 	  <div class="ui-widget-content ui-accordion-content searchPaneContent" style="display:none" align="center">
 		 <br>
 			Genie Service Started @ <b>#application.genieService.getDateServiceStarted()#</b>,			
-			Server: <b>#ListGetAt(CreateObject("java", "java.net.InetAddress").getLocalHost(),1,"/")#</b>, Environment: <b>#application.env#</b>, Warehouse: <b>#application.warehouseDSN#</b><br>
+			Server: <b>#ListGetAt(CreateObject("java", "java.net.InetAddress").getLocalHost(),1,"/")#</b>, Environment: <b>#application.env#</b>, Warehouse: <b>#application.warehouseDSN#</b>, Ad Server: <b>#application.adServer#</b><br>
 			<a href="#SCRIPT_NAME#?#QUERY_STRING#&resetApplicationScope=YES&#session.URLToken#" class="adminLink">Reset Application Scope</a> 
 			| <a href="#ListLast(SCRIPT_NAME,"/")#?#QUERY_STRING#&resetSessionScope=YES&#session.URLToken#" class="adminLink">Reset Session Scope</a>
 			| <a href="addSystemMessage.cfm?#session.UrlToken#" target="_blank" class="adminLink">Add A System Message</a>

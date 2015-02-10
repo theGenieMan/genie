@@ -79,7 +79,7 @@
 	<cfset Application.wMidsTimeout="360">
 	<cfset Application.mopiGroups="1,2,3,4,U">    
 	<cfset Application.htcuNoNirReasons="Intel already exists,Intel of no value">
-	<cfset Application.adServer="10.240.230.187">
+	<cfset Application.adServer="10.1.230.150">
 	<cfset Application.relevanceScores="50,55,60,65,70,75,80,85,90,95,100">
 
     <cflog file="genie" type="information" text="onApplicationStart static variables set">
@@ -279,7 +279,7 @@
   
   <!--- <cfset onApplicationStart()> --->
       
-  <cfif not isDefined('session.userSettings.peType')>
+  <cfif not isDefined('session.userSettings.peType') OR not isDefined('session.isMopiDisclosureUser')>
   	  <cfset onSessionStart()>
   </cfif>
   
@@ -502,6 +502,12 @@
 	  <cfelse>
 	  	 <cfset session.isFDI=false>
 	  </cfif>
+	  
+	  <cfif ListFindNoCase(application.mopiDisclosureRoles,session.user.getDuty(),",") GT 0>
+	  	<cfset session.isMopiDisclosureUser=true>	  
+	  <cfelse>
+	  	<cfset session.isMopiDisclosureUser=false>  
+  	  </cfif>
 
 	  <!--- get the users dpa retention and timeout settings --->
 	  <cfset roleSettings=application.genieUserService.getUserRoleSettings(session.user.getDUTY())>
