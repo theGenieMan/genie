@@ -80,6 +80,8 @@ WHERE  PERSON_URN='#PERSON_URN#'
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">
 	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
+	<script type="text/javascript" src="/js/globalEvents.js"></script>
+	<script type="text/javascript" src="/js/globalFunctions.js"></script>	
 </head>
 
 <body>
