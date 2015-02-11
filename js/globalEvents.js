@@ -698,7 +698,7 @@ $(document).on('change','#actionSelectDropDown',
 		var userId=$('#genieCurrentUserId').val();
 		var userCollar=$('#genieCurrentUserCollar').val();	
 		var dWidth=$(window).width()-100;
-		var dHeight= $(window).height()-150;	
+		var dHeight= $(window).height()-125;	
 		
 		// OIS Paste		
 		if(actionType=='OIS Paste'){

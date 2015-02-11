@@ -107,19 +107,19 @@ Revisions   :
 		<input type="hidden" id="printNominalRef" value="#nominalRef#">
 	 	<input type="button" id="btnScreenPrint" name="btnScreenPrint" value="SCREEN PRINT"><br>		
 					
-		<strong>SCREEN PRINT</strong> opens in a new window with the print dialog box open. <br>There is no guarantee that 
+		<strong>SCREEN PRINT</strong> opens in a new window with the print dialog box open. There is no guarantee that 
 		the print will look exactly like what is on screen. <br>Once you have printed the document click the `Close Window` button.
 		
-		<br><Br>
+		<br><br>
 		<input type="button" name="btnPDFPrint" id="btnPDFPrint" value="PRINT TO PDF"><br>				
 		<strong>PRINT TO PDF</strong> opens in a new window with your print in Adobe Acrobat PDF Format
 		<br><input type="checkbox" class="printOption" id="chkPDFBreak" name="chkPDFBreak" value="pagebreak">Page Break Between Sections (Tick For Yes)
 		
-		
+		<br>
 		<cfif session.isPDFPackageUser
 		 	or session.user.getUserId() IS "c_jon020"
 			or session.user.getUserId() IS "t_low001">
-		 <br><br>
+		 <br>
 		 <div align="center"> 
 			<form action="intelPackagePrint.cfm?#session.urlToken#" method="post" target="_blank">
 				<input type="hidden" name="nominalRef" value="#nominalRef#">				
@@ -129,7 +129,7 @@ Revisions   :
 		</cfif>
 		
 		<cfif session.isMopiDisclosureUser>
-		 <br><br>
+		 <br>
 		 <div align="center"> 
 			<form action="/nominalViewers/genie/mopiDisclosure.cfm?#session.urlToken#" method="post" target="_blank">
 				<input type="hidden" name="nominalRef" value="#nominalRef#">				
