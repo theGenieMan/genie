@@ -158,6 +158,10 @@ Revisions        :
 			<td>#session.isPDFPackageUser#</td>
 		</tr>
 		<tr>
+			<th>MOPI Disclosure?</th>
+			<td>#session.isMopiDisclosureUser#</td>
+		</tr>
+		<tr>
 			<th valign="top">Settings</th>
 			<td>Font size: #session.userSettings.fontSize#<br>
 			    Font : #session.userSettings.font#<br>
