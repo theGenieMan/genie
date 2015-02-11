@@ -336,9 +336,14 @@ AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sq
 			<tbody>
 			<cfloop from="1" to="#arrayLen(attachments)#" index="iAtt">
 			<cfset user=application.hrService.getUserByUID(attachments[iAtt].getORIGINATOR())>
+			<cfif NOT user.getIsValidRecord()>
+			  <cfset originatorText=attachments[iAtt].getORIGINATOR()>
+			<cfelse>
+			  <cfset originatorText=user.getFullName()>
+			</cfif>	
 			<tr class="row_colour#iAtt MOD 2#">
 				<td>#attachments[iAtt].getDOC_TYPE()#</td>
-				<td>#user.getFullName()#</td>
+				<td>#originatorText#</td>
 				<td><a href="#qry_CrimeDetails.REC_YEAR#\#qry_CrimeDetails.REC_MON#\#qry_CrimeDetails.REC_DAY#\#qry_CrimeDetails.CRIME_REF#\#attachments[iAtt].getDOCUMENT_NO()#_#attachments[iAtt].getFILE_NAME()#" class="genieAttachedDocument" target="_blank">#attachments[iAtt].getFILE_NAME()#</a></td>
 				<td>#attachments[iAtt].getDATE_CREATED_TEXT()#</td>
 			</tr>		

@@ -334,7 +334,7 @@ Revisions   :
 		  <td width="2%">&nbsp;</td>	
 		  <td width="32%" align="center">		   
 			<button name="frm_ProcDecEnq" id="procDecEnquiryButton" 
-			        AccessKey="P" 
+			        AccessKey="E" 
 				    onClick="fullscreen('/enquiryScreens/processDecision/enquiry.cfm?#session.URLToken#')">PROC<u>E</u>SS ENQUIRY</button>		   
 		  <td width="2%">&nbsp;</td>		  
 		  <td width="32%" align="center">		   
@@ -364,13 +364,13 @@ Revisions   :
 		 <tr>
 		  <td width="32%" align="center">		   
 			<button name="frm_IntelFreeEnq" id="intelFreeTextButton" 
-			       AccessKey="X"
-				   onClick="fullscreen('/enquiryScreens/intelFreeText/enquiry.cfm?#session.URLToken#')">INTEL FREE TE<u>X</u>T</button>		   
+			       AccessKey="N"
+				   onClick="fullscreen('/enquiryScreens/intelFreeText/enquiry.cfm?#session.URLToken#')">I<u>N</u>TEL FREE TEXT</button>		   
 		  </td>
 		  <td width="2%">&nbsp;</td>
 		  <td width="32%" align="center">
 		   <button name="frm_CrimeBrow" id="crimeBrowserButton"
-			       AccessKey="V"
+			       AccessKey="B"
 				   onClick="fullscreen('/enquiryScreens/crimeBrowser/enquiry.cfm?#session.URLToken#')">CRIME <u>B</u>ROWSER</button>		   	  	
 		  </td>  
 		  <td width="2%">&nbsp;</td>
@@ -383,7 +383,7 @@ Revisions   :
 		 <tr>
 		  <td width="32%" align="center">		   
 			<button name="frm_PropEnq" id="propertyEnquiryButton" 
-			        AccessKey="I" 
+			        AccessKey="R" 
 				    onClick="fullscreen('/enquiryScreens/property/enquiry.cfm?#session.URLToken#')">PROPE<u>R</u>TY ENQUIRY</button>		   
 		  <td width="2%">&nbsp;</td>
 		  <td width="32%" align="center">		   
