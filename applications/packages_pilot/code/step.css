@@ -1,0 +1,31 @@
+.riskstandard{
+	background-color:#66FF66;
+}
+.riskmedium{
+	background-color:#FF9933;
+}
+.riskhigh{
+	background-color:#FF3333;
+}
+
+.expand{
+	font-weight:bold;
+	color:blue;
+	cursor:hand;	
+}
+
+.contract{
+	font-weight:bold;
+	color:blue;
+	cursor:hand;	
+}
+
+.warrantButton{
+	font-weight:bold;
+	font-size:120%
+}
+
+.warrantRef{
+	font-weight:bold;
+	font-size:120%
+}
