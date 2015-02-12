@@ -165,7 +165,7 @@ $(document).on('click','input[type=button].printButton',
 				mode:'popup',
 				popTitle:'WARKS & WEST MERCIA POLICE - GENIE -'+printUser,
 				popClose:true,
-				printTitle:'<h3>WARWICKSHIRE AND WEST MERCIA POLICE - '+printTitle+'.<br>User:' +printUser+ '<br>'+getDateTime()+'</h3>',
+				printTitle:'<h3>WARWICKSHIRE AND WEST MERCIA POLICE - '+printTitle+'.<br>User: ' +printUser+ ', '+getDateTime()+'</h3>',
 				extraCss:'/css/geniePrint.css'
 			});
 			

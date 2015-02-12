@@ -5,8 +5,8 @@
  */
 
 body{
-	font-family:Courier;
-	font-size:9pt;
+	font-family:Arial;
+	font-size:9.5pt;
 }
 
 h2 {
@@ -24,6 +24,7 @@ h2 {
 
 a {
 	text-decoration:none;
+	color:black;
 }
 
 pre.crime {
