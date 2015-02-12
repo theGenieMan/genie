@@ -28,7 +28,15 @@
 <cfelseif SERVER_NAME IS "genieuat.intranet.wmcpolice">			
 	<cfset genieServer="http://genieuat.intranet.wmcpolice">
 	<cfset oisBrowser="http://ois.intranet.wmcpolice/browser/">
-	<cfset intranetServer="http://websvr.intranet.wmcpolice">							
+	<cfset intranetServer="http://websvr.intranet.wmcpolice">		
+<cfelseif SERVER_NAME IS "genietrain.intranet.wmcpolice">			
+	<cfset genieServer="http://genietrain.intranet.wmcpolice">
+	<cfset oisBrowser="http://ois.intranet.wmcpolice/browser/">
+	<cfset intranetServer="http://development.intranet.wmcpolice">
+<cfelseif SERVER_NAME IS "SVR21007">			
+	<cfset genieServer="http://svr21007">
+	<cfset oisBrowser="http://ois.intranet.wmcpolice/browser/">
+	<cfset intranetServer="http://development.intranet.wmcpolice">								
 </cfif>
 
 <cfswitch expression="#Type#">

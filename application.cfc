@@ -57,7 +57,7 @@
 	<cfset Application.sCustodyTimespan=CreateTimeSpan(application.timespanCustodyDay,application.timespanCustodyHour,application.timespanCustodyMin,application.timespanCustodySec)>
     
     <!--- application vars that are the same regardless of environment --->
-    <cfset Application.Version="4.0 RC2.5">
+    <cfset Application.Version="4.0 RC2.6">
 	<cfset Application.dateStarted=now()>
 	<cfset Application.lis_Months="JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC">
 	<cfset Application.lis_MonthNos="01,02,03,04,05,06,07,08,09,10,11,12">
@@ -439,7 +439,7 @@
 	  <cfset session.genieUser=s_ISGenieUser>
 	        
        <!--- if it's the train env then make sure the user gets access regardless --->
-		<cfif application.Env is "TRAIN" OR application.Env IS "TRAIN31">
+		<cfif application.Env is "TRAIN" OR application.Env IS "TRAIN_TEST">
 			<cfset s_IsGenieUser=true>
 		<cfelse>
 			<!--- if user is not a genie user then send to access denied --->
@@ -606,7 +606,7 @@
       <cfset confReturn.sessionTimespan="#createtimespan(0,2,0,0)#">
       <cfset confReturn.applicationTimespan="#createtimespan(0,2,0,0)#">
 	  <cfset confReturn.assetsDir="d:\genie_assets">  	  
-   <cfelseif SERVER_NAME IS "genietrain31.intranet.wmcpolice">
+   <cfelseif SERVER_NAME IS "genietrain31.intranet.wmcpolice" OR SERVER_NAME IS "SVR21007">
 	  <cfset confReturnEnv="TRAIN_TEST">
 	  <cfset confReturn.sessionTimespan="#createtimespan(0,0,5,0)#">
       <cfset confReturn.applicationTimespan="#createtimespan(0,0,5,0)#">
