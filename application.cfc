@@ -586,7 +586,7 @@
 	 <cfset confReturn.sessionTimespan="#createtimespan(0,4,0,0)#">
      <cfset confReturn.applicationTimespan="#createtimespan(0,2,0,0)#">
 	 <cfset confReturn.assetsDir="\\svr20200\f$\genie_assets">   
-   <cfelseif SERVER_NAME IS "geniedev.intranet.wmcpolice" OR SERVER_NAME IS "SVR20312" OR SERVER_NAME IS "SVR20031">
+   <cfelseif SERVER_NAME IS "geniedev.intranet.wmcpolice" OR SERVER_NAME IS "SVR20312" OR SERVER_NAME IS "SVR20031" OR SERVER_NAME IS "SVR20996">
      <cfset confReturn.ENV="DEV">
 	 <cfset confReturn.sessionTimespan="#createtimespan(0,0,10,0)#">
 	 <cfset confReturn.applicationTimespan="#createtimespan(0,0,0,0)#">
