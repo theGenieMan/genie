@@ -117,6 +117,7 @@ Revisions        :
 			<input type="hidden" id="genieCurrentUserCollar" value="#session.user.getCollar()#">	
 			<input type="hidden" id="dpaClear" value="#session.dpaClear#">	
 			<input type="hidden" id="dpaTimeout" value="#session.dpaTimeout#">	
+			<input type="hidden" id="collapseSearch" value="#session.userSettings.collapse#">	
 			<input type="hidden" id="genieUserMyFontSize" value="#session.userSettings.fontSize#">						
 		</td>
 	</tr>
@@ -136,7 +137,7 @@ Revisions        :
 		<tr>
 			<th>DPA Clear / Timeout</th>
 			<td>#session.dpaClear# / #session.dpaTimeout#</td>
-		</tr>
+		</tr>				
 		<tr>
 			<th>West Mids?</th>
 			<td>#session.isWmidsUser#</td>
@@ -166,7 +167,8 @@ Revisions        :
 			<td>Font size: #session.userSettings.fontSize#<br>
 			    Font : #session.userSettings.font#<br>
 				Stylesheet : #session.userSettings.stylesheet#<br>
-				PE Search Type : #session.userSettings.peType#
+				PE Search Type : #session.userSettings.peType#<br>
+				Collapse: #session.userSettings.collapse#
 			</td>
 	</table>
   <cfelse>

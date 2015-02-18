@@ -276,10 +276,9 @@
 
 <cffunction name="onRequest">
   <cfargument name = "targetPage" type="String" required="false">
-  
-  <!--- <cfset onApplicationStart()> --->
-      
-  <cfif not isDefined('session.userSettings.peType') OR not isDefined('session.isMopiDisclosureUser')>
+        
+  <cfif not isDefined('session.userSettings.peType') OR not isDefined('session.isMopiDisclosureUser')
+  	 OR not isDefined('session.userSettings.collapse')>
   	  <cfset onSessionStart()>
   </cfif>
   

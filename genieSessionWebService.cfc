@@ -36,6 +36,7 @@
 		<cfargument name="stylesheet" type="string" required="true" hint="user settings update stylesheet">
 		<cfargument name="peType" type="string" required="true" hint="uset settings update person search type">
 		<cfargument name="fontSize" type="string" required="true" hint="user settings update font size">
+		<cfargument name="collapse" type="string" required="true" hint="should search sections be collapse on search">
 		<cfargument name="userId" type="string" required="true" hint="user settings userid to update">
 		<cfargument name="userName" type="string" required="true" hint="user settings user name to update">		
 	 	
@@ -44,6 +45,7 @@
 															   font=arguments.font,
 															   stylesheet=arguments.stylesheet,
                                                                peType=arguments.peType,
+															   collapse=arguments.collapse,
 															   fontSize=arguments.fontSize)>
 	 	
 	 	<cfreturn true>	
