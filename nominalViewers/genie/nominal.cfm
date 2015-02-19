@@ -189,7 +189,7 @@ Revisions   :
 					<td valign="top" class="row_colour0">#IIf(Len(nominal.getSex()) IS 0,DE("&nbsp;"),DE(nominal.getSex()))#<br>
 														 #IIf(Len(nominal.getMARITAL_STATUS()) IS 0,DE("&nbsp;"),DE(nominal.getMARITAL_STATUS()))#</td>
 					<th valign="top">Shoe Size</th>
-					<td valign="top" class="row_colour1">#IIf(Len(nominal.getSHOE_SIZE()) IS 0,DE("&nbsp;"),DE(nominal.getSHOE_SIZE()))#</td>
+					<td valign="top" class="row_colour0">#IIf(Len(nominal.getSHOE_SIZE()) IS 0,DE("&nbsp;"),DE(nominal.getSHOE_SIZE()))#</td>
 					<th valign="top">Occupation</th>
 					<td valign="top" class="row_colour0">
 					#IIf(Len(nominal.getCURRENT_WORK_LOCATION()) IS 0,DE(""),DE("<a class='workLocationLink' href='javascript:void(0)'>(+)</a> <span id='workLocation' style='display:none'>"&Replace(nominal.getCURRENT_WORK_LOCATION(),chr(35),chr(35)&chr(35),"ALL")&"</span>"))#
@@ -198,7 +198,7 @@ Revisions   :
 				</tr>	
 				<tr>
 					<th valign="top">MOPI Group</th>
-					<td valign="top" class="row_colour0">#IIf(Len(nominal.getMOPI_GROUP()) IS 0,DE("&nbsp;"),DE(nominal.getMOPI_GROUP()))#</td>
+					<td valign="top" class="row_colour1">#IIf(Len(nominal.getMOPI_GROUP()) IS 0,DE("&nbsp;"),DE(nominal.getMOPI_GROUP()))#</td>
 			        <th valign="top">Ethnic 6<br>Ethnic 16</th>
 					<td valign="top" class="row_colour1" colspan="3">
 						#IIf(Len(nominal.getETHNICITY_6()) IS 0,DE("&nbsp;"),DE(nominal.getETHNICITY_6()))#<br>
