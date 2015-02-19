@@ -89,7 +89,7 @@ Revisions   :
 		</body>
 		</table>
 	<cfelse>
-	  <p><b>NO VEHICLES RECORDED</b></p>
+	  <p><b>NO TELEPHONES RECORDED</b></p>
 	</cfif>
 			
  </cfoutput>			
