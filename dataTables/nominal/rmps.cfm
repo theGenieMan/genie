@@ -51,8 +51,19 @@ Revisions   :
 			       plans, format of a nominal is. MR. SURNAME, Forename (NominalRef)
 				   regex used to spot (nominalRef) --->			 
 		     <tr class='row_colour#i mod 2#'>
-			     <td valign="top" #rowUrnStyle#><b><a href="#rmp[i].getRMP_URN()#" class="genieRMPLink">#rmp[i].getRMP_URN()#</a></b></td>
-				 <td valign="top"><b>#rmp[i].getRMP_TYPE()#</b></td>
+			     <td valign="top" #rowUrnStyle#>
+			     	<b>
+			     		<a href="#rmp[i].getRMP_URN()#" class="genieRMPLink">#rmp[i].getRMP_URN()#</a>						
+					</b>
+				 </td>
+				 <td valign="top">
+				 	<b>#rmp[i].getRMP_TYPE()#
+				 	<cfif rmp[i].getCATS_MAIN_FILE() IS "Y">
+					<br>
+					*** CATS MAIN FILE	
+					</cfif>
+				 	</b>
+				</td>
 				 <td valign="top">
 				 	<cfset sVictims=rmp[i].getVICTIMS()>
 					<cfset aVictimMatches=ReMatch("\([0-9]{1,7}[A-Z]\)",sVictims)>
