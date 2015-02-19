@@ -1420,7 +1420,7 @@ button#personEnquiryButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#addressEnquiryButton{
@@ -1430,7 +1430,7 @@ button#addressEnquiryButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#custodyEnquiryButton{
@@ -1440,7 +1440,7 @@ button#custodyEnquiryButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#custodyWhiteboardButton{
@@ -1450,7 +1450,7 @@ button#custodyWhiteboardButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#telephoneEnquiryButton{
@@ -1460,7 +1460,7 @@ button#telephoneEnquiryButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#vehicleEnquiryButton{
@@ -1470,7 +1470,7 @@ button#vehicleEnquiryButton{
     height: 30px;
 	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#procDecEnquiryButton{
@@ -1480,7 +1480,7 @@ button#procDecEnquiryButton{
     height: 30px;
 	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#offenceEnquiryButton{
@@ -1490,7 +1490,7 @@ button#offenceEnquiryButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#intelEnquiryButton{
@@ -1500,7 +1500,7 @@ button#intelEnquiryButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#intelFreeTextButton{
@@ -1510,7 +1510,7 @@ button#intelFreeTextButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#crimeBrowserButton{
@@ -1520,7 +1520,7 @@ button#crimeBrowserButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#firearmsEnquiryButton{
@@ -1530,7 +1530,7 @@ button#firearmsEnquiryButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#propertyEnquiryButton{
@@ -1540,7 +1540,7 @@ button#propertyEnquiryButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#bailDiaryButton{
@@ -1550,7 +1550,7 @@ button#bailDiaryButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#warningEnquiryButton{
@@ -1560,7 +1560,7 @@ button#warningEnquiryButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#bailConditionsButton{
@@ -1570,7 +1570,7 @@ button#bailConditionsButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#recentSearchesButton{
@@ -1580,7 +1580,7 @@ button#recentSearchesButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#namexUpdateButton{
@@ -1590,7 +1590,7 @@ button#namexUpdateButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#userNotesButton{
@@ -1600,7 +1600,7 @@ button#userNotesButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#testEnquiryButton{
@@ -1610,7 +1610,7 @@ button#testEnquiryButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button{
@@ -1636,6 +1636,7 @@ pre.crime {
 
 .thSorted{
 	color:yellow !important;
+	font-style:italic;
 }
 
 .thSortable{

@@ -1445,57 +1445,57 @@ font-size:90%;
 }
 
 button#personEnquiryButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/personEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#addressEnquiryButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/addressEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#custodyEnquiryButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/custodyEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#custodyWhiteboardButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/custodyWhiteboardIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#telephoneEnquiryButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/telephoneEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#vehicleEnquiryButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/vehicleEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1505,7 +1505,7 @@ button#vehicleEnquiryButton{
 }
 
 button#procDecEnquiryButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/processDecisionIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1515,81 +1515,81 @@ button#procDecEnquiryButton{
 }
 
 button#offenceEnquiryButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/offenceEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#intelEnquiryButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/intelEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#intelFreeTextButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/intelFreeTextIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#crimeBrowserButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/crimeBrowserIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#firearmsEnquiryButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/firearmsEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#propertyEnquiryButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/propertyEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#bailDiaryButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/bailDiaryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#warningEnquiryButton{
-    background: #FFCCCC;
+    background: #FFCCCC url('/images/warningEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
@@ -1630,6 +1630,16 @@ button#userNotesButton{
     text-align:center;
     height: 30px;
 	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#testEnquiryButton{
+    background: #FFCCCC;
+	border:1px solid #000000;
+    text-align:center;
+    height: 30px;
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }

@@ -1404,62 +1404,62 @@ font-size:90%;
 }
 
 button#personEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/personEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#addressEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/addressEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#custodyEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/custodyEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#custodyWhiteboardButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/custodyWhiteboardIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#telephoneEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/telephoneEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#vehicleEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/vehicleEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
@@ -1470,7 +1470,7 @@ button#vehicleEnquiryButton{
 }
 
 button#procDecEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/processDecisionIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
@@ -1481,89 +1481,89 @@ button#procDecEnquiryButton{
 }
 
 button#offenceEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/offenceEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#intelEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/intelEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#intelFreeTextButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/intelFreeTextIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#crimeBrowserButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/crimeBrowserIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#firearmsEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/firearmsEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#propertyEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/propertyEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#bailDiaryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/bailDiaryIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
 
 button#warningEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/warningEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #0000FF;
 	color: #0000FF;
     text-align:left;
     height: 30px;
-	font-size:130%; 
+	font-size:120%; 
 	font-weight:bold; 
 	width:250px
 }
@@ -1602,6 +1602,17 @@ button#namexUpdateButton{
 }
 
 button#userNotesButton{
+    background: #FFFFCC;
+	border:1px solid #0000FF;
+	color: #0000FF;
+    text-align:center;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
+}
+
+button#testEnquiryButton{
     background: #FFFFCC;
 	border:1px solid #0000FF;
 	color: #0000FF;
