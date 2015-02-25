@@ -72,6 +72,10 @@ Revisions   :
 	
 </cfsilent>	
 
+<cfparam name="redirector" default="N">
+<cfparam name="auditRequired" default="">
+<cfparam name="auditInfo" default="">
+
 <html>	
 <head>
 	<title><cfoutput>#nominal.getFULL_NAME()# #nominal.getNOMINAL_REF()#</cfoutput></title>
@@ -96,12 +100,19 @@ Revisions   :
 	<script type="text/javascript" src="/applications/cfc/hr_alliance/jquery.hrQuickSearch.js"></script>
 	<script type="text/javascript" src="js/nominalEvents.js"></script>
 	<script type="text/javascript" src="js/photoScroll.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>	
 </head>
 
 <cfoutput>
 <body>
+<div id="dpa" style="display:none;"></div>	
+<div id="nominalDocumentBody" style="display:none;">
+<input type="hidden" name="redirector" id="redirector" value="#redirector#">
+<input type="hidden" name="auditRequired" id="auditRequired" value="#auditRequired#">
+<input type="hidden" name="auditInfo" id="auditInfo" value="#auditInfo#">
+<input type="hidden" name="nominalRef" id="nominalRef" value="#nominalRef#">
 <input type="hidden" id="hiddenPhotoList" name="hiddenPhotoList" value="<cfoutput>#photoList#</cfoutput>">
+
 <cfif isDefined('fullWarnings')>
 	<input type="hidden" id="fullWarnings" name="fullWarnings" value="YES">
 </cfif>
@@ -137,13 +148,13 @@ Revisions   :
 					  <img src="#photo.getPHOTO_URL()#" id="photoImg" border="0" alt="#IIf(Len(photo.getAS_REF()) IS 0,DE("No Photo Available"),DE("Picture Of "&nominal.getFull_Name()&" ("&nominal.getNOMINAL_REF()))#."  width="200">
 					  <div id="photoScrollingLinks" style="display:none;">
 						  <div align="left" style="display:inline-block;width:30%">
-						   <span id="photoPrev" class="photoScrollLink">&lt;&lt;&lt&lt</span>
+						   <span id="photoPrev" class="photoScrollLink" title="View Next Image">&lt;&lt;&lt&lt</span>
 						  </div>
 						  <div align="center" style="display:inline-block;width:35%">
-						   <span id="currentPhoto"></span> of <span id="totalPhotos"></span> <span id="showAllPhotos">(+)</span>
+						   <span id="currentPhoto"></span> of <span id="totalPhotos"></span> <span id="showAllPhotos" title="Show All Photos">(+)</span>
 						  </div>						  
 						  <div align="right" style="display:inline-block;width:30%">
-						   <span id="photoNext" class="photoScrollLink">&gt;&gt&gt;&gt;</span>
+						   <span id="photoNext" class="photoScrollLink" title="View Previous Image">&gt;&gt&gt;&gt;</span>
 						  </div>						  
 					  </div>
 				  </div>				
@@ -467,7 +478,7 @@ Revisions   :
 	<li><a href="/dataTables/nominal/warrants.cfm?nominalRef=#nominalRef#">Wr<u>n</u>t</a></li>
 	<li><a href="/dataTables/nominal/organisations.cfm?nominalRef=#nominalRef#"><u>O</u>rgs</a></li>
 	<li><a href="/dataTables/nominal/fpu.cfm?nominalRef=#nominalRef#">FP<u>U</u></a></li>
-	<li><a href="/dataTables/nominal/iraqs.cfm?nominalRef=#nominalRef#"><u>I</u>raq</a></li>	
+	<li><a href="/dataTables/nominal/iraqs.cfm?nominalRef=#nominalRef#"><u>I</u>ntel</a></li>	
 	<li><a href="/dataTables/nominal/misper.cfm?nominalRef=#nominalRef#"><u>M</u>isp</a></li>
 	<li><a href="/dataTables/nominal/step.cfm?nominalRef=#nominalRef#">Pac<u>k</u></a></li>
 	<li><a href="/dataTables/nominal/occupations.cfm?nominalRef=#nominalRef#">Occ<u>J</u></a></li>
@@ -476,6 +487,7 @@ Revisions   :
 	<li><a href="/dataTables/nominal/rmps.cfm?nominalRef=#nominalRef#">RM<u>P</u></a></li>		
   </ul>
 </div>	
+</div>
 
 <div id="dialogData" style="display:none;"></div>
 
@@ -489,7 +501,7 @@ Revisions   :
 					  <div align="right" style="height:20px;">
 					  <cfif photos[i].getSYSTEM_ID() IS "CUSTODY"
 					  	 OR photos[i].getSYSTEM_ID() IS "WARKS CUST">						 
-						 	<a href="/downloadImage.cfm?img=#Replace(photos[i].getPHOTO_URL(),application.str_Image_URL,application.str_Image_Temp_Dir)#&nominalRef=#nominal.getNOMINAL_REF()#"><img src="/images/download.png" class="downloadImage" hspace="5" border="0"></a>
+						 	<span class="downloadPhoto" title="Download Image For #nominal.getSURNAME_1()# #photos[i].getDatePhotoTaken()#"><a href="/downloadImage.cfm?img=#Replace(photos[i].getPHOTO_URL(),application.str_Image_URL,application.str_Image_Temp_Dir)#&nominalRef=#nominal.getNOMINAL_REF()#"><img src="/images/download.png" class="downloadImage" hspace="5" border="0"></a></span>
 					  <cfelse>
 					  	  <br>								 
 					  </cfif>					  			  
