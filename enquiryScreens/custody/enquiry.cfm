@@ -1,4 +1,31 @@
-﻿<!DOCTYPE html>	
+﻿<!DOCTYPE html>
+<!---
+
+Module      : /enquiryScreens/custody/enquiry.cfm
+
+App         : GENIE
+
+Purpose     : Displays the custody enquiry screen
+
+Requires    : 
+
+Author      : Nick Blackham
+
+Date        : 18/11/2014
+
+Version     : 
+
+Revisions   : 
+
+--->
+	
+<cfparam name="redirector" default="N">
+<cfparam name="auditRequired" default="">
+<cfparam name="auditInfo" default="">	
+<cfparam name="station" default="">
+<cfparam name="arrestDateFrom" default="">
+<cfparam name="arrestDateTo" default="">	
+		
 <html>	
 <head>
 	<title>GENIE - Custody Enquiry</title>
@@ -31,6 +58,10 @@
 <body>
 	<div id="dpa" style="display:none;"></div>
 	<cfoutput>	
+		
+	<input type="hidden" name="redirector" id="redirector" value="#redirector#">
+	<input type="hidden" name="auditRequired" id="auditRequired" value="#auditRequired#">
+	<input type="hidden" name="auditInfo" id="auditInfo" value="#auditInfo#">		
 		
 	<cfset headerTitle="CUSTODY ENQUIRY">	
 	<cfinclude template="/header.cfm">
@@ -92,12 +123,16 @@
 				<tr>
 					<td><label for="station">Station</label></td>
 					<td>
+						<input name="station" id="station" displayInPane="Station" displayPrevSearch="Y" value="#station#" size="5">
+						<span class="fakeLink" id="stationList"><b>Station List</b></span>
+						<!---
 						<select name="station" id="station" displayInPane="Station" displayPrevSearch="Y">
 					    <option value="">-- Select --</option>
 						<cfloop query="application.qry_CustodyStation">
-						  <option value="#ORG_CODE#">... #ORG_NAME# (#ORG_CODE#)</option>																					
+						  <option value="#ORG_CODE#" #iif(ORG_CODE IS station,de('selected'),de(''))#>... #ORG_NAME# (#ORG_CODE#)</option>																					
 						</cfloop>						
 						</select>
+						--->
 					</td>										
 				</tr>	
 				<tr>
@@ -152,11 +187,11 @@
 					<td><label for="arrestDateFrom">Date of Arrest</label></td>
 					<td colspan="4">
 						<b>Between/On</b> 
-						<input name="arrestDateFrom" id="arrestDateFrom" displayInPane="Date Arrest Between/On" displayPrevSearch="Y" size="10" value="" datepicker> 
+						<input name="arrestDateFrom" id="arrestDateFrom" displayInPane="Date Arrest Between/On" displayPrevSearch="Y" size="10" value="#arrestDateFrom#" datepicker> 
 						@
 						<input name="arrestTimeFrom" id="arrestTimeFrom" displayInPane=" Time" displayPrevSearch="Y" size="4" value="" timepicker>
 						<b>And</b> 
-						<input name="arrestDateTo" id="arrestDateTo" displayInPane="Date Arrest To" displayPrevSearch="Y" size="10" value="" datepicker>
+						<input name="arrestDateTo" id="arrestDateTo" displayInPane="Date Arrest To" displayPrevSearch="Y" size="10" value="#arrestDateTo#" datepicker>
 						@
 						<input name="arrestTimeTo" id="arrestTimeTo" displayInPane=" Time" displayPrevSearch="Y" size="4" value="" timepicker>
 					</td>										
@@ -241,7 +276,12 @@
   	  <table width="100%" class="searchButtonsTable">
 	  		<tr>
 	  			<td width="50%" align="left"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY" accesskey="N"></td>
-				<td width="50%" align="right"><input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button" accesskey="S"></td>
+				<td width="50%" align="right">
+					<cfif isDefined('startSearch')>
+					 <input type="hidden" name="doSearch" id="doSearch" value="true">  	
+					</cfif>
+					<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button" accesskey="S">
+				</td>
 	  		</tr>
 	  </table>
     </div>		
@@ -296,6 +336,33 @@
 	<div id="custodySummaryDialog" style="display:none;">
 		<div id='onLoadingDiv' style='width:100%' align='center'><h4>Loading, please wait</h4><div class='progressBar'></div></div>
 		<div id='onData' style="display:none;"></div>
+	</div>
+
+	<div id="stationListDialog" style="display:none;">
+		<h3 align="center">Custody Stations</h3>
+		<p>Use the station code to view custodies for that station.<br>
+		   Wilcards can be used. For all West Mercia Stations use 22%, all Warwickshire 23%<br>
+		   For all TPU stations use eg. 22F% (All West Mercia Shropshire TPU stations) 
+		</p>
+		<table class="nominalData" width="300">
+		 <caption><b>Current Custody Stations</b></caption>				
+		 <thead>		
+		 	<tr>
+		 		<th>Station Code</th>
+				<th>Station</th>
+		 	</tr>
+		 </thead>	
+		 <tbody>		   
+		   <cfset z=1>
+		   <cfloop query="application.qry_CustodyStation">
+			<tr class="row_colour#z mod 2#">
+				<td width="100">#ORG_CODE#</td>
+                <td width="200">#ORG_NAME#</td>
+			</tr>		
+			<cfset z++>																						
+		   </cfloop>		 	
+		 </tbody>
+		</table>
 	</div>
 		
 	</cfoutput>

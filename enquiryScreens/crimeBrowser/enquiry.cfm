@@ -1,4 +1,17 @@
-﻿<cfparam name="frmDummy" default="">
+﻿
+
+<cfset offenceGroupings=application.genieService.getOffenceGroupings()>
+<cfset offenceCode=application.genieService.getOffenceCodes()>
+<cfset offenceMarkers=application.genieService.getOffenceMarkerList()>
+<cfset sectors=application.genieService.getOrgLookup(orgType='SCT')>
+<cfset beats=application.genieService.getOrgLookup(orgType='BTS')>
+<cfset snts=application.genieService.getSntLookup()>
+<cfset ptZones=application.genieService.getPatrolZones()>
+
+<cfparam name="redirector" default="N">
+<cfparam name="auditRequired" default="">
+<cfparam name="auditInfo" default="">	
+<cfparam name="frmDummy" default="">
 <cfparam name="frmAllDummy" default="">
 <cfparam name="frmDateFrom" default="#DateFormat(dateAdd('d','-1',now()),"DD/MM/YYYY")#">
 <cfparam name="frmDateTo" default="#DateFormat(now(),"DD/MM/YYYY")#">
@@ -11,15 +24,7 @@
 <cfparam name="frmMarker" default="">
 <cfparam name="frmHowToUseMarker" default="AND">
 
-<cfset offenceGroupings=application.genieService.getOffenceGroupings()>
-<cfset offenceCode=application.genieService.getOffenceCodes()>
-<cfset offenceMarkers=application.genieService.getOffenceMarkerList()>
-<cfset sectors=application.genieService.getOrgLookup(orgType='SCT')>
-<cfset beats=application.genieService.getOrgLookup(orgType='BTS')>
-<cfset snts=application.genieService.getSntLookup()>
-<cfset ptZones=application.genieService.getPatrolZones()>
-
-<!DOCTYPE html>	
+<!DOCTYPE html>		
 <html>	
 <head>
 	<title>GENIE - Crime Browser</title>
@@ -52,6 +57,10 @@
 <body>
 	<div id="dpa" style="display:none;"></div>
 	<cfoutput>	
+
+	<input type="hidden" name="redirector" id="redirector" value="#redirector#">
+	<input type="hidden" name="auditRequired" id="auditRequired" value="#auditRequired#">
+	<input type="hidden" name="auditInfo" id="auditInfo" value="#auditInfo#">	
 		
 	<cfset headerTitle="CRIME BROWSER">	
 	<cfinclude template="/header.cfm">
@@ -223,7 +232,12 @@
   	  <table width="100%" class="searchButtonsTable">
 	  		<tr>
 	  			<td width="50%" align="left"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY" accesskey="N"></td>
-				<td width="50%" align="right"><input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button" accesskey="S"></td>
+				<td width="50%" align="right">
+					<cfif isDefined('startSearch')>
+					 <input type="hidden" name="doSearch" id="doSearch" value="true">  	
+					</cfif>
+					<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button" accesskey="S">
+				</td>
 	  		</tr>
 	  </table>
     </div>		

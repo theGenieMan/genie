@@ -84,5 +84,5 @@ $(document).ready(function() {
 					}
 					
 			})		
-		$('#dpa').dpa('show')
+		$('#dpa').dpa('show',true)
 });

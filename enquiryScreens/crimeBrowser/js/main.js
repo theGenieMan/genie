@@ -40,6 +40,10 @@ $(document).ready(function() {
 			initialUserId=loggedInUser;
 		}
 		
+		var redirector=$('#redirector').val();
+	  	var auditRequired=$('#auditRequired').val();
+		var auditInfo=$('#auditInfo').val();
+		
 		$('#dpa').dpa({
 					requestFor:{
 						initialValue:initialUserId
@@ -80,7 +84,13 @@ $(document).ready(function() {
 											if($('#prevSearch option').length>1){
 												$('#prevSearchSpan').show()
 											}
-										}			  					  
+										}		
+										
+										// if we have an auto search
+										if( $('#doSearch').length>0 ){
+											$('.enquiryForm').trigger('submit');
+										}
+											  					  
 									 }
 							});								
 							
@@ -88,5 +98,60 @@ $(document).ready(function() {
 					}
 					
 			})		
-	$('#dpa').dpa('show')
+	
+	// see if we are running a search automatically
+		// if we are then run it, no need to show the DPA box
+		if( $('#doSearch').length>0 ){
+		  
+		  if (redirector == 'N') {
+		  	$('.enquiryForm').submit();
+		  }
+		  else
+		  {
+		  	
+		  	if (auditRequired=='Y'){
+				$('#dpa').dpa('show',true)
+			}
+			else
+			{				
+				// we don't need to show the dpa box but we do need to complete an audit
+				var userId=$('#genieCurrentUserId').val();
+				var force=$('#genieCurrentUserForce').val();
+				var collar=$('#genieCurrentUserCollar').val();
+				var fullName=$('#genieCurrentUserName').val()
+				var dept=$('#genieCurrentUserDept').val()
+				var reason="6";
+				var reasonText=$('#auditInfo').val();
+				
+				// send the data to the session update function in the genie service							
+				$.ajax({
+						 type: 'POST',
+						 url: '/genieSessionWebService.cfc?method=updateSession&reasonCode='+reason+'&reasonText='+reasonText+'&requestFor='+fullName+'&requestForCollar='+collar+'&requestForForce='+force,						 							  
+						 cache: false,
+						 async: false,							 
+						 success: function(data, status){							
+							$('#startSearch').show();													
+							
+							// if there is an initial focus button set then focus it																						
+							if ($('.enquiryForm [initialFocus]').length>0){
+								$('.enquiryForm [initialFocus]').focus()
+							}			  					  
+							// if we have a prevSearch select box with more than one entry in then show that to
+							if ($('#prevSearch').length>0){
+								if($('#prevSearch option').length>1){
+									$('#prevSearchSpan').show()
+								}
+							}
+							
+							$('.enquiryForm').submit();		  					  
+						 }
+				});					
+			}
+		  }
+		}		
+		else{
+		// not an auto search, show the DPA
+			$('#dpa').dpa('show',true)
+		}
+	
 });

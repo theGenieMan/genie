@@ -83,7 +83,7 @@ $(document).ready(function() {
 					}
 					
 			});
-		$('#dpa').dpa('show')	
+		$('#dpa').dpa('show',true)
 		
 			
 		// monitor typing on these boxes, when typing stops and 3 or more chars then fire a lookup search
