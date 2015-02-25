@@ -114,7 +114,10 @@ Revisions        :
 			<input type="hidden" id="genieCurrentUserId" value="#iif(session.user.getForceCode() IS '22',de(session.user.getUSERID()),de(session.user.getOTHERUSERID()))#">
 			<input type="hidden" id="genieCurrentUserIdWMP" value="#session.user.getUSERID()#">
 			<input type="hidden" id="genieCurrentUserName" value="#session.user.getFullName()#">
-			<input type="hidden" id="genieCurrentUserCollar" value="#session.user.getCollar()#">	
+			<input type="hidden" id="genieCurrentUserCollar" value="#session.user.getCollar()#">
+			<input type="hidden" id="genieCurrentUserForce" value="#session.user.getForceCode()#">
+			<input type="hidden" id="genieCurrentUserDept" value="#session.user.getDepartment()#">	
+			<input type="hidden" id="genieCurrentUserSAL" value="#session.LoggedInUserLogAccess#">	
 			<input type="hidden" id="dpaClear" value="#session.dpaClear#">	
 			<input type="hidden" id="dpaTimeout" value="#session.dpaTimeout#">	
 			<input type="hidden" id="collapseSearch" value="#session.userSettings.collapse#">	

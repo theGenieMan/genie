@@ -465,7 +465,7 @@ $(document).on('click','.genieCaseLink',
 			
 			if (inList=='Y'){
 				showInCurrentWindow=true;
-			}
+			}			
 			
 			if (caseType=='NSPIS'){
 				url = '/documentViewers/caseDocNSPIS.cfm?caseRef='+caseRef; 
@@ -1072,7 +1072,7 @@ $(document).on('click','.newEnquiryButton',
 				
 			}
 		)
-		$('#dpa').dpa('show');
+		$('#dpa').dpa('show',false);
 		resetResultPanes();
 		resetSearchPanes();				
 	}

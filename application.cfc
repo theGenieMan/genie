@@ -57,7 +57,7 @@
 	<cfset Application.sCustodyTimespan=CreateTimeSpan(application.timespanCustodyDay,application.timespanCustodyHour,application.timespanCustodyMin,application.timespanCustodySec)>
     
     <!--- application vars that are the same regardless of environment --->
-    <cfset Application.Version="4.0 RC2.6">
+    <cfset Application.Version="4.0 RC3">
 	<cfset Application.dateStarted=now()>
 	<cfset Application.lis_Months="JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC">
 	<cfset Application.lis_MonthNos="01,02,03,04,05,06,07,08,09,10,11,12">

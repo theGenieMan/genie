@@ -70,5 +70,38 @@
 	 	<cfreturn true>	
 		 
 	</cffunction> 
+	
+	<cffunction name="doGenieAudit" access="remote" returntype="void" output="false" hint="calls the genie service with audit data">
+    	<cfargument type="string" name="userId" required="true" hint="userId to audit for">
+    	<cfargument type="string" name="sessionId" required="false" default="#createUUID()#" hint="sessionId to audit for">    	
+    	<cfargument type="string" name="reason" required="true" hint="reason code for request">    	
+    	<cfargument type="string" name="reasonText" required="true" hint="reason text for request">
+    	<cfargument type="string" name="requestFor" required="true" hint="requestor userid to audit for">    	    	    	    	 	    	    	    	
+    	<cfargument type="string" name="fullName" required="true" hint="requestor fullname to audit for">    	    	    	    	
+    	<cfargument type="string" name="action" required="true" hint="audit action for">    	    	    	    	    	    	    	
+    	<cfargument type="string" name="fields" required="false" default='""' hint="sessionId to audit for">    	    	    	    	    	
+    	<cfargument type="string" name="details" required="false" default='""' hint="sessionId to audit for">    	    	  
+    	<cfargument type="string" name="numberOfResults" required="false" default="0" hint="sessionId to audit for">
+		<cfargument type="string" name="department" required="false" default="" hint="department the person works in">
+		<cfargument type="string" name="ethnicCode" required="false" default="" hint="ethnic code of driver being checked">
+		<cfargument type="string" name="requestCollar" required="false" default="" hint="collar of person requesting">
+		<cfargument type="string" name="requestForce" required="false" default="" hint="for of person requesting">	
+	
+		<cfset application.genieService.doGenieAudit( userId=arguments.userId,
+													  sessionId=arguments.sessionId,
+													  reason=arguments.reason,
+                                                      reasonText=arguments.reasonText,
+                                                      requestFor=arguments.requestFor,
+                                                      fullName=arguments.fullName,
+                                                      action=arguments.action,
+                                                      fields=arguments.fields,
+                                                      details=arguments.details,
+                                                      numberOfResults=arguments.numberOfResults,
+                                                      department=arguments.department,
+                                                      ethnicCode=arguments.ethnicCode,
+                                                      requestCollar=arguments.requestCollar,
+                                                      requestForce=arguments.requestForce)>
+	
+	</cffunction>
 	 
 </cfcomponent>
