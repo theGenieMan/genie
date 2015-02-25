@@ -33,7 +33,9 @@
 		returnRank: 'hrRank',
 		returnRankClass: '',	
 		returnManager: 'hrManager',
-		returnManagerClass: '',					
+		returnManagerClass: '',
+		returnDepartment: 'hrDepartment',
+		returnDepartmentClass: '',						
 		resultsSizeHeight: 110,
 		resultsSizeWidth: 350,
 		resetButtonId: 'hrResetButton',
@@ -74,7 +76,8 @@
 			this.userResult.append("<input type='hidden' name='"+this.options.returnLocation+"' id='"+this.options.returnLocation+"' class='"+this.options.returnLocationClass+"'value=''>");
 			this.userResult.append("<input type='hidden' name='"+this.options.returnDivision+"' id='"+this.options.returnDivision+"' class='"+this.options.returnDivisionClass+"'value=''>");
 			this.userResult.append("<input type='hidden' name='"+this.options.returnRank+"' id='"+this.options.returnRank+"' class='"+this.options.returnRankClass+"'value=''>");
-			this.userResult.append("<input type='hidden' name='"+this.options.returnManager+"' id='"+this.options.returnManager+"' class='"+this.options.returnManagerClass+"'value=''>");			
+			this.userResult.append("<input type='hidden' name='"+this.options.returnManager+"' id='"+this.options.returnManager+"' class='"+this.options.returnManagerClass+"'value=''>");
+			this.userResult.append("<input type='hidden' name='"+this.options.returnDepartment+"' id='"+this.options.returnDepartment+"' class='"+this.options.returnDepartmentClass+"'value=''>");			
 			
 			this.resetButton = $( "<input type='button' value='Find Another' id='"+this.options.resetButtonId+"'>")
 			.appendTo( this.userResult );
@@ -96,6 +99,7 @@
 					this.userResult.find('#'+this.options.returnDivision).val('').change();
 					this.userResult.find('#'+this.options.returnRank).val('').change();
 					this.userResult.find('#'+this.options.returnManager).val('').change();
+					this.userResult.find('#'+this.options.returnDepartment).val('').change();
 					this.resultsArea.hide();
 					this.resultsArea.html('');
 					$('#'+this.options.searchBox).val('').focus();
@@ -174,7 +178,7 @@
 									}
 									
 									var thisDuty=self.options.showDuty=='Y'?" [Duty:"+userInfo.dutyToday+"]":"";
-									var spanData = "<div id='+" + userInfo.personId + "' class='searchResult row" + iSpan % 2 + "' userId='" + sUserId + "' collarNo='" + userInfo.collar + "' forceCode='"+userInfo.forceCode+"' email='"+userInfo.emailAddress+"' phone='"+userInfo.workPhone+"' location='"+userInfo.location+"' division='"+userInfo.division+"' rank='"+userInfo.title+"' manager='"+userInfo.manager+"'>" + userInfo.fullName + thisDuty +"</div>";															
+									var spanData = "<div id='+" + userInfo.personId + "' class='searchResult row" + iSpan % 2 + "' userId='" + sUserId + "' collarNo='" + userInfo.collar + "' forceCode='"+userInfo.forceCode+"' email='"+userInfo.emailAddress+"' phone='"+userInfo.workPhone+"' location='"+userInfo.location+"' division='"+userInfo.division+"' rank='"+userInfo.title+"' manager='"+userInfo.manager+"' department='"+userInfo.department+"'>" + userInfo.fullName + thisDuty +"</div>";															
 									resultsArea.append(spanData);
 									iSpan++;
 								});
@@ -202,7 +206,7 @@
 										default:
 										  sUserId='';										  
 									}									
-									self._createUserInfo(userInfo.fullName, sUserId, userInfo.personId, userInfo.collar, userInfo.forceCode, userInfo.emailAddress, userInfo.workPhone, userInfo.location, userInfo.division, userInfo.title, userInfo.manager)
+									self._createUserInfo(userInfo.fullName, sUserId, userInfo.personId, userInfo.collar, userInfo.forceCode, userInfo.emailAddress, userInfo.workPhone, userInfo.location, userInfo.division, userInfo.title, userInfo.manager, userInfo.department)
 								};
 							}
 							else {
@@ -269,17 +273,18 @@
 				var phone=elt.attr('phone');
 				var location=elt.attr('location');
 				var division=elt.attr('division');
-				var rank=elt.attr('rank')
-				var manager=elt.attr('manager')
-			 
-				this._createUserInfo(fullName,userId,personId,collarNo,forceCode,email,phone,location,division,rank,manager);
+				var rank=elt.attr('rank');
+				var manager=elt.attr('manager');
+				var department=elt.attr('department');
+			    
+				this._createUserInfo(fullName,userId,personId,collarNo,forceCode,email,phone,location,division,rank,manager,department);
 
 				}
 			});				
 		},		
 		
 		// function that writes back the html that the user has requested
-		_createUserInfo: function(fullName,userId,personId,collarNo,forceCode,email,phone,location,division,rank,manager){
+		_createUserInfo: function(fullName,userId,personId,collarNo,forceCode,email,phone,location,division,rank,manager,department){
 			
 			/*
 			var displayHtml="<input type='text' name='dummyDisplay' value='"+fullName+"' size='40' disabled>";
@@ -299,7 +304,8 @@
 			this.userResult.find('#'+this.options.returnEmail).val(email).change();			
 			this.userResult.find('#'+this.options.returnLocation).val(location).change();
 			this.userResult.find('#'+this.options.returnDivision).val(division).change();
-			this.userResult.find('#'+this.options.returnRank).val(rank).change();					
+			this.userResult.find('#'+this.options.returnRank).val(rank).change();
+			this.userResult.find('#'+this.options.returnDepartment).val(department).change();					
 			
 			//this.userResult.append(displayHtml).append(this.resetButton).append(hidUserId).append(hidFullName).append(hidPersonId);
 			this.userResult.show();		
