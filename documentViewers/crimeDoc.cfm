@@ -84,7 +84,9 @@ AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sq
   	</cfif>
   </cfif>
 </cfif>
-
+<cfparam name="redirector" default="N">
+<cfparam name="auditRequired" default="">
+<cfparam name="auditInfo" default="">
 <html>
 <head>
 	<title>GENIE - Crime Document <cfoutput>#crimeNo#</cfoutput></title>
@@ -92,23 +94,154 @@ AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sq
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">		
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/customControls/dpa/css/dpa.css">
-	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/applications/cfc/hr_alliance/hrWidget.css">			
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/applications/cfc/hr_alliance/hrWidget.css">				
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="print.css" media="print">	
 	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
 	<script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>
 	<script type="text/javascript" src="/js/globalEvents.js"></script>
 	<script type="text/javascript" src="/js/globalFunctions.js"></script>
+	<script type="text/javascript" src="/jQuery/customControls/dpa/jquery.genie.dpa.js"></script>
+	<script type="text/javascript" src="/applications/cfc/hr_alliance/hrBean.js"></script>
+	<script type="text/javascript" src="/jQuery/highlight/jquery.highlight.js"></script>
+	<script type="text/javascript" src="/applications/cfc/hr_alliance/jquery.hrQuickSearch.js"></script>	
 	<script>
-	  $(document).ready(function() {  	
-	  	var $crimeTabs=$( "#crimeTabs" ).tabs();
+	  $(document).ready(function() {  
+	  
+	    var redirector=$('#redirector').val();
+	  	var auditRequired=$('#auditRequired').val();
+		var auditInfo=$('#auditInfo').val();
+		var initialUserId=$('#genieCurrentUserId').val();
+		var dpaClear=($('#dpaClear').val()==='true');
+		var crimeNo=$('#crimeNo').val();
+		
+		$('#dpa').dpa({
+					requestFor:{
+						initialValue:initialUserId
+					},
+					alwaysClear:dpaClear,
+					showPNCPaste:false,
+					loggedInUser: initialUserId,
+					dpaUpdated: function(e,data){
+							// update the dpa boxes as per the values entered.
+							$('#reasonCode').val(data.reasonCode)
+							$('#reasonText').val(data.reasonText)
+							$('#requestFor').val(data.requestFor)							
+							$('#requestForCollar').val(data.requestForCollar)
+							$('#requestForForce').val(data.requestForForce)
+							$('#ethnicCode').val(data.ethnicCode)
+
+							// setup the audit string 
+	                        var auditString  = '&userId='+data.requestForUserId;
+							    auditString += '&reason='+data.reasonCode;
+								auditString += '&reasonText='+data.reasonText;
+								auditString += '&requestFor='+data.requestFor;
+								auditString += '&fullName='+data.requestFor;
+								auditString += '&action=View Crime';
+								auditString += '&details='+crimeNo;
+								auditString += '&department='+data.requestForDepartment;
+								auditString += '&requestCollar='+data.requestForCollar;
+								auditString += '&requestForce='+data.requestForForce;
+							
+							// send the data to the session update function in the genie service							
+							$.ajax({
+									 type: 'POST',
+									 url: '/genieSessionWebService.cfc?method=updateSession&reasonCode='+data.reasonCode+'&reasonText='+data.reasonText+'&requestFor='+data.requestFor+'&ethnicCode='+data.ethnicCode+'&requestForCollar='+data.requestForCollar+'&requestForForce='+data.requestForForce,						 							  
+									 cache: false,
+									 async: false,							 
+									 success: function(data, status){							
+										$('#crimeDocumentBody').show();						
+										$('#dpa').dpa('hide');	
+										$crimeTabs = $("#crimeTabs").tabs();		
+																				
+										// send the audit string																	
+										$.ajax({
+												 type: 'POST',
+												 url: '/genieSessionWebService.cfc?method=doGenieAudit'+auditString,						 							  
+												 cache: false,
+												 async: true,							 
+												 success: function(data, status){							
+													
+																						  					  
+												 }
+										});		
+																												  					  
+									 }
+							});								
+							
+							
+					}
+					
+			});			
+				
+		if (redirector == 'N') {
+			var $crimeTabs = $("#crimeTabs").tabs();
+			$('#crimeDocumentBody').show();
+		}
+		else
+		{
+			if (auditRequired == 'Y'){			
+				$('#crimeDocumentBody').hide();
+				$('#dpa').dpa('show')
+			}	
+			else
+			{
+				// we don't need to show the dpa box but we do need to complete an audit
+				var userId=$('#genieCurrentUserId').val();
+				var force=$('#genieCurrentUserForce').val();
+				var collar=$('#genieCurrentUserCollar').val();
+				var fullName=$('#genieCurrentUserName').val()
+				var dept=$('#genieCurrentUserDept').val()
+				var reason="6";
+				var reasonText=$('#auditInfo').val();
+				
+				// setup the audit string 
+                var auditString  = '&userId='+userId;
+				    auditString += '&reason='+reason;
+					auditString += '&reasonText='+reasonText;
+					auditString += '&requestFor='+fullName;
+					auditString += '&fullName='+fullName;
+					auditString += '&action=View Crime';
+					auditString += '&details='+crimeNo;
+					auditString += '&department='+dept;
+					auditString += '&requestCollar='+collar;
+					auditString += '&requestForce='+force;
+				
+				// send the data to the session update function in the genie service							
+				$.ajax({
+						 type: 'POST',
+						 url: '/genieSessionWebService.cfc?method=updateSession&reasonCode='+reason+'&reasonText='+reasonText+'&requestFor='+fullName+'&requestForCollar='+collar+'&requestForForce='+force,						 							  
+						 cache: false,
+						 async: false,							 
+						 success: function(data, status){														
+							$crimeTabs = $("#crimeTabs").tabs();		
+							$('#crimeDocumentBody').show();						
+																	
+							// send the audit string																	
+							$.ajax({
+									 type: 'POST',
+									 url: '/genieSessionWebService.cfc?method=doGenieAudit'+auditString,						 							  
+									 cache: false,
+									 async: true,							 
+									 success: function(data, status){							
+										
+																			  					  
+									 }
+							});		
+																									  					  
+						 }
+				});	
+				
+			}
+		}
 	  });
 	</script>
 </head>
 
 <body>
+<div id="dpa" style="display:none;"></div>	
+<div id="crimeDocumentBody" style="display:none;">	
 <cfoutput>
-
 <cfset headerTitle="CRIME - "&crimeNo>	
 <cfinclude template="/header.cfm">
 <br>
@@ -122,6 +255,11 @@ AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sq
 	 #nextCrimeLink#
 	</div>
 </cfif>
+
+<input type="hidden" name="redirector" id="redirector" value="#redirector#">
+<input type="hidden" name="auditRequired" id="auditRequired" value="#auditRequired#">
+<input type="hidden" name="auditInfo" id="auditInfo" value="#auditInfo#">
+<input type="hidden" name="crimeNo" id="crimeNo" value="#crimeNo#">
 
 <h4 align="center">#crimeNo# - #qry_CrimeDetails.REC_TITLE#</h4>
 
@@ -356,9 +494,11 @@ AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sq
 	
 </div>	
 </cfoutput>
-
+</div>
 </body>
 </html>
 
-<!--- audit --->
-<cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"View Crime","","#crimeNo#",0,session.user.getDepartment())>
+<!--- audit if the request hasn't come from the redirector --->
+<cfif redirector IS "N">
+	<cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"View Crime","","#crimeNo#",0,session.user.getDepartment())>
+</cfif>
