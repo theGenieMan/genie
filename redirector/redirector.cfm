@@ -1,5 +1,5 @@
 <cfset uniqueTimestamp=TimeFormat(now(),'HHmmss')&DateFormat(now(),'DDMMYYYY')>
-
+<cfdump var="#url#">
 <!--- use env variable to work out which genie server to pass to --->
 <cfif SERVER_NAME IS "websvr.intranet.wmcpolice">
    <cfset genieServer="http://genie.intranet.wmcpolice">	
@@ -21,6 +21,7 @@
 	<cfset genieServer="http://SVR20031">
 	<cfset oisBrowser="http://web518.intranet.wmcpolice/browser/">
 	<cfset intranetServer="http://development.intranet.wmcpolice">	
+	<cfset genieVersion=4>
 <cfelseif SERVER_NAME IS "genie.intranet.wmcpolice">			
 	<cfset genieServer="http://genie.intranet.wmcpolice">
 	<cfset oisBrowser="http://ois.intranet.wmcpolice/browser/">
@@ -38,6 +39,12 @@
 	<cfset oisBrowser="http://ois.intranet.wmcpolice/browser/">
 	<cfset intranetServer="http://development.intranet.wmcpolice">								
 </cfif>
+
+<cfif not isDefined('genieVersion')>
+	<cfset genieVersion=3>
+</cfif>
+
+<cfoutput>#genieServer#</cfoutput>
 
 <cfswitch expression="#Type#">
 
@@ -159,6 +166,9 @@
   </cfcase>   
 
  <cfcase value="crime">
+ 	 
+  <cfif genieVersion IS 3>	 
+ 	 
   <cfif not isDefined("auditRequired")>
    <cfset auditRequired='Y'>
   </cfif>
@@ -191,482 +201,776 @@
     </cfoutput>
 	
     </script>
-
+ 
+  <cfelseif genieVersion IS 4>
+  
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>	  
+	  
+	  <cfoutput>
+	  <script>
+	   var newWin = window.open("#genieServer#/documentViewers/crimeDoc.cfm?crimeNo=#ref#&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#")
+	   newWin.focus()
+       window.opener='Self'; 
+       window.open('','_parent',''); 
+       window.close();
+	  </script>
+	  </cfoutput>
+  </cfif>
 
  </cfcase>
 
  <cfcase value="custody">
-  <cfif not isDefined("auditRequired")>
-   <cfset auditRequired='Y'>
+  <cfif genieVersion IS 3>
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>
+	   <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	
+		
+	    function openGenieCustody(custodyRef,auditRequired,auditInfo)
+	    {	
+	    var geniePath='http://genie.intranet.wmcpolice/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/DocumentView.cfm&str_DocType=CUSTODY&External=Yes';
+	    geniePath=geniePath+'&str_DocRef='+custodyRef+'&str_CustRef='+custodyRef+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
+	    fullscreen(geniePath,'custodyDoc<cfoutput>#uniqueTimestamp#</cfoutput>');
+	    window.opener='Self'; 
+	    window.open('','_parent',''); 
+	    window.close();
+	    }
+	    
+	    <cfoutput>
+	    openGenieCustody('#Replace(Ref,"CUST/","","ALL")#','#auditRequired#','#auditInfo#');
+	    </cfoutput>
+		
+	    </script>
+		
+  <cfelseif genieVersion IS 4>
+  	  
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>	  
+	  
+	  <cfoutput>
+	  <script>
+	   var newWin = window.open("#genieServer#/documentViewers/custodyDocNSPIS.cfm?custodyRef=#ref#&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#")
+	   newWin.focus()
+       window.opener='Self'; 
+       window.open('','_parent',''); 
+       window.close();
+	  </script>
+	  </cfoutput>  	  
+  	  
   </cfif>
-  <cfif not isDefined('auditInfo')>
-   <cfset auditInfo=''>    
-  </cfif>
-   <script>
-	function fullscreen(url,winname) {
-		w = screen.availWidth-10;
-		h = screen.availHeight-50;
-		features = "width="+w+",height="+h;
-		features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
-		WREF=window.open(url, winname , features);
-		if(!WREF.opener){ WREF.opener = this.window; }
-	}	
-	
-    function openGenieCustody(custodyRef,auditRequired,auditInfo)
-    {	
-    var geniePath='http://genie.intranet.wmcpolice/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/DocumentView.cfm&str_DocType=CUSTODY&External=Yes';
-    geniePath=geniePath+'&str_DocRef='+custodyRef+'&str_CustRef='+custodyRef+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
-    fullscreen(geniePath,'custodyDoc<cfoutput>#uniqueTimestamp#</cfoutput>');
-    window.opener='Self'; 
-    window.open('','_parent',''); 
-    window.close();
-    }
-    
-    <cfoutput>
-    openGenieCustody('#Replace(Ref,"CUST/","","ALL")#','#auditRequired#','#auditInfo#');
-    </cfoutput>
-	
-    </script>
- </cfcase>
-<cfcase value="case">
-  <cfif not isDefined("auditRequired")>
-   <cfset auditRequired='Y'>
-  </cfif>
-  <cfif not isDefined('auditInfo')>
-   <cfset auditInfo=''>    
-  </cfif>
-
-   <script>
-   	<cfoutput>
-	function fullscreen(url,winname) {
-		w = screen.availWidth-10;
-		h = screen.availHeight-50;
-		features = "width="+w+",height="+h;
-		features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
-		WREF=window.open(url, winname , features);
-		if(!WREF.opener){ WREF.opener = this.window; }
-	}	
-	
-    function openGenieCase(caseRef,auditRequired,auditInfo)
-    {	
-    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/DocumentView.cfm&str_DocType=CASE&External=Yes';
-    geniePath=geniePath+'&str_DocRef='+caseRef+'&str_CaseRef='+caseRef+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
-    fullscreen(geniePath,'caseDoc<cfoutput>#uniqueTimestamp#</cfoutput>');
-    window.opener='Self'; 
-    window.open('','_parent',''); 
-    window.close();
-    }
-        
-    openGenieCase('#Ref#','#auditRequired#','#auditInfo#');
-    </cfoutput>
-	
-    </script>
-
  </cfcase>
 
- <cfcase value="intel">  <cfif not isDefined("auditRequired")>
-   <cfset auditRequired='Y'>
-  </cfif>
-  <cfif not isDefined('auditInfo')>
-   <cfset auditInfo=''>    
-  </cfif>
-   <script>
-	function fullscreen(url,winname) {
-		w = screen.availWidth-10;
-		h = screen.availHeight-50;
-		features = "width="+w+",height="+h;
-		features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
-		WREF=window.open(url, winname , features);
-		if(!WREF.opener){ WREF.opener = this.window; }
-	}	
+ <cfcase value="case">
+  <cfif genieVersion IS 3>
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>
 	
-    function openGenieIntel(intelRef,auditRequired,auditInfo)
-    {	
-    var geniePath='http://genie.intranet.wmcpolice/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/DocumentView.cfm&str_DocType=IRAQS&External=Yes';
-    geniePath=geniePath+'&str_DocRef='+intelRef+'&str_Log='+intelRef+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
-    fullscreen(geniePath,'intelDoc<cfoutput>#uniqueTimestamp#</cfoutput>');
-    window.opener='Self'; 
-    window.open('','_parent',''); 
-    window.close();
-    }
-    
-    <cfoutput>
-    openGenieIntel('#Replace(Ref,"INTEL/","","ALL")#','#auditRequired#','#auditInfo#');
-    </cfoutput>
-	
-    </script>
+	   <script>
+	   	<cfoutput>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	
+		
+	    function openGenieCase(caseRef,auditRequired,auditInfo)
+	    {	
+	    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/DocumentView.cfm&str_DocType=CASE&External=Yes';
+	    geniePath=geniePath+'&str_DocRef='+caseRef+'&str_CaseRef='+caseRef+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
+	    fullscreen(geniePath,'caseDoc<cfoutput>#uniqueTimestamp#</cfoutput>');
+	    window.opener='Self'; 
+	    window.open('','_parent',''); 
+	    window.close();
+	    }
+	        
+	    openGenieCase('#Ref#','#auditRequired#','#auditInfo#');
+	    </cfoutput>
+		
+	    </script>
+  <cfelseif genieVersion IS 4>
+  	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>	  
+	  
+	  <cfoutput>
+	  <script>
+	   var newWin = window.open("#genieServer#/documentViewers/caseDocNSPIS.cfm?caseRef=#ref#&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#")
+	   newWin.focus()
+       window.opener='Self'; 
+       window.open('','_parent',''); 
+       window.close();
+	  </script>
+	  </cfoutput>  	
+  </cfif>
+ </cfcase>
 
+ <cfcase value="intel">  
+  <cfif genieVersion IS 3>	 
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>
+	   <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	
+		
+	    function openGenieIntel(intelRef,auditRequired,auditInfo)
+	    {	
+	    var geniePath='http://genie.intranet.wmcpolice/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/DocumentView.cfm&str_DocType=IRAQS&External=Yes';
+	    geniePath=geniePath+'&str_DocRef='+intelRef+'&str_Log='+intelRef+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
+	    fullscreen(geniePath,'intelDoc<cfoutput>#uniqueTimestamp#</cfoutput>');
+	    window.opener='Self'; 
+	    window.open('','_parent',''); 
+	    window.close();
+	    }
+	    
+	    <cfoutput>
+	    openGenieIntel('#Replace(Ref,"INTEL/","","ALL")#','#auditRequired#','#auditInfo#');
+	    </cfoutput>
+		
+	    </script>
+  <cfelseif genieVersion IS 4>
+ 	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>	  
+	  
+	  <cfoutput>
+	  <script>
+	   var newWin = window.open("#genieServer#/documentViewers/intelDoc.cfm?logRef=#ref#&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#")
+	   newWin.focus()
+       window.opener='Self'; 
+       window.open('','_parent',''); 
+       window.close();
+	  </script>
+	  </cfoutput>  	  	  
+  </cfif>
 
  </cfcase>
 
  <cfcase value="misper">
-  <cfif not isDefined("auditRequired")>
-   <cfset auditRequired='Y'>
-   <cfset auditInfo=''>
+  <cfif genieVersion IS 3>
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	   <cfset auditInfo=''>
+	  </cfif>
+	   <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	
+		
+	    function openGenieIntel(misPerRef,auditRequired,auditInfo)
+	    {	
+	    var geniePath='http://genie.intranet.wmcpolice/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/DocumentView.cfm&str_DocType=MISPER&External=Yes';
+	    geniePath=geniePath+'&str_DocRef='+misPerRef+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
+	    fullscreen(geniePath,'misperDoc');
+	    window.opener='Self'; 
+	    window.open('','_parent',''); 
+	    window.close();
+	    }
+	    
+	    <cfoutput>
+	    openGenieIntel('#Ref#','#auditRequired#','#auditInfo#');
+	    </cfoutput>
+		
+	    </script>
+  <cfelseif genieVersion IS 4>
+ 	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>	  
+	  
+	  <cfoutput>
+	  <script>
+	   var newWin = window.open("#genieServer#/documentViewers/misperDoc.cfm?caseNo=#ref#&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#")
+	   newWin.focus()
+       window.opener='Self'; 
+       window.open('','_parent',''); 
+       window.close();
+	  </script>
+	  </cfoutput>   	  
   </cfif>
-   <script>
-	function fullscreen(url,winname) {
-		w = screen.availWidth-10;
-		h = screen.availHeight-50;
-		features = "width="+w+",height="+h;
-		features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
-		WREF=window.open(url, winname , features);
-		if(!WREF.opener){ WREF.opener = this.window; }
-	}	
-	
-    function openGenieIntel(misPerRef,auditRequired,auditInfo)
-    {	
-    var geniePath='http://genie.intranet.wmcpolice/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/DocumentView.cfm&str_DocType=MISPER&External=Yes';
-    geniePath=geniePath+'&str_DocRef='+misPerRef+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
-    fullscreen(geniePath,'misperDoc');
-    window.opener='Self'; 
-    window.open('','_parent',''); 
-    window.close();
-    }
-    
-    <cfoutput>
-    openGenieIntel('#Ref#','#auditRequired#','#auditInfo#');
-    </cfoutput>
-	
-    </script>
-
 
  </cfcase>
  
- <cfcase value="stopsearch">  <cfif not isDefined("auditRequired")>
-   <cfset auditRequired='Y'>
+ <cfcase value="stopsearch">  
+  <cfif genieVersion IS 3>
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>
+	   <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	
+		
+	    function openGenieCustody(stopSearchRef,auditRequired,auditInfo)
+	    {	
+	    var geniePath='http://genie.intranet.wmcpolice/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/DocumentView.cfm&str_DocType=STOPSEARCH&External=Yes';
+	    geniePath=geniePath+'&str_DocRef='+stopSearchRef+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
+	    fullscreen(geniePath,'stopSearch<cfoutput>#uniqueTimestamp#</cfoutput>');
+	    window.opener='Self'; 
+	    window.open('','_parent',''); 
+	    window.close();
+	    }
+	    
+	    <cfoutput>
+	    openGenieCustody('#Ref#','#auditRequired#','#auditInfo#');
+	    </cfoutput>
+		
+	    </script>
+  <cfelseif genieVersion IS 4>
+ 	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>	  
+	  
+	  <cfoutput>
+	  <script>
+	   var newWin = window.open("#genieServer#/documentViewers/stopsearchDoc.cfm?urn=#ref#&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#")
+	   newWin.focus()
+       window.opener='Self'; 
+       window.open('','_parent',''); 
+       window.close();
+	  </script>
+	  </cfoutput>     	  
   </cfif>
-  <cfif not isDefined('auditInfo')>
-   <cfset auditInfo=''>    
-  </cfif>
-   <script>
-	function fullscreen(url,winname) {
-		w = screen.availWidth-10;
-		h = screen.availHeight-50;
-		features = "width="+w+",height="+h;
-		features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
-		WREF=window.open(url, winname , features);
-		if(!WREF.opener){ WREF.opener = this.window; }
-	}	
-	
-    function openGenieCustody(stopSearchRef,auditRequired,auditInfo)
-    {	
-    var geniePath='http://genie.intranet.wmcpolice/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/DocumentView.cfm&str_DocType=STOPSEARCH&External=Yes';
-    geniePath=geniePath+'&str_DocRef='+stopSearchRef+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
-    fullscreen(geniePath,'stopSearch<cfoutput>#uniqueTimestamp#</cfoutput>');
-    window.opener='Self'; 
-    window.open('','_parent',''); 
-    window.close();
-    }
-    
-    <cfoutput>
-    openGenieCustody('#Ref#','#auditRequired#','#auditInfo#');
-    </cfoutput>
-	
-    </script>
-
 
  </cfcase>
 
 <cfcase value="nominal">
-  <cfif not isDefined("auditRequired")>
-   <cfset auditRequired='Y'>
-  </cfif>
-  <cfif not isDefined('auditInfo')>
-   <cfset auditInfo=''>    
-  </cfif>
-  <cfif not isDefined('firstTab')>
-   <cfset firstTab=''>
-  </cfif>
+  <cfif genieVersion IS 3>
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>
+	  <cfif not isDefined('firstTab')>
+	   <cfset firstTab=''>
+	  </cfif>
+	
+	   <script>
+	   <cfoutput>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	
+		
+	    function openGenieNominal(nominalRef,auditRequired,auditInfo, firstTab)
+	    {	
+	    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/nominalInformation.cfm';
+	    geniePath=geniePath+'&str_CRO='+nominalRef+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo+'&firstTab='+firstTab;		
+	    fullscreen(geniePath,'nominal_'+nominalRef);
+	    window.opener='Self'; 
+	    window.open('','_parent',''); 
+	    window.close();
+	    }
+	        
+	      openGenieNominal('#Ref#','#auditRequired#','#auditInfo#','#firstTab#');
+	    </cfoutput>
+		
+	    </script>
 
-   <script>
-   <cfoutput>
-	function fullscreen(url,winname) {
-		w = screen.availWidth-10;
-		h = screen.availHeight-50;
-		features = "width="+w+",height="+h;
-		features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
-		WREF=window.open(url, winname , features);
-		if(!WREF.opener){ WREF.opener = this.window; }
-	}	
-	
-    function openGenieNominal(nominalRef,auditRequired,auditInfo, firstTab)
-    {	
-    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/nominalInformation.cfm';
-    geniePath=geniePath+'&str_CRO='+nominalRef+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo+'&firstTab='+firstTab;		
-    fullscreen(geniePath,'nominal_'+nominalRef);
-    window.opener='Self'; 
-    window.open('','_parent',''); 
-    window.close();
-    }
-        
-      openGenieNominal('#Ref#','#auditRequired#','#auditInfo#','#firstTab#');
-    </cfoutput>
-	
-    </script>
+ <cfelseif genieVersion IS 4>
+ 	 
+	  <cfoutput>
+	  <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}		  	
+		
+	   fullscreen("#genieServer#/nominalViewers/genie/nominal.cfm?nominalRef=#ref#&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#","nominal#ref#")	   
+       window.opener='Self'; 
+       window.open('','_parent',''); 
+       window.close();
+	  </script>
+	  </cfoutput>   	 
+ 	 
+ </cfif>
 
  </cfcase>
 
  <cfcase value="crash">
-  <cfif not isDefined("auditRequired")>
-   <cfset auditRequired='Y'>
-   <cfset auditInfo=''>
+  <cfif genieVersion IS 3>
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	   <cfset auditInfo=''>
+	  </cfif>
+	
+	   <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	
+		
+	    function openGenieCrash(crashRef,crashDate,auditRequired,auditInfo)
+	    {	
+	    var geniePath='http://genie.intranet.wmcpolice/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/DocumentView.cfm&str_DocType=CRASH&External=Yes';
+	    geniePath=geniePath+'&str_DocRef='+crashRef+'&crashDate='+crashDate+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
+	    fullscreen(geniePath,'crashDoc<cfoutput>#uniqueTimestamp#</cfoutput>');
+	    window.opener='Self'; 
+	    window.open('','_parent',''); 
+	    window.close();
+	    }
+	    
+	    <cfoutput>
+	    openGenieCrash('#Ref#','#crashDate#','#auditRequired#','#auditInfo#');
+	    </cfoutput>
+		
+	    </script>
+  <cfelseif genieVersion IS 4>
+ 	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>	  
+	  
+	  <cfoutput>
+	  <script>
+	   var newWin = window.open("#genieServer#/documentViewers/crashDoc.cfm?crashRef=#ref#&crashDate=#crashDate#&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#")
+	   newWin.focus()
+       window.opener='Self'; 
+       window.open('','_parent',''); 
+       window.close();
+	  </script>
+	  </cfoutput>       	  
   </cfif>
+ </cfcase>
 
-   <script>
-	function fullscreen(url,winname) {
-		w = screen.availWidth-10;
-		h = screen.availHeight-50;
-		features = "width="+w+",height="+h;
-		features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
-		WREF=window.open(url, winname , features);
-		if(!WREF.opener){ WREF.opener = this.window; }
-	}	
-	
-    function openGenieCrash(crashRef,crashDate,auditRequired,auditInfo)
-    {	
-    var geniePath='http://genie.intranet.wmcpolice/genie/code/reason_for_enquiry.cfm?page=nominal_details/code/DocumentView.cfm&str_DocType=CRASH&External=Yes';
-    geniePath=geniePath+'&str_DocRef='+crashRef+'&crashDate='+crashDate+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
-    fullscreen(geniePath,'crashDoc<cfoutput>#uniqueTimestamp#</cfoutput>');
-    window.opener='Self'; 
-    window.open('','_parent',''); 
-    window.close();
-    }
-    
-    <cfoutput>
-    openGenieCrash('#Ref#','#crashDate#','#auditRequired#','#auditInfo#');
-    </cfoutput>
-	
-    </script>
+ <cfcase value="vrm">
+  <cfif genieVersion IS 3>  
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>
+	   <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	
+		
+	    function openGenieVehicleSearch(vrm,auditRequired,auditInfo)
+	    {	
+	    var geniePath='http://genie.intranet.wmcpolice/genie/code/reason_for_enquiry.cfm?page=vehicle_enquiry.cfm&frm_HidAction=search&External=Yes';
+	    geniePath=geniePath+'&Vrm='+vrm+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
+	    fullscreen(geniePath,'vehicleSearch');
+	    window.opener='Self'; 
+	    window.open('','_parent',''); 
+	    window.close();    
+	    }
+	    
+	    <cfoutput>
+	    openGenieVehicleSearch('#Replace(Ref,"VRM/","","ALL")#','#auditRequired#','#auditInfo#');
+	    </cfoutput>
+		
+	    </script>
+  <cfelseif genieVersion IS 4>
+ 	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>	  
+	  
+	  <cfoutput>
+	  <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	  	
+		
+	   fullscreen("#genieServer#/enquiryScreens/vehicle/enquiry.cfm?vrm=#Replace(Ref,'VRM/','','ALL')#&startSearch=Y&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#")
+	   window.opener='Self'; 
+       window.open('','_parent',''); 
+       window.close();
+	  </script>
+	  </cfoutput>    	  
+  </cfif>
 
  </cfcase>
 
- <cfcase value="vrm">  <cfif not isDefined("auditRequired")>
-   <cfset auditRequired='Y'>
+ <cfcase value="custody_search">
+  <cfif genieVersion IS 3>  
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>
+	   <cfoutput>
+	   <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	
+		
+	    function openGenieCustodySearch(station,fromDay,fromMonth,fromYear,fromHour,toDay,toMonth,toYear,toHour,auditRequired,auditInfo)
+	    {	
+	    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=custody_enquiry.cfm&frm_HidAction=search&External=Yes';
+	    geniePath=geniePath+'&frm_TxtStation='+station+'&frm_TxtArr1Day='+fromDay+'&frm_SelArr1Mon='+fromMonth+'&frm_TxtArr1Year='+fromYear+'&frm_SelArr1Hrs='+fromHour;
+	    geniePath=geniePath+'&frm_TxtArr2Day='+toDay+'&frm_SelArr2Mon='+toMonth+'&frm_TxtArr2Year='+toYear+'&frm_SelArr2Hrs='+toHour;    
+	    geniePath=geniePath+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
+	    fullscreen(geniePath,'cusotdySearch#uniqueTimestamp#');
+	    window.opener='Self'; 
+	    window.open('','_parent',''); 
+	    window.close();
+	    }
+	    
+	    
+	    openGenieCustodySearch('#station#','#ListGetAt(fromDate,1,"/")#','#ListGetAt(fromDate,2,"/")#','#ListGetAt(fromDate,3,"/")#','#fromHour#:00','#ListGetAt(toDate,1,"/")#','#ListGetAt(toDate,2,"/")#','#ListGetAt(toDate,3,"/")#','#toHour#:00','#auditRequired#','#auditInfo#');    
+		
+	    </script>
+	    </cfoutput>
+  <cfelseif genieVersion IS 4>
+ 	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>	  
+	  
+	  <cfoutput>
+	  <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	  	
+		
+	   fullscreen("#genieServer#/enquiryScreens/custody/enquiry.cfm?station=#station#&arrestDateFrom=#fromDate#&arrestDateTo=#toDate#&startSearch=Y&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#")
+	   window.opener='Self'; 
+       window.open('','_parent',''); 
+       window.close();
+	  </script>
+	  </cfoutput>    	  
   </cfif>
-  <cfif not isDefined('auditInfo')>
-   <cfset auditInfo=''>    
-  </cfif>
-   <script>
-	function fullscreen(url,winname) {
-		w = screen.availWidth-10;
-		h = screen.availHeight-50;
-		features = "width="+w+",height="+h;
-		features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
-		WREF=window.open(url, winname , features);
-		if(!WREF.opener){ WREF.opener = this.window; }
-	}	
-	
-    function openGenieVehicleSearch(vrm,auditRequired,auditInfo)
-    {	
-    var geniePath='http://genie.intranet.wmcpolice/genie/code/reason_for_enquiry.cfm?page=vehicle_enquiry.cfm&frm_HidAction=search&External=Yes';
-    geniePath=geniePath+'&Vrm='+vrm+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
-    fullscreen(geniePath,'vehicleSearch');
-    window.opener='Self'; 
-    window.open('','_parent',''); 
-    window.close();    
-    }
-    
-    <cfoutput>
-    openGenieVehicleSearch('#Replace(Ref,"VRM/","","ALL")#','#auditRequired#','#auditInfo#');
-    </cfoutput>
-	
-    </script>
-
-
  </cfcase>
 
- <cfcase value="custody_search">  <cfif not isDefined("auditRequired")>
-   <cfset auditRequired='Y'>
+ <cfcase value="crime_browser">
+  <cfif genieVersion IS 3>	   
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>
+	   <cfoutput>
+	   <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	
+		
+	    function openGenieCrimeBrowser(fromDay,fromMonth,fromYear,toDay,toMonth,toYear,groups,area,timeFrom,timeTo,dateType,sortType,auditRequired,auditInfo,markers,markerUse)
+	    {	
+	    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=crime_browser.cfm&frmHidAction=search&External=Yes';
+	    geniePath=geniePath+'&frmDateFromDay='+fromDay+'&frmDateFromMon='+fromMonth+'&frmDateFromYear='+fromYear;
+		geniePath=geniePath+'&frmDateToDay='+toDay+'&frmDateToMon='+toMonth+'&frmDateToYear='+toYear;
+		geniePath=geniePath+'&frmTimeFrom='+timeFrom+'&frmTimeTo='+timeTo;
+		geniePath=geniePath+'&frmArea='+area+'&frmOffenceGroupings='+groups+'&frmMarker='+markers;		
+	    geniePath=geniePath+'&frmDateType='+dateType+'&frmSortType='+sortType+'&frmHowToUseMarker='+markerUse;    
+	    geniePath=geniePath+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
+	    fullscreen(geniePath,'crimeBrowser#uniqueTimestamp#');
+	    window.opener='Self'; 
+	    window.open('','_parent',''); 
+	    window.close();
+	    }
+	    
+	    
+	    openGenieCrimeBrowser('#fromDay#','#fromMonth#','#fromYear#','#toDay#','#toMonth#','#toYear#','#groups#','#area#','#timeFrom#','#timeTo#','#dateType#','#sortType#','#auditRequired#','#auditInfo#','#markers#','#markerUse#');
+	    
+		
+	    </script>
+	    </cfoutput>
+  <cfelseif genieVersion is 4>
+  	  
+  	  <cfoutput>
+	  <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	  	
+		
+	   fullscreen("#genieServer#/enquiryScreens/crimeBrowser/enquiry.cfm?frmArea=#area#&frmDateFrom=#fromDate#&frmTimeFrom=#timeFrom#&frmDateTo=#toDate#&frmTimeTo=#timeTo#&frmOffenceGroupings=#groups#&frmDateType=#dateType#&frmMarker=#markers#&frmHowToUseMarker=#markerUse#&frmSortType=#sortType#&startSearch=Y&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#")
+	   window.opener='Self'; 
+       window.open('','_parent',''); 
+       window.close();
+	  </script>
+	  </cfoutput>
+  	  
   </cfif>
-  <cfif not isDefined('auditInfo')>
-   <cfset auditInfo=''>    
-  </cfif>
-   <cfoutput>
-   <script>
-	function fullscreen(url,winname) {
-		w = screen.availWidth-10;
-		h = screen.availHeight-50;
-		features = "width="+w+",height="+h;
-		features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
-		WREF=window.open(url, winname , features);
-		if(!WREF.opener){ WREF.opener = this.window; }
-	}	
-	
-    function openGenieCustodySearch(station,fromDay,fromMonth,fromYear,fromHour,toDay,toMonth,toYear,toHour,auditRequired,auditInfo)
-    {	
-    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=custody_enquiry.cfm&frm_HidAction=search&External=Yes';
-    geniePath=geniePath+'&frm_TxtStation='+station+'&frm_TxtArr1Day='+fromDay+'&frm_SelArr1Mon='+fromMonth+'&frm_TxtArr1Year='+fromYear+'&frm_SelArr1Hrs='+fromHour;
-    geniePath=geniePath+'&frm_TxtArr2Day='+toDay+'&frm_SelArr2Mon='+toMonth+'&frm_TxtArr2Year='+toYear+'&frm_SelArr2Hrs='+toHour;    
-    geniePath=geniePath+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
-    fullscreen(geniePath,'cusotdySearch#uniqueTimestamp#');
-    window.opener='Self'; 
-    window.open('','_parent',''); 
-    window.close();
-    }
-    
-    
-    openGenieCustodySearch('#station#','#ListGetAt(fromDate,1,"/")#','#ListGetAt(fromDate,2,"/")#','#ListGetAt(fromDate,3,"/")#','#fromHour#:00','#ListGetAt(toDate,1,"/")#','#ListGetAt(toDate,2,"/")#','#ListGetAt(toDate,3,"/")#','#toHour#:00','#auditRequired#','#auditInfo#');    
-	
-    </script>
-    </cfoutput>
-
  </cfcase>
 
- <cfcase value="crime_browser">  <cfif not isDefined("auditRequired")>
-   <cfset auditRequired='Y'>
+ <cfcase value="bail_diary">
+  <cfif genieVersion IS 3>  
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>
+	   <cfoutput>
+	   <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	
+		
+	    function openBailDiary(station,diaryDate,auditRequired,auditInfo)
+	    {	
+	    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=bail_diary.cfm&frmHidAction=search&External=Yes';
+	    geniePath=geniePath+'&frmDiaryDate='+diaryDate;
+		geniePath=geniePath+'&frmDiarySuite='+station;
+		geniePath=geniePath+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
+		fullscreen(geniePath,'baildiary#uniqueTimestamp#');
+	    window.opener='Self'; 
+	    window.open('','_parent',''); 
+	    window.close();
+	    }
+	    
+	    <cfoutput>
+	    openBailDiary('#ref#','#DateFormat(now(),"DD/MM/YYYY")#','#auditRequired#','#auditInfo#');
+	    </cfoutput>
+		
+	    </script>
+	   </cfoutput>
+  <cfelseif genieVersion IS 4>
+  	   <cfoutput>
+		  <script>
+			function fullscreen(url,winname) {
+				w = screen.availWidth-10;
+				h = screen.availHeight-50;
+				features = "width="+w+",height="+h;
+				features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+				WREF=window.open(url, winname , features);
+				if(!WREF.opener){ WREF.opener = this.window; }
+			}	  	
+			
+		   fullscreen("#genieServer#/enquiryScreens/bailDiary/enquiry.cfm?custSuite=#station#&frmDiaryDate=#diaryDate#&startSearch=Y&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#")
+		   window.opener='Self'; 
+	       window.open('','_parent',''); 
+	       window.close();
+		  </script>
+	   </cfoutput>
   </cfif>
-  <cfif not isDefined('auditInfo')>
-   <cfset auditInfo=''>    
-  </cfif>
-   <cfoutput>
-   <script>
-	function fullscreen(url,winname) {
-		w = screen.availWidth-10;
-		h = screen.availHeight-50;
-		features = "width="+w+",height="+h;
-		features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
-		WREF=window.open(url, winname , features);
-		if(!WREF.opener){ WREF.opener = this.window; }
-	}	
-	
-    function openGenieCrimeBrowser(fromDay,fromMonth,fromYear,toDay,toMonth,toYear,groups,area,timeFrom,timeTo,dateType,sortType,auditRequired,auditInfo,markers,markerUse)
-    {	
-    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=crime_browser.cfm&frmHidAction=search&External=Yes';
-    geniePath=geniePath+'&frmDateFromDay='+fromDay+'&frmDateFromMon='+fromMonth+'&frmDateFromYear='+fromYear;
-	geniePath=geniePath+'&frmDateToDay='+toDay+'&frmDateToMon='+toMonth+'&frmDateToYear='+toYear;
-	geniePath=geniePath+'&frmTimeFrom='+timeFrom+'&frmTimeTo='+timeTo;
-	geniePath=geniePath+'&frmArea='+area+'&frmOffenceGroupings='+groups+'&frmMarker='+markers;		
-    geniePath=geniePath+'&frmDateType='+dateType+'&frmSortType='+sortType+'&frmHowToUseMarker='+markerUse;    
-    geniePath=geniePath+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
-    fullscreen(geniePath,'crimeBrowser#uniqueTimestamp#');
-    window.opener='Self'; 
-    window.open('','_parent',''); 
-    window.close();
-    }
-    
-    
-    openGenieCrimeBrowser('#fromDay#','#fromMonth#','#fromYear#','#toDay#','#toMonth#','#toYear#','#groups#','#area#','#timeFrom#','#timeTo#','#dateType#','#sortType#','#auditRequired#','#auditInfo#','#markers#','#markerUse#');
-    
-	
-    </script>
-    </cfoutput>
-
  </cfcase>
 
- <cfcase value="bail_diary">  <cfif not isDefined("auditRequired")>
-   <cfset auditRequired='Y'>
-  </cfif>
-  <cfif not isDefined('auditInfo')>
-   <cfset auditInfo=''>    
-  </cfif>
-   <cfoutput>
-   <script>
-	function fullscreen(url,winname) {
-		w = screen.availWidth-10;
-		h = screen.availHeight-50;
-		features = "width="+w+",height="+h;
-		features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
-		WREF=window.open(url, winname , features);
-		if(!WREF.opener){ WREF.opener = this.window; }
-	}	
-	
-    function openBailDiary(station,diaryDate,auditRequired,auditInfo)
-    {	
-    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=bail_diary.cfm&frmHidAction=search&External=Yes';
-    geniePath=geniePath+'&frmDiaryDate='+diaryDate;
-	geniePath=geniePath+'&frmDiarySuite='+station;
-	geniePath=geniePath+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
-	fullscreen(geniePath,'baildiary#uniqueTimestamp#');
-    window.opener='Self'; 
-    window.open('','_parent',''); 
-    window.close();
-    }
-    
-    <cfoutput>
-    openBailDiary('#ref#','#DateFormat(now(),"DD/MM/YYYY")#','#auditRequired#','#auditInfo#');
-    </cfoutput>
-	
-    </script>
-   </cfoutput>
-
+  <cfcase value="intel_enquiry">
+   <cfif genieVersion IS 3>  
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>
+	   <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	   	
+	   	<cfoutput>
+	    function openIntelEnquiry(division,startDateDay,startDateMon,startDateYear,endDateDay,endDateMonth,endDateYear,auditRequired,auditInfo)
+	    {	
+	    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=intel_enquiry.cfm&frm_HidAction=search&External=Yes&fieldNames=frm_SelDivision';
+	    geniePath=geniePath+'&frm_SelDivision='+division;
+		geniePath=geniePath+'&frm_TxtCreatedDay1='+startDateDay;
+		geniePath=geniePath+'&frm_SelCreatedMon1='+startDateMon;
+		geniePath=geniePath+'&frm_TxtCreatedYear1='+startDateYear;
+		geniePath=geniePath+'&frm_TxtCreatedDay2='+endDateDay;
+		geniePath=geniePath+'&frm_SelCreatedMon2='+endDateMonth;
+		geniePath=geniePath+'&frm_TxtCreatedYear2='+endDateYear;		
+		geniePath=geniePath+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;	
+		fullscreen(geniePath,'intelenq#uniqueTimestamp#');
+	    window.opener='Self'; 
+	    window.open('','_parent',''); 
+	    window.close();
+	    }
+		</cfoutput>
+	    
+	    <cfoutput>
+	    openIntelEnquiry('#division#','#ListGetAt(startDate,1,"/")#','#ListGetAt(startDate,2,"/")#','#ListGetAt(startDate,3,"/")#','#ListGetAt(endDate,1,"/")#','#ListGetAt(endDate,2,"/")#','#ListGetAt(endDate,3,"/")#','#auditRequired#','#auditInfo#');
+	    </cfoutput>	
+	    </script>
+	<cfelseif genieVersion IS 4>
+	   <cfoutput>
+		  <script>
+			function fullscreen(url,winname) {
+				w = screen.availWidth-10;
+				h = screen.availHeight-50;
+				features = "width="+w+",height="+h;
+				features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+				WREF=window.open(url, winname , features);
+				if(!WREF.opener){ WREF.opener = this.window; }
+			}	  	
+			
+		   fullscreen("#genieServer#/enquiryScreens/intel/enquiry.cfm?division=#division#&date_created1=#startDate#&date_created2=#endDate#&startSearch=Y&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#")
+		   window.opener='Self'; 
+	       window.open('','_parent',''); 
+	       window.close();
+		  </script>
+	   </cfoutput>		
+   </cfif>
  </cfcase>
 
-  <cfcase value="intel_enquiry">  <cfif not isDefined("auditRequired")>
-   <cfset auditRequired='Y'>
+  <cfcase value="intelByArea">
+   <cfif genieVersion IS 3>  
+	  <cfif not isDefined("auditRequired")>
+	   <cfset auditRequired='Y'>
+	  </cfif>
+	  <cfif not isDefined('auditInfo')>
+	   <cfset auditInfo=''>    
+	  </cfif>
+	   <script>
+		function fullscreen(url,winname) {
+			w = screen.availWidth-10;
+			h = screen.availHeight-50;
+			features = "width="+w+",height="+h;
+			features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+			WREF=window.open(url, winname , features);
+			if(!WREF.opener){ WREF.opener = this.window; }
+		}	
+		<cfoutput>
+	    function openIntelByArea(area,dateFrom,dateTo,auditRequired,auditInfo)
+	    {	
+	    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=intelByArea.cfm&frm_HidAction=search&External=Yes';
+	    geniePath=geniePath+'&frm_TxtArea='+area;
+		geniePath=geniePath+'&frm_TxtDateFrom='+dateFrom;
+		geniePath=geniePath+'&frm_TxtDateTo='+dateTo;
+		geniePath=geniePath+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
+		fullscreen(geniePath,'intelByArea#uniqueTimestamp#');
+	    window.opener='Self'; 
+	    window.open('','_parent',''); 
+	    window.close();
+	    }
+	    </cfoutput>
+	    <cfoutput>
+	    openIntelByArea('#area#','#dateFrom#','#dateTo#','#auditRequired#','#auditInfo#');
+	    </cfoutput>
+		
+	    </script>
+  <cfelseif genieVersion IS 4>
+	   <cfoutput>
+		  <script>
+			function fullscreen(url,winname) {
+				w = screen.availWidth-10;
+				h = screen.availHeight-50;
+				features = "width="+w+",height="+h;
+				features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
+				WREF=window.open(url, winname , features);
+				if(!WREF.opener){ WREF.opener = this.window; }
+			}	  	
+			
+		   fullscreen("#genieServer#/enquiryScreens/intelByArea/enquiry.cfm?area=#area#&dateFrom=#dateFrom#&dateTo=#dateTo#&startSearch=Y&redirector=Y&auditRequired=#auditRequired#&auditInfo=#auditInfo#")
+		   //window.opener='Self'; 
+	       //window.open('','_parent',''); 
+	       //window.close();
+		  </script>
+	   </cfoutput>  	  	  
   </cfif>
-  <cfif not isDefined('auditInfo')>
-   <cfset auditInfo=''>    
-  </cfif>
-   <script>
-	function fullscreen(url,winname) {
-		w = screen.availWidth-10;
-		h = screen.availHeight-50;
-		features = "width="+w+",height="+h;
-		features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
-		WREF=window.open(url, winname , features);
-		if(!WREF.opener){ WREF.opener = this.window; }
-	}	   	
-   	<cfoutput>
-    function openIntelEnquiry(division,startDateDay,startDateMon,startDateYear,endDateDay,endDateMonth,endDateYear,auditRequired,auditInfo)
-    {	
-    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=intel_enquiry.cfm&frm_HidAction=search&External=Yes&fieldNames=frm_SelDivision';
-    geniePath=geniePath+'&frm_SelDivision='+division;
-	geniePath=geniePath+'&frm_TxtCreatedDay1='+startDateDay;
-	geniePath=geniePath+'&frm_SelCreatedMon1='+startDateMon;
-	geniePath=geniePath+'&frm_TxtCreatedYear1='+startDateYear;
-	geniePath=geniePath+'&frm_TxtCreatedDay2='+endDateDay;
-	geniePath=geniePath+'&frm_SelCreatedMon2='+endDateMonth;
-	geniePath=geniePath+'&frm_TxtCreatedYear2='+endDateYear;		
-	geniePath=geniePath+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;	
-	fullscreen(geniePath,'intelenq#uniqueTimestamp#');
-    window.opener='Self'; 
-    window.open('','_parent',''); 
-    window.close();
-    }
-	</cfoutput>
-    
-    <cfoutput>
-    openIntelEnquiry('#division#','#ListGetAt(startDate,1,"/")#','#ListGetAt(startDate,2,"/")#','#ListGetAt(startDate,3,"/")#','#ListGetAt(endDate,1,"/")#','#ListGetAt(endDate,2,"/")#','#ListGetAt(endDate,3,"/")#','#auditRequired#','#auditInfo#');
-    </cfoutput>	
-    </script>
- </cfcase>
-
-  <cfcase value="intelByArea">  <cfif not isDefined("auditRequired")>
-   <cfset auditRequired='Y'>
-  </cfif>
-  <cfif not isDefined('auditInfo')>
-   <cfset auditInfo=''>    
-  </cfif>
-   <script>
-	function fullscreen(url,winname) {
-		w = screen.availWidth-10;
-		h = screen.availHeight-50;
-		features = "width="+w+",height="+h;
-		features += ",left=0,top=0,screenX=0,screenY=0,scrollbars=1,status=1,resizable=1";
-		WREF=window.open(url, winname , features);
-		if(!WREF.opener){ WREF.opener = this.window; }
-	}	
-	<cfoutput>
-    function openIntelByArea(area,dateFrom,dateTo,auditRequired,auditInfo)
-    {	
-    var geniePath='#genieServer#/genie/code/reason_for_enquiry.cfm?page=intelByArea.cfm&frm_HidAction=search&External=Yes';
-    geniePath=geniePath+'&frm_TxtArea='+area;
-	geniePath=geniePath+'&frm_TxtDateFrom='+dateFrom;
-	geniePath=geniePath+'&frm_TxtDateTo='+dateTo;
-	geniePath=geniePath+'&auditRequired='+auditRequired+'&auditInfo='+auditInfo;
-	fullscreen(geniePath,'intelByArea#uniqueTimestamp#');
-    window.opener='Self'; 
-    window.open('','_parent',''); 
-    window.close();
-    }
-    </cfoutput>
-    <cfoutput>
-    openIntelByArea('#area#','#dateFrom#','#dateTo#','#auditRequired#','#auditInfo#');
-    </cfoutput>
-	
-    </script>
-
 
  </cfcase>
  
