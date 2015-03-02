@@ -51,7 +51,7 @@ $(document).ready(function() {
 	  2 = Display all logs but deny access if < level 15
 	  3 = Display all logs but deny access if < level 10 --->
 <cfif Session.LoggedInUserLogAccess IS 1 OR Session.LoggedInUserLogAccess IS 2 
-   OR Session.LoggedInUserLogAccess IS 3>
+   OR Session.LoggedInUserLogAccess IS 3 OR Session.LoggedInUserLogAccess IS 15>
    <cfset viewAllLogs="YES">
    <cfif Session.LoggedInUserLogAccess IS 1>
 	 <cfset actualLogLevel=20>
@@ -59,6 +59,8 @@ $(document).ready(function() {
 	 <cfset actualLogLevel=15>
    <cfelseif Session.LoggedInUserLogAccess IS 3>
 	 <cfset actualLogLevel=10>
+   <cfelse>
+   	 <cfset actualLogLevel=Session.LoggedInUserLogAccess>
    </cfif>
 <cfelse>
  <cfset actualLogLevel=Session.LoggedInUserLogAccess>
@@ -68,6 +70,7 @@ $(document).ready(function() {
 <cfloop query="qry_Iraqs">
  <cfif SECURITY_ACCESS_LEVEL LT actualLogLevel>
   <cfset str_Message="OTHER LOGS ARE RECORDED FOR WHICH YOU DO NOT HAVE ACCESS">
+  <cfbreak>
  </cfif>
 </cfloop>
 
@@ -125,16 +128,20 @@ $(document).ready(function() {
 			<cfif displayThisRow IS "YES">
 			<cfset logData=LOG_REF&"|"&SECURITY_ACCESS_LEVEL>
 			<cfset logData &= "|"&HAND_CODE&"|"&Replace(iif(Len(HAND_GUIDANCE) GT 0,DE(HAND_GUIDANCE),DE('None')),chr(10),"~","ALL")>
-			<cfset lisLogs=ListAppend(lisLogs,logData,chr(10))>	 	
+			<cfif displayLogLink>
+				<cfset lisLogs=ListAppend(lisLogs,logData,chr(10))>
+			</cfif>	 	
 		<tr class="row_colour#j mod 2#">
 		 <cfif isDefined('includePrintChecks')>
-		  <td><input type="checkbox" name="chkIncludeIntel" id="chkIncludeIntel" value="#LOG_REF#"></td>
+		  <td><input type="checkbox" name="chkIncludeIntel" id="chkIncludeIntel" value="#LOG_REF#|#SECURITY_ACCESS_LEVEL#"></td>
 		 </cfif>										
 		  <td>
 		  <cfif displayLogLink IS "YES">
 			 <strong>  
 				<a href="#LOG_REF#" class="genieIntelLink" searchUUID="#searchUUID#" handCode="#HAND_CODE#" handGuide="#HAND_GUIDANCE#">#LOG_REF#</a>
-			 </strong>	   		 	 
+			 </strong>	   
+		  <cfelse>
+		  	  #LOG_REF#		 	 
 		  </cfif>
 		  </td>
 		  <td>#FIVE_BY_FIVE#</td>
