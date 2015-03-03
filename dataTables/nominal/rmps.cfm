@@ -53,7 +53,7 @@ Revisions   :
 		     <tr class='row_colour#i mod 2#'>
 			     <td valign="top" #rowUrnStyle#>
 			     	<b>
-			     		<a href="#rmp[i].getRMP_URN()#" class="genieRMPLink">#rmp[i].getRMP_URN()#</a>						
+			     		<a href="#application.rmp_link##rmp[i].getRMP_URN()#" rmpUrn="#rmp[i].getRMP_URN()#" class="genieRMPLink">#rmp[i].getRMP_URN()#</a>						
 					</b>
 				 </td>
 				 <td valign="top">
