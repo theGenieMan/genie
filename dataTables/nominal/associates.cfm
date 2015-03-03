@@ -132,7 +132,7 @@ ASSOCIATES
 			<th width="2%">&nbsp;</th>                    					
 			<th width="1%">&nbsp;</th>                    
 			<th width="37%">NOTES</th>					
-			<th width="8%" class="#iif(orderBy IS "date_created",de('thSorted'),de('thSortable'))#" sort="date_created" nominalRef="#nominalRef#">CREATED</th>										
+			<th width="8%" class="#iif(orderBy IS "date_created",de('thSorted'),de('thSortable'))#" sort="date_created" nominalRef="#nominalRef#">UPDATED</th>										
 		 </tr>
 	 </thead>
 	 <tbody>		 	 
@@ -200,7 +200,11 @@ ASSOCIATES
 		    --->              
           </td>  
 		  <td valign="top">#RELT_NOTES#</td>
-		  <td valign="top">#DateFormat(DATE_RELT_CREATED,'DD/MM/YYYY')#</td>
+		  <td valign="top">
+		  	<cfif DateFormat(LAST_UPDATED_DATE,'DD/MM/YYYY') IS NOT "01/01/1900">
+		  	#DateFormat(LAST_UPDATED_DATE,'DD/MM/YYYY')#
+		  	</cfif>
+		  </td>
 		 </tr>
          <cfset i=i+1>
 		</cfloop>
