@@ -1356,6 +1356,10 @@ font-size:90%;
 	font-weight:bold;
 }
 
+.genieLinkVisited{
+	color:#800080 !important;
+}
+
 .firearmsNominal{
 	cursor:hand;
 	color:#000080 !important;
