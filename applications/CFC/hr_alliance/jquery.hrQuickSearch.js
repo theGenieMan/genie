@@ -113,7 +113,15 @@
 				  	this.searchButton.trigger('click');
 				  }
 				}
-			})
+			});
+			
+			this._on ( this.searchBox , {
+				focusin: function(){					
+					if (this.element.find('#'+this.options.searchBox).val().length > 0) {
+						$(document).unbind('keypress.pickPerson');	
+					}					
+				}			
+			});	
 	
 			// click event for the search button
 			this._on( this.searchButton, {
@@ -178,14 +186,31 @@
 									}
 									
 									var thisDuty=self.options.showDuty=='Y'?" [Duty:"+userInfo.dutyToday+"]":"";
-									var spanData = "<div id='+" + userInfo.personId + "' class='searchResult row" + iSpan % 2 + "' userId='" + sUserId + "' collarNo='" + userInfo.collar + "' forceCode='"+userInfo.forceCode+"' email='"+userInfo.emailAddress+"' phone='"+userInfo.workPhone+"' location='"+userInfo.location+"' division='"+userInfo.division+"' rank='"+userInfo.title+"' manager='"+userInfo.manager+"' department='"+userInfo.department+"'>" + userInfo.fullName + thisDuty +"</div>";															
+									var spanData = "<div resultNum='"+iSpan+"' id='+" + userInfo.personId + "' class='searchResult row" + iSpan % 2 + "' userId='" + sUserId + "' collarNo='" + userInfo.collar + "' forceCode='"+userInfo.forceCode+"' email='"+userInfo.emailAddress+"' phone='"+userInfo.workPhone+"' location='"+userInfo.location+"' division='"+userInfo.division+"' rank='"+userInfo.title+"' manager='"+userInfo.manager+"' department='"+userInfo.department+"'>" + userInfo.fullName + thisDuty +"</div>";															
 									resultsArea.append(spanData);
 									iSpan++;
 								});
 								
 								if (recordCount > 1) {					
 								    // highlight the search text that the user has put in				
-									resultsArea.highlight(searchText);																											
+									resultsArea.highlight(searchText);
+									
+									// bind key 1 and 2 to the first two result options
+									$(document).bind('keypress.pickPerson', function(event) {
+										
+										if (event.keyCode === 49){
+											event.preventDefault();
+											$('div[resultNum=1]').trigger('dblclick');
+										}
+										
+										if (event.keyCode === 50){
+											event.preventDefault();
+											$('div[resultNum=2]').trigger('dblclick');
+										}
+										
+									});
+									
+																																				
 								};
 								// if there is only 1 result then don't show the pick list, just populate that users details into the result
 								if (recordCount == 1) {
@@ -262,6 +287,7 @@
 			// when the user double clicks on the search result list
 			// populate the results with the details they have clicked on
 			this._on( {'dblclick .searchResult': function(event){
+				$(document).unbind('keypress.pickPerson');
 				var elt = $(event.currentTarget);								
 				var fullName=elt.html().replace(/<[\/]{0,1}(span|SPAN)[^><]*>/g,"");
 				var fullName=fullName.replace(/\[.*\]/g,"");
