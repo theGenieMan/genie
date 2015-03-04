@@ -148,7 +148,7 @@
 		  		<tr>
 		  			<td width="15%"><label for="searchType">Search Type</label></td>
 					<td width="45%">
-						<select name="searchType" id="searchType" class="mandatory" displayInPane="Search Type" displayPrevSearch="N">
+						<select name="searchType" id="searchType" class="mandatory" displayInPane="Search Type" displayPrevSearch="N" initSelect='#session.userSettings.peType#'>
 							<option value="Standard" #iif(session.userSettings.peType IS "Standard",de('selected'),de(''))#>Standard</option>
 							<option value="Wildcard" #iif(session.userSettings.peType IS "Wildcard",de('selected'),de(''))#>Wildcard</option>
 						</select>
