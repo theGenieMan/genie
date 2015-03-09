@@ -83,7 +83,7 @@ $(document).ready(function() {
 					}
 					
 			})	
-		$('#dpa').dpa('show')
+		$('#dpa').dpa('show',true)
 		
 		// size the selected warning box to match the list of warnings box 	
 		$('#frmWarning').width($('#frmWarningList').width());		

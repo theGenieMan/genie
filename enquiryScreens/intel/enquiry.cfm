@@ -1,4 +1,31 @@
 ﻿<!DOCTYPE html>	
+<!---
+
+Module      : /enquiryScreens/intel/enquiry.cfm
+
+App         : GENIE
+
+Purpose     : Displays the intel enquiry screen
+
+Requires    : 
+
+Author      : Nick Blackham
+
+Date        : 18/11/2014
+
+Version     : 
+
+Revisions   : 
+
+--->
+	
+<cfparam name="redirector" default="N">
+<cfparam name="auditRequired" default="">
+<cfparam name="auditInfo" default="">	
+<cfparam name="division" default="">
+<cfparam name="date_created1" default="">
+<cfparam name="date_created2" default="">	
+	
 <cfset qCats=application.genieService.getIntelCategories()>
 <html>	
 <head>
@@ -32,6 +59,10 @@
 <body>
 	<div id="dpa" style="display:none;"></div>
 	<cfoutput>	
+
+	<input type="hidden" name="redirector" id="redirector" value="#redirector#">
+	<input type="hidden" name="auditRequired" id="auditRequired" value="#auditRequired#">
+	<input type="hidden" name="auditInfo" id="auditInfo" value="#auditInfo#">	
 		
 	<cfset headerTitle="INTEL ENQUIRY">	
 	<cfinclude template="/header.cfm">
@@ -103,7 +134,7 @@
 					<td valign="top">
 						<select name="division" id="division" displayInPane="Policing Area" displayPrevSearch="Y" multiple size="5">							
 							<cfloop query="Application.qry_Division">
-							<option value="#ORG_CODE#">#Replace(ORG_NAME,' POLICING AREA','')#</option>		
+							<option value="#ORG_CODE#" #iif(ORG_CODE IS division,de('selected'),de(''))#>#Replace(ORG_NAME,' POLICING AREA','')#</option>		
 							</cfloop>
 						</select>
 					</td>	
@@ -137,9 +168,9 @@
 					<td valign="top"><label for="date_created1">Created</label></td>
 					<td valign="top" colspan="4">
 						<b>Between/On</b> 
-						<input name="date_created1" id="date_created1" displayInPane="Created Between/On" displayPrevSearch="Y" size="10" value="" datepicker> 
+						<input name="date_created1" id="date_created1" displayInPane="Created Between/On" displayPrevSearch="Y" size="10" value="#date_created1#" datepicker> 
 						<b>And</b> 
-						<input name="date_created2" id="date_created2" displayInPane="Created To" displayPrevSearch="Y" size="10" value="" datepicker>
+						<input name="date_created2" id="date_created2" displayInPane="Created To" displayPrevSearch="Y" size="10" value="#date_created2#" datepicker>
 					</td>										
 				</tr>	
 				<tr>
@@ -167,7 +198,12 @@
   	  <table width="100%" class="searchButtonsTable">
 	  		<tr>
 	  			<td width="50%" align="left"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY" accesskey="N"></td>
-				<td width="50%" align="right"><input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button" accesskey="S"></td>
+				<td width="50%" align="right">
+					<cfif isDefined('startSearch')>
+					 <input type="hidden" name="doSearch" id="doSearch" value="true">  	
+					</cfif>
+					<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button" accesskey="S">
+				</td>
 	  		</tr>
 	  </table>
     </div>		

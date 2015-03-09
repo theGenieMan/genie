@@ -26,6 +26,7 @@
 						requestForUserName: 'dpaRequestForUserName',
 						requestForCollar: 'dpaRequestForCollar',
 						requestForForce: 'dpaRequestForForce',
+						requestForDepartment: 'dpaRequestForDepartment',
 						initialValue: ''
 			},
 			updateDestination:{
@@ -93,7 +94,8 @@
 					returnUserId: this.options.requestFor.requestForUserId,
 					returnFullName: this.options.requestFor.requestForUserName,			
 					returnCollarNo: this.options.requestFor.requestForCollar,
-					returnForce: this.options.requestFor.requestForForce,		
+					returnForce: this.options.requestFor.requestForForce,	
+					returnDepartment: this.options.requestFor.requestForDepartment,	
 					initialValue: this.element.find('#dpaRequestForSearch').attr('initialValue'),
 					helpMessage: 'Enter collar and press Tab or CTRL+M for you',
 					findButton:false,
@@ -355,8 +357,10 @@
 										var reasonText=thisDialog.find('#'+options.reasonText).val();
 										var reasonSelect=thisDialog.find('#'+options.reasonCodeSelect).val();										
 										var requestFor=thisDialog.find('#'+options.requestFor.requestForUserName).val();
+										var requestForUserId=thisDialog.find('#'+options.requestFor.requestForUserId).val();
 										var requestForCollar=thisDialog.find('#'+options.requestFor.requestForCollar).val();
 										var requestForForce=thisDialog.find('#'+options.requestFor.requestForForce).val();
+										var requestForDepartment=thisDialog.find('#'+options.requestFor.requestForDepartment).val();
 										var ethnicCode=thisDialog.find('#'+options.ethnicCodeSelect).val();
 										var urlToOpen=self.options.urlToOpen;
 										var howToOpen=self.options.howToOpen;
@@ -387,11 +391,13 @@
 												reasonCode: reasonCode,
 												reasonText: reasonText,												
 												requestFor: requestFor,
+												requestForUserId: requestForUserId,
 												requestForCollar: requestForCollar,
 												requestForForce: requestForForce,
+												requestForDepartment: requestForDepartment,
 												ethnicCode: ethnicCode,
 												urlToOpen: urlToOpen,
-												howToOpen: howToOpen,						
+												howToOpen: howToOpen						
 											});
 											
 											// clear the dpa down

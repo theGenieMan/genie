@@ -50,7 +50,7 @@ $(document).on('click','#showAllPhotos',
 				width: dWidth,
 				title: $('.nominalTitle').html()+' - Photos',
 				open: function(event, ui){
-
+					$('span.downloadPhoto').qtip();
 				},
 				close: function(event, ui){																	    										               
 					$(this).dialog('destroy');

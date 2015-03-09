@@ -128,30 +128,31 @@ $(document).on('click','.genieAddressLink',
 		var dHeight= $(window).height()-150;
 		
 		$('#onData').html('').hide()
-		$('#onLoadingDiv').show();
-		
-		// load the alias data into the hidden div used for the dialog
-		$('#addressDetailsDialog').load(onUrl,null,
-			function(){
-			 $('#onData').show()			 
-			 $('#onLoadingDiv').hide();				
-		});
 		
 		// open the dialog						 
-					$('#addressDetailsDialog').dialog({
-						modal: true,
-						position: 'center',
-						height: dHeight,
-						width: dWidth,
-						title: 'Genie - Address Details',
-						open: function(event, ui){
-
-						},
-						close: function(event, ui){																	    										               
-							$(this).dialog('destroy');																																									
-						},
-						buttons: [ { text: "Close", click: function() { $( this ).dialog( "close" ); } } ]
-					}); 
+		$('#addressDetailsDialog').dialog({
+			modal: true,
+			position: 'center',
+			height: dHeight,
+			width: dWidth,
+			title: 'Genie - Address Details',
+			open: function(event, ui){
+				
+				$('#onLoadingDiv').show();
+				
+				// load the alias data into the hidden div used for the dialog
+				$('#onData').load(onUrl,null,
+					function(){
+					 $('#onData').show()			 
+					 $('#onLoadingDiv').hide();				
+				});
+				
+			},
+			close: function(event, ui){																	    										               
+				$(this).dialog('destroy');																																									
+			},
+			buttons: [ { text: "Close", click: function() { $( this ).dialog( "close" ); } } ]
+		}); 
 		
 	});
 

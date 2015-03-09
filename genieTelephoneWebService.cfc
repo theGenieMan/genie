@@ -271,7 +271,7 @@
 			</cfif>
 			
 			<cfif Len(CASE_REF) GT 0>
-				<cfset sInfo&=iif(Len(sInfo) GT 0,de('<br>'),de(''))&"CASE: <a href='#CASE_REF#' custodyType='NSPIS' class='#variables.caseClass#'>#CASE_REF#</a>">
+				<cfset sInfo&=iif(Len(sInfo) GT 0,de('<br>'),de(''))&"CASE: <a href='#CASE_REF#' caseType='NSPIS' class='#variables.caseClass#'>#CASE_REF#</a>">
 			</cfif>
 			
 			<cfif Len(OIS_LOG) GT 0>

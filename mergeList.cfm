@@ -67,7 +67,7 @@ Revisions   :
 				dateFrom=$('#fromDate').val();
 				dateTo=$('#toDate').val();
 				actionByUser=$('#actionByUserId').val();				
-				requestByUser=$('#requestByUserId').attr('value');								
+				requestByUser=$('#requestByUserId').val();								
 				actioned=$('#mergeStatus').val();								
 				
 				$('#mergeLoadingDiv').show();
@@ -77,8 +77,7 @@ Revisions   :
 			}
 		)
 		
-		function getMergeList(mergeId, nominalRef, filterYear, dateFrom, dateTo, requestBy, actionBy, actioned){
-				
+		function getMergeList(mergeId, nominalRef, filterYear, dateFrom, dateTo, requestBy, actionBy, actioned){				
 				$.ajax({
 					 type: 'POST',
 					 url: '<cfoutput>#application.genieProxy#</cfoutput>?method=getMergeList&mergeId='+mergeId+'&nominalRef='+nominalRef+'&filterYear='+filterYear+'&dateFrom='+dateFrom+'&dateTo='+dateTo+'&requestBy='+requestBy+'&actionBy='+actionBy+'&actioned='+actioned,						 

@@ -20,6 +20,9 @@ Revisions   :
 --->
 
 <cfparam name="vrm" default="" />
+<cfparam name="redirector" default="N">
+<cfparam name="auditRequired" default="">
+<cfparam name="auditInfo" default="">
 	
 <html>	
 <head>
@@ -49,6 +52,10 @@ Revisions   :
 <body>
 	<div id="dpa" style="display:none;"></div>
 	<cfoutput>	
+	
+	<input type="hidden" name="redirector" id="redirector" value="#redirector#">
+	<input type="hidden" name="auditRequired" id="auditRequired" value="#auditRequired#">
+	<input type="hidden" name="auditInfo" id="auditInfo" value="#auditInfo#">	
 	
 	<cfinclude template="/actionSelectJS.cfm">
 	<cfset headerTitle="VEHICLE ENQUIRY">	

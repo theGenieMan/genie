@@ -103,7 +103,7 @@ Revisions   :
 			
 			$.ajax({
 					 type: 'POST',
-					 url: '/genieSessionWebService.cfc?method=updateUserSettings&font='+$('#font').val()+'&stylesheet='+$('#colourScheme').val()+'&peType='+$('#peType').val()+'&fontSize='+$('#myFontSize').val()+'&userId='+$('#userId').val()+'&userName='+$('#userName').val(),						 							  
+					 url: '/genieSessionWebService.cfc?method=updateUserSettings&font='+$('#font').val()+'&stylesheet='+$('#colourScheme').val()+'&peType='+$('#peType').val()+'&fontSize='+$('#myFontSize').val()+'&collapse='+$('#collapse').val()+'&userId='+$('#userId').val()+'&userName='+$('#userName').val(),						 							  
 					 cache: false,
 					 async: false,							 
 					 success: function(data, status){							
@@ -161,6 +161,17 @@ Revisions   :
 				</select>
 			</td>
 		</tr>
+		
+		<tr>
+			<td valign="top"><b>Collapse Sections On Search?</b></td>
+			<td >&nbsp;</td>
+		    <td colspan="3">
+				<select id="collapse" name="collapse">
+					<option value="Y" #iif(session.userSettings.collapse IS "Y",de('selected'),de(''))#>Yes</option>
+					<option value="N" #iif(session.userSettings.collapse IS "N",de('selected'),de(''))#>No</option>
+				</select>
+			</td>
+		</tr>		
 		
 		<tr>
 			<td valign="top"><b>Font</b></td>

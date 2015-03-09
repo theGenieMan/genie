@@ -69,6 +69,16 @@ function doIntelEnquiry(){
 	
 	initWestMerciaTab();
 	
+	// now all the searches have been sent and the right tabs initialised 
+    // show the results container
+    $('#resultsContainer').show()
+	
+    // find out if the user wants the sections collapse, if they do then collapse them
+    // otherwise scroll to the results section   
+    if ($('#collapseSearch').val() == 'Y') {
+   	  collapseAllSearchPanes('searchPaneHeader');
+    }	
+	
 	$.ajax({
 		 type: 'POST',
 		 url: '/genieIntelWebService.cfc?method=doIntelEnquiry',						 
@@ -122,6 +132,13 @@ function doIntelEnquiry(){
 				$('#wmpResultsButtons input[type=button]').removeAttr('disabled');				
 			}
 			
+		   // find out if the user wants the sections collapse, if they do then collapse them
+		   // otherwise scroll to the results section   
+			 if ($('#collapseSearch').val() == 'N') {
+			   	 var scrollToPos=parseInt($('#resultsContainer').offset().top)-50;	 
+	   	 		 window.scrollTo(0,scrollToPos)			   			
+			 }				
+			
 			// add this search to the previous search list
 			addPreviousSearch()			
 				  
@@ -130,9 +147,6 @@ function doIntelEnquiry(){
 		 	alert('An error performing the intelligence enquiry: '+textStatus+', '+errorThrown)			
 		 }*/
 		 });		
-
-	$('#resultsContainer').show();
-	collapseAllSearchPanes('searchPaneHeader');
 	
     // set the last enquiry timestamp, so we can work out when to remove the button
     $('#lastEnquiryTimestamp').val(getTimestamp());

@@ -1474,7 +1474,7 @@ font-size:90%;
 }
 
 button#personEnquiryButton{
-    background: #FFFFCC;
+	background: #FFFFCC url('/images/personEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1483,8 +1483,8 @@ button#personEnquiryButton{
 	width:250px
 }
 
-button#addressEnquiryButton{
-    background: #FFFFCC;
+button#addressEnquiryButton{    
+	background: #FFFFCC url('/images/addressEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1494,7 +1494,7 @@ button#addressEnquiryButton{
 }
 
 button#custodyEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/custodyEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1504,7 +1504,7 @@ button#custodyEnquiryButton{
 }
 
 button#custodyWhiteboardButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/custodyWhiteboardIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1514,7 +1514,7 @@ button#custodyWhiteboardButton{
 }
 
 button#telephoneEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/telephoneEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1523,8 +1523,8 @@ button#telephoneEnquiryButton{
 	width:250px
 }
 
-button#vehicleEnquiryButton{
-    background: #FFFFCC;
+button#vehicleEnquiryButton{    
+	background: #FFFFCC url('/images/vehicleEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1534,7 +1534,7 @@ button#vehicleEnquiryButton{
 }
 
 button#procDecEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/processDecisionIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1544,7 +1544,7 @@ button#procDecEnquiryButton{
 }
 
 button#offenceEnquiryButton{
-    background: #FFFFCC;
+	background: #FFFFCC url('/images/offenceEnquiryIcon.png') no-repeat 98% 50%;    
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1554,7 +1554,7 @@ button#offenceEnquiryButton{
 }
 
 button#intelEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/intelEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1564,7 +1564,7 @@ button#intelEnquiryButton{
 }
 
 button#intelFreeTextButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/intelFreeTextIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1574,7 +1574,7 @@ button#intelFreeTextButton{
 }
 
 button#crimeBrowserButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/crimeBrowserIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1584,7 +1584,7 @@ button#crimeBrowserButton{
 }
 
 button#firearmsEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/firearmsEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1594,7 +1594,7 @@ button#firearmsEnquiryButton{
 }
 
 button#propertyEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/propertyEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1604,7 +1604,7 @@ button#propertyEnquiryButton{
 }
 
 button#bailDiaryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/bailDiaryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1614,7 +1614,7 @@ button#bailDiaryButton{
 }
 
 button#warningEnquiryButton{
-    background: #FFFFCC;
+    background: #FFFFCC url('/images/warningEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #000000;
     text-align:left;
     height: 30px;
@@ -1663,6 +1663,16 @@ button#userNotesButton{
 	width:250px
 }
 
+button#testEnquiryButton{
+    background: #FFFFCC;
+	border:1px solid #000000;
+    text-align:center;
+    height: 30px;
+	font-size:120%; 
+	font-weight:bold; 
+	width:250px
+}
+
 button{
 	cursor:hand;
 }
@@ -1672,7 +1682,7 @@ button{
 }
 
 pre.crime {
-     /* white-space: pre-line;       CSS 3 */
+    white-space: pre-line;      /* CSS 3 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
@@ -1686,10 +1696,11 @@ pre.crime {
 
 .thSorted{
 	color:#000000 !important;
+	font-style:italic;
 }
 
 .thSortable{
-	color:#000000 !important;
+	color:#FFFFFF !important;
 	cursor:hand;
 	text-decoration:underline;
 }

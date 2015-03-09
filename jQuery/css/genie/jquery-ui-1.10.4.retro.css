@@ -1356,6 +1356,10 @@ font-size:90%;
 	font-weight:bold;
 }
 
+.genieLinkVisited{
+	color:#800080 !important;
+}
+
 .firearmsNominal{
 	cursor:hand;
 	color:#000080 !important;
@@ -1420,154 +1424,164 @@ font-size:90%;
 	font-size:90%;
 }
 
-button#personEnquiryButton{
-    background: #DEDDDE no-repeat 98% 50%;
+button#personEnquiryButton{    
+	background: #DEDDDE url('/images/personEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
-button#addressEnquiryButton{
-    background: #DEDDDE no-repeat 98% 50%;
+button#addressEnquiryButton{    
+	background: #DEDDDE url('/images/addressEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
+}
+
+button#addressEnquiryButton{    
+	background: #DEDDDE url('/images/addressEnquiryIcon.png') no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
 }
 
 button#custodyEnquiryButton{
-    background: #DEDDDE no-repeat 98% 50%;
+    background: #DEDDDE url('/images/custodyEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
-	font-size:120%; 
+	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#custodyWhiteboardButton{
-    background: #DEDDDE no-repeat 98% 50%;
+    background: #DEDDDE url('/images/custodyWhiteboardIcon.png') no-repeat 98% 50%;
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
-	font-size:120%; 
+	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#telephoneEnquiryButton{
-    background: #DEDDDE no-repeat 98% 50%;
-	border:1px solid #B8B8B8;
-    text-align:left;
-    height: 30px;
-	font-size:120%; 
-	font-weight:bold; 
-	width:225px
-}
-
-button#vehicleEnquiryButton{
-    background: #DEDDDE no-repeat 98% 50%;
+    background: #DEDDDE url('/images/telephoneEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
 	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
+}
+
+button#vehicleEnquiryButton{    
+	background: #DEDDDE url('/images/vehicleEnquiryIcon.png') no-repeat 98% 50%;
+	border:1px solid #B8B8B8;
+    text-align:left;
+    height: 30px;
+	font-size:130%; 
+	font-weight:bold; 
+	width:250px
 }
 
 button#procDecEnquiryButton{
-    background: #DEDDDE no-repeat 98% 50%;
+    background: #DEDDDE url('/images/processDecisionIcon.png') no-repeat 98% 50%;
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
 	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#offenceEnquiryButton{
-    background: #DEDDDE no-repeat 98% 50%;
+	background: #DEDDDE url('/images/offenceEnquiryIcon.png') no-repeat 98% 50%;    
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
-	font-size:120%; 
+	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#intelEnquiryButton{
-    background: #DEDDDE no-repeat 98% 50%;
+    background: #DEDDDE url('/images/intelEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
-	font-size:120%; 
+	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#intelFreeTextButton{
-    background: #DEDDDE no-repeat 98% 50%;
+    background: #DEDDDE url('/images/intelFreeTextIcon.png') no-repeat 98% 50%;
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
-	font-size:120%; 
+	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#crimeBrowserButton{
-    background: #DEDDDE no-repeat 98% 50%;
+    background: #DEDDDE url('/images/crimeBrowserIcon.png') no-repeat 98% 50%;
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
-	font-size:120%; 
+	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#firearmsEnquiryButton{
-    background: #DEDDDE no-repeat 98% 50%;
+    background: #DEDDDE url('/images/firearmsEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
-	font-size:120%; 
+	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#propertyEnquiryButton{
-    background: #DEDDDE no-repeat 98% 50%;
+    background: #DEDDDE url('/images/propertyEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
-	font-size:120%; 
+	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#bailDiaryButton{
-    background: #DEDDDE no-repeat 98% 50%;
+    background: #DEDDDE url('/images/bailDiaryIcon.png') no-repeat 98% 50%;
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
-	font-size:120%; 
+	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#warningEnquiryButton{
-    background: #DEDDDE no-repeat 98% 50%;
+    background: #DEDDDE url('/images/warningEnquiryIcon.png') no-repeat 98% 50%;
 	border:1px solid #B8B8B8;
     text-align:left;
     height: 30px;
-	font-size:120%; 
+	font-size:130%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#bailConditionsButton{
@@ -1577,7 +1591,7 @@ button#bailConditionsButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#recentSearchesButton{
@@ -1587,7 +1601,7 @@ button#recentSearchesButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#namexUpdateButton{
@@ -1597,7 +1611,7 @@ button#namexUpdateButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#userNotesButton{
@@ -1607,7 +1621,7 @@ button#userNotesButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button#testEnquiryButton{
@@ -1617,7 +1631,7 @@ button#testEnquiryButton{
     height: 30px;
 	font-size:120%; 
 	font-weight:bold; 
-	width:225px
+	width:250px
 }
 
 button{
@@ -1629,7 +1643,7 @@ button{
 }
 
 pre.crime {
-   /*  white-space: pre-line;       CSS 3 */
+    white-space: pre-line;       /* CSS 3 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */

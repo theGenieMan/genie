@@ -114,9 +114,13 @@ Revisions        :
 			<input type="hidden" id="genieCurrentUserId" value="#iif(session.user.getForceCode() IS '22',de(session.user.getUSERID()),de(session.user.getOTHERUSERID()))#">
 			<input type="hidden" id="genieCurrentUserIdWMP" value="#session.user.getUSERID()#">
 			<input type="hidden" id="genieCurrentUserName" value="#session.user.getFullName()#">
-			<input type="hidden" id="genieCurrentUserCollar" value="#session.user.getCollar()#">	
+			<input type="hidden" id="genieCurrentUserCollar" value="#session.user.getCollar()#">
+			<input type="hidden" id="genieCurrentUserForce" value="#session.user.getForceCode()#">
+			<input type="hidden" id="genieCurrentUserDept" value="#session.user.getDepartment()#">	
+			<input type="hidden" id="genieCurrentUserSAL" value="#session.LoggedInUserLogAccess#">	
 			<input type="hidden" id="dpaClear" value="#session.dpaClear#">	
 			<input type="hidden" id="dpaTimeout" value="#session.dpaTimeout#">	
+			<input type="hidden" id="collapseSearch" value="#session.userSettings.collapse#">	
 			<input type="hidden" id="genieUserMyFontSize" value="#session.userSettings.fontSize#">						
 		</td>
 	</tr>
@@ -136,7 +140,7 @@ Revisions        :
 		<tr>
 			<th>DPA Clear / Timeout</th>
 			<td>#session.dpaClear# / #session.dpaTimeout#</td>
-		</tr>
+		</tr>				
 		<tr>
 			<th>West Mids?</th>
 			<td>#session.isWmidsUser#</td>
@@ -166,7 +170,8 @@ Revisions        :
 			<td>Font size: #session.userSettings.fontSize#<br>
 			    Font : #session.userSettings.font#<br>
 				Stylesheet : #session.userSettings.stylesheet#<br>
-				PE Search Type : #session.userSettings.peType#
+				PE Search Type : #session.userSettings.peType#<br>
+				Collapse: #session.userSettings.collapse#
 			</td>
 	</table>
   <cfelse>

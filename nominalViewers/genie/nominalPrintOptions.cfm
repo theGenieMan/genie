@@ -72,34 +72,76 @@ Revisions   :
    <p>Please select the details you want by checking the boxes below. The created document will open in a new window.</p> 
    
 	 <div>
-        <input type="Checkbox" class="printOption" name="chkPersonal" value="Personal" checked> Personal Details | 		
+        | <input type="Checkbox" class="printOption" name="chkPersonal" value="Personal" checked> Personal Details |
+		<cfif tabs.Roles> 		
 		<input type="Checkbox" class="printOption" name="chkOffences" value="Roles" #Iif(tabs.Roles,de(""),de("disabled"))#> Roles |
+		</cfif>
+		<cfif tabs.Addresses>
 		<input type="Checkbox" class="printOption" name="chkAddresses" value="Address" #Iif(tabs.Addresses,de(""),de("disabled"))#> Address |
+		</cfif>
+		<cfif tabs.Bails>
 		<input type="Checkbox" class="printOption" name="chkBails" value="Bails" #Iif(tabs.Bails,de(""),de("disabled"))#> Bails |
+		</cfif>
+		<cfif tabs.ProcDec>
 		<input type="Checkbox" class="printOption" name="chkProcDec" value="ProcDec" #Iif(tabs.ProcDec,de(""),de("disabled"))#>  Process Decisions |
+		</cfif>
+		<cfif tabs.Vehicles>
 		<input type="Checkbox" class="printOption" name="chkVehicles" value="Vehicle" #Iif(tabs.Vehicles,de(""),de("disabled"))#> Vehicles |
-		<input type="Checkbox" class="printOption" name="chkPhone" value="Phone" #Iif(tabs.TelNos,de(""),de("disabled"))#> Tel Nos		
+		</cfif>
+		<cfif tabs.TelNos>
+		<input type="Checkbox" class="printOption" name="chkPhone" value="Phone" #Iif(tabs.TelNos,de(""),de("disabled"))#> Tel Nos |
+		</cfif>		
  	 </div>
 	 
-	 <div>
-   		<input type="Checkbox" class="printOption" name="chkDocs" value="Docs" #Iif(tabs.Docs,de(""),de("disabled"))#> Documents | 
-   		<input type="Checkbox" class="printOption" name="chkAlias" value="Alias" #Iif(tabs.Alias,de(""),de("disabled"))#> Aliases | 
-   		<input type="Checkbox" class="printOption" name="chkAssoc" value="Assoc" #Iif(tabs.Assoc,de(""),de("disabled"))#> Associates | 
-  		<input type="Checkbox" class="printOption" name="chkCustodies" value="Custody" #Iif(tabs.Custodies,de(""),de("disabled"))#> Custodies | 
-  		<input type="Checkbox" class="printOption" name="chkFeatures" value="Feature" #Iif(tabs.Feat,de(""),de("disabled"))#> Features | 
-  		<input type="Checkbox" class="printOption" name="chkWarrants" value="Warrant" #Iif(tabs.Warrants,de(""),de("disabled"))#> Warrants | 
-  		<input type="Checkbox" class="printOption" name="chkOrgs" value="Org" #Iif(tabs.Orgs is true,de(""),de("disabled"))#> Orgs | 
-  		<input type="Checkbox" class="printOption" name="chkFamProt" value="FamProt" #Iif(tabs.FPU,de(""),de("disabled"))#> Family Protection  					
+	 <div>| 
+	 	<cfif tabs.Docs>
+   		<input type="Checkbox" class="printOption" name="chkDocs" value="Docs" #Iif(tabs.Docs,de(""),de("disabled"))#> Documents |
+		</cfif>
+		<cfif tabs.Alias> 
+   		<input type="Checkbox" class="printOption" name="chkAlias" value="Alias" #Iif(tabs.Alias,de(""),de("disabled"))#> Aliases |
+		</cfif>
+		<cfif tabs.Assoc> 
+   		<input type="Checkbox" class="printOption" name="chkAssoc" value="Assoc" #Iif(tabs.Assoc,de(""),de("disabled"))#> Associates |
+		</cfif>
+		<cfif tabs.Custodies> 
+  		<input type="Checkbox" class="printOption" name="chkCustodies" value="Custody" #Iif(tabs.Custodies,de(""),de("disabled"))#> Custodies |
+		</cfif>
+		<cfif tabs.Feat> 
+  		<input type="Checkbox" class="printOption" name="chkFeatures" value="Feature" #Iif(tabs.Feat,de(""),de("disabled"))#> Features |
+		</cfif>
+		<cfif tabs.Warrants> 
+  		<input type="Checkbox" class="printOption" name="chkWarrants" value="Warrant" #Iif(tabs.Warrants,de(""),de("disabled"))#> Warrants |
+		</cfif>
+		<cfif tabs.Orgs> 
+  		<input type="Checkbox" class="printOption" name="chkOrgs" value="Org" #Iif(tabs.Orgs is true,de(""),de("disabled"))#> Orgs |
+		</cfif>
+		<cfif tabs.FPU> 
+  		<input type="Checkbox" class="printOption" name="chkFamProt" value="FamProt" #Iif(tabs.FPU,de(""),de("disabled"))#> Family Protection |
+		</cfif>  					
 	 </div>
         
-	 <div>				
-  		<input type="Checkbox" class="printOption" name="chkIRAQS" value="Intel" #Iif(tabs.Iraqs,de(""),de("disabled"))#> IRAQS | 
-		<input type="Checkbox" class="printOption" name="chkMisper" value="Misper" #Iif(tabs.Misper,de(""),de("disabled"))#> Misper | 
-		<input type="Checkbox" class="printOption" name="chkStep" value="Step" #Iif(tabs.Step,de(""),de("disabled"))#> Packages | 
-		<input type="Checkbox" class="printOption" name="chkOccs" value="Occ" #Iif(tabs.Occ,de(""),de("disabled"))#> Occupations | 
-		<input type="Checkbox" class="printOption" name="chkWarn" value="Warn" #Iif(tabs.Warn,de(""),de("disabled"))#> Warnings | 
-		<input type="Checkbox" class="printOption" name="chkStopSearch" value="StopSearch" #Iif(tabs.SS,de(""),de("disabled"))#> Stop Search | 	
-		<input type="Checkbox" class="printOption" name="chkRMP" value="RMP" #Iif(tabs.RMP,de(""),de("disabled"))#> Risk Man Plans			 					 			        
+	 <div>| 				
+	    <cfif tabs.Iraqs>
+  		<input type="Checkbox" class="printOption" name="chkIRAQS" value="Intel" #Iif(tabs.Iraqs,de(""),de("disabled"))#> IRAQS |
+		</cfif>
+		<cfif tabs.Misper> 
+		<input type="Checkbox" class="printOption" name="chkMisper" value="Misper" #Iif(tabs.Misper,de(""),de("disabled"))#> Misper |
+		</cfif>
+		<cfif tabs.Step> 
+		<input type="Checkbox" class="printOption" name="chkStep" value="Step" #Iif(tabs.Step,de(""),de("disabled"))#> Packages |
+		</cfif>
+		<cfif tabs.Occ> 
+		<input type="Checkbox" class="printOption" name="chkOccs" value="Occ" #Iif(tabs.Occ,de(""),de("disabled"))#> Occupations |
+		</cfif>
+		<cfif tabs.Warn> 
+		<input type="Checkbox" class="printOption" name="chkWarn" value="Warn" #Iif(tabs.Warn,de(""),de("disabled"))#> Warnings |
+		</cfif>
+		<cfif tabs.SS> 
+		<input type="Checkbox" class="printOption" name="chkStopSearch" value="StopSearch" #Iif(tabs.SS,de(""),de("disabled"))#> Stop Search |
+		</cfif>
+		<cfif tabs.RMP> 	
+		<input type="Checkbox" class="printOption" name="chkRMP" value="RMP" #Iif(tabs.RMP,de(""),de("disabled"))#> Risk Man Plans |
+		</cfif>			 					 			        
 	 </div>   
 	 
 	 <div align="center">

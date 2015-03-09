@@ -1,4 +1,30 @@
 ﻿<!DOCTYPE html>	
+<!---
+
+Module      : /enquiryScreens/bailDiary/enquiry.cfm
+
+App         : GENIE
+
+Purpose     : Displays the bail diary screen
+
+Requires    : 
+
+Author      : Nick Blackham
+
+Date        : 18/11/2014
+
+Version     : 
+
+Revisions   : 
+
+--->
+
+<cfparam name="redirector" default="N">
+<cfparam name="auditRequired" default="">
+<cfparam name="auditInfo" default="">	
+<cfparam name="custSuite" default="">
+<cfparam name="diaryDate" default="">	
+
 <html>	
 <head>
 	<title>GENIE - Bail Diary</title>
@@ -31,6 +57,10 @@
 <body>
 	<div id="dpa" style="display:none;"></div>
 	<cfoutput>	
+	
+	<input type="hidden" name="redirector" id="redirector" value="#redirector#">
+	<input type="hidden" name="auditRequired" id="auditRequired" value="#auditRequired#">
+	<input type="hidden" name="auditInfo" id="auditInfo" value="#auditInfo#">	
 		
 	<cfset headerTitle="BAIL DIARY">	
 	<cfinclude template="/header.cfm">
@@ -79,7 +109,7 @@
 					<td>
 						<select name="custSuite" id="custSuite" class="mandatory" displayInPane="Custody Suite" displayPrevSearch="Y" initialFocus="true" multiple size="7">														
 							<cfloop query="application.bailCustodySuites">
-								<option value="#CUSTODY_SUITE#">#CUSTODY_SUITE#</option>																						
+								<option value="#CUSTODY_SUITE#" #iif(CUSTODY_SUITE IS custSuite,DE('selected'),de(''))#>#CUSTODY_SUITE#</option>																						
 							</cfloop>
 						</select>					
 						<br>Hold CTRL key down and click to select multiple custody suites (Max 4) 	
@@ -100,7 +130,12 @@
   	  <table width="100%" class="searchButtonsTable">
 	  		<tr>
 	  			<td width="50%" align="left"><input type="button" class="newEnquiryButton ui-button" value="NEW ENQUIRY" accesskey="N"></td>
-				<td width="50%" align="right"><input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button" accesskey="S"></td>
+				<td width="50%" align="right">
+					<cfif isDefined('startSearch')>
+					 <input type="hidden" name="doSearch" id="doSearch" value="true">  	
+					</cfif>
+					<input type="submit" name="startSearch" id="startSearch" value="START SEARCH" class="ui-button" accesskey="S">
+				</td>
 	  		</tr>
 	  </table>
     </div>		

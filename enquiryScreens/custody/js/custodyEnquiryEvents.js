@@ -113,3 +113,24 @@ $(document).on('click','.genieCustodySummary',
 
 	}
 );
+
+// clicked on the station list link
+$(document).on('click','#stationList',
+	function(){
+		// open the dialog						 
+		$('#stationListDialog').dialog({
+			modal: true,
+			position: 'center',
+			height: 450,
+			width: 600,
+			title: 'Genie - Custody Stations',
+			open: function(event, ui){
+				
+			},
+			close: function(event, ui){																	    										               
+				$(this).dialog('destroy');																																									
+			},
+			buttons: [ { text: "Close", click: function() { $( this ).dialog( "close" ); } } ]
+		}); 		
+	}
+);

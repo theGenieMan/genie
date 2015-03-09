@@ -30,6 +30,7 @@ ALIASES
 		    <th>&nbsp;INC?&nbsp;</th>
 			</cfif>					 	
 		    <th width="8%">TYPE</th>
+			<th width="2%">NT</th>
 			<th width="20%">NOMINAL REF</th>
 			<th width="25%">NAME</th>				
 			<th>DOB</th>						
@@ -42,8 +43,9 @@ ALIASES
 		<tr class="row_colour#i mod 2#">
 			  <cfif isDefined('includePrintChecks')>
 			  <td><input type="checkbox" name="chkIncludeAlias" id="chkIncludeAlias" value="#REL_TYPE#|#NOMINAL_REF#|#Replace(NAME,",","~","ALL")#|#DOB#"></td>
-			  </cfif>					
+			  </cfif>					  			
 			  <td>#REL_TYPE#</td>
+			  <td>#NAME_TYPE#</td>
 			  <td>#NOMINAL_REF#</td>
 			  <td>#NAME#</td>
 			  <td>#DOB#</td>

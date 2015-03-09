@@ -81,7 +81,7 @@ $(document).ready(function() {
 		}		
 		else{
 		// not an auto search, show the DPA
-			$('#dpa').dpa('show')
+			$('#dpa').dpa('show',true)
 		}			
 	
 });
