@@ -37,7 +37,7 @@
 <cfelseif SERVER_NAME IS "SVR21007">			
 	<cfset genieServer="http://svr21007">
 	<cfset oisBrowser="http://ois.intranet.wmcpolice/browser/">
-	<cfset intranetServer="http://development.intranet.wmcpolice">								
+	<cfset intranetServer="http://svr21007">								
 </cfif>
 
 <cfif not isDefined('genieVersion')>
