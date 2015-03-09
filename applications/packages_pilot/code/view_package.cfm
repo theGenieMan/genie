@@ -1,3 +1,4 @@
+<!doctype html>
 <!---
 
 Module      : view_package.cfm
