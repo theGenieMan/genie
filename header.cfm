@@ -101,6 +101,9 @@ Revisions        :
 		 </cfif>			
 		</td>
 		<td width="65%" align="right">
+			<cfif isDefined('session.trainingPWD')>
+			<b>Train Pwd: #session.trainingPWD#</b>, 	
+			</cfif>
 			<b><span class="showSession">#Session.LoggedInUser#</span></b>. <strong>Log Access:</strong> #Session.LoggedInUserLogAccess#.
 			<!--- 
 			<a href="/mySettings.cfm?#session.urlToken#" class="mySettings">My Settings</a>
