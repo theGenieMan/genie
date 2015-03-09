@@ -1,5 +1,4 @@
 <cfcomponent>
-
 <cfset confData=initConfigTimeouts()>
 
 <cfset This.name = "GENIE">
@@ -607,7 +606,7 @@
       <cfset confReturn.applicationTimespan="#createtimespan(0,2,0,0)#">
 	  <cfset confReturn.assetsDir="d:\genie_assets">  	  
    <cfelseif SERVER_NAME IS "genietrain31.intranet.wmcpolice" OR SERVER_NAME IS "SVR21007">
-	  <cfset confReturnEnv="TRAIN_TEST">
+	  <cfset confReturn.Env="TRAIN_TEST">
 	  <cfset confReturn.sessionTimespan="#createtimespan(0,0,5,0)#">
       <cfset confReturn.applicationTimespan="#createtimespan(0,0,5,0)#">
 	  <cfset confReturn.assetsDir="d:\genie_assets">  
