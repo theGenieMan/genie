@@ -10,7 +10,10 @@
   <cfset This.applicationtimeout="#createtimespan(0,0,0,10)#">
 <cfelseif SERVER_NAME IS "webtest.intranet.wmcpolice">
   <cfset This.Sessiontimeout="#createtimespan(0,2,0,0)#">
-  <cfset This.applicationtimeout="#createtimespan(0,2,0,0)#">  
+  <cfset This.applicationtimeout="#createtimespan(0,2,0,0)#">
+<cfelse>
+  <cfset This.Sessiontimeout="#createtimespan(0,0,30,0)#">
+  <cfset This.applicationtimeout="#createtimespan(0,0,30,0)#">	  
 </cfif>
 
 
@@ -24,7 +27,7 @@
       <cfset Application.ENV="DEV">
    <cfelseif SERVER_NAME IS "webtest.intranet.wmcpolice">
       <cfset Application.ENV="TEST">   
-   <cfelseif SERVER_NAME IS "genietrain.intranet.wmcpolice">
+   <cfelseif SERVER_NAME IS "genietrain.intranet.wmcpolice" OR SERVER_NAME IS "SVR21007">
       <cfset Application.ENV="GENIE_TRAIN">   
 	</cfif>
     
