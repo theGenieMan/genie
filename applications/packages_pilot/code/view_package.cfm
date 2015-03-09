@@ -23,10 +23,10 @@ Revisions   :
 	<title><cfoutput>#application.ApplicationName#</cfoutput></title>
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/accessibility/home/stylesheet.cfm">	
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="step.css">
-	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/ui/css/smoothness/jquery-ui-1.8.23.custom.css">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/jquery-ui-1.10.4.retro.css">	
 	
-	<script type="text/javascript" src="/jQuery/jQuery.js"></script>
-	<script type="text/javascript" src="/jQuery/ui/js/jquery-ui-1.8.23.custom.min.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
 	<script type="text/javascript">         
 		
 		$(document).ready(function() {  		               
