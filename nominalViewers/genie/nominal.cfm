@@ -352,7 +352,7 @@ Revisions   :
 					<th valign="top" width="15%">PNC ID</th>
 					<td valign="top" class="row_colour0 standOut" width="18%"><b>#IIf(Len(nominal.getPNCID_NO()) IS 0,DE("&nbsp;"),DE(nominal.getPNCID_NO()))#</b></td>
 					<th valign="top" width="15%">CRO</th>
-					<td valign="top" class="row_colour0" width="18%"><b>#IIf(Len(nominal.getCRO()) IS 0,DE("&nbsp;"),DE(nominal.getCRO()))#</b></td>
+					<td valign="top" class="row_colour0 standOut" width="18%"><b>#IIf(Len(nominal.getCRO()) IS 0,DE("&nbsp;"),DE(nominal.getCRO()))#</b></td>
 				</tr>
 				<tr>
 					<th valign="top">DOB</th>
