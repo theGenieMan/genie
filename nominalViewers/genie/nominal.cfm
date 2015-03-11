@@ -140,6 +140,190 @@ Revisions   :
 <cfif nominal.getDECEASED() IS "Y">**** DECEASED **** - </cfif>#nominal.getFULL_NAME()# #IIf(Len(nominal.getDATE_OF_BIRTH_TEXT()) IS 0,DE("&nbsp;"),DE(' - '&nominal.getDATE_OF_BIRTH_TEXT()))# (#nominal.getNOMINAL_REF()#)<cfif nominal.getDECEASED() IS "Y"> - **** DECEASED ****</cfif>
 </div>
 
+<!--- show all required information boxes --->
+<div id="infoBoxParent">
+	    <!--- deceased marker --->
+		<cfif nominal.getDECEASED() IS "Y">						
+			 <div class="redWarningBox">	
+			      **** DECEASED ****<br>
+                  #IIf(Len(nominal.getDATE_OF_DEATH_TEXT()) IS 0,DE("&nbsp;"),DE(nominal.getDATE_OF_DEATH_TEXT()))#
+                  #IIf(nominal.getDOD_ESTIMATE_FLAG() IS 'Y',DE("(Estimated)"),DE("&nbsp;"))#	                          						  
+             </div>
+        </cfif>    						
+	    <!--- alias name types --->
+		<cfif nominal.getName_Type() IS NOT "P">				    
+			 <div class="redWarningBox">						  						 		
+			  <cfswitch expression="#nominal.getName_Type()#">
+			   <cfcase value="A">
+				  ALIAS RECORD
+			   </cfcase>
+			   <cfcase value="B">
+				  ALIAS DATE OF BIRTH RECORD
+			   </cfcase>
+			   <cfcase value="C">
+				  ALIAS THIRD CHRISTIAN NAME RECORD
+			   </cfcase>
+			   <cfcase value="T">
+				  TEMPORARY RECORD
+			   </cfcase>
+			   <cfcase value="F">
+				  ALIAS FORMER NAME RECORD 
+			   </cfcase>	
+			   <cfcase value="W">
+				  ALIAS WEDDED NAME RECORD
+			   </cfcase>						   					   						   						   						   
+			  </cfswitch>						   
+			 </div> 
+	    </cfif>
+	    <!--- prisoner release --->		
+		<cfif Len(release.getPNC_ID()) GT 0>						
+			<div class="redWarningBox">						  	
+				 Prisoner @ #release.getESTABLISHMENT()#<br>						 
+				 Release Date: #DateFormat(release.getDIARY_DATE(),"DD/MM/YYYY")#						   
+			</div>
+		</cfif>
+		<!--- target marker --->			
+		<cfif Len(target.getTARGET_REF()) GT 0>
+			<div class="redWarningBox">
+			 #target.getReason()#
+			</div>						
+		</cfif>
+		<!--- persistent young offender addition --->
+		<cfif pyo>					
+			<div class="redWarningBox">
+			 DETER YOUNG OFFENDER<br>
+			 <a href="/help/DYO_FLOWCHART.doc" target="_blank">Click For Guidance</a>
+			</div>												
+		</cfif>
+		<cfif Len(currentCustody.getCustody_Ref()) GT 0>						
+			<div class="redWarningBox">
+			   <cfif currentCustody.getSTATUS() IS "C">
+                 IN CUSTODY @ #currentCustody.getSTATION()#<Br>#currentCustody.getCUSTODY_REF()#
+               <cfelse>
+                 CURRENTLY IN CUSTODY<Br>IN TRANSFER
+                </cfif>
+			</div>						
+		</cfif>		
+		<cfif rmp.current>					
+			<div class="redWarningBox">							  
+				CURRENT RMP <br> #rmp.rmp.getRMP_TYPE()#                     
+			</div>						
+		</cfif>												
+		<cfif nominal.getSTEP_FLAG() IS "Y">						
+			<div class="redWarningBox">
+			 STEP PACKAGE(S)                         
+			</div>						
+		</cfif>	
+        <!--- Addition of CHILD PROTECTION Marker RFC 8673 --->
+        <cfif nominal.getCHILD_CARE_PLAN() IS "Y">
+         
+           <cfset ccpType='Archived'>
+
+           <cfif Len(nominal.getDATE_FINISHED()) IS 0>
+               <cfset ccpType='Live'>
+           <cfelse>
+               <cfif Len(nominal.getDATE_STARTED()) GT 0>
+                   <cfif dateDiff("d",nominal.getDATE_STARTED(),now()) GTE 0 AND dateDiff("d",now(),nominal.getDATE_FINISHED()) GTE 0>
+                     <cfset ccpType='Live'>
+                   </cfif>
+               </cfif>
+           </cfif>
+
+            <div class="infoBoxChild #IIf(ccpType IS "Live",DE("redWarningBox"),DE("greenWarningBox"))#">
+                CHILD PROTECTION<br>CARE PLAN<br>
+                #nominal.getDATE_STARTED_TEXT()# #IIF(Len(nominal.getDATE_FINISHED_TEXT()) GT 0,DE(' - '&nominal.getDATE_FINISHED_TEXT()),DE(''))#                               
+            </div>
+           
+        </cfif>
+        
+        <!--- iom info boxes --->    
+		<cfif iom>					
+		<div class="warningBoxIOM#iomLevel#">
+          I O M  - 
+		  <cfswitch expression="#iomLevel#">
+		  	  <cfcase value="1">
+			  RED
+			  </cfcase>
+			  <cfcase value="2">
+			  AMBER
+			  </cfcase>
+			  <cfcase value="3">
+			  GREEN
+			  </cfcase>
+			  <cfcase value="4">
+			  BLACK
+			  </cfcase>
+		  </cfswitch>
+          <br>(<a href="/help/IOM_guidance.doc" target="_blank">Click Here For Guidance</a>)
+		</div>									
+		</cfif>        					
+
+		<!--- threat to life RMP --->
+		<cfif nominal.getTTL_FLAG() IS "Y">
+		<div class="redWarningBox">
+			 SUBJECT OF RISK MAN PLAN<br>
+			 *** CONTACT FDI IF POLICE CONTACT ***
+			 <cfif isDefined('session.isFDI')>
+			 	<cfif session.isFDI>
+				 <br><a href="#application.ttlLink#&ref=#nominal.getNOMINAL_REF()#" target="_blank">Click For More Information</a>
+				</cfif>
+			 </cfif>
+		</div>
+		</cfif>
+		
+		<cfif Len(onWarrant.getWarrant_Ref()) GT 0>
+		  <div class="redWarningBox">
+			 CURRENTLY WANTED<br>ON WARRANT
+		  </div>						
+		</cfif>
+					
+		<cfif Len(onBail.getBAIL_REF()) GT 0>
+		<div class="redWarningBox">
+		  CURRENTLY ON BAIL <cfif ArrayLen(onBail.getBailConditions()) GT 0><br>CONDITIONS APPLY</cfif>
+		</div>
+		</cfif>						
+		
+		<cfif ppo>
+		<div class="redWarningBox">
+           PRIORITY &amp; PROLIFIC OFFENDER (PPO)
+           <br>(<a href="/help/generic_PPO_guidance.pdf" target="_blank">Click Here For Guidance</a>)
+		</div>			
+		</cfif>
+        
+        <cfif nominal.getTACAD_FLAG() IS "Y">
+		<div class="redWarningBox">
+			   SUBJECT OF TACTICAL ADVICE<br>
+			   <cfif session.loggedInUserLogAccess LTE 20 or session.isFDI>
+               <a href="#Application.TACAD_Link##nominalRef#" target="_blank">Click Here For More Information</a>
+               <cfelse>
+			   *** CONTACT FDI IF POLICE CONTACT ***
+			   </cfif>
+		</div>						
+        </cfif>
+        
+        <cfif nominal.getCOMP_STATUS() IS "M" OR nominal.getCOMP_STATUS() IS "I">
+		<div class="blueWarningBox">					 
+			CURRENTLY LISTED AS<Br>A MISSING PERSON					  
+		</div>
+		</cfif>
+		            
+        <cfif Len(nominal.getCOLLECTOR_TXT()) GT 0>
+		<div class="redWarningBox">
+			ASB - Div: #nominal.getCOLLECTOR_DIV()#<br>
+            #nominal.getCOLLECTOR_TXT()#<br>
+			(<a href="/help/asb_guidance.doc" target="_blank">Click For Notes</a>)
+		</div>
+		</cfif>
+		
+        <cfif Len(nominal.getQUICK_STEP_FLAG()) GT 0>
+		<div class="redWarningBox">
+			QUICK STEP PACKAGE<br>
+			(<a href="#application.nominalQuickStepLink##nominal.getNOMINAL_REF()#" target="_blank">Click For Details</a>)
+		</div>												
+		</cfif>  
+							    		
+</div>		 
+
 <table width="100%" border=0 height="300px" id="nominalDetailsTable">
 	<tr>
 		<td width="210" valign="top" id="photoColumn">
@@ -161,7 +345,7 @@ Revisions   :
 		</td>		
 		<td valign="top" id="detailsColumn" #iif(arrayLen(warnings) GT 0,DE('width="50%"'),de('width="90%"'))#>
 		  <div id="nominalInfoHolder">	
-			<table width="98%" class="nominalData">
+			<table width="98%" class="nominalData" id="nominalDataTable">
 				<tr>
 					<th valign="top" width="15%">Nominal Ref</th>
 					<td valign="top" class="row_colour0 standOut" width="18%">#IIf(Len(nominal.getNominal_Ref()) IS 0,DE("&nbsp;"),DE(nominal.getNominal_Ref()))#</td>
@@ -217,191 +401,7 @@ Revisions   :
 					</td>	
 				</tr>		
 			</table>
-			
-			<!--- show all required information boxes --->
-			<div id="infoBoxParent">
-				    <!--- deceased marker --->
-					<cfif nominal.getDECEASED() IS "Y">						
-						 <div class="redWarningBox">	
-						      **** DECEASED ****<br>
-	                          #IIf(Len(nominal.getDATE_OF_DEATH_TEXT()) IS 0,DE("&nbsp;"),DE(nominal.getDATE_OF_DEATH_TEXT()))#
-	                          #IIf(nominal.getDOD_ESTIMATE_FLAG() IS 'Y',DE("(Estimated)"),DE("&nbsp;"))#	                          						  
-		                 </div>
-		            </cfif>    						
-				    <!--- alias name types --->
-					<cfif nominal.getName_Type() IS NOT "P">				    
-						 <div class="redWarningBox">						  						 		
-						  <cfswitch expression="#nominal.getName_Type()#">
-						   <cfcase value="A">
-							  ALIAS RECORD
-						   </cfcase>
-						   <cfcase value="B">
-							  ALIAS DATE OF BIRTH RECORD
-						   </cfcase>
-						   <cfcase value="C">
-							  ALIAS THIRD CHRISTIAN NAME RECORD
-						   </cfcase>
-						   <cfcase value="T">
-							  TEMPORARY RECORD
-						   </cfcase>
-						   <cfcase value="F">
-							  ALIAS FORMER NAME RECORD 
-						   </cfcase>	
-						   <cfcase value="W">
-							  ALIAS WEDDED NAME RECORD
-						   </cfcase>						   					   						   						   						   
-						  </cfswitch>						   
-						 </div> 
-				    </cfif>
-				    <!--- prisoner release --->		
-					<cfif Len(release.getPNC_ID()) GT 0>						
-						<div class="redWarningBox">						  	
-							 Prisoner @ #release.getESTABLISHMENT()#<br>						 
-							 Release Date: #DateFormat(release.getDIARY_DATE(),"DD/MM/YYYY")#						   
-						</div>
-					</cfif>
-					<!--- target marker --->			
-					<cfif Len(target.getTARGET_REF()) GT 0>
-						<div class="redWarningBox">
-						 #target.getReason()#
-						</div>						
-					</cfif>
-					<!--- persistent young offender addition --->
-					<cfif pyo>					
-						<div class="redWarningBox">
-						 DETER YOUNG OFFENDER<br>
-						 <a href="/help/DYO_FLOWCHART.doc" target="_blank">Click For Guidance</a>
-						</div>												
-					</cfif>
-					<cfif Len(currentCustody.getCustody_Ref()) GT 0>						
-						<div class="redWarningBox">
-						   <cfif currentCustody.getSTATUS() IS "C">
-                             IN CUSTODY @ #currentCustody.getSTATION()#<Br>#currentCustody.getCUSTODY_REF()#
-                           <cfelse>
-                             CURRENTLY IN CUSTODY<Br>IN TRANSFER
-                            </cfif>
-						</div>						
-					</cfif>		
-					<cfif rmp.current>					
-						<div class="redWarningBox">							  
-							CURRENT RMP <br> #rmp.rmp.getRMP_TYPE()#                     
-						</div>						
-					</cfif>												
-					<cfif nominal.getSTEP_FLAG() IS "Y">						
-						<div class="redWarningBox">
-						 STEP PACKAGE(S)                         
-						</div>						
-					</cfif>	
-                    <!--- Addition of CHILD PROTECTION Marker RFC 8673 --->
-                    <cfif nominal.getCHILD_CARE_PLAN() IS "Y">
-                     
-                       <cfset ccpType='Archived'>
-
-                       <cfif Len(nominal.getDATE_FINISHED()) IS 0>
-                           <cfset ccpType='Live'>
-                       <cfelse>
-                           <cfif Len(nominal.getDATE_STARTED()) GT 0>
-                               <cfif dateDiff("d",nominal.getDATE_STARTED(),now()) GTE 0 AND dateDiff("d",now(),nominal.getDATE_FINISHED()) GTE 0>
-                                 <cfset ccpType='Live'>
-                               </cfif>
-                           </cfif>
-                       </cfif>
-
-                        <div class="infoBoxChild #IIf(ccpType IS "Live",DE("redWarningBox"),DE("greenWarningBox"))#">
-                            CHILD PROTECTION<br>CARE PLAN<br>
-                            #nominal.getDATE_STARTED_TEXT()# #IIF(Len(nominal.getDATE_FINISHED_TEXT()) GT 0,DE(' - '&nominal.getDATE_FINISHED_TEXT()),DE(''))#                               
-                        </div>
-                       
-                    </cfif>
-                    
-                    <!--- iom info boxes --->    
-					<cfif iom>					
-					<div class="warningBoxIOM#iomLevel#">
-                      I O M  - 
-					  <cfswitch expression="#iomLevel#">
-					  	  <cfcase value="1">
-						  RED
-						  </cfcase>
-						  <cfcase value="2">
-						  AMBER
-						  </cfcase>
-						  <cfcase value="3">
-						  GREEN
-						  </cfcase>
-						  <cfcase value="4">
-						  BLACK
-						  </cfcase>
-					  </cfswitch>
-                      <br>(<a href="/help/IOM_guidance.doc" target="_blank">Click Here For Guidance</a>)
-					</div>									
-					</cfif>        					
-
-					<!--- threat to life RMP --->
-					<cfif nominal.getTTL_FLAG() IS "Y">
-					<div class="redWarningBox">
-						 SUBJECT OF RISK MAN PLAN<br>
-						 *** CONTACT FDI IF POLICE CONTACT ***
-						 <cfif isDefined('session.isFDI')>
-						 	<cfif session.isFDI>
-							 <br><a href="#application.ttlLink#&ref=#nominal.getNOMINAL_REF()#" target="_blank">Click For More Information</a>
-							</cfif>
-						 </cfif>
-					</div>
-					</cfif>
-					
-            		<cfif Len(onWarrant.getWarrant_Ref()) GT 0>
-					  <div class="redWarningBox">
-						 CURRENTLY WANTED<br>ON WARRANT
-					  </div>						
-					</cfif>
-								
-					<cfif Len(onBail.getBAIL_REF()) GT 0>
-					<div class="redWarningBox">
-					  CURRENTLY ON BAIL <cfif ArrayLen(onBail.getBailConditions()) GT 0><br>CONDITIONS APPLY</cfif>
-					</div>
-					</cfif>						
-					
-					<cfif ppo>
-					<div class="redWarningBox">
-                       PRIORITY &amp; PROLIFIC OFFENDER (PPO)
-                       <br>(<a href="/help/generic_PPO_guidance.pdf" target="_blank">Click Here For Guidance</a>)
-					</div>			
-					</cfif>
-                    
-                    <cfif nominal.getTACAD_FLAG() IS "Y">
-					<div class="redWarningBox">
-						   SUBJECT OF TACTICAL ADVICE<br>
-						   <cfif session.loggedInUserLogAccess LTE 20 or session.isFDI>
-                           <a href="#Application.TACAD_Link##nominalRef#" target="_blank">Click Here For More Information</a>
-                           <cfelse>
-						   *** CONTACT FDI IF POLICE CONTACT ***
-						   </cfif>
-					</div>						
-                    </cfif>
-                    
-                    <cfif nominal.getCOMP_STATUS() IS "M" OR nominal.getCOMP_STATUS() IS "I">
-					<div class="blueWarningBox">					 
-						CURRENTLY LISTED AS<Br>A MISSING PERSON					  
-					</div>
-					</cfif>
-					            
-                    <cfif Len(nominal.getCOLLECTOR_TXT()) GT 0>
-					<div class="redWarningBox">
-						ASB - Div: #nominal.getCOLLECTOR_DIV()#<br>
-                        #nominal.getCOLLECTOR_TXT()#<br>
-						(<a href="/help/asb_guidance.doc" target="_blank">Click For Notes</a>)
-					</div>
-					</cfif>
-					
-                    <cfif Len(nominal.getQUICK_STEP_FLAG()) GT 0>
-					<div class="redWarningBox">
-						QUICK STEP PACKAGE<br>
-						(<a href="#application.nominalQuickStepLink##nominal.getNOMINAL_REF()#" target="_blank">Click For Details</a>)
-					</div>												
-					</cfif>  
-										    		
-			</div>
-		  </div>
+		  </div>				
 		</td>
 		<td valign="top" id="warningsColumn">
 			<div class="warningInfoHolder">
