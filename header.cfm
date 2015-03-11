@@ -102,7 +102,7 @@ Revisions        :
 		</td>
 		<td width="65%" align="right">
 			<cfif isDefined('session.trainingPWD')>
-			<b>Train Pwd: #session.trainingPWD#</b>, 	
+			<b>Pwd: #session.trainingPWD#</b>,	
 			</cfif>
 			<b><span class="showSession">#Session.LoggedInUser#</span></b>. <strong>Log Access:</strong> #Session.LoggedInUserLogAccess#.
 			<!--- 

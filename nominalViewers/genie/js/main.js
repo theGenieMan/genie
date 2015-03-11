@@ -116,6 +116,7 @@ function initNominalScreen(){
    	var disableTabs = $('#disableTabs').val().split(',');
    	var disabledTabArray = [];
    	var firstTab = parseInt($('#firstTab').val());
+	var scrollTop=0;
    	
    	for (var i = 0; i < disableTabs.length; i++) {
    		disabledTabArray.push(parseInt(disableTabs[i]))
@@ -136,10 +137,13 @@ function initNominalScreen(){
 			beforeLoad: function(ev, ui){
 				ui.panel.find('#dataContainer').hide();
 				$('#searchingDiv').show()
+				scrollTop = $(window).scrollTop(); // save current scroll position
+			            
 			},
 			load: function(ev, ui){
 				ui.panel.find('#dataContainer').show();
-				$('#searchingDiv').hide()
+				$(window).scrollTop(scrollTop); // keep scroll at current position
+				$('#searchingDiv').hide();
 			},
 			active: firstTab
 		})

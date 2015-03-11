@@ -126,6 +126,7 @@ input.input4char{
     display: table;		 
     width: 98%;    
 	vertical-align:middle;
+	padding-top:3px;
 }
 
 .infoBoxChild{
@@ -334,6 +335,10 @@ behavior: url(/csspie/PIE.htc);
 .warningInfoHolder{
 	height:290px;
 	overflow:auto;
+}
+
+#nominalDataTable{
+	height:290px;
 }
 
 #dialogWarningData{
