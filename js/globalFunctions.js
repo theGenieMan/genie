@@ -588,10 +588,7 @@ function drawPreviousSearch(){
 function populateSearchDetails(arrSD){
 	
 	$('.enquiryForm').trigger("reset");
-	for (i = 0; i < arrSD.length; i++) {
-		console.log(i+': '+arrSD[i].id);
-		console.log(i+': '+arrSD[i].type);
-		console.log(i+': '+arrSD[i].value);
+	for (i = 0; i < arrSD.length; i++) {		
 		
 		if (arrSD[i].type=='TEXT' || arrSD[i].type=='SELECT'){
 			$('#'+arrSD[i].id).val(arrSD[i].value)
@@ -602,5 +599,11 @@ function populateSearchDetails(arrSD){
 			$('#'+arrSD[i].id).prop('checked',arrSD[i].value)
 		}
 		
+	}
+	// show the data
+	expandDataSearchPanes('searchPaneHeader');
+	// if the START SEARCH button is available run the search.
+	if ($('#startSearch').length>0){
+		$('#startSearch').trigger('click');
 	}
 }
