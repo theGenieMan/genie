@@ -247,7 +247,7 @@ Revisions   :
 <tr>
  <td width="35%" valign="top" align="center">
   <div align="center">
-   <img src="/images/genie_bat.jpg" border="0" alt="GENIE Logo" onClick="fullscreen('/genie/code/index.cfm?#session.URLToken#','genie_window')"> 
+   <img src="/images/genie_bat.jpg" border="0" alt="GENIE Logo" onClick="fullscreen('mainMenu.cfm?#session.URLToken#','genieMainMenu')"> 
   </div>
     <br>
 	<div class="ui-state-highlight" id="data_prot_message">
