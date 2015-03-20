@@ -77,7 +77,8 @@ Revisions   :
 <head>
 	<title><cfoutput>#Application.Form_Title#</cfoutput></title>
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/css/genie.css">	
-	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/jquery-ui-1.10.4.custom.css">
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/jquery_news_ticker/styles/ticker-style.css">
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="notificationsCentre.css">  
 	<script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
@@ -221,6 +222,7 @@ Revisions   :
 				<td>
 					<select name="system" id="system">
 						<option value="LIVE" #iif(Form.system is "LIVE",de('selected'),de(''))#>LIVE</option>
+						<option value="LIVE_UAT" #iif(Form.system is "LIVE_UAT",de('selected'),de(''))#>LIVE UAT</option>
 						<option value="TRAIN" #iif(Form.system is "TRAIN",de('selected'),de(''))#>TRAIN</option>
 						<option value="TEST" #iif(Form.system is "TEST",de('selected'),de(''))#>TEST</option>
 						<option value="DEV" #iif(Form.system is "DEV",de('selected'),de(''))#>DEV</option>
