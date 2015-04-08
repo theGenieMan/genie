@@ -38,7 +38,7 @@ function getFormData(){
 			date_from2:$('#createdTo').val().toUpperCase(),
 			date_to1:$('#terminatedFrom').val().toUpperCase(),
 			date_to2:$('#terminatedTo').val().toUpperCase(),
-			notes:$('#notes').val().toUpperCase(),		
+			note:$('#notes').val().toUpperCase(),		
 			firearms:$('#firearmsData').is(':checked')?'Y':'N',	
 			wMids:$('#wMidsData').is(':checked')?'Y':'N',
 			htcu:$('#htcuData').is(':checked')?'Y':'N',
