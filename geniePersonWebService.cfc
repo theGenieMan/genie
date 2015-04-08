@@ -508,6 +508,17 @@
 		    		<cfset validation.errors=ListAppend(validation.errors,"Date of Birth #peArgs.dobDay#/#peArgs.dobMonth#/#peArgs.dobYear# is not valid","|")>
 				</cfif>
 			</cfif>
+			
+			<cfif peArgs.searchType IS "Standard">
+				<cfif ReFindNoCase('[^a-zA-Z]',peArgs.surname1) GT 0
+				   OR ReFindNoCase('[^a-zA-Z]',peArgs.surname2) GT 0
+				   OR ReFindNoCase('[^a-zA-Z]',peArgs.forename1) GT 0	
+				   OR ReFindNoCase('[^a-zA-Z]',peArgs.forename2) GT 0>
+					<cfset validation.valid=false>
+		    		<cfset validation.errors=ListAppend(validation.errors,"You are running a standard search, you can only enter characters A-Z in surname and forename fields","|")>
+				</cfif>
+			</cfif>
+			
 		</cfif>
 		
 		<cfif validation.valid>
@@ -737,7 +748,7 @@
 		<cfset keyPair.P_DOB = sDob>
 		<cfset keyPair.P_EXACT = searchData.exactDob>
 		<cfset keyPair.P_DOB_PART = sDobPart>
-		<cfset keyPair.P_FUZZY = searchData.searchType>
+		<cfset keyPair.P_FUZZY = iif(searchData.searchType IS "Wildcard",de('Y'),de('N'))>
 
 		<cfset firearmsResults = application.genieService.doWestMerciaFirearmsSearch(searchTerms=keyPair,
 																					 fromWebService='Y',
