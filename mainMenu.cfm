@@ -104,11 +104,15 @@ Revisions   :
 			});
 			
 	 if ($('#js-news').length > 0) {
+		var noMessages=$('#js-news').find('.news-item').size();
 	 	$('#js-news').ticker({
-	 		speed: 0.15,
+	 		speed: 0,
 	 		controls: false,
-	 		titleText: 'SYSTEM MESSAGES: ',
-	 		pauseOnItems: 5000
+	 		titleText: noMessages+' SYSTEM MESSAGES: ',
+	 		pauseOnItems: 5000,
+			displayType:'fade',
+			fadeInSpeed: 0,      // Speed of fade in animation
+        	fadeOutSpeed: 0
 	 	});
 	 	
 	 	$(document).on('click', '.sysMessage', function(){
@@ -451,9 +455,10 @@ Revisions   :
 		 			 		 	  		
 		 <tr>
 		  <td colspan="5" align="center">
-		   <button name="frm_UserNotes" id="userNotesButton"
-			       AccessKey="G"
-				   onClick="fullscreen('/help/Handout - GENIE User Notes.doc')">GENIE USER NOTES</button>			   	   
+		   <button name="frm_UserNotes" id="userNotesButton"			       
+				   onClick="fullscreen('/help/Handout - GENIE User Notes.doc')">GENIE USER NOTES</button>	
+		   <button name="frm_UserNotes" id="userNotesButton"			       
+				   onClick="fullscreen('/help/Current_Release_Notes.doc')">RELEASE NOTES</button>		   	   
 		  </td>
 		 </tr>
 		</table>
