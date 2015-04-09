@@ -57,11 +57,15 @@ Revisions   :
 	$(document).ready(function() {
 		
 	 if ($('#js-news').length > 0) {
+	 	var noMessages=$('#js-news').find('.news-item').size();
 	 	$('#js-news').ticker({
-	 		speed: 0.15,
+	 		speed: 0,
 	 		controls: false,
-	 		titleText: 'SYSTEM MESSAGES: ',
-	 		pauseOnItems: 5000
+	 		titleText: noMessages+' SYSTEM MESSAGES: ',
+	 		pauseOnItems: 5000,
+			displayType:'fade',
+			fadeInSpeed: 0,      // Speed of fade in animation
+        	fadeOutSpeed: 0
 	 	});
 	 	
 	 	$(document).on('click', '.sysMessage', function(){
