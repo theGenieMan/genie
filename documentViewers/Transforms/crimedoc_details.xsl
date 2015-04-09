@@ -47,8 +47,7 @@
 </xsl:choose>
 
 <p>
-
-This <strong><xsl:value-of select="Crime_Document/HO_Offence_Description" /></strong> took place 
+This <strong><xsl:value-of select="Crime_Document/HO_Offence_Description" /></strong> took place  
 
 <xsl:choose>
 <xsl:when test="string-length(Crime_Document/Date_Committed_To)>0">
@@ -60,11 +59,12 @@ at
 </xsl:choose>
 <strong><xsl:value-of select="Crime_Document/Time_Committed_From" /></strong> on <strong><xsl:value-of select="Crime_Document/Day_Committed_From" /></strong>&nbsp;<strong><xsl:value-of select="Crime_Document/Date_Committed_From" /></strong><xsl:if test="string-length(Crime_Document/Time_Committed_To)>0"> and <strong><xsl:value-of select="Crime_Document/Time_Committed_To" /></strong></xsl:if>  <xsl:if test="string-length(Crime_Document/Date_Committed_To)>0"> on <strong><xsl:value-of select="Crime_Document/Day_Committed_To" /></strong>&nbsp;<strong><xsl:value-of select="Crime_Document/Date_Committed_To" /></strong></xsl:if> at 
 <strong>
+	
 <xsl:if test="string(Crime_Document/Crime_Location/Building_Name)">
-<xsl:value-of select="Crime_Document/Crime_Location/Building_Name" />, 
+<xsl:value-of select="Crime_Document/Crime_Location/Building_Name" />,	  
 </xsl:if>
 <xsl:if test="string(Crime_Document/Crime_Location/Building_Number)">
-<xsl:value-of select="Crime_Document/Crime_Location/Building_Number" />, 
+<xsl:value-of select="Crime_Document/Crime_Location/Building_Number" />,
 </xsl:if>
 <xsl:if test="string(Crime_Document/Crime_Location/Street_1)">
 <xsl:value-of select="Crime_Document/Crime_Location/Street_1" />, 
@@ -89,6 +89,7 @@ at
 		&nbsp;(<xsl:value-of select="Crime_Document/Crime_Location/Easting" />,&nbsp;<xsl:value-of select="Crime_Document/Crime_Location/Northing" />)
 	</xsl:if>
 </xsl:if>
+ (*** MAP ***)
 </strong>
 
 </p>

@@ -23,16 +23,26 @@ Revisions   :
 <cffile action="read" file="#getDirectoryFromPath(getCurrentTemplatePath())#Transforms\forensicsdoc_details.xsl"  variable="xml_forensics_docdetails">
 
 <cfquery name="qry_CrimeDetails" datasource="#Application.WarehouseDSN#">
-SELECT CRIME_REF, TO_CHAR(CREATED_DATE,'DD') AS REC_DAY, TO_CHAR(CREATED_DATE,'MM') AS REC_MON, 
-       TO_CHAR(CREATED_DATE,'YYYY') AS REC_YEAR, STATUS, LPA, REC_TITLE
-FROM browser_owner.OFFENCE_SEARCH
+SELECT os.CRIME_REF, TO_CHAR(os.CREATED_DATE,'DD') AS REC_DAY, TO_CHAR(os.CREATED_DATE,'MM') AS REC_MON, 
+       TO_CHAR(os.CREATED_DATE,'YYYY') AS REC_YEAR, os.STATUS, os.LPA, os.REC_TITLE,
+       REPLACE(DECODE(PART_ID,'','','FLAT '||PART_ID||', '),'FLAT FLAT','FLAT')||
+				   DECODE(BUILDING_NAME,'','',BUILDING_NAME||', ')||
+				   DECODE(BUILDING_NUMBER,'','',BUILDING_NUMBER||', ')||
+				   DECODE(STREET_1,'','',STREET_1||', ')||
+				   DECODE(LOCALITY,'','',LOCALITY||', ')||
+				   DECODE(TOWN,'','',TOWN||', ')||
+				   DECODE(COUNTY,'','',COUNTY||' ')||
+				   DECODE(addr.POST_CODE,'','',addr.POST_CODE) Address
+FROM browser_owner.OFFENCE_SEARCH os, browser_owner.GE_ADDRESSES addr
 <cfif isDefined("crimeRef")>
-WHERE CRIME_REF=<cfqueryparam value="#crimeRef#" cfsqltype="cf_sql_integer">
+WHERE os.CRIME_REF=<cfqueryparam value="#crimeRef#" cfsqltype="cf_sql_integer">
 <cfelse>
-WHERE ORG_CODE=<cfqueryparam value="#ListGetAt(crimeNo,1,"/")#" cfsqltype="cf_sql_varchar">
-AND  SERIAL_NO=<cfqueryparam value="#ListGetAt(crimeNo,2,"/")#" cfsqltype="cf_sql_varchar">
-AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sql_integer">
+WHERE os.ORG_CODE=<cfqueryparam value="#ListGetAt(crimeNo,1,"/")#" cfsqltype="cf_sql_varchar">
+AND  os.SERIAL_NO=<cfqueryparam value="#ListGetAt(crimeNo,2,"/")#" cfsqltype="cf_sql_varchar">
+AND  os.YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sql_integer">
 </cfif>
+AND  addr.POST_CODE=os.POST_CODE
+AND  addr.PREMISE_KEY=os.PREMISE_KEY
 </cfquery>
 
 <cfif qry_CrimeDetails.recordCount GT 0>
@@ -384,7 +394,11 @@ AND  YEAR=<cfqueryparam value="#Int(ListGetAt(crimeNo,3,"/"))#" cfsqltype="cf_sq
 		<!--- update the SNT info ---> 
 		<cfset s_Doc=Replace(s_Doc,"*** SNT ***",sSnt)>
 		
-		<!--- output the document with the tags replaced for links --->
+		<!--- update the MAP ---> 
+		<cfset s_Doc=Replace(s_Doc,"*** MAP ***",'<a href="http://maps.google.co.uk/?q='&URLEncodedFormat(qry_CrimeDetails.ADDRESS)&'" target="_blank" class="fakeLink">Click For Map</a>')>
+				
+		
+		<!--- output the document with the tags replaced for links --->			
 		#s_Doc#
 		
 		<cfif IsDefined ("SocoReports")>
