@@ -178,8 +178,9 @@ Revisions   :
 	    <!--- prisoner release --->		
 		<cfif Len(release.getPNC_ID()) GT 0>						
 			<div class="redWarningBox">						  	
-				 Prisoner @ #release.getESTABLISHMENT()#<br>						 
-				 Release Date: #DateFormat(release.getDIARY_DATE(),"DD/MM/YYYY")#						   
+				 Prisoner @ #release.getESTABLISHMENT()#,						 
+				 Release: #DateFormat(release.getDIARY_DATE(),"DD/MM/YYYY")#<br>
+				 <a href="http://websvr.intranet.wmcpolice/index_email.cfm?page_address=%2Fapplications%2Foms%2Fcode%2Frelease_search.cfm%3FFRM_BTNSEARCH=Search%26OMS_XL%3DYES%26FRM_HIDACTION=Search%26FRM_TXTPNCID=#release.getPNC_ID()#%26FromNomImg=YES%23The_Results" target="_blank">Click For Details</a>						   
 			</div>
 		</cfif>
 		<!--- target marker --->			
