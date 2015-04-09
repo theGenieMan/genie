@@ -185,6 +185,7 @@ Revisions        :
 			
 			 <cfset thisCrmRef=thisCrm>
 			 <cfset thisRole=Evaluate('role'&thisCrmRef)>
+			 <cfset thisProcess=Evaluate('process'&thisCrmRef)>
 			 <cfset thisComm=Evaluate('comm'&thisCrmRef)>
 			 <cfset thisAddr=Evaluate('addr'&thisCrmRef)>
 			 <cfset thisMo=Evaluate('mo'&thisCrmRef)>
@@ -244,12 +245,15 @@ Revisions        :
 			 <div class="tableRow">
 			  <div class="tableCell">
 			  	#thisRole#
+			  	<cfif Len(thisProcess) GT 0>
+				<br>#thisProcess#
+				</cfif>
 			  </div>
 			  <div class="tableCell">
 			  	#thisComm#
 			  </div>			  
 			  <div class="tableCell">
-			  	#thisOffTitle#
+			  	#htmlEditFormat(thisOffTitle)#
 			  </div>
 			  <div class="tableCell">
 			  	<cfset noLines += thisLines>
@@ -267,6 +271,7 @@ Revisions        :
 	</cfoutput>
 	</html>
 </cfdocument>
+
 
 <cfheader name="Content-disposition" value="attachment;filename=mopiDoc.pdf" />
 <cfcontent type="application/pdf" variable="#ToBinary(mopiDoc)#" />		
@@ -286,13 +291,15 @@ Revisions        :
                                 DECODE(addr.LOCALITY,'','',addr.LOCALITY||', ')||
                                 DECODE(addr.TOWN,'','',addr.TOWN||', ')||
                                 DECODE(addr.COUNTY,'','',addr.COUNTY||' ')||
-                                DECODE(addr.POST_CODE,'','',addr.POST_CODE) as OffenceAddress
+                                DECODE(addr.POST_CODE,'','',addr.POST_CODE) as OffenceAddress,
+				   nr.PROCESS                                
             FROM   browser_owner.NOMINAL_ROLES nr, browser_owner.OFFENCE_SEARCH o, browser_owner.OFFENCE_NOTES MO, BROWSER_OWNER.GE_ADDRESSES addr
             WHERE  nr.CRIME_REF=o.CRIME_REF
             AND    (nr.CRIME_REF=mo.CRIME_REF(+) AND mo.NOTE_TYPE_DESC='MO SUMMARY')
             AND    (o.PREMISE_KEY=addr.PREMISE_KEY AND o.POST_CODE=addr.POST_CODE)       
             AND    nr.NOMINAL_REF=<cfqueryparam value="#nominalRef#" cfsqltype="cf_sql_varchar" />
-            ORDER BY o.FIRST_COMMITTED
+			--AND    (CREATED_DATE <= SYSDATE-2500 AND CREATED_DATE > SYSDATE-3500)
+            ORDER BY o.FIRST_COMMITTED DESC
 </cfquery>	
 
 <html>
@@ -310,7 +317,20 @@ Revisions        :
 		font-size:10pt;
 		width:98%;
   	}
-  </style>				
+  </style>			
+  <script>
+  	$(document).ready(function() { 
+		$(document).on('click','#checkAllCrimes',function(e){
+			e.preventDefault();
+			$('#mopiForm').find(':checkbox').prop('checked', true)
+		});
+		
+		$(document).on('click','#uncheckAllCrimes',function(e){
+			e.preventDefault();
+			$('#mopiForm').find(':checkbox').prop('checked', false)
+		});
+	});
+  </script>	
  </head>
  <body>
  	<cfset headerTitle="MOPI Disclosure">
@@ -321,7 +341,11 @@ Revisions        :
 	<cfoutput> 
 	<h3 align="center">#nominal.getFULL_NAME()#</h3> 
 	
-	<form action="#script_name#" method="post" target="_blank">
+	<div>
+		<a href="check" id="checkAllCrimes">Check All</a> | <a href="uncheck" id="uncheckAllCrimes">Uncheck All</a><br>
+	</div>
+	
+	<form action="#script_name#" method="post" target="_blank" name="mopiForm" id="mopiForm">
 	<div align="center">
 		<input type="submit" name="subPDF" value="CREATE DOCUMENT">
 	</div>	
@@ -344,7 +368,7 @@ Revisions        :
 	    <cfset lisOutput=listAppend(lisOutput,CRIME_REF,",")>
 	   <tr class="row_colour#i mod 2#">
 	   	<td valign="top"><input type="checkbox" name="chkIncludes" value="#CRIME_REF#" checked></td>
-	   	<td valign="top">#ROLE_CODE#</td>
+	   	<td valign="top">#ROLE_CODE#<cfif Len(PROCESS) GT 0><Br>#PROCESS#</cfif></td>
 		<td valign="top">
 			#FIRST_COM_DATE#<Br>
 			#FIRST_COM_TIME#
@@ -352,6 +376,7 @@ Revisions        :
 		<td valign="top">#SHORT_OFFENCE_TITLE#</td>
 		<td valign="top">
 			<input type="hidden" name="role#CRIME_REF#" value="#ROLE_CODE#">
+			<input type="hidden" name="process#CRIME_REF#" value="#PROCESS#">
 			<input type="hidden" name="comm#CRIME_REF#" value="#FIRST_COM_DATE# #FIRST_COM_TIME#">
 			<input type="hidden" name="offTitle#CRIME_REF#" value="#SHORT_OFFENCE_TITLE#">
 			<input type="hidden" name="addr#CRIME_REF#" value="#OFFENCEADDRESS#">
