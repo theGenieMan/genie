@@ -127,12 +127,14 @@
 		    	   <cfset validation.errors=ListAppend(validation.errors,"West Mids Search requires Number","|")>						
 				</cfif>		  	
 			</cfif>
+			<!---
 			<cfif telArgs.firearms IS "Y">
 				<cfif   Len(telArgs.tel_no) IS 0>
 				   <cfset validation.valid=false>
 		    	   <cfset validation.errors=ListAppend(validation.errors,"Firearms Search requires Number","|")>						
 				</cfif>		  	
 			</cfif>
+			--->
 			<cfif telArgs.htcu IS "Y">
 				<cfif   Len(telArgs.tel_no) IS 0>
 				   <cfset validation.valid=false>

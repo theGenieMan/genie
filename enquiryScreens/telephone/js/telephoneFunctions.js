@@ -136,7 +136,7 @@ function doTelephoneEnquiry(){
 
    // if firearms results have been requested init the tab and do the call
    // otherwise hide the tab
-	if (dataToSend.firearms == 'Y'){
+	if (dataToSend.firearms == 'Y' && dataToSend.tel_no.length > 0){
    		initFirearmsTab();
 		
 		$.ajax({
