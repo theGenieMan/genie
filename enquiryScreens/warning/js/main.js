@@ -22,7 +22,7 @@ $(document).ready(function() {
 		
 		// setup masked date boxes
 		 $("input[datepicker]").inputmask("dd/mm/yyyy");
-		 $('input[timepicker]').timeEntry({show24Hours:true,spinnerImage:''});	
+		 $('input[timepicker]').timeEntry({show24Hours:true,spinnerImage:'',initialField:0});
 
 		// create results required
 		var $resultsTabs=$( "#resultsTabs" ).tabs();
