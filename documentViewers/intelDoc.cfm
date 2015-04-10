@@ -278,12 +278,36 @@ WHERE LOG_REF=<cfqueryparam value="#logRef#" cfsqltype="cf_sql_integer">
 				<br>
 				<!--- Custody Front Sheet Details --->
 				<div id="intelDocument">
+				<cftry>
 				#XmlTransform(xmldoc, xml_Intel_header)#
 				<hr>
 				#XmlTransform(xmldoc, xml_Intel_body)#
 				<hr>
 				
 				<cfset s_Doc=XmlTransform(xmldoc, xml_intel_index)>
+				<cfcatch type="any">
+					<cfmail to="nick.blackham@westmercia.pnn.police.uk" from="genie@westmercia.pnn.police.uk" subject="GENIE INTEL DOC ERROR" type="html">
+					<html>
+						<head>
+						  <style>
+						  	body{
+						  		font-family:Arial;
+								font-size:11pt;
+							}							
+						  </style>
+						</head>
+						<body>
+							<p>Intel Doc Error</p>
+							<p>Log Ref:#logRef#</p>
+							<p>Path: #str_Intel_Doc#</p>
+							<p>Error: #cfcatch.Message#</p>
+							<p>#cfcatch.Detail#</p>
+						</body>
+					</html>	
+					</cfmail>
+					<cfthrow type="Application" errorcode="INTELDOCERROR1" message="There is a problem with Intel Document #logRef#, this will be looked at by ICT. Please try again later">
+				</cfcatch>
+				</cftry>
 				<cfset s_NomStart="<nom_ref>">
 				<cfset s_NomEnd="</nom_ref>">
 				<!--- find all the <nom_ref></nom_ref> tags and inser genie link --->
