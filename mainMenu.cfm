@@ -456,7 +456,7 @@ Revisions   :
 		 <tr>
 		  <td colspan="5" align="center">
 		   <button name="frm_UserNotes" id="userNotesButton"			       
-				   onClick="fullscreen('/help/Handout - GENIE User Notes.doc')">GENIE USER NOTES</button>	
+				   onClick="fullscreen('/help/Handout - GENIE User Notes V4.doc')">GENIE USER NOTES</button>	
 		   <button name="frm_UserNotes" id="userNotesButton"			       
 				   onClick="fullscreen('/help/Current_Release_Notes.doc')">RELEASE NOTES</button>		   	   
 		  </td>
