@@ -359,7 +359,7 @@ ORDER BY 1
 <cfset temp = QuerySetCell(application.qry_MOPI, "rv_low_value","U",5)>
 <cfset temp = QuerySetCell(application.qry_MOPI, "rv_meaning","U",5)>
 
-<cfif application.ENV IS NOT "TRAIN">
+<cfif application.ENV IS NOT "TRAIN" and application.ENV IS NOT "TRAIN_TEST">	
 	<cfquery name="application.bailCustodySuites" datasource="#application.warehouseDSN#">
         SELECT DISTINCT REPLACE(REPLACE(REPLACE(BAILED_TO, ', WEST MERCIA CONSTABULARY',''),'NUNEATON AND BEDWORTH DISTRICT SECTOR, WARWICKSHIRE POLICE','NUNEATON'),'SOUTHERN AREA, WARWICKSHIRE POLICE','LEAMINGTON SPA') AS CUSTODY_SUITE
         FROM browser_owner.BAIL_SEARCH BS
@@ -368,7 +368,7 @@ ORDER BY 1
         AND trunc(BS.BAILED_TO_DATE)>=trunc(sysdate)
         ORDER BY REPLACE(REPLACE(REPLACE(BAILED_TO, ', WEST MERCIA CONSTABULARY',''),'NUNEATON AND BEDWORTH DISTRICT SECTOR, WARWICKSHIRE POLICE','NUNEATON'),'SOUTHERN AREA, WARWICKSHIRE POLICE','LEAMINGTON SPA')
 	</cfquery>
-<cfelse>
+<cfelse>	
 	<cfset application.bailCustodySuites=QueryNew("CUSTODY_SUITE","varchar")>
 	<cfset newRow = QueryAddRow(application.bailCustodySuites,7)>
 	<cfset temp = QuerySetCell(application.bailCustodySuites, "CUSTODY_SUITE","HEREFORD",1)>
