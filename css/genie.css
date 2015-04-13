@@ -388,3 +388,13 @@ ol.bailConditions li {
 .nominalNextPrevLinks {
 	font-size:90%;
 }
+
+.FAQList{
+	font-size:120%;
+	font-weight:bold;
+}
+
+.FAQList li{
+	padding-top:5px;
+	padding-bottom:5px;
+}

@@ -293,7 +293,8 @@ Revisions   :
 		  	
    <ul>        		
        <li id="main"><a href="##mainMenu" accesskey="M"><u>M</u>ain Menu</a></li>
-	   <li id="nominals"><a href="favouriteList.cfm?#session.URLToken#" accesskey="U">Fa<u>v</u>ourite Nominals</a></li>
+	   <li id="nominals"><a href="favouriteList.cfm?#session.URLToken#" accesskey="V">Fa<u>v</u>ourite Nominals</a></li>
+	   <li id="faq"><a href="faqs.cfm?#session.URLToken#" accesskey="F"><u>F</u>AQs</a></li>
 	   <cfif session.isNomMergeUser>
 	   <li id="merges"><a href="mergeList.cfm?#session.URLToken#&actioned=N">Nominal Merges (S)</a></li>	
 	   </cfif>			  
