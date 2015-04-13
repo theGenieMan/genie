@@ -217,9 +217,14 @@ function doPropCategoryLookup(searchElement, codeElement){
 // does a lookup on the wmc homc codes
 function doPropSubCategoryLookup(searchElement, codeElement, categoryCode){
 	
+	var searchText=searchElement.val()
+	
+	// remove any existing sub cat results searches
+	$('#subCatResults').remove();
+	
 	$.ajax({
 		 type: 'POST',
-		 url: '/geniePropertyWebService.cfc?method=propSubCategoryLookup&categoryCode='+categoryCode,						 
+		 url: '/geniePropertyWebService.cfc?method=propSubCategoryLookup&categoryCode='+categoryCode+'&searchText='+searchText,						 
 		 contentType: "application/json",						 
 		 cache: false,
 		 async: true,		 		 
@@ -227,7 +232,7 @@ function doPropSubCategoryLookup(searchElement, codeElement, categoryCode){
 		 	
 			var elTop=searchElement.offset().top;
 			var elLeft=searchElement.offset().left;
-			var $divResults=$("<div class='popupSearchResults'><div align='center'><span class='closePopup'>Close</span></div><span id='resultCount'></span> results for `"+categoryCode+"`</div>");
+			var $divResults=$("<div id='subCatResults' class='popupSearchResults'><div align='center'><span class='closePopup'>Close</span></div><span id='resultCount'></span> results for category=`"+categoryCode+"`, sub category=`"+searchText+"`</div>");
 			var $resultTable=$("<table width='98%' class='genieData ninetypc'><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody></tbody></table>");			
 			$divResults.css('top',elTop+searchElement.height());
 			$divResults.css('left',elLeft);
@@ -248,7 +253,7 @@ function doPropSubCategoryLookup(searchElement, codeElement, categoryCode){
 			}
 			else
 			{
-				$divResults.append('<p><b>No matches found for `'+homcCode+'`</b></p>');
+				$divResults.append('<p><b>No matches found for `'+searchText+'`</b></p>');
 			}
 			
 			$('body').append($divResults);
@@ -315,9 +320,14 @@ function doManufacturerLookup(searchElement, codeElement){
 // does a lookup on the wmc homc codes
 function doPropModelLookup(searchElement, codeElement, manufacturerCode){
 	
+	var searchText=searchElement.val()
+	
+	// remove any existing model results popups
+	$('#modelResults').remove();
+	
 	$.ajax({
 		 type: 'POST',
-		 url: '/geniePropertyWebService.cfc?method=propModelLookup&manufacturerCode='+manufacturerCode,						 
+		 url: '/geniePropertyWebService.cfc?method=propModelLookup&manufacturerCode='+manufacturerCode+'&searchText='+searchText,						 
 		 contentType: "application/json",						 
 		 cache: false,
 		 async: true,		 		 
@@ -325,7 +335,7 @@ function doPropModelLookup(searchElement, codeElement, manufacturerCode){
 		 	
 			var elTop=searchElement.offset().top;
 			var elLeft=searchElement.offset().left;
-			var $divResults=$("<div class='popupSearchResults'><div align='center'><span class='closePopup'>Close</span></div><span id='resultCount'></span> results for `"+manufacturerCode+"`</div>");
+			var $divResults=$("<div id='modelResults' class='popupSearchResults'><div align='center'><span class='closePopup'>Close</span></div><span id='resultCount'></span> results for manufacturer=`"+manufacturerCode+"`, model=`"+searchText+"`</div>");
 			var $resultTable=$("<table width='98%' class='genieData ninetypc'><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody></tbody></table>");			
 			$divResults.css('top',elTop+searchElement.height());
 			$divResults.css('left',elLeft);

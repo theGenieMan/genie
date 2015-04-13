@@ -101,6 +101,16 @@ $(document).ready(function() {
 						    delay: 1000
 						});	
 
+		// monitor typing on these boxes, when typing stops and 3 or more chars then fire a lookup search
+		$('#subCategory_desc').typing({						    
+						    stop: function (event, $elem) {								
+						        if ($elem.val().length >= 3 || $elem.val()=='*'){
+									doPropSubCategoryLookup($elem, $('#'+$elem.attr('codeElement')), $('#'+$elem.attr('categoryField')).val())
+								}
+						    },
+						    delay: 1000
+						});	
+
 						
 		// monitor typing on these boxes, when typing stops and 3 or more chars then fire a lookup search
 		$('#manufacturer_desc').typing({						    
@@ -118,5 +128,13 @@ $(document).ready(function() {
 						    delay: 1000
 						});							
 																			
-	
+	    // monitor typing on these boxes, when typing stops and 3 or more chars then fire a lookup search
+		$('#model_desc').typing({						    
+						    stop: function (event, $elem) {								
+						        if ($elem.val().length >= 3 || $elem.val()=='*'){
+									doPropModelLookup($elem, $('#'+$elem.attr('codeElement')), $('#'+$elem.attr('manufacturerField')).val())
+								}
+						    },
+						    delay: 1000
+						});	
 });

@@ -217,9 +217,11 @@
 		FROM     queryTable
 		WHERE (1=1)
 		<cfif Len(searchText) GT 0>
-    	AND  (('F'||SUB_DESC) LIKE <cfqueryparam value ="'F#UCase(arguments.searchText)#" cfsqltype="cf_sql_varchar"> OR ('F'||psc_code) LIKE <cfqueryparam value ="'F%#UCase(arguments.searchText)#%" cfsqltype="cf_sql_varchar">)
+    	AND  (('F'||SUB_DESC) LIKE <cfqueryparam value ="'F%#UCase(arguments.searchText)#%" cfsqltype="cf_sql_varchar"> OR ('F'||psc_code) LIKE <cfqueryparam value ="'F%#UCase(arguments.searchText)#%" cfsqltype="cf_sql_varchar">)
 		</cfif>
-		AND      prpc_code=<cfqueryparam value ="#arguments.categoryCode#" cfsqltype="cf_sql_varchar">	
+		<cfif Len(categoryCode) GT 0>
+		AND      prpc_code=<cfqueryparam value ="#arguments.categoryCode#" cfsqltype="cf_sql_varchar">
+		</cfif>	
 		ORDER BY sub_desc	
 		</cfquery>
     
@@ -260,9 +262,11 @@
 		FROM     queryTable
 		WHERE (1=1)
 		<cfif Len(searchText) GT 0>
-    	AND  (('F'||DESCRIPTION) LIKE <cfqueryparam value ="'F#UCase(arguments.searchText)#" cfsqltype="cf_sql_varchar"> OR ('F'||mod_code) LIKE <cfqueryparam value ="'F%#UCase(arguments.searchText)#%" cfsqltype="cf_sql_varchar">)
+    	AND  (('F'||DESCRIPTION) LIKE <cfqueryparam value ="'F%#UCase(arguments.searchText)#%" cfsqltype="cf_sql_varchar"> OR ('F'||mod_code) LIKE <cfqueryparam value ="'F%#UCase(arguments.searchText)#%" cfsqltype="cf_sql_varchar">)
 		</cfif>
-		AND      mnf_code=<cfqueryparam value ="#arguments.manufacturerCode#" cfsqltype="cf_sql_varchar">	
+		<cfif Len(manufacturerCode) GT 0>
+		AND      mnf_code=<cfqueryparam value ="#arguments.manufacturerCode#" cfsqltype="cf_sql_varchar">
+		</cfif>	
 		ORDER BY mod_desc
 		</cfquery>
     

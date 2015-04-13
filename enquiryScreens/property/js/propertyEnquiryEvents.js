@@ -100,7 +100,7 @@ $(document).on('focus','#subCategory_desc',
 		var categoryCode=$('#'+$(this).attr('categoryField')).val();
 		
 		if (categoryCode.length>0){
-			$(this).blur();
+			//$(this).blur();
 			doPropSubCategoryLookup($(this), $('#'+$(this).attr('codeElement')), categoryCode)
 		}
 	}
@@ -142,7 +142,7 @@ $(document).on('focus','#model_desc',
 		var manufacturerCode=$('#'+$(this).attr('manufacturerField')).val();
 		
 		if (manufacturerCode.length>0){
-			$(this).blur();
+			//$(this).blur();
 			doPropModelLookup($(this), $('#'+$(this).attr('codeElement')), manufacturerCode)
 		}
 	}
