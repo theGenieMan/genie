@@ -4,7 +4,9 @@
   
 <cffunction name="init" access="public" output="false" returntype="hrDAO" hint="constructor">
      <cfargument name="DSN" type="string" required="true" hint="datasource" />
+	 <cfargument name="adServer" type="string" required="false" hint="address of AD Server" default="10.1.230.216" />
      <cfset variables.DSN = arguments.DSN />
+	 <cfset variables.adServer = arguments.adServer>
      <cfreturn this />
 </cffunction>
 
@@ -14,7 +16,9 @@
 	 <cfargument name="forceCode" type="string" required="false" hint="force code of user to lookup only required if refType is collar. Default 22 West Mercia" default="22" >     
 
      <!--- setup a new hr object --->
-     <cfset hrRecord=CreateObject("component","hrBean").init()>
+     <cfset var hrRecord=CreateObject("component","hrBean").init()>
+	 <cfset var userQuery="">
+	  	  
 	 <cfif refType IS "userId">
 	  <cfset hrRecord.setUserId(ref)>
 	 <cfelseif refType IS "collar">
@@ -85,7 +89,29 @@
 						<cfset hrRecord.setForceCode(qHR.FORCE_CODE) />
 						<cfset hrRecord.setOtherUserId(qHR.OTHER_USER_ID) />
 						<cfset hrRecord.setTrueUserId(qHR.TRUE_USER_ID) />
-            			<cfset hrRecord.setIsValidRecord(true)>																	
+            			<cfset hrRecord.setIsValidRecord(true)>		
+            		<cfelse>
+						<!--- no HR warehouse record so try Active Directory, if we have a userId type search --->
+						
+						<cfif refType IS "userId">
+							<cfldap action="QUERY" name="userQuery"
+							attributes="displayName"	start="DC=westmerpolice01,DC=local"
+							scope="SUBTREE" maxrows="1"
+							filter="samaccountname=#ref#"
+							server="#variables.adServer#"
+							username="westmerpolice01\cold_fusion"
+							password="a11a1re" />		
+						    	
+							<cfif userQuery.recordCount GT 0>
+								<cfset hrRecord.setFullName(userQuery.displayName) />
+								<cfset hrRecord.setForceCode('XX')>
+								<cfset hrRecord.setUserId(ref)>
+								<cfset hrRecord.setCollar('999999')>
+								<cfset hrRecord.setDuty('TEMPORARY USER NOT ON HR')>
+								<cfset hrRecord.setIsValidRecord(true)>		
+							</cfif>
+							
+						</cfif>													
 					</cfif>  
 				
 	     </cfif> 
@@ -100,6 +126,7 @@
 	<cfset var qSearch="">
 	<cfset var thisUser="">
 	<cfset var arrUsers=ArrayNew(1)>
+	<cfset var tempHRRecord="">
 	
 	<!--- do the query based on the last name, first name being wildcarded on the search text, or if search text is number assume
 	      that it's a collar no and try and match on that.
@@ -131,9 +158,19 @@
 	 WHERE rownum < #maxResults#
 	</cfquery>	
 	
-	<cfloop query="qSearch">
-		<cfset arrayAppend(arrUsers,read(ref=USER_ID,refType='userId'))>
-	</cfloop>
+	<!--- if the search string matches a 900 user id AND we get no results from the HR Table search then try AD --->
+	<cfif qSearch.recordCount IS 0 AND ArrayLen(REMatch('[a-z]_[a-z]{3}9[0-9][0-9]',arguments.searchText)) GT 0>
+		<cfset tempHRRecord=read(ref=searchText,refType='userId')>
+		<cfif tempHRRecord.getIsValidRecord()>
+			<cfset arrayAppend(arrUsers,tempHRRecord)>
+	    </cfif>
+	<cfelse>
+	
+		<cfloop query="qSearch">
+			<cfset arrayAppend(arrUsers,read(ref=USER_ID,refType='userId'))>
+		</cfloop>
+	
+	</cfif>
 	
 	<cfreturn arrUsers>
 		

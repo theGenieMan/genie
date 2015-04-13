@@ -68,13 +68,14 @@ $(document).ready(function() {
 				  <th>&nbsp;INC?&nbsp;</th>
 				  </cfif>	  
 				  <th width="5%" class="#iif(sort IS "ROLE",de('thSorted'),de('thSortable'))#" sort="ROLE" nominalRef="#nominalRef#">ROLE</th>				
-				  <th width="5%">PROC</th>	
-				  <th width="5%">ELIM</th>				  
+				  <th width="4%">PROC</th>	
+				  <th width="4%">ELIM</th>				  
 				  <th width="10%">OFFENCE</th>
 				  <th width="12%">INCIDENT</th>
 				  <th>OFFENCE TITLE</th>
-				  <th width="20%" class="#iif(sort IS "DATE_COM",de('thSorted'),de('thSortable'))#" sort="DATE_COM" nominalRef="#nominalRef#">DATES COMMITTED</th>	
+				  <th width="18%" class="#iif(sort IS "DATE_COM",de('thSorted'),de('thSortable'))#" sort="DATE_COM" nominalRef="#nominalRef#">DATES COMMITTED</th>	
 				  <th width="8%" class="#iif(sort IS "DATE_CREATED",de('thSorted'),de('thSortable'))#" sort="DATE_CREATED" nominalRef="#nominalRef#">CREATED</th>
+				  <th width="8%">REFERRED</th>				
 				  <th width="8%">FILED</th>				  					
 				 </tr>
 		 </thead>
@@ -118,6 +119,7 @@ $(document).ready(function() {
 						 </td>
 						 <td>#DATE_COMM#</td>
 						 <td>#CREATED_DATE#</td>
+						 <td>#REFERRED_DATE#</td>
 						 <td>#DATE_FILED#</td>
 					  </tr>					
 					<cfset j=j+1>

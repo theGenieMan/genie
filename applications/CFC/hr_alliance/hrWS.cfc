@@ -91,7 +91,9 @@
 		<cfargument name="forceCode" type="string" hint="force of user to get user details for" required="false" default="22" />
 		<cfargument name="dsn" type="string" hint="userId of user to get hr object for" required="false" default="#variables.dsn#" />
 		
+		<!---
 		<cflog file="hrWS" text="getUserByCollar collar=#arguments.collar# forceCode=#arguments.forceCode#" type="information">
+		--->
 		
 		<cfset var returnXml=Duplicate(variables.xmlHeader)>		
 		<cfset var hrService=CreateObject('component','hrService').init(dsn=arguments.DSN)>
@@ -109,7 +111,9 @@
 		<cfargument name="maxResults" type="numeric" required="false" default="100" > 
 		<cfargument name="dsn" type="string" hint="datasource to search" required="false" default="#variables.dsn#" />
 		
+		<!---
 		<cflog file="hrWS" text="quickSearch searchText=#arguments.searchText#" type="information">
+		--->
 		
 		<cfset var hrService=CreateObject('component','hrService').init(dsn=arguments.DSN)>
 		<cfset var users=hrService.quickSearch(searchText=arguments.searchText,maxResults=maxResults)>		
@@ -125,7 +129,9 @@
 		<cfset returnXml = Replace(returnXml,'~HRUserList~',userXmlList)>
 		<cfset returnXml &= Duplicate(variables.xmlFooter)>
 		
+		<!---
 		<cflog file="hrWS" text="quickSearch returned=#returnXml#" type="information">
+		--->
 		
 		<cfreturn returnXml>
 		
