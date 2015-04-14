@@ -127,7 +127,6 @@ WHERE CUSTODY_REF=<cfqueryparam value="#custodyRef#" cfsqltype="cf_sql_varchar">
 <LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">		
 <LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/customControls/dpa/css/dpa.css">
 <LINK REL="STYLESHEET" TYPE="text/css" HREF="/applications/cfc/hr_alliance/hrWidget.css">			
-<LINK REL="STYLESHEET" TYPE="text/css" HREF="print.css" media="print">	
 <script type="text/javascript" src="/jQuery/js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="/jQuery/js/jquery-ui-1.10.4.custom.js"></script>
 <script type="text/javascript" src="/jQuery/PrintArea/jquery.PrintArea.js"></script>
