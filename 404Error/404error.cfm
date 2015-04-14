@@ -27,6 +27,10 @@ Revisions   :
 </head>
 
 <body>
+
+<cfsavecontent variable="dump404">
+	<cfdump var="#cgi#" format="text">
+</cfsavecontent>	
 	
 <div class="ui-widget-header-genie" align="center">
 	GENIE - Page Cannot Be Found
@@ -39,5 +43,6 @@ Revisions   :
 <p>If you had V3.6.2 open when you got this error please then please close all your GENIE windows and reopen GENIE Via Start -> All Programs -> Sessions -> GENIE on the Force Desktop</p>
 
 <cflog file="genie404" type="information" text="Path Info=#PATH_INFO#, Path Translated=#PATH_TRANSLATED#, Referrer=#HTTP_REFERER#, User=#AUTH_USER#" />
+<cflog file="genie404" type="information" text="Dump | #dump404#" />
 	
 </body>
