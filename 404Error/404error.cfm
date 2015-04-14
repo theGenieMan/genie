@@ -36,13 +36,13 @@ Revisions   :
 	GENIE - Page Cannot Be Found
 </div>
 
-<p>The page `<cfoutput>#PATH_INFO#</cfoutput>` you are looking for cannot be found</p>
+<p>The page `<cfoutput>#SCRIPT_NAME#</cfoutput>` you are looking for cannot be found</p>
 
 <p>GENIE was upgraded from V3.6.2 to V4 on Wednesday 15th April 2015 at 1000</p>
 
 <p>If you had V3.6.2 open when you got this error please then please close all your GENIE windows and reopen GENIE Via Start -> All Programs -> Sessions -> GENIE on the Force Desktop</p>
 
-<cflog file="genie404" type="information" text="Path Info=#PATH_INFO#, Path Translated=#PATH_TRANSLATED#, Referrer=#HTTP_REFERER#, User=#AUTH_USER#" />
+<cflog file="genie404" type="information" text="Script Name=#SCRIPT_NAME#, Path Translated=#PATH_TRANSLATED#, Referrer=#HTTP_REFERER#, User=#AUTH_USER#" />
 <cflog file="genie404" type="information" text="Dump | #dump404#" />
 	
 </body>
