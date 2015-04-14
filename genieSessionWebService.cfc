@@ -60,6 +60,22 @@
 	 	<cfreturn returnVar>	
 		 
 	</cffunction> 
+	
+	<cffunction name="getUserSession" access="remote" output="false" returntype="Struct" returnformat="JSON">
+	 	<cfset var returnVar = structNew()>
+
+	 	<cfset returnVar.lastDPAUpdate=session.lastDPAUpdate>		
+		<cfset returnVar.audit_code=session.audit_code>
+		<cfset returnVar.audit_for=session.audit_for>
+		<cfset returnVar.audit_details=session.audit_details>
+		<cfset returnVar.ethnic_code=session.ethnic_code>
+		<cfset returnVar.audit_for_collar=session.audit_for_collar>
+		<cfset returnVar.audit_for_force=session.audit_for_force>
+		<cfset returnVar.dpaTimeout=session.dpaTimeout>
+	 	
+	 	<cfreturn returnVar>	
+		 
+	</cffunction> 	
 
 	<cffunction name="resetSession" access="remote" output="false" returntype="string">
 	 	

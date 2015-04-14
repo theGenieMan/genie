@@ -268,6 +268,14 @@ function getAppVar(varName){
 	})		
 }
 
+function getUserSession(){
+	return	$.ajax({
+		 type: 'POST',
+		 url: '/genieSessionWebService.cfc?method=getUserSession',						 		 						 
+		 cache: false
+	})		
+}
+
 function pad(num, size) {
     var s = num+"";
     while (s.length < size) s = "0" + s;

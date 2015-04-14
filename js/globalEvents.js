@@ -201,10 +201,37 @@ $(document).on('click','.genieNominal',
 				url += '&firstTab='+firstTab
 			}						
 
-			if (typeof dpa !== "undefined"){
-				$('#dpa').dpa('option','urlToOpen',url);
-				$('#dpa').dpa('option','howToOpen','full');
-				$('#dpa').dpa('show');
+			if (typeof dpa !== "undefined"){				
+				$('#dpa').dpa('option', 'urlToOpen', url);
+				$('#dpa').dpa('option', 'howToOpen', 'full');				
+				
+				if (dpa == 'yes') {				
+					$('#dpa').dpa('show');
+				}
+				
+				if (dpa == 'ifnotset') {
+					
+					// check if the user has their dpa set, if they have and it's within their
+					// timeout period then just open the nominal. Otherwise show the dpa box
+					getUserSession().done(function(result) {
+										var resultObj = jQuery.parseJSON(result);
+										var dateNow = new Date();
+										var dateDpa = new Date(resultObj.LASTDPAUPDATE);										
+										var dpaDifference=Math.floor((dateNow - dateDpa)/1000/60);
+										var auditCode = resultObj.AUDIT_CODE.toString();
+										
+										if (auditCode.length > 0 && dpaDifference < resultObj.DPATIMEOUT )
+										{
+										  	fullscreen(url, 'nominal' + getTimestamp())
+										}
+										else
+										{
+											$('#dpa').dpa('show');
+										}
+																								
+									})					
+					
+				}
 			}	
 			else
 			{
@@ -296,7 +323,42 @@ $(document).on('click','.genieCustodyLink',
 			if (typeof dpa !== "undefined") {
 				$('#dpa').dpa('option', 'urlToOpen', url);
 				$('#dpa').dpa('option', 'howToOpen', showInCurrentWindow ? 'current' : 'new');
-				$('#dpa').dpa('show');
+				
+				if (dpa == 'yes') {				
+					$('#dpa').dpa('show');
+				}
+				
+				if (dpa == 'ifnotset') {
+					
+					// check if the user has their dpa set, if they have and it's within their
+					// timeout period then just open the nominal. Otherwise show the dpa box
+					getUserSession().done(function(result) {
+										var resultObj = jQuery.parseJSON(result);
+										var dateNow = new Date();
+										var dateDpa = new Date(resultObj.LASTDPAUPDATE);										
+										var dpaDifference=Math.floor((dateNow - dateDpa)/1000/60);
+										var auditCode = resultObj.AUDIT_CODE.toString();
+										
+										if (auditCode.length > 0 && dpaDifference < resultObj.DPATIMEOUT )
+										{
+										 if (showInCurrentWindow == 'current') {
+										  	window.location(url)
+										  }
+										  else {
+										  	alert(url);
+											alert('custody'+custodyRef.replace(/[/\\*]/g, ''))
+										  	newwindow=window.open(url,'custody'+custodyRef.replace(/[/\\*]/g, ''),'toolbars=0,scrollbars=1');											
+										  }	
+										}
+										else
+										{
+											$('#dpa').dpa('show');
+										}
+																								
+									})					
+					
+				}
+				
 			}
 			else {
 			
@@ -365,7 +427,40 @@ $(document).on('click','.genieIntelLink',
 			 if (typeof dpa !== "undefined") {
 			 	$('#dpa').dpa('option','urlToOpen', url);
 				$('#dpa').dpa('option','howToOpen', showInCurrentWindow?'current':'new');
-			 	$('#dpa').dpa('show');
+			 	
+				if (dpa == 'yes') {				
+					$('#dpa').dpa('show');
+				}
+				
+				if (dpa == 'ifnotset') {
+					
+					// check if the user has their dpa set, if they have and it's within their
+					// timeout period then just open the nominal. Otherwise show the dpa box
+					getUserSession().done(function(result) {
+										var resultObj = jQuery.parseJSON(result);
+										var dateNow = new Date();
+										var dateDpa = new Date(resultObj.LASTDPAUPDATE);										
+										var dpaDifference=Math.floor((dateNow - dateDpa)/1000/60);
+										var auditCode = resultObj.AUDIT_CODE.toString();
+										
+										if (auditCode.length > 0 && dpaDifference < resultObj.DPATIMEOUT )
+										{
+										  if (showInCurrentWindow == 'current') {
+										  	window.location(url)
+										  }
+										  else {
+										  	newwindow=window.open(url,'intel'+logRef,'toolbars=0,scrollbars=1');											
+										  }	
+										}
+										else
+										{
+											$('#dpa').dpa('show');
+										}
+																								
+									})					
+					
+				}
+				
 			 }
 			 else {
 			 
@@ -415,7 +510,39 @@ $(document).on('click','.genieCrimeLink',
 			if (typeof dpa !== "undefined") {
 				$('#dpa').dpa('option', 'urlToOpen', url);
 				$('#dpa').dpa('option', 'howToOpen', showInCurrentWindow ? 'current' : 'new');
-				$('#dpa').dpa('show');
+				
+				if (dpa == 'yes') {				
+					$('#dpa').dpa('show');
+				}
+				
+				if (dpa == 'ifnotset') {
+					
+					// check if the user has their dpa set, if they have and it's within their
+					// timeout period then just open the nominal. Otherwise show the dpa box
+					getUserSession().done(function(result) {
+										var resultObj = jQuery.parseJSON(result);
+										var dateNow = new Date();
+										var dateDpa = new Date(resultObj.LASTDPAUPDATE);										
+										var dpaDifference=Math.floor((dateNow - dateDpa)/1000/60);
+										var auditCode = resultObj.AUDIT_CODE.toString();
+										
+										if (auditCode.length > 0 && dpaDifference < resultObj.DPATIMEOUT )
+										{
+										  if (showInCurrentWindow == 'current') {
+										  	window.location(url)
+										  }
+										  else {
+										  	newwindow=window.open(url,'crime'+crimeRef,'toolbars=0,scrollbars=1');											
+										  }	
+										}
+										else
+										{
+											$('#dpa').dpa('show');
+										}
+																								
+									})					
+					
+				}
 			}
 			else {
 				if (showInCurrentWindow) {
@@ -482,7 +609,39 @@ $(document).on('click','.genieCaseLink',
 			if (typeof dpa !== "undefined") {
 				$('#dpa').dpa('option', 'urlToOpen', url);
 				$('#dpa').dpa('option', 'howToOpen', showInCurrentWindow ? 'current' : 'new');
-				$('#dpa').dpa('show');
+				
+				if (dpa == 'yes') {				
+					$('#dpa').dpa('show');
+				}
+				
+				if (dpa == 'ifnotset') {
+					
+					// check if the user has their dpa set, if they have and it's within their
+					// timeout period then just open the nominal. Otherwise show the dpa box
+					getUserSession().done(function(result) {
+										var resultObj = jQuery.parseJSON(result);
+										var dateNow = new Date();
+										var dateDpa = new Date(resultObj.LASTDPAUPDATE);										
+										var dpaDifference=Math.floor((dateNow - dateDpa)/1000/60);
+										var auditCode = resultObj.AUDIT_CODE.toString();
+										
+										if (auditCode.length > 0 && dpaDifference < resultObj.DPATIMEOUT )
+										{
+										  if (showInCurrentWindow == 'current') {
+										  	window.location(url)
+										  }
+										  else {
+										  	newwindow=window.open(url,'case'+caseRef.replace(/[/\\*]/g, ""),'toolbars=0,scrollbars=1');											
+										  }	
+										}
+										else
+										{
+											$('#dpa').dpa('show');
+										}
+																								
+									})					
+					
+				}
 			}
 			else {
 				if (showInCurrentWindow) {
@@ -576,7 +735,39 @@ $(document).on('click','.genieStopSearchLink',
 			if (typeof dpa !== "undefined") {
 				$('#dpa').dpa('option', 'urlToOpen', url);
 				$('#dpa').dpa('option', 'howToOpen', showInCurrentWindow ? 'current' : 'new');
-				$('#dpa').dpa('show');
+				
+				if (dpa == 'yes') {				
+					$('#dpa').dpa('show');
+				}
+				
+				if (dpa == 'ifnotset') {
+					
+					// check if the user has their dpa set, if they have and it's within their
+					// timeout period then just open the nominal. Otherwise show the dpa box
+					getUserSession().done(function(result) {
+										var resultObj = jQuery.parseJSON(result);
+										var dateNow = new Date();
+										var dateDpa = new Date(resultObj.LASTDPAUPDATE);										
+										var dpaDifference=Math.floor((dateNow - dateDpa)/1000/60);
+										var auditCode = resultObj.AUDIT_CODE.toString();
+										
+										if (auditCode.length > 0 && dpaDifference < resultObj.DPATIMEOUT )
+										{
+										  if (showInCurrentWindow == 'current') {
+										  	window.location(url)
+										  }
+										  else {
+										  	newwindow=window.open(url,'stopsearch'+URN,'toolbars=0,scrollbars=1');											
+										  }	
+										}
+										else
+										{
+											$('#dpa').dpa('show');
+										}
+																								
+									})					
+					
+				}
 			}
 			else {
 				if (showInCurrentWindow) {
