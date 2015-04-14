@@ -43,11 +43,6 @@ Revisions   :
 	<script type="text/javascript" src="/jQuery/highlight/jquery.highlight.js"></script>	
 	<script type="text/javascript" src="/applications/cfc/hr_alliance/jquery.hrQuickSearch.js"></script>	
 	<script type="text/javascript" src="/jQuery/jquery_news_ticker/includes/jquery.ticker.js"></script>		
-	
-	<cfif session.user.getUserId() IS NOT "n_bla003">
-	<script language="JavaScript" src="right_click.js"></script>
-	</cfif>		
-		
 	<script>
 
      function showVisor(division,sessionInfo) {
