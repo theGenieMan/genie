@@ -332,7 +332,9 @@
 			<cfdump var="#westMidsResults#" format="text">
 		</cfsavecontent>
 		
+		<!---
 		<cflog file="genieAddressWS" type="information" text="#theResults#">
+		--->
 		    
 		<cfset westMidsAddressesGrouped = application.genieService.doWestMidsAddressGrouping(westMidsResults.addresses)>
 	

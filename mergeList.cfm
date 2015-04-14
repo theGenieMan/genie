@@ -216,6 +216,8 @@ Revisions   :
 							<option value="">Both</option>
 							<option value="N" selected>Outstanding</option>
 							<option value="Y">Complete</option>
+							<option value="Completed - Merged">Complete - Merged</option>
+							<option value="Completed - Not Merged">Complete - Not Merged</option>
 						</select>
 		</div>
 		<input type="hidden" name="actioned" value="#actioned#">

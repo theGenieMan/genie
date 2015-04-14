@@ -31,7 +31,7 @@ Revisions   :
 	<cfif Len(mergeResult) GT 0>
 	<cfquery name="qInsList" datasource="#application.warehouseDSN#">
 		UPDATE browser_owner.NOMINAL_MERGE_LIST
-		SET    	<cfif mergeResult IS "Completed">
+		SET    	<cfif mergeResult IS "Completed - Merged" OR mergeResult IS "Completed - Not Merged">
 			   		ACTIONED = <cfqueryparam value="Y" cfsqltype="cf_sql_varchar" />,
 			    <cfelse>
 					ACTIONED = <cfqueryparam value="N" cfsqltype="cf_sql_varchar" />,
@@ -256,8 +256,12 @@ ORDER BY NOMINAL_MERGE_ID
 				<form action="#listLast(script_name,"/")#?#session.URLToken#" method="post" class="mergeForm">
 				<b>Action Result</b>: <select id="mergeResult" name="mergeResult" class="mandatory">
 					 					<option value="">-- Select --</option>
-										<option value="In Progess" #iif(qNomMergeData.ACTION_RESULT IS "In Progress",de('selected'),de(''))#>In Progress</option>
+										<option value="In Progress" #iif(qNomMergeData.ACTION_RESULT IS "N",de('selected'),de(''))#>In Progress</option>
+										<!---
 										<option value="Completed" #iif(qNomMergeData.ACTION_RESULT IS "Completed",de('selected'),de(''))#>Completed</option>
+										--->
+										<option value="Completed - Merged" #iif(qNomMergeData.ACTION_RESULT IS "Y-Merged",de('selected'),de(''))#>Completed - Merged</option>
+										<option value="Completed - Not Merged" #iif(qNomMergeData.ACTION_RESULT IS "Y-Not Merged",de('selected'),de(''))#>Completed - Not Merged</option>
 										<!--- <option value="Rejected" #iif(qNomMergeData.ACTION_RESULT IS "Rejected",de('selected'),de(''))#>Rejected</option> --->
 									  </select>	<br>
 				<b>Actioned By</b>: <div id="mergeAction" initialValue="#session.user.getUserId()#"></div>				

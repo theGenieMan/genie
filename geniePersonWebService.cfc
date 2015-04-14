@@ -303,8 +303,7 @@
 	  <cfset var validation=validateQuickNominalSearch(arguments)>
 	  <cfset var errorHtmlStart="<div class='error' id='searchErrors'>">
 	  <cfset var errorHtmlEnd="</div>">
-	  
-	  <cflog file="genieWebService" text="quick genie search resultType=#arguments.resultType#, Forename: #arguments.nominalForename#; Surname: #arguments.nominalSurname#; DOB: #arguments.nominalDOB#; Ref: #arguments.nominalRef# by #arguments.user#" type="information" />	
+	  	
 	  
 	  <!--- search request is valid --->
 	  <cfif validation.valid>
@@ -409,8 +408,6 @@
 	    <cfsavecontent variable="queryDump">
 			<cfdump var="#westMerResults#">
 		</cfsavecontent>
-		
-		<cflog type="information" file="genieWS" text="#queryDump#">
 	    
 	    <!--- only get the nominals that are a primary name type 
 		<cfquery name="qNameTypeP" dbtype="query">
@@ -439,8 +436,7 @@
 		</cfloop>
 	    
 	    <cfset returnXml=Replace(returnXml,'%resultCount%',iNomCount)>
-		<cfset returnXml=Replace(returnXml,'%nominalResults%',nominalXmlResults)>
-		<cflog file="genieWebService" text="returning XML" type="information" />
+		<cfset returnXml=Replace(returnXml,'%nominalResults%',nominalXmlResults)>		
 		
 	    <cfreturn returnXml>
 		
@@ -545,17 +541,7 @@
 	  <cfset var searchData=deserializeJSON(toString(getHttpRequestData().content))> 
 	  <cfset var auditData=createAuditStructure(searchData)>   
 	  <cfset var thisUUID=createUUID()>
-	  <cfset var returnTable=''>
-	    
-	  <cfset var iFuncStart="">
-	  <cfset var iFuncEnd="">
-	  <cfset var iServiceCallStart="">
-	  <cfset var iServiceCallEnd="">
-	  <cfset var iTableCreateStart="">
-	  <cfset var iTableCreateEnd="">
-	    
-	  <cfset iFuncStart=getTickCount()> 
-	  <cflog file="geniePersonWebService" type="information" text="==================================================================================" >  
+	  <cfset var returnTable=''>   	    
 	  
 	    <cfset keyPair = StructNew()>
 		<cfset keyPair.key = "P_NOMINAL_REF">
@@ -672,9 +658,7 @@
 																				  auditReq='Y',
                                                                                   searchUUID=thisUUID)>
 		<cfset iServiceCallEnd=getTickCount()>																				      
-		
-		<cflog file="geniePersonWebService" type="information" text="Service Call = #iServiceCallEnd-iServiceCallStart# ms #thisUUID#" >
-		
+				
 		<cfset iTableCreateStart=getTickCount()>
 		<cfif searchData.resultType IS "XML">
 		
@@ -698,14 +682,6 @@
 		<cfelse>
 			<cfset returnTable = 'No Valid Return Format Specified, options are XML,Short Table,Long Table'>
 		</cfif>
-		
-		<cfset iTableCreateEnd=getTickCount()>				
-		<cflog file="geniePersonWebService" type="information" text="Table Create = #iTableCreateEnd-iTableCreateStart# ms #thisUUID#" >
-		
-		<cfset iFuncEnd=getTickCount()>		
-		
-		<cflog file="geniePersonWebService" type="information" text="Person Search Total = #iFuncEnd-iFuncStart# ms #thisUUID#" >
-		<cflog file="geniePersonWebService" type="information" text="==================================================================================" >
 																  
 		<cfreturn returnTable>																		  		
    
