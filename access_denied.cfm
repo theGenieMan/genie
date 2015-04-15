@@ -3,8 +3,8 @@
 <head>
 	<title><cfoutput>GENIE Access Denied</cfoutput></title>
 	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/css/genie.css">	
-	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_<cfoutput>#session.userSettings.font#</cfoutput>.css">	
-	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/<cfoutput>#session.userSettings.styleSheet#</cfoutput>">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/font_arial.css">	
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="/jQuery/css/genie/jquery-ui-1.10.4.custom.css">	
 </head>
 
 <body>
