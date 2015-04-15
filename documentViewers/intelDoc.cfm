@@ -17,6 +17,10 @@ Revisions   :
 
 --->
 
+<cfparam name="redirector" default="N">
+<cfparam name="auditRequired" default="">
+<cfparam name="auditInfo" default="">
+
 <cffile action="read" file="#getDirectoryFromPath(getCurrentTemplatePath())#Transforms\intel_doc_header.xsl"  variable="xml_intel_header">
 <cffile action="read" file="#getDirectoryFromPath(getCurrentTemplatePath())#Transforms\intel_doc_body.xsl"  variable="xml_intel_body">
 <cffile action="read" file="#getDirectoryFromPath(getCurrentTemplatePath())#Transforms\intel_doc_index.xsl"  variable="xml_intel_index">
