@@ -243,10 +243,22 @@ The record was created on <strong><xsl:value-of select="Crime_Document/Date_Reco
 				<xsl:if test="Person/Forenames">
 					<xsl:value-of select="Person/Forenames" />&nbsp;
 				</xsl:if>
+				<!--
 				<xsl:if test="contains('OFFICER IN CASE,OFFICER COMPLETING REPORT',Role_Type)">
 					<xsl:value-of select="Person/Rank_Badge" />&nbsp;
 				</xsl:if>
-				<xsl:value-of select="Person/Surname" />&nbsp;&nbsp;<nom_ref><xsl:value-of select="Person/Nominal_Ref" /></nom_ref></td>
+				-->
+				
+		        <xsl:choose>
+		          <xsl:when test="contains('OFFICER IN CASE,OFFICER COMPLETING REPORT',Role_Type)">
+		            <anOfficer><xsl:value-of select="Person/Rank_Badge" />&nbsp;<xsl:value-of select="Person/Surname" /></anOfficer>
+		          </xsl:when>
+		          <xsl:otherwise>
+		            <xsl:value-of select="Person/Surname" />
+		          </xsl:otherwise>
+		        </xsl:choose>				
+				
+				&nbsp;&nbsp;<nom_ref><xsl:value-of select="Person/Nominal_Ref" /></nom_ref></td>
 			<td valign="top">
 		     <xsl:choose>		
 			   <xsl:when test="string-length(Person/Eliminated)>0 and (Role_Type='SUSPECT')">

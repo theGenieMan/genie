@@ -5,39 +5,48 @@
    <cfset genieServer="http://genie.intranet.wmcpolice">	
    <cfset oisBrowser="http://ois.intranet.wmcpolice/browser/">   
    <cfset intranetServer="http://websvr.intranet.wmcpolice">	
+   <cfset corpDir="http://corpdir.westmerpolice01.local">
 <cfelseif SERVER_NAME IS "development.intranet.wmcpolice">
 	<cfset genieServer="http://geniedev.intranet.wmcpolice">	
 	<cfset oisBrowser="http://web518.intranet.wmcpolice/browser/">
 	<cfset intranetServer="http://development.intranet.wmcpolice">
+	<cfset corpDir="http://corpdir.westmerpolice01.local">
 <cfelseif SERVER_NAME IS "webtest.intranet.wmcpolice">		
 	<cfset genieServer="http://geniedev.intranet.wmcpolice">
 	<cfset oisBrowser="http://web518.intranet.wmcpolice/browser/">
 	<cfset intranetServer="http://webtest.intranet.wmcpolice">
+	<cfset corpDir="http://corpdir.westmerpolice01.local">
 <cfelseif SERVER_NAME IS "SVR20312">		
 	<cfset genieServer="http://SVR20312">
 	<cfset oisBrowser="http://web518.intranet.wmcpolice/browser/">
 	<cfset intranetServer="http://development.intranet.wmcpolice">
+	<cfset corpDir="http://corpdir.westmerpolice01.local">
 <cfelseif SERVER_NAME IS "SVR20031">		
 	<cfset genieServer="http://SVR20031">
 	<cfset oisBrowser="http://web518.intranet.wmcpolice/browser/">
 	<cfset intranetServer="http://development.intranet.wmcpolice">	
+	<cfset corpDir="http://corpdir.westmerpolice01.local">
 	<cfset genieVersion=4>
 <cfelseif SERVER_NAME IS "genie.intranet.wmcpolice">			
 	<cfset genieServer="http://genie.intranet.wmcpolice">
 	<cfset oisBrowser="http://ois.intranet.wmcpolice/browser/">
 	<cfset intranetServer="http://websvr.intranet.wmcpolice">
+	<cfset corpDir="http://corpdir.westmerpolice01.local">
 <cfelseif SERVER_NAME IS "genieuat.intranet.wmcpolice">			
 	<cfset genieServer="http://genieuat.intranet.wmcpolice">
 	<cfset oisBrowser="http://ois.intranet.wmcpolice/browser/">
-	<cfset intranetServer="http://websvr.intranet.wmcpolice">		
+	<cfset intranetServer="http://websvr.intranet.wmcpolice">	
+	<cfset corpDir="http://corpdir.westmerpolice01.local">	
 <cfelseif SERVER_NAME IS "genietrain.intranet.wmcpolice">			
 	<cfset genieServer="http://genietrain.intranet.wmcpolice">
 	<cfset oisBrowser="http://ois.intranet.wmcpolice/browser/">
 	<cfset intranetServer="http://development.intranet.wmcpolice">
+	<cfset corpDir="http://corpdir.westmerpolice01.local">
 <cfelseif SERVER_NAME IS "SVR21007">			
 	<cfset genieServer="http://svr21007">
 	<cfset oisBrowser="http://ois.intranet.wmcpolice/browser/">
-	<cfset intranetServer="http://svr21007">								
+	<cfset intranetServer="http://svr21007">			
+	<cfset corpDir="http://corpdir.westmerpolice01.local">					
 </cfif>
 
 <cfif not isDefined('genieVersion')>
@@ -49,8 +58,8 @@
 <cfswitch expression="#Type#">
 
  <cfcase value="corpDirectory">
-
-  <cflocation url="/index_email.cfm?page_address=#UrlEncodedFormat('/applications/corpDirectory/search.cfm?action=search&showAdvanced=false&p_search_string=')##Ref#">
+  
+  <cflocation url="#corpDir#/applications/corpDirectory/search.cfm?action=search&showAdvanced=false&p_search_string=#Ref#">
 
  </cfcase>
 

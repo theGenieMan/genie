@@ -386,6 +386,32 @@ AND  addr.PREMISE_KEY=os.PREMISE_KEY
 		  <cfbreak>
 		 </cfif>
 		</cfloop>
+				
+		<cfset s_OffStart="<anOfficer>">
+		<cfset s_OffEnd="</anOfficer>">
+		
+		<cfset i_DocPos=0>
+		<cfset i=1>
+		<cfloop condition="i IS 1">
+		<cfset i_DocPos=FindNoCase(s_OffStart,s_Doc,i_DocPos)>
+		 <cfif i_DocPos GT 0>
+		  <!--- find the end of the nom ref tag and extract the value --->
+		  <cfset i_OffEnd=Find(s_OffEnd,s_Doc,i_DocPos)>
+		  <cfset s_OffTag=Mid(s_Doc,i_DocPos,((i_OffEnd-i_DocPos)+Len(s_OffEnd)))>
+		   		  
+		  <cfset s_OffRef=Trim(REReplace(s_OffTag,"<[^>]*>","","ALL"))>		  
+		   
+		  <cfset firstSpace=ListFirst(s_OffRef," ")>
+		  <cfset searchString=Trim(Replace(Replace(s_OffRef,firstSpace,""),"&nbsp;"," ","ALL"))>
+		  
+		  <cfset s_OffRefLink="<b><a href=""/redirector/redirector.cfm?type=corpDirectory&ref=#searchString#"" class=""fakeLink"" target=""_blank"">#s_OffRef#</a></b>">
+		  
+		  <cfset s_Doc=Replace(s_Doc,s_OffTag,s_OffRefLink,"ALL")>		  
+		 <cfelse>
+		  <!--- no more linked crimes --->
+		  <cfbreak>
+		 </cfif>
+		</cfloop> 
 		
 		<!--- update the crime status with a value from the table --->
 		<cfset s_Doc=Replace(s_Doc,"*** CRIME_STATUS ***",qry_CrimeDetails.STATUS)>
