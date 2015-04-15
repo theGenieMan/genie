@@ -578,7 +578,7 @@
      <cfset confReturn.ENV="LIVE">
 	 <cfset confReturn.sessionTimespan="#createtimespan(0,4,0,0)#">
      <cfset confReturn.applicationTimespan="#createtimespan(0,2,0,0)#"> 
-	 <cfset confReturn.assetsDir="\\svr20200\g$\genie_assets">
+	 <cfset confReturn.assetsDir="\\svr20200\f$\genie_assets">
    <cfelseif SERVER_NAME IS "genieuat.intranet.wmcpolice">
 	 <cfset confReturn.ENV="LIVE_UAT">
 	 <cfset confReturn.sessionTimespan="#createtimespan(0,4,0,0)#">
