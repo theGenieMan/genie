@@ -112,7 +112,7 @@ ORDER BY DATE_ADDED DESC
 	     <cfloop query="qry_NameDetails">
 		  <cfset latestPhoto=application.genieService.getWestMerciaNominalLatestPhoto(NOMINAL_REF)>
 	      <tr class="row_colour#i MOD 2#" id="tr#NOMINAL_REF#">
-	       <td valign="top"><strong><a href="#NOMINAL_REF#" class="genieNominal" dpa="Y">#DETAILS# (#NOMINAL_REF#)</a></strong></td>
+	       <td valign="top"><strong><a href="#NOMINAL_REF#" class="genieNominal" dpa="yes">#DETAILS# (#NOMINAL_REF#)</a></strong></td>
 		   <td valign="top"><img src="#latestPhoto.getPHOTO_URL()#" height="100"></td>       
 	       <td valign="top">#DOB#</td>
 	       <td valign="top">#SEX#</td>
