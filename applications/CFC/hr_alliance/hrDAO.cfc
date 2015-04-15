@@ -159,7 +159,7 @@
 	</cfquery>	
 	
 	<!--- if the search string matches a 900 user id AND we get no results from the HR Table search then try AD --->
-	<cfif qSearch.recordCount IS 0 AND ArrayLen(REMatch('[a-z]_[a-z]{3}9[0-9][0-9]',arguments.searchText)) GT 0>
+	<cfif qSearch.recordCount IS 0 AND (ArrayLen(REMatch('[a-z]_[a-z]{3}9[0-9][0-9]',arguments.searchText)) OR ArrayLen(REMatch('2300[0-9][0-9][0-9][0-9]',arguments.searchText)) GT 0)>
 		<cfset tempHRRecord=read(ref=searchText,refType='userId')>
 		<cfif tempHRRecord.getIsValidRecord()>
 			<cfset arrayAppend(arrUsers,tempHRRecord)>
