@@ -87,7 +87,7 @@ Revisions   :
 					type: 'POST'
 				},
 				activate: function(event, ui){
-					if(ui.newTab.index()!=2){
+					if(ui.newTab.index()!=3){
 						clearInterval(mergeInterval)
 					}
 					else{
