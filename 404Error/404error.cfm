@@ -40,7 +40,9 @@ Revisions   :
 
 <p>GENIE was upgraded from V3.6.2 to V4 on Wednesday 15th April 2015 at 1000</p>
 
-<p>If you had V3.6.2 open when you got this error please then please close all your GENIE windows and reopen GENIE Via Start -> All Programs -> Sessions -> GENIE on the Force Desktop</p>
+<p>It you have clicked a link in another application or somewhere on the intranet then it may be that this link needs to be reformatted to work with
+GENIE V4. You should report where the link is that you are clicking on when receiving this error page to the ICT Service Desk via email (also if you can 
+include a screenshot of the page with the link on this will help enormously). Many Thanks ICT.</p>
 
 <cflog file="genie404" type="information" text="Script Name=#SCRIPT_NAME#, Path Translated=#PATH_TRANSLATED#, Referrer=#HTTP_REFERER#, User=#AUTH_USER#" />
 <cflog file="genie404" type="information" text="Dump | #dump404#" />
