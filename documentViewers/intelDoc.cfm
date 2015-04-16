@@ -44,6 +44,7 @@ WHERE LOG_REF=<cfqueryparam value="#logRef#" cfsqltype="cf_sql_integer">
 		      so work out the previous log and next log and display links to them
 			  searchUUID file contains a csv list of log refs --->
 		<cfif isDefined('searchUUID')>
+			
 		  <cfif Len(searchUUID) GT 0>
 		   <cfif FileExists(application.intelFTSTempDir&searchUUID&".txt")>
 			<cffile action="read" file="#application.intelFTSTempDir##searchUUID#.txt" variable="fileLogList">
@@ -73,8 +74,8 @@ WHERE LOG_REF=<cfqueryparam value="#logRef#" cfsqltype="cf_sql_integer">
 	
 		<cffile action="read" file="#str_Intel_doc#" variable="sIntelDoc" charset="utf-8">
 		
-		<cfset lisReplaceChars="#chr(14)#,#chr(15)#,#chr(16)#,#chr(17)#,#chr(18)#,#chr(19)#,#chr(20)#,#chr(21)#,#chr(22)#,#chr(23)#,#chr(24)#,#chr(25)#,#chr(26)#,#chr(27)#,#chr(28)#,#chr(29)#,#chr(30)#,#chr(31)#">
-		<cfset lisReplaceWith=" , , , , , , , , , , , , , , , , , ">
+		<cfset lisReplaceChars="#chr(14)#,#chr(15)#,#chr(16)#,#chr(17)#,#chr(18)#,#chr(19)#,#chr(20)#,#chr(21)#,#chr(22)#,#chr(23)#,#chr(24)#,#chr(25)#,#chr(26)#,#chr(27)#,#chr(28)#,#chr(29)#,#chr(30)#,#chr(31)#,#chr(128)#">
+		<cfset lisReplaceWith=" , , , , , , , , , , , , , , , , , , ">
 		
 		<cfset sIntelDoc=ReplaceList(sIntelDoc,lisReplaceChars,lisReplaceWith)>
 		
