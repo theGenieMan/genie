@@ -31,6 +31,8 @@ $(document).ready(function() {
 			initialUserId=loggedInUser;
 		}
 		
+		$('#searchType').change();
+		
 		$('#dpa').dpa({
 					requestFor:{
 						initialValue:initialUserId
