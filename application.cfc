@@ -471,6 +471,11 @@
 		  <cfset Session.LoggedInUserEmail="">
 		  <cfset Session.LoggedInUserDiv="H">                                                                                                                                                                   	
 	  </cfif>
+	  	  
+	  <!--- if training everybody gets access to west mids --->
+	  <cfif application.ENV IS "TRAIN">
+	  	  <cfset session.isWMidsUser=true>
+  	  </cfif>
 	  
 	  <!--- should the person be able to submit a stop search / drink drive --->
 	  <cfif (session.user.getDepartment() IS "Infrastructure" OR 
