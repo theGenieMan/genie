@@ -108,5 +108,5 @@ Revisions   :
  </div>		 	
 
 <cfif not isDefined("noAudit")>	
-  <cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"NOMINAL INFO (nominal_information.cfm)","","Nom Ref:#nominalRef# - FPU",0,session.user.getDepartment())>
+  <cfset application.genieService.doGenieAudit(session.user.getUserId(),Session.ThisUUID,session.audit_code,session.audit_details,session.audit_for,session.user.getFullName(),"NOMINAL INFO (nominal_information.cfm)","","Nom Ref:#nominalRef# #application.genieService.getWestMerciaNominalFullName(nominalRef)# - FPU",0,session.user.getDepartment())>
 </cfif>
