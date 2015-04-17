@@ -131,12 +131,27 @@
 	  <cfset var iAddrCount=0>
 	  <cfset var searchData=deserializeJSON(toString(getHttpRequestData().content))> 	     	  
 	  <cfset var returnTable=''>
+	  <cfset var resultType=searchData.resultType>
+	
+	  <!--- remove the none search related elements from the search terms --->
+	  <cfset structDelete(searchData,'wMids')>
+	  <cfset structDelete(searchData,'firearms')>  
+	  <cfset structDelete(searchData,'searchType')>
+	  <cfset structDelete(searchData,'resultType')>  	  	  
+	  <cfset structDelete(searchData,'enquiryUser')>
+	  <cfset structDelete(searchData,'enquiryUserName')>
+	  <cfset structDelete(searchData,'enquiryUserDept')>
+	  <cfset structDelete(searchData,'requestFor')>
+	  <cfset structDelete(searchData,'reasonCode')>  
+	  <cfset structDelete(searchData,'reasonText')>
+	  <cfset structDelete(searchData,'sessionId')>  
+	  <cfset structDelete(searchData,'terminalId')>  	
 	
 		<cfset addressResults = application.genieService.doWestMerciaAddressSearch(searchTerms=searchData)>  
 		
-		<cfif searchData.resultType IS "XML">
+		<cfif resultType IS "XML">
 		
-		<cfelseif searchData.resultType IS "html">						
+		<cfelseif resultType IS "html">						
 				<cfset returnData = doWMerAddressTable(addressResults)>				 														
 		<cfelse>
 			<cfset returnData = 'No Valid Return Format Specified. options are XML  or HTML'>
