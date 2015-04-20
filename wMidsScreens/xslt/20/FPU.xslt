@@ -66,8 +66,7 @@
 						</xsl:for-each>
 					</tbody>
 				</table>
-
-
+			    
 				<h3>Persons Involved</h3>
 				<table class="small" width="95%">
 					<tbody>
@@ -113,7 +112,7 @@
 						</tr>
 					</tbody>
 				</table>
-
+			    
 				<h3>Actions</h3>
 				<table class="small" width="95%">
 					<tbody>
@@ -155,6 +154,8 @@
 					</tbody>
 				</table>
 
+	</xsl:template>
+	
 	<xsl:template name="NAME_HYPERLINK">
 		<xsl:param name="surname"/>
 		<xsl:param name="forenames"/>
@@ -188,7 +189,5 @@
 				<xsl:value-of select="$post_code"/>
 			</xsl:if>
 		
-	</xsl:template>
-
-	</xsl:template>
+	</xsl:template>	
 </xsl:stylesheet>
