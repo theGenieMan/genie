@@ -31,7 +31,7 @@ function showFormDebug(){
 function getFormData(){	
 
 	var dataToSend={
-			search_text:$('#search_text').val().toUpperCase(),			
+			search_text:$('#search_text').val(),			
 			division:$('#division').val().toUpperCase(),
 			relevance:$('#relevance').val().toUpperCase(),
 			sort_order:$('#sort_order').val().toUpperCase(),			
