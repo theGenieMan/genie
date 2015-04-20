@@ -109,7 +109,7 @@ Revisions   :
 					<td>
 						<select name="custSuite" id="custSuite" class="mandatory" displayInPane="Custody Suite" displayPrevSearch="Y" initialFocus="true" multiple size="7">														
 							<cfloop query="application.bailCustodySuites">
-								<option value="#CUSTODY_SUITE#" #iif(CUSTODY_SUITE IS custSuite,DE('selected'),de(''))#>#CUSTODY_SUITE#</option>																						
+								<option value="#CUSTODY_SUITE#" #iif(ListFind(custSuite,CUSTODY_SUITE) GT 0,DE('selected'),de(''))#>#CUSTODY_SUITE#</option>																						
 							</cfloop>
 						</select>					
 						<br>Hold CTRL key down and click to select multiple custody suites (Max 4) 	
