@@ -87,7 +87,8 @@ $(document).ready(function() {
 										}		
 										
 										// if we have an auto search
-										if( $('#doSearch').length>0 ){
+										if( $('#doSearch').length>0 ){		
+											$('#frmAllDummy').change();									
 											$('.enquiryForm').trigger('submit');
 										}
 											  					  
@@ -104,6 +105,7 @@ $(document).ready(function() {
 		if( $('#doSearch').length>0 ){
 		  
 		  if (redirector == 'N') {
+		  	$('#frmAllDummy').change();
 		  	$('.enquiryForm').submit();
 		  }
 		  else
@@ -142,7 +144,7 @@ $(document).ready(function() {
 									$('#prevSearchSpan').show()
 								}
 							}
-							
+							$('#frmAllDummy').change();
 							$('.enquiryForm').submit();		  					  
 						 }
 				});					

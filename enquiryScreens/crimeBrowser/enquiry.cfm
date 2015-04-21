@@ -12,12 +12,16 @@
 <cfparam name="auditRequired" default="">
 <cfparam name="auditInfo" default="">	
 <cfparam name="frmDummy" default="">
+<cfparam name="frmOffenceGroupings" default="">
 <cfparam name="frmAllDummy" default="">
+<cfif frmOffenceGroupings IS "ALL" AND redirector IS "Y">
+  <cfset frmAllDummy="Y">
+</cfif>
 <cfparam name="frmDateFrom" default="#DateFormat(dateAdd('d','-1',now()),"DD/MM/YYYY")#">
 <cfparam name="frmDateTo" default="#DateFormat(now(),"DD/MM/YYYY")#">
 <cfparam name="frmTimeFrom" default="00:00">
 <cfparam name="frmTimeTo" default="23:59">
-<cfparam name="frmOffenceGroupings" default="">
+
 <cfparam name="frmArea" default="">
 <cfparam name="frmDateType" default="DATE_CREATED">
 <cfparam name="frmSortType" default="DATE_CREATED_DESC">
@@ -161,7 +165,7 @@
 		  			<td valign="top"><label for="frmOffenceGroupings">Themes</label></td>
 					<td  valign="top">
 					   <div>
-	                   <input type="checkbox" name="frmAllDummy" id="frmAllDummy" onClick="checkAll()" value="Y" #iif(frmAllDummy IS "Y",de("checked"),de(""))#><b>All Offences</b>
+	                   <input type="checkbox" name="frmAllDummy" id="frmAllDummy" value="Y" #iif(frmAllDummy IS "Y",de("checked"),de(""))#><b>All Offences</b>
 	                   </div>
 	                   
 	        	       <cfquery name="qTitles" dbtype="query">

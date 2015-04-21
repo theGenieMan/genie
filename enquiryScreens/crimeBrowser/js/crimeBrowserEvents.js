@@ -97,3 +97,7 @@ $(document).on('dblclick','#frmPZ',
 				addArea(sAreaToAdd)
 			  }); // end snt double click	
 
+$(document).on('change','#frmAllDummy',
+			  function(){
+			  	checkAll()
+			  }); // end all dummy change

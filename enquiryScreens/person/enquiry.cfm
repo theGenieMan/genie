@@ -204,11 +204,8 @@
 					<td>
 						<select name="wMidsOrder" id="wMidsOrder" displayInPane="West Mids Order" displayPrevSearch="N">
 						  <option value="Name">Name</option>
-						  <option value="System">System</option>
-						  <!--- removed as other forces data no longer going into FLINTS --->
-						  <!---
-						  <option value="Force">Force</option>
-						  --->						  						
+						  <option value="System">System</option>						  
+						  <option value="Force">Force</option>						  			
 						</select>												
 					</td>
 				</tr>				
