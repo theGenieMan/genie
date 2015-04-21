@@ -40,8 +40,7 @@
 	  <div class="ui-state-highlight" align="center">
 		Enter information into <b>at least one</b> of the search fields below.
 		<cfif session.isWMidsUser>
-		<br>
-		<b>West Mids</b> - searching is available on the following fields. Postcode, Premise No, Flat No, Street. You <b>must complete one</b> of these for a West Mids Search
+		<br><b>West Mids</b> search boxes are marked with <b><i>*W*</i></b>	
 		</cfif>
 	  </div>
 	  <div class="spacer">&nbsp;</div>
@@ -100,17 +99,17 @@
 		  		<tr>
 		  			<td width="15%"><label for="postcode">Postcode</label></td>
 					<td width="25%">
-						<input name="postcode" id="postcode" displayInPane="Postcode" displayPrevSearch="Y" initialFocus="true" size="8"> <cfif session.isWMidsUser><b>WM</b></cfif>						
+						<input name="postcode" id="postcode" displayInPane="Postcode" displayPrevSearch="Y" initialFocus="true" size="8"> <cfif session.isWMidsUser><b><i>*W*</i></b></cfif>						
 					</td>
 					<td width="15%"><label for="premiseno">Premise No</label></td>
 					<td>
-						<input name="premiseno" id="premiseno" displayInPane="Premise No" displayPrevSearch="Y"  size="2">	<cfif session.isWMidsUser><b>WM</b></cfif>					
+						<input name="premiseno" id="premiseno" displayInPane="Premise No" displayPrevSearch="Y"  size="2">	<cfif session.isWMidsUser><b><i>*W*</i></b></cfif>					
 					</td>																		
 		  		</tr>	
 		  		<tr>
 		  			<td width="15%"><label for="flatno">Flat No</label></td>
 					<td width="25%">
-						<input name="flatno" id="flatno" displayInPane="Flat No" displayPrevSearch="Y"  size="2"> <cfif session.isWMidsUser><b>WM</b></cfif>						
+						<input name="flatno" id="flatno" displayInPane="Flat No" displayPrevSearch="Y"  size="2"> <cfif session.isWMidsUser><b><i>*W*</i></b></cfif>						
 					</td>
 					<td width="15%"><label for="premisename">Premise Name</label></td>
 					<td>
@@ -120,7 +119,7 @@
 		  		<tr>
 		  			<td width="15%"><label for="street">Street</label></td>
 					<td colspan="3">
-						<input name="street" id="street" displayInPane="Street" displayPrevSearch="Y"  size="50"> <cfif session.isWMidsUser><b>WM</b></cfif>						
+						<input name="street" id="street" displayInPane="Street" displayPrevSearch="Y"  size="50"> <cfif session.isWMidsUser><b><i>*W*</i></b></cfif>						
 					</td>																
 		  		</tr>		
 		  		<tr>

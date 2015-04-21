@@ -66,6 +66,9 @@ Revisions   :
 	<div id="searchPanes">		  
 	  <div class="ui-state-highlight" align="center">
 		Enter information into <b>at least one</b> of the search fields below.
+	  	<cfif session.isWMidsUser>
+		<br><b>West Mids</b> search boxes are marked with <b><i>*W*</i></b>	
+		</cfif>
 	  </div>
 	  <div class="spacer">&nbsp;</div>
 	  <table width="100%" class="searchButtonsTable">
@@ -126,7 +129,7 @@ Revisions   :
 		  		<tr>
 		  			<td width="15%"><label for="tel_no">Number</label></td>
 					<td width="25%" colspan="3">
-						<input name="tel_no" id="tel_no" displayInPane="Number" displayPrevSearch="Y" size="15" value="#tel_no#" initialFocus="true"> <cfif session.isWMidsUser><b>WM</b></cfif>						
+						<input name="tel_no" id="tel_no" displayInPane="Number" displayPrevSearch="Y" size="15" value="#tel_no#" initialFocus="true"> <cfif session.isWMidsUser><b><i>*W*</i></cfif>						
 					</td>																							
 		  		</tr>	
 		  		<tr>

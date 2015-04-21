@@ -69,6 +69,9 @@ Revisions   :
 	<div id="searchPanes">		  
 	  <div class="ui-state-highlight" align="center">
 		Enter information into <b>at least one</b> of the search fields below.
+		<cfif session.isWMidsUser>
+		<br><b>West Mids</b> search boxes are marked with <b><i>*W*</i></b>	
+		</cfif>
 	  </div>
 	  <div class="spacer">&nbsp;</div>
 	  <table width="100%" class="searchButtonsTable">
@@ -125,7 +128,7 @@ Revisions   :
 		  		<tr>
 		  			<td width="15%"><label for="vrm">VRM</label></td>
 					<td width="25%" colspan="3">
-						<input name="vrm" id="vrm" displayInPane="VRM" displayPrevSearch="Y" size="8" value="#vrm#" initialFocus="true"> <cfif session.isWMidsUser><b>WM</b></cfif>
+						<input name="vrm" id="vrm" displayInPane="VRM" displayPrevSearch="Y" size="8" value="#vrm#" initialFocus="true"> <cfif session.isWMidsUser><b><i>*W*</i></b></cfif>
 						&nbsp;&nbsp;Special Search Available (eg. T%*312*%Y - NB. *ANYORDER*, Warks / West Mercia Data Only)						
 					</td>																							
 		  		</tr>	

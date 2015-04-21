@@ -63,7 +63,7 @@
 		<strong>or</strong> type data into <strong>one or more</strong> of the search fields in the Name / DOB / Additional Sections<br>
 		<b>Firearms</b> searches can be performed on Surnames, Forenames and PNC ID
 		<cfif session.isWMidsUser>
-		<br><b>West Mids</b> search boxes are marked with WM	
+		<br><b>West Mids</b> search boxes are marked with <b><i>*W*</i></b>	
 		</cfif>
 	  </div>
 	  <div class="spacer">&nbsp;</div>
@@ -117,11 +117,11 @@
 					</td>
 					<td><label for="pnc">PNC ID</label></td>
 					<td>
-						<input type="text" name="pnc" id="pnc"  displayInPane="PNC Id" displayPrevSearch="Y">	<cfif session.isWMidsUser><b>WM</b></cfif>					
+						<input type="text" name="pnc" id="pnc"  displayInPane="PNC Id" displayPrevSearch="Y">				
 					</td>							
 					<td><label for="cro">CRO</label></td>
 					<td>
-						<input type="text" name="cro" id="cro" displayInPane="CRO" displayPrevSearch="Y"> <cfif session.isWMidsUser><b>WM</b></cfif>						
+						<input type="text" name="cro" id="cro" displayInPane="CRO" displayPrevSearch="Y">						
 					</td>								
 		  		</tr>	
 				<cfif session.isOCC>
@@ -169,17 +169,17 @@
 				<tr>
 					<td><label for="surname1">Surname / Maiden Name</label></td>
 					<td>
-						<input type="text" name="surname1" id="surname1" displayInPane="Surname 1" displayPrevSearch="Y" initialFocus="true">
+						<input type="text" name="surname1" id="surname1" displayInPane="Surname 1" displayPrevSearch="Y" initialFocus="true"> <cfif session.isWMidsUser><b><i>*W*</i></i></b></cfif>
 						&nbsp;
-						<input type="text" name="surname2" id="surname2" displayInPane="Surname 2" displayPrevSearch="Y"> <cfif session.isWMidsUser><b>WM</b></cfif>
+						<input type="text" name="surname2" id="surname2" displayInPane="Surname 2" displayPrevSearch="Y">
 					</td>
 				</tr>
 				<tr>
 					<td><label for="forename1">Forename / Nickname</b></td>
 					<td>
-						<input type="text" name="forename1" id="forename1" displayInPane="Forename 1" displayPrevSearch="Y">
+						<input type="text" name="forename1" id="forename1" displayInPane="Forename 1" displayPrevSearch="Y"> <cfif session.isWMidsUser><b><i>*W*</i></b></cfif>
 						&nbsp;
-						<input type="text" name="forename2" id="forename2" displayInPane="Forename 2" displayPrevSearch="Y"> <cfif session.isWMidsUser><b>WM</b></cfif>					
+						<input type="text" name="forename2" id="forename2" displayInPane="Forename 2" displayPrevSearch="Y">				
 					</td>
 				</tr>
 				<tr>
@@ -192,9 +192,8 @@
 							 <option value="#ListGetAt(Application.lis_MonthNos,ListFind(Application.lis_Months,str_Mon,","),",")#">#str_Mon#</option>
 						  </cfloop>							
 						</select> /						
-						<input type="text" name="dobYear" id="dobYear" class="input4char" maxlength="4" displayInPane="DOB Year" displayPrevSearch="Y">
-						&nbsp;&nbsp;
-						<cfif session.isWMidsUser><b>WM</b> | </cfif>
+						<input type="text" name="dobYear" id="dobYear" class="input4char" maxlength="4" displayInPane="DOB Year" displayPrevSearch="Y">						
+						<cfif session.isWMidsUser><b><i>*W*</i></b>&nbsp; | &nbsp;&nbsp;</cfif>
 						<label for="exactDOB">Exact DOB Match?</label>
 						<input type="checkbox" name="exactDOB" id="exactDOB" displayInPane="Exact DOB" displayPrevSearch="Y">
 						
@@ -206,7 +205,10 @@
 						<select name="wMidsOrder" id="wMidsOrder" displayInPane="West Mids Order" displayPrevSearch="N">
 						  <option value="Name">Name</option>
 						  <option value="System">System</option>
-						  <option value="Force">Force</option>						  						
+						  <!--- removed as other forces data no longer going into FLINTS --->
+						  <!---
+						  <option value="Force">Force</option>
+						  --->						  						
 						</select>												
 					</td>
 				</tr>				
@@ -227,24 +229,23 @@
 				 		  <cfloop query="application.qry_Sex">
 				  		   <option value="#rv_low_value#">#RV_MEANING#</option>				 
 				          </cfloop>
-				        </select> <cfif session.isWMidsUser><b>WM</b></cfif>
+				        </select> <cfif session.isWMidsUser><b><i>*W*</i></b></cfif>
 					</td>
 					<td width="15%"><label for="ageFrom">Age</label></td>
 					<td>
 						<input type="text" name="ageFrom" id="ageFrom" class="input2char" displayInPane="Age From" displayPrevSearch="Y">
 						-						
-						<input type="text" name="ageTo" id="ageTo" class="input2char" displayInPane="Age To" displayPrevSearch="Y"> <cfif session.isWMidsUser><b>WM</b></cfif>
+						<input type="text" name="ageTo" id="ageTo" class="input2char" displayInPane="Age To" displayPrevSearch="Y">
 					</td>					
 					<td width="15%"><label for="pob">Place of Birth</label></td>
 					<td>
-						<input type="text" name="pob" id="pob" displayInPane="Place of Birth" displayPrevSearch="Y">		
-						<cfif session.isWMidsUser>WM</cfif>				
+						<input type="text" name="pob" id="pob" displayInPane="Place of Birth" displayPrevSearch="Y">											
 					</td>					
 		  		</tr>		
 		  		<tr>
 		  			<td><label for="maiden">Maiden Name</label></td>
 					<td>
-						<input type="text" name="maiden" id="maiden" displayInPane="Maiden Name" displayPrevSearch="Y"> <cfif session.isWMidsUser><b>WM</b></cfif>
+						<input type="text" name="maiden" id="maiden" displayInPane="Maiden Name" displayPrevSearch="Y">
 					</td>
 					<td><label for="nickname">Nick name</label></td>
 					<td>
@@ -252,7 +253,7 @@
 					</td>					
 					<td><label for="pTown">Post Town</label></td>
 					<td>
-						<input type="text" name="pTown" id="pTown" displayInPane="Post Town" displayPrevSearch="Y"> <cfif session.isWMidsUser><b>WM</b></cfif>						
+						<input type="text" name="pTown" id="pTown" displayInPane="Post Town" displayPrevSearch="Y">						
 					</td>					
 		  		</tr>							
 		  	</table>			
