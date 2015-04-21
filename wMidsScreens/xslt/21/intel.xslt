@@ -3,7 +3,10 @@
 	<xsl:include href="d:\genie_assets\risp\xslt\21\hyperlinks.xslt"/>
 	<xsl:include href="d:\genie_assets\risp\xslt\21\PrintPage.xslt"/>
 
+    <!--
 	<xsl:output version="1.0" omit-xml-declaration="no" indent="no" media-type="text/html"/>
+	-->
+	
 	<xsl:variable name="nomcount" select="count(//INTEL/LOG_NOMINALS/LOG_NOMINAL)"/>
 	<xsl:variable name="addcount" select="count(//INTEL/LOG_ADDRESSES/LOG_ADDRESS)"/>
 	<xsl:variable name="vehcount" select="count(//INTEL/LOG_VEHICLES/LOG_VEHICLE)"/>

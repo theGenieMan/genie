@@ -107,7 +107,21 @@
 
 	</xsl:template>
 	
-		<xsl:template name="ADDRESS_HYPERLINK">
+	<xsl:template name="NAME_HYPERLINK">
+		<xsl:param name="surname"/>
+		<xsl:param name="forenames"/>
+		<xsl:param name="dob"/>
+		<xsl:param name="linktext"/>
+
+			<xsl:value-of select="$surname"/>
+			<xsl:if test="$forenames != ''">,<xsl:value-of select="$forenames"/>
+			</xsl:if>
+			<xsl:if test="$dob !=''">,<xsl:value-of select="$dob"/>
+			</xsl:if>
+
+	</xsl:template>	
+	
+	<xsl:template name="ADDRESS_HYPERLINK">
 		<xsl:param name="premise_name"/>
 		<xsl:param name="number"/>
 		<xsl:param name="street"/>

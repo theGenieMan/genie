@@ -9,7 +9,9 @@
 		<html>
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 			<meta http-equiv="pragma" content="nocache"/>
+			<!--
 			<link href="..\StyleSheets\Flintsweb.css" type="text/css" rel="stylesheet"/>
+			-->
 			<head>
 			</head>
 			<body style=" margin:2px; padding: 2px;" scroll="no" ondragstart="return false" >
