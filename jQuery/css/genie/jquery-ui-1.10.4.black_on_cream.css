@@ -1200,14 +1200,16 @@ table.genieData, table.wmpData, table.nominalData {
 }
 
 table.genieData td, table.wmpData td {
-	padding: 3px;
-	border:1px solid #000000;
+	padding: 2px;
+	border-bottom:1px solid #FFFFFF;
+	/*border:1px solid #000000;*/
 }
 
 table.genieData thead th, table.wmpData thead th {
 	background-color:#FFFFCC;
 	color:#000000;
 	font-weight:bold;
+	border-bottom:1px solid black;
 }	
 
 table.nominalData {
@@ -1700,7 +1702,7 @@ pre.crime {
 }
 
 .thSortable{
-	color:#FFFFFF !important;
+	color:#000000 !important;
 	cursor:hand;
 	text-decoration:underline;
 }
