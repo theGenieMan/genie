@@ -261,7 +261,7 @@ The record was created on <strong><xsl:value-of select="Crime_Document/Date_Reco
 				&nbsp;&nbsp;<nom_ref><xsl:value-of select="Person/Nominal_Ref" /></nom_ref></td>
 			<td valign="top">
 		     <xsl:choose>		
-			   <xsl:when test="string-length(Person/Eliminated)>0 and (Role_Type='SUSPECT')">
+			   <xsl:when test="string-length(Person/Eliminated)>0 and (Role_Type='SUSPECT' or Role_Type='FID OR DID SUSPECT')">
 			     Eliminated: <xsl:value-of select="Person/Date_Eliminated" />. 
 			   </xsl:when>
 			 </xsl:choose>					
