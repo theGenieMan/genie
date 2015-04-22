@@ -88,7 +88,7 @@ $(document).ready(function() {
 										
 										// if we have an auto search
 										if( $('#doSearch').length>0 ){	
-											if ($('#frmAllDummy').val == 'Y') {
+											if ($('#frmAllDummy').val() == 'Y') {
 												$('#frmAllDummy').change();
 											}							
 											$('.enquiryForm').trigger('submit');
@@ -107,7 +107,7 @@ $(document).ready(function() {
 		if( $('#doSearch').length>0 ){
 		  
 		  if (redirector == 'N') {
-		  	if ($('#frmAllDummy').val == 'Y') 
+		  	if ($('#frmAllDummy').val() == 'Y') 
 			{
 				$('#frmAllDummy').change();
 			}
@@ -149,7 +149,8 @@ $(document).ready(function() {
 									$('#prevSearchSpan').show()
 								}
 							}
-							if ($('#frmAllDummy').val == 'Y') {
+							
+							if ($('#frmAllDummy').val() == 'Y') {
 								$('#frmAllDummy').change();
 							}
 							$('.enquiryForm').submit();		  					  
