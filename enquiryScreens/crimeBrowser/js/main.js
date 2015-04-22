@@ -87,8 +87,10 @@ $(document).ready(function() {
 										}		
 										
 										// if we have an auto search
-										if( $('#doSearch').length>0 ){		
-											$('#frmAllDummy').change();									
+										if( $('#doSearch').length>0 ){	
+											if ($('#frmAllDummy').val == 'Y') {
+												$('#frmAllDummy').change();
+											}							
 											$('.enquiryForm').trigger('submit');
 										}
 											  					  
@@ -105,7 +107,10 @@ $(document).ready(function() {
 		if( $('#doSearch').length>0 ){
 		  
 		  if (redirector == 'N') {
-		  	$('#frmAllDummy').change();
+		  	if ($('#frmAllDummy').val == 'Y') 
+			{
+				$('#frmAllDummy').change();
+			}
 		  	$('.enquiryForm').submit();
 		  }
 		  else
@@ -144,7 +149,9 @@ $(document).ready(function() {
 									$('#prevSearchSpan').show()
 								}
 							}
-							$('#frmAllDummy').change();
+							if ($('#frmAllDummy').val == 'Y') {
+								$('#frmAllDummy').change();
+							}
 							$('.enquiryForm').submit();		  					  
 						 }
 				});					
