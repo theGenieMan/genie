@@ -7,6 +7,7 @@
 		<cfargument name="requestForCollar" type="string" required="false" default="" hint="update of collar of person requesting">
 		<cfargument name="requestForForce" type="string" required="false" default="" hint="update of Force of person requesting">
 	 	
+	 	<!---
 	 	<cflog file="genie" type="information" text="updateSession called #session.urlToken#" >
 		 
 		<cfsavecontent variable="sessionDetails">
@@ -18,6 +19,7 @@
 		<cfif isDefined('session.lastDPAUpdate')>
 		<cflog file="genie" type="information" text="updateSession before = #session.lastDPAUpdate#,#session.audit_code#,#session.audit_for#,#session.audit_details#,#session.ethnic_code#,#session.audit_for_collar#,#session.audit_for_force#">
 		</cfif> 
+	 	--->
 	 	
 	 	<cfset session.lastDPAUpdate=now()>		
 		<cfset session.audit_code=arguments.reasoncode>
@@ -26,9 +28,10 @@
 		<cfset session.ethnic_code=arguments.ethnicCode>
 		<cfset session.audit_for_collar=arguments.requestForCollar>
 		<cfset session.audit_for_force=arguments.requestForForce>
-			 
+		
+		<!---	 
 		<cflog file="genie" type="information" text="updateSession after = #session.lastDPAUpdate#,#session.audit_code#,#session.audit_for#,#session.audit_details#,#session.ethnic_code#,#session.audit_for_collar#,#session.audit_for_force#">	
-		 
+		 --->
 	</cffunction>
 	
 	<cffunction name="updateUserSettings" access="remote" output="false" returntype="string">
