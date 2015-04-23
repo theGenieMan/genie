@@ -17,6 +17,9 @@
 <cfif frmOffenceGroupings IS "ALL" AND redirector IS "Y">
   <cfset frmAllDummy="Y">
 </cfif>
+<cfif frmOffenceGroupings IS "KEY" AND redirector IS "Y">
+  <cfset frmDummy="1001">
+</cfif>
 <cfparam name="frmDateFrom" default="#DateFormat(dateAdd('d','-1',now()),"DD/MM/YYYY")#">
 <cfparam name="frmDateTo" default="#DateFormat(now(),"DD/MM/YYYY")#">
 <cfparam name="frmTimeFrom" default="00:00">
@@ -187,7 +190,7 @@
 	            	        </cfloop>
 	            	        )
 	            	    </cfquery>
-	            	    <div style="padding-top:5px;">
+	            	    <div style="padding-top:5px;">						
 	        	        <input type="checkbox" name="frmDummy" id="frmDummy#GROUP_ID#" value="#GROUP_ID#" onClick="updateBoxes('#INCLUDE_GROUPS#','frmDummy#GROUP_ID#','#INTEREST_MARKERS#')" #iif(ListFind(frmDummy,GROUP_ID,",") GT 0,de('checked'),de(''))#><strong>#GROUP_NAME#</strong>
 	        	        <cfif DISPLAY_GROUPS IS "Y"> 
 	        	        (

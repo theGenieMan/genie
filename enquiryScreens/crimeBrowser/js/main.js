@@ -88,7 +88,7 @@ $(document).ready(function() {
 										
 										// if we have an auto search
 										if( $('#doSearch').length>0 ){	
-											if ($('#frmAllDummy').val() == 'Y') {
+											if ($('#frmAllDummy').is(':checked')) {
 												$('#frmAllDummy').change();
 											}							
 											$('.enquiryForm').trigger('submit');
@@ -107,7 +107,7 @@ $(document).ready(function() {
 		if( $('#doSearch').length>0 ){
 		  
 		  if (redirector == 'N') {
-		  	if ($('#frmAllDummy').val() == 'Y') 
+		  	if ($('#frmAllDummy').is(':checked')) 
 			{
 				$('#frmAllDummy').change();
 			}
@@ -150,9 +150,15 @@ $(document).ready(function() {
 								}
 							}
 							
-							if ($('#frmAllDummy').val() == 'Y') {
+							if ($('#frmAllDummy').is(':checked')) {								
 								$('#frmAllDummy').change();
 							}
+							
+							if ($('#frmDummy1001').is(':checked')) {
+								$('#frmDummy1001').prop('checked',false);
+								$('#frmDummy1001').trigger('click');
+							}
+							
 							$('.enquiryForm').submit();		  					  
 						 }
 				});					

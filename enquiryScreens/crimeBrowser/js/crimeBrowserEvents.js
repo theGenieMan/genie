@@ -100,4 +100,4 @@ $(document).on('dblclick','#frmPZ',
 $(document).on('change','#frmAllDummy',
 			  function(){
 			  	checkAll()
-			  }); // end all dummy change
+			  }); // end all dummy change		  
