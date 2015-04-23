@@ -10,6 +10,8 @@ $(document).ready(function() {
 		window.globalSearchButtonInterval='';
 		window.globalPreviousSearchArray=[];
 		
+		window.searchStatusArray=[];
+		
 		// setup masked date boxes
 		 $("input[datepicker]").inputmask("dd/mm/yyyy");
 		 $('input[timepicker]').timeEntry({show24Hours:true,spinnerImage:'',initialField:0});

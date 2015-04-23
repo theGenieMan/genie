@@ -58,6 +58,9 @@ function getFormData(){
 
 function doTelephoneEnquiry(){
 			
+	//disable the search button
+	$('#startSearch').prop('disabled',true)				
+			
 	// get the search form data
 	var dataToSend=getFormData();
 	
@@ -76,6 +79,9 @@ function doTelephoneEnquiry(){
     if ($('#collapseSearch').val() == 'Y') {
    	  collapseAllSearchPanes('searchPaneHeader');
     }	
+	
+	window.searchStatusArray.push('WEST MERCIA RUNNING');
+	console.log('Run Status Array = '+window.searchStatusArray);
 	
 	$.ajax({
 		 type: 'POST',
@@ -127,7 +133,20 @@ function doTelephoneEnquiry(){
 			// now a search has been performed show the actions drop down
 			if ($('#actionsDropDown').length > 0) {
 				$('#actionsDropDown').show();
-			}		  
+			}		
+			
+			 var runStatus=jQuery.inArray('WEST MERCIA RUNNING',window.searchStatusArray)
+			 if(runStatus!=-1){
+			 	window.searchStatusArray.splice(runStatus,1)
+			 };
+			 console.log('WEST MERCIA SEARCH FINISHED')
+			 console.log('Run Status Array = '+window.searchStatusArray);
+			 // if there is nothing in the array then all searches have completed
+			 // so re-enable the search button
+			 if(window.searchStatusArray.length==0){
+			 	console.log('WEST MERCIA SEARCH - RUN STATUS EMPTY RE-ENABLE BUTTON')
+			 	$('#startSearch').prop('disabled',false)
+			 }					  
 		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred processing the vehicle enquiry: '+textStatus+', '+errorThrown)			
@@ -138,7 +157,9 @@ function doTelephoneEnquiry(){
    // otherwise hide the tab
 	if (dataToSend.firearms == 'Y' && dataToSend.tel_no.length > 0){
    		initFirearmsTab();
-		
+		window.searchStatusArray.push('FIREARMS RUNNING');
+		console.log('Run Status Array = '+window.searchStatusArray);
+				
 		$.ajax({
 		 type: 'POST',
 		 url: '/genieTelephoneWebService.cfc?method=doFirearmsTelephoneEnquiry',						 
@@ -186,6 +207,18 @@ function doTelephoneEnquiry(){
 			{
 				$('#firearmsResultsButtons input[type=button]').removeAttr('disabled')
 			}
+			
+			var runStatus=jQuery.inArray('FIREARMS RUNNING',window.searchStatusArray)
+			 if(runStatus!=-1){
+			 	window.searchStatusArray.splice(runStatus,1)
+			 };
+			 console.log('FIREARMS SEARCH FINISHED')
+			 console.log('Run Status Array = '+window.searchStatusArray);
+			 
+			 if (window.searchStatusArray.length == 0) {
+			 	console.log('FIREARMS SEARCH - RUN STATUS EMPTY RE-ENABLE BUTTON')
+			 	$('#startSearch').prop('disabled', false)
+			 }			
 									  					  
 		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
@@ -203,7 +236,8 @@ function doTelephoneEnquiry(){
    // otherwise hide the tab
 	if (dataToSend.htcu == 'Y'){
    		initHTCUTab();
-		
+		window.searchStatusArray.push('HTCU RUNNING');
+		console.log(window.searchStatusArray);		
 		$.ajax({
 		 type: 'POST',
 		 url: '/genieTelephoneWebService.cfc?method=doHTCUTelephoneEnquiry',						 
@@ -251,6 +285,18 @@ function doTelephoneEnquiry(){
 			{
 				$('#htcuResultsButtons input[type=button]').removeAttr('disabled')
 			}
+					
+			var runStatus=jQuery.inArray('HTCU RUNNING',window.searchStatusArray)
+			 if(runStatus!=-1){
+			 	window.searchStatusArray.splice(runStatus,1)
+			 };
+			 console.log('HTCU SEARCH FINISHED')
+			 console.log('Run Status Array = '+window.searchStatusArray);
+			
+			 if (window.searchStatusArray.length == 0) {
+			 	console.log('HTCU SEARCH - RUN STATUS EMPTY RE-ENABLE BUTTON')
+			 	$('#startSearch').prop('disabled', false)
+			 }						
 									  					  
 		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
@@ -268,7 +314,8 @@ function doTelephoneEnquiry(){
    // otherwise hide the tab   
    if (dataToSend.wMids == 'Y'){
    		initWMidsTab();
-
+		window.searchStatusArray.push('WEST MIDS RUNNING');
+		console.log(window.searchStatusArray);
 		$.ajax({
 		 type: 'POST',
 		 url: '/genieTelephoneWebService.cfc?method=doWestMidsTelephoneEnquiry',						 
@@ -305,6 +352,18 @@ function doTelephoneEnquiry(){
 			{
 				$('#wMidsResultsButtons input[type=button]').removeAttr('disabled')
 			}
+			
+			var runStatus=jQuery.inArray('WEST MIDS RUNNING',window.searchStatusArray)
+			 if(runStatus!=-1){
+			 	window.searchStatusArray.splice(runStatus,1)
+			 };
+			 console.log('WEST MIDS SEARCH FINISHED')
+			 console.log('Run Status Array = '+window.searchStatusArray);
+			
+			 if (window.searchStatusArray.length == 0) {
+			 	console.log('WEST MIDS SEARCH - RUN STATUS EMPTY RE-ENABLE BUTTON')
+			 	$('#startSearch').prop('disabled', false)
+			 }				
 									  					  
 		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
