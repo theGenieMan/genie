@@ -68,6 +68,9 @@ function getFormData(){
 
 function doPersonEnquiry(){
 	
+	//disable the search button
+	$('#startSearch').prop('disabled',true)	
+	
 	// clear the interval for checking on search expiry
 	clearInterval(window.globalSearchButtonInterval)
 	
