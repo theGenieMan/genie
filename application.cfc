@@ -75,7 +75,9 @@
 	<cfset Application.forceLookUp="20|West Mids,21|Staffs,23|Warks,30|Derbyshire">
 	<cfset Application.wMidsSysCodes="COCO">
 	<cfset Application.wMidsSysReplaces="OASIS">
+	<!---
 	<cfset Application.wMidsTimeout="360">
+	--->
 	<cfset Application.mopiGroups="1,2,3,4,U">    
 	<cfset Application.htcuNoNirReasons="Intel already exists,Intel of no value">
 	<cfset Application.adServer="10.1.230.150">

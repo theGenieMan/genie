@@ -297,6 +297,7 @@ function resetSearchPanes(){
 			}						
 		}
 	)
+	$('#startSearch').prop('disabled', false)
 }
 
 function resetResultPanes(){
