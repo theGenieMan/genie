@@ -87,6 +87,9 @@ function doPersonEnquiry(){
    	  collapseAllSearchPanes('searchPaneHeader');
     }
 	
+	window.searchStatusArray.push('WEST MERCIA RUNNING');
+	console.log('Run Status Array = '+window.searchStatusArray);
+	
 	$.ajax({
 		 type: 'POST',
 		 url: '/geniePersonWebService.cfc?method=doWMerPersonEnquiry',						 
@@ -172,6 +175,19 @@ function doPersonEnquiry(){
 		   	 var scrollToPos=parseInt($('#resultsContainer').offset().top)-50;	 
    	 		 window.scrollTo(0,scrollToPos)
 		    }
+			
+			 var runStatus=jQuery.inArray('WEST MERCIA RUNNING',window.searchStatusArray)
+			 if(runStatus!=-1){
+			 	window.searchStatusArray.splice(runStatus,1)
+			 };
+			 console.log('WEST MERCIA SEARCH FINISHED')
+			 console.log('Run Status Array = '+window.searchStatusArray);
+			 // if there is nothing in the array then all searches have completed
+			 // so re-enable the search button
+			 if(window.searchStatusArray.length==0){
+			 	console.log('WEST MERCIA SEARCH - RUN STATUS EMPTY RE-ENABLE BUTTON')
+			 	$('#startSearch').prop('disabled',false)
+			 }			
 
 				  
 		 }/*,
@@ -185,6 +201,8 @@ function doPersonEnquiry(){
    
    if (dataToSend.firearms == 'Y' && (dataToSend.surname1.length > 0 || dataToSend.forename1.length > 0 || dataToSend.pncid.length > 0)){
    		initFirearmsTab();
+		window.searchStatusArray.push('FIREARMS RUNNING');
+		console.log('Run Status Array = '+window.searchStatusArray);
 		
 		$.ajax({
 		 type: 'POST',
@@ -233,6 +251,18 @@ function doPersonEnquiry(){
 			{
 				$('#firearmsResultsButtons input[type=button]').removeAttr('disabled')
 			}
+			
+			var runStatus=jQuery.inArray('FIREARMS RUNNING',window.searchStatusArray)
+			 if(runStatus!=-1){
+			 	window.searchStatusArray.splice(runStatus,1)
+			 };
+			 console.log('FIREARMS SEARCH FINISHED')
+			 console.log('Run Status Array = '+window.searchStatusArray);
+			 
+			 if (window.searchStatusArray.length == 0) {
+			 	console.log('FIREARMS SEARCH - RUN STATUS EMPTY RE-ENABLE BUTTON')
+			 	$('#startSearch').prop('disabled', false)
+			 }
 									  					  
 		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
@@ -250,7 +280,8 @@ function doPersonEnquiry(){
    // otherwise hide the tab   
    if (dataToSend.wMids == 'Y'){
    		initWMidsTab();
-
+		window.searchStatusArray.push('WEST MIDS RUNNING');
+		console.log(window.searchStatusArray);
 		$.ajax({
 		 type: 'POST',
 		 url: '/geniePersonWebService.cfc?method=doWestMidsPersonEnquiry',						 
@@ -299,6 +330,18 @@ function doPersonEnquiry(){
 			{
 				$('#wMidsResultsButtons input[type=button]').removeAttr('disabled')
 			}
+			
+			var runStatus=jQuery.inArray('WEST MIDS RUNNING',window.searchStatusArray)
+			 if(runStatus!=-1){
+			 	window.searchStatusArray.splice(runStatus,1)
+			 };
+			 console.log('WEST MIDS SEARCH FINISHED')
+			 console.log('Run Status Array = '+window.searchStatusArray);
+			
+			 if (window.searchStatusArray.length == 0) {
+			 	console.log('WEST MIDS SEARCH - RUN STATUS EMPTY RE-ENABLE BUTTON')
+			 	$('#startSearch').prop('disabled', false)
+			 }			
 									  					  
 		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){

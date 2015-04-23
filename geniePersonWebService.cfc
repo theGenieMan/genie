@@ -1015,9 +1015,36 @@
 	
 			<cfset westMidsHTML = formatWestMidsResults(westMidsNominalsGrouped, searchData.wMidsOrder)>
 		<cfelse>
-			<!--- search is no good so send back the error --->
-			<cflog file="genieWestMidsPersonSearchErrors" type="information" text="Error = #westMidsResult.errorText#, Xml Search was = #searchXml#" />
-			<cfset westMidsHTML = "<p>"&westMidsResult.errorText&"</p>">	
+			<cfset westMidsHTML =  "<h4 align='center'>The West Midlands search did not complete successfully</h4>">
+			<cfset westMidsHTML &= "<p align='center'>The Error Code is : <b>"&westMidsResults.errorText&"</b><br><br>">
+			<cfset westMidsHTML &= "If the error code is 408 Request Time-out this means that search at the West Midlands end ">
+			<cfset westMidsHTML &= "did not respond within #Ceiling(application.wMidsTimeout/60)# minutes. You may need to refine your search as broad searches can ">
+			<cfset westMidsHTML &= "lead to long running requests which have an adverse effect on GENIE performance.</p>">
+			
+			<cfmail   to="nick.blackham@westmercia.pnn.police.uk"
+					from="genie@westmercia.pnn.police.uk"
+					subject="GENIE - West Mids Person Unsuccessful"
+					type="html">
+				<html>
+					<head>
+						<style>
+							body { 
+								font-family:Arial;
+								font-size:11pt
+							}						
+						</style>						
+					</head>
+					<body>
+						<h4>Error Code: #westMidsResults.errorText#</h4>
+						<p>
+							<b>User Id : #auditData.enquiryUser#</b><br>
+							<b>Search Xml : 
+								<pre>#HTMLEditFormat(searchXml)#</pre>
+							</b>
+						</p>
+					</body>
+				</html>			
+ 		    </cfmail>
 		</cfif>
 	
 		<cfreturn westMidsHTML>
