@@ -64,6 +64,7 @@ $(document).on('submit','.enquiryForm',
 			else{
 				// it's a valid enquiry and we are going to get some form of results
 				// run the search 
+				window.searchStatusArray=[];
 				doVehicleEnquiry();			
 			}
 							  					  

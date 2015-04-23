@@ -21,6 +21,8 @@ $(document).ready(function() {
 		window.globalSearchButtonInterval='';
 		window.globalPreviousSearchArray=[];
 
+		window.searchStatusArray=[];
+
 		// create results required
 		var $resultsTabs=$( "#resultsTabs" ).tabs();
 		
