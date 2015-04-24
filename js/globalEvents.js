@@ -549,7 +549,7 @@ $(document).on('click','.genieCrimeLink',
 					window.location = url;
 				}
 				else {
-					window.open(url,'scrollbars=1,toolbar=1,status=1,menubar=1,titlebar=1,location=1');
+					window.open(url,'crime'+crimeRef,'scrollbars=1,toolbar=1,status=1,menubar=1,titlebar=1,location=1');
 				}
 			}	
 			
