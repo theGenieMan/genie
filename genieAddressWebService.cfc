@@ -346,7 +346,7 @@
 		<cfif westMidsResults.searchOK>    
 			<cfset westMidsAddressesGrouped = application.genieService.doWestMidsAddressGrouping(westMidsResults.addresses)>
 		
-			<cfset westMidsHTML = formatWestMidsResults(westMidsAddressesGrouped)>
+			<cfset westMidsHTML = formatWestMidsResults(westMidsAddressesGrouped,westMidsResults.overflow)>
 	    <cfelse>
 			<cfset westMidsHTML =  "<h4 align='center'>The West Midlands search did not complete successfully</h4>">
 			<cfset westMidsHTML &= "<p align='center'>The Error Code is : <b>"&westMidsResults.errorText&"</b><br><br>">
@@ -389,6 +389,8 @@
 	            hint="formats the west mids results for display">
 		<cfargument name="qWestMidsResults" type="any" required="true" 
 		            hint="west mids results to be formatted"/>
+		<cfargument name="overflow" type="boolean" required="false" 
+		            hint="has the west mids data breached it's 500 record limit" default="false" />				
 
 	
 		<cfset var returnHTML = "">
@@ -400,6 +402,10 @@
 		<cfif qWestMidsResults.distinctQuery.recordCount IS 0>
 			<cfset returnHTML = "<p><b>Your Search Returned No Results</b></p>">
 		<cfelse>
+			
+		    <cfif arguments.overflow>
+				<cfset returnHTML = "<h4 align='center'>Your Search Returned &gt; 500 results. Only the first 500 are being shown</h4>">
+			</cfif>
 		
 			<cfloop query="arguments.qWestMidsResults.distinctQuery">
 			
