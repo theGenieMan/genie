@@ -211,7 +211,7 @@
 																				 fromWebService='Y',
 																				 wsAudit=auditData)>
 		<cfif westMidsResults.searchOK>      
-			<cfset westMidsHTML = formatWestMidsResults(westMidsResults.vehicles)>
+			<cfset westMidsHTML = formatWestMidsResults(westMidsResults.vehicles, westMidsResults.overflow)>
 		<cfelse>
 			<cfset westMidsHTML =  "<h4 align='center'>The West Midlands search did not complete successfully</h4>">
 			<cfset westMidsHTML &= "<p align='center'>The Error Code is : <b>"&westMidsResults.errorText&"</b><br><br>">
@@ -253,6 +253,8 @@
 	            hint="formats the west mids results for display">
 		<cfargument name="vehicles" type="any" required="true" 
 		            hint="west mids results to be formatted"/>		
+		<cfargument name="overflow" type="boolean" required="false" 
+		            hint="has the west mids data breached it's 500 record limit" default="false" />		            
 	
 		<cfset var returnHTML = "">
 		<cfset var iVeh = 1>
@@ -264,6 +266,9 @@
 		<cfelse>
 			 <cfoutput>
 			    <cfsavecontent variable="thisVeh">
+					<cfif arguments.overflow>
+						<cfset returnHTML = "<h4 align='center'>Your Search Returned &gt; 500 results. Only the first 500 are being shown</h4>">
+					</cfif>
 					<div class="vehicleResult">
 						<table width="98%" class="genieData">
 						 <thead>	

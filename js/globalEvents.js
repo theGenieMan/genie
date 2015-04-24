@@ -507,7 +507,7 @@ $(document).on('click','.genieCrimeLink',
 				showInCurrentWindow=true;
 			}
 			
-			if (typeof dpa !== "undefined") {
+			if (typeof dpa !== "undefined") {				
 				$('#dpa').dpa('option', 'urlToOpen', url);
 				$('#dpa').dpa('option', 'howToOpen', showInCurrentWindow ? 'current' : 'new');
 				
@@ -531,8 +531,8 @@ $(document).on('click','.genieCrimeLink',
 										  if (showInCurrentWindow == 'current') {
 										  	window.location(url)
 										  }
-										  else {
-										  	newwindow=window.open(url,'crime'+crimeRef,'toolbars=0,scrollbars=1');											
+										  else {										  	
+										  	newwindow=window.open(url,'crime'+crimeRef,'scrollbars=1,toolbar=1,status=1,menubar=1,titlebar=1,location=1');											
 										  }	
 										}
 										else
@@ -544,12 +544,12 @@ $(document).on('click','.genieCrimeLink',
 					
 				}
 			}
-			else {
+			else {				
 				if (showInCurrentWindow) {
 					window.location = url;
 				}
 				else {
-					window.open(url);
+					window.open(url,'scrollbars=1,toolbar=1,status=1,menubar=1,titlebar=1,location=1');
 				}
 			}	
 			
