@@ -202,15 +202,7 @@
 </cfsavecontent>
 
 <cfsavecontent variable="variables.fPhotoDiv">
-<div class="genieCamera genieToolTip">
-	<div style="display:none;" class="toolTip">
-	  <div class="genieTooltipHeader">
-	  	%photoTitle%
-	  </div>
-	  <div class="genieTooltipHolder geniePhotoHolder">
-	  	<img src="%photoUrl%" height=200 width=160>		
-	  </div>
-	</div>
+<div class="genieCamera genieWMidsToolTip" appRef="%APP_REF_P%" sysRef="%SYS_REF_P%" forceId="%FORCE_ID_P%" photoSurname="%SURNAME_P%">	
 </div>	
 </cfsavecontent>
 
@@ -474,6 +466,8 @@
 	 <cfset validation.valid=true>
 	 <cfset validation.errors="">
 	 
+	 <cflog text="genie person search. Wmids = #peArgs.wMids#" file="geniePersonEnq" type="Information">
+	 
 	 	<cfif Len(peArgs.surname1) IS 0
 		  AND Len(peArgs.forename1) IS 0
 		  AND Len(peArgs.surname2) IS 0
@@ -512,6 +506,13 @@
 				   OR ReFindNoCase('[^a-zA-Z]',peArgs.forename2) GT 0>
 					<cfset validation.valid=false>
 		    		<cfset validation.errors=ListAppend(validation.errors,"You are running a standard search, you can only enter characters A-Z in surname and forename fields","|")>
+				</cfif>
+			</cfif>
+			
+			<cfif peArgs.wMids IS "Y">
+				<cfif Len(peArgs.surname1) LT 2 AND Len(peArgs.forename1) LT 2>
+					<cfset validation.valid=false>
+		    		<cfset validation.errors=ListAppend(validation.errors,"The minimum requirement for a West Midlands person search is 2 characters in both Surname and Forename fields","|")>					
 				</cfif>
 			</cfif>
 			
@@ -971,6 +972,8 @@
 		<cfset var searchData=deserializeJSON(toString(getHttpRequestData().content))>
 		<cfset var auditData=createAuditStructure(searchData)>
 		<cfset var searchXml = "<risp:surname>$surname$</risp:surname><risp:forenames>$forename$</risp:forenames><risp:dob>$dob$</risp:dob><risp:cro/><risp:gender>$gender$</risp:gender><risp:pncid/><risp:maiden_name>$maidenname$</risp:maiden_name><risp:agefrom>$agefrom$</risp:agefrom><risp:ageto>$ageto$</risp:ageto><risp:place_of_birth>$pob$</risp:place_of_birth><risp:postal_town>$postal$</risp:postal_town><risp:fuzzy_name>Y</risp:fuzzy_name>">
+		<cfset var iRequestStart=0>
+		<cfset var iRequestEnd=0>
 	
 		<cfset searchXml = Replace(searchXml, '$surname$', searchData.surname1)>
 		<cfset searchXml = Replace(searchXml, '$forename$', searchData.forename1)>
@@ -1000,20 +1003,19 @@
 		<cfset searchXml = Replace(searchXml, '$postal$', searchData.pTown)>
 		<cfset searchXml = Replace(searchXml, '$agefrom$', searchData.ageFrom)>
 		<cfset searchXml = Replace(searchXml, '$ageto$', searchData.ageTo)>
-		
+				
 		<cfset westMidsResults = application.genieService.doWestMidsPersonSearch(searchTerms=searchXml,
 																				 userId=auditData.enquiryUser,
 																				 terminalId=auditData.terminalId,
 																				 sessionId=auditData.sessionId, 		                                                                         
 																				 fromWebService='Y',
 																				 wsAudit=auditData)>
-	
+		
 	    <cfif westMidsResults.searchOk>
-        	<!--- search is ok, so format the results --->			
-			<cfset westMidsNominalsGrouped = application.genieService.doWestMidsNominalGrouping(nominals=westMidsResults.nominals, 
+        	<!--- search is ok, so format the results --->	
+    		<cfset westMidsNominalsGrouped = application.genieService.doWestMidsNominalGrouping(nominals=westMidsResults.nominals, 
 		                                                                                    group=searchData.wMidsOrder)>
-	
-			<cfset westMidsHTML = formatWestMidsResults(westMidsNominalsGrouped, searchData.wMidsOrder)>
+			<cfset westMidsHTML = formatWestMidsResults(westMidsNominalsGrouped, searchData.wMidsOrder, westMidsResults.overflow)>
 		<cfelse>
 			<cfset westMidsHTML =  "<h4 align='center'>The West Midlands search did not complete successfully</h4>">
 			<cfset westMidsHTML &= "<p align='center'>The Error Code is : <b>"&westMidsResults.errorText&"</b><br><br>">
@@ -1046,7 +1048,7 @@
 				</html>			
  		    </cfmail>
 		</cfif>
-	
+	    
 		<cfreturn westMidsHTML>
 	
 	</cffunction>  
@@ -1057,6 +1059,8 @@
 		            hint="west mids results to be formatted"/>
 		<cfargument name="westMidsOrder" type="string" required="true" 
 		            hint="how the west mids data should be ordered options name,force,system"/>
+		<cfargument name="overflow" type="boolean" required="false" 
+		            hint="has the west mids data breached it's 500 record limit" default="false" />					
 	
 		<cfset var returnHTML = "">
 		<cfset var iNom = 1>
@@ -1065,6 +1069,10 @@
 		<cfif qWestMidsResults.distinctQuery.recordCount IS 0>
 			<cfset returnHTML = "<p><b>Your Search Returned No Results</b></p>">
 		<cfelse>
+		
+		    <cfif arguments.overflow>
+				<cfset returnHTML = "<h4 align='center'>Your Search Returned &gt; 500 results. Only the first 500 are being shown</h4>">
+			</cfif>
 		
 			<cfloop query="arguments.qWestMidsResults.distinctQuery">
 			
@@ -1119,11 +1127,16 @@
 					    <cfset thisRow=ReplaceNoCase(thisRow,'%NOM_PHOTO%','',"ALL")>
 					</cfif>
 					<cfset thisRow=ReplaceNoCase(thisRow,'%photoUrl%',RISP_PHOTO,"ALL")>
-					<cfset thisRow=ReplaceNoCase(thisRow,'%photoTitle%',NOMINAL_REF & " " & REPLACE(SURNAME, "'", "", "ALL"),"ALL")>					
+					<cfset thisRow=ReplaceNoCase(thisRow,'%photoTitle%',NOMINAL_REF & " " & REPLACE(SURNAME, "'", "", "ALL"),"ALL")>
+					
+					<cfset thisRow=ReplaceNoCase(thisRow,'%APP_REF_P%',APP_REF,"ALL")>
+					<cfset thisRow=ReplaceNoCase(thisRow,'%FORCE_ID_P%',FORCE_REF,"ALL")>
+					<cfset thisRow=ReplaceNoCase(thisRow,'%SYS_REF_P%',SYS_REF,"ALL")>
+					<cfset thisRow=ReplaceNoCase(thisRow,'%SURNAME_P%',SURNAME,"ALL")>
+										
 					<cfset thisRow=ReplaceNoCase(thisRow,'%NOM_NAME%',FIRSTNAME & " " & SURNAME,"ALL")> 
 					<cfset thisRow=ReplaceNoCase(thisRow,'%NOM_DOB%',DOB,"ALL")>
-					<cfset returnHTML &= thisRow>
-					
+					<cfset returnHTML &= thisRow>				 
 				</cfloop>
 				
 				
@@ -1135,7 +1148,7 @@
 	   <cfreturn returnHTML>
 	
 	</cffunction>
-  
+
     <cffunction name="getAge" access="private" output="false" returntype="Numeric">
   	  <cfargument name="birthDate" required="true" type="string" hint="dd/mm/yyyy">
 	
@@ -1298,7 +1311,7 @@
 			
 	</cffunction>
 
-  <cffunction name="doWarningEnquiry" access="remote" returntype="string" returnFormat="plain" output="false" hint="do warning enquiry">
+    <cffunction name="doWarningEnquiry" access="remote" returntype="string" returnFormat="plain" output="false" hint="do warning enquiry">
   	  <cfargument name="resultType" type="string" required="false" default="html" hint="result format, options html or xml">
 	  
 	  <cfset var thisUUID=createUUID()>  	  	  	  	

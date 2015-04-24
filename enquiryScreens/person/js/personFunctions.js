@@ -294,9 +294,11 @@ function doPersonEnquiry(){
 		 data: JSON.stringify( dataToSend ),
 		 success: function(data, status){
 		 				
-			var $resultsTable=$($.trim(data))							
+			var $resultsTable=$($.trim(data))										
 				$resultsTable.find("tbody tr:even").addClass('row_colour0');
-				$resultsTable.find("tbody tr:odd").addClass("row_colour1");			
+				$resultsTable.find("tbody tr:odd").addClass("row_colour1");	
+					
+				/*
 				$resultsTable.find('td div.genieToolTip').qtip({
 									  	content: {
 											        text: function(event, api){
@@ -309,7 +311,39 @@ function doPersonEnquiry(){
 								                  at: 'right center',
 								                  viewport: $(window)         
 											   	}											  															    
-									  });				
+									  });
+			    */
+				
+				$resultsTable.find('td div.genieWMidsToolTip').qtip({
+				content: {
+			        text: function(event, api) {
+						console.log('IN TOOL TIP')
+			            $.ajax({
+			                url: '/wMidsScreens/westMidsPhoto.cfm?appRef='+encodeURI($(this).attr('appRef'))+'&sysRef='+encodeURI($(this).attr('sysRef'))+'&forceId='+encodeURI($(this).attr('forceId'))+'&photoSurname='+encodeURI($(this).attr('photoSurname')) // Use data-url attribute for the URL
+			            })
+			            .then(function(content) {
+			                // Set the tooltip content upon successful retrieval
+			                api.set('content.text', content);							
+			            }, function(xhr, status, error) {
+			                // Upon failure... set the tooltip content to the status and error value
+			                api.set('content.text', status + ': ' + error);
+			            });
+			
+			            return 'Loading...'; // Set some initial text
+			        }
+			    },
+				position: {
+					      my: 'right center',
+		                  at: 'left center',
+						  target: 'mouse',	
+					        adjust: {
+								x: -15,
+					            screen: true
+					        },
+		                  viewport: $(window)         
+					   	}	
+				});				
+								
 			$('#wMidsResultsData').append($resultsTable);
 			$('#wMidsSpinner').hide();
 			$('#wMidsSearchingDiv').hide();
