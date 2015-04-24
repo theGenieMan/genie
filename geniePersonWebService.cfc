@@ -510,7 +510,7 @@
 			</cfif>
 			
 			<cfif peArgs.wMids IS "Y">
-				<cfif Len(peArgs.surname1) LT 2 AND Len(peArgs.forename1) LT 2>
+				<cfif Len(peArgs.surname1) LT 2 OR Len(peArgs.forename1) LT 2>
 					<cfset validation.valid=false>
 		    		<cfset validation.errors=ListAppend(validation.errors,"The minimum requirement for a West Midlands person search is 2 characters in both Surname and Forename fields","|")>					
 				</cfif>
