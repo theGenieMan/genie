@@ -1384,6 +1384,21 @@ font-size:90%;
 	padding:2px;	
 }
 
+.genieTooltipHeader_IM{
+	background-color:#0C5C99;
+	color:white;
+	font-size:100%;
+	font-weight:bold;	
+	padding:2px;	
+}
+
+.genieTooltipHolder_IM{
+	font-size:100%;
+	background-color:#ffffc1;;	
+	padding:2px;	
+	line-height: 0.4cm;
+}
+
 .warningTitle
 {
   	background-color : #F00;

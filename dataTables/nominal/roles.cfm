@@ -40,6 +40,35 @@ $(document).ready(function() {
 			tab.find('.ui-tabs-anchor').attr('href', newUrl);										
 			tabs.tabs("load", currentTabIndex);			
 	 })	 
+	 
+	 $('#rolesTable td div.genieIM').qtip({
+				content: {
+			        text: function(event, api) {						
+			            $.ajax({
+			                url: '/dataTables/nominal/interestMarkers.cfm?crime_ref='+$(this).attr('crime_ref')+'&crime_no='+$(this).attr('crime_no')
+			            })
+			            .then(function(content) {
+			                // Set the tooltip content upon successful retrieval
+			                api.set('content.text', content);							
+			            }, function(xhr, status, error) {
+			                // Upon failure... set the tooltip content to the status and error value
+			                api.set('content.text', status + ': ' + error);
+			            });
+			
+			            return 'Loading...'; // Set some initial text
+			        }
+			    },
+				position: {
+					      my: 'right center',
+		                  at: 'left center',
+						  target: 'mouse',	
+					        adjust: {
+								x: -15,
+					            screen: true
+					        },
+		                  viewport: $(window)         
+					   	}	
+				});				
 })
 </script>
 
@@ -71,7 +100,8 @@ $(document).ready(function() {
 				  <th width="4%">PROC</th>	
 				  <th width="4%">ELIM</th>				  
 				  <th width="10%">OFFENCE</th>
-				  <th width="12%">INCIDENT</th>
+				  <th width="1%">IM</th>
+				  <th width="11%">INCIDENT</th>
 				  <th>OFFENCE TITLE</th>
 				  <th width="18%" class="#iif(sort IS "DATE_COM",de('thSorted'),de('thSortable'))#" sort="DATE_COM" nominalRef="#nominalRef#">DATES COMMITTED</th>	
 				  <th width="8%" class="#iif(sort IS "DATE_CREATED",de('thSorted'),de('thSortable'))#" sort="DATE_CREATED" nominalRef="#nominalRef#">CREATED</th>
@@ -106,6 +136,11 @@ $(document).ready(function() {
 						 <td>#ELIMINATED#</td>
 						 <td>
 						 	<strong><a href="#CRIME_NUMBER#" searchUUID="#searchUUID#" class="genieCrimeLink">#CRIME_NUMBER#</a></strong></td>
+						 </td>
+						 <td>
+						   <cfif HAS_IM IS "Y">
+						   <div class="genieIM" crime_ref="#CRIME_REF#" crime_no="#CRIME_NUMBER#"></div>
+				  		   </cfif>
 						 </td>
 						 <td>
 						  <cfif Len(INCIDENT_NO) IS 12>

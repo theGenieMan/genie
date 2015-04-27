@@ -20,15 +20,15 @@
 		<cflog file="genie" type="information" text="updateSession before = #session.lastDPAUpdate#,#session.audit_code#,#session.audit_for#,#session.audit_details#,#session.ethnic_code#,#session.audit_for_collar#,#session.audit_for_force#">
 		</cfif> 
 	 	--->
-	 	
-	 	<cfset session.lastDPAUpdate=now()>		
-		<cfset session.audit_code=arguments.reasoncode>
-		<cfset session.audit_for=arguments.requestFor>
-		<cfset session.audit_details=arguments.reasonText>
-		<cfset session.ethnic_code=arguments.ethnicCode>
-		<cfset session.audit_for_collar=arguments.requestForCollar>
-		<cfset session.audit_for_force=arguments.requestForForce>
-		
+	 	<cflock timeout=20 scope="Session" type="Exclusive">
+		 	<cfset session.lastDPAUpdate=now()>		
+			<cfset session.audit_code=arguments.reasoncode>
+			<cfset session.audit_for=arguments.requestFor>
+			<cfset session.audit_details=arguments.reasonText>
+			<cfset session.ethnic_code=arguments.ethnicCode>
+			<cfset session.audit_for_collar=arguments.requestForCollar>
+			<cfset session.audit_for_force=arguments.requestForForce>
+		</cflock>
 		<!---	 
 		<cflog file="genie" type="information" text="updateSession after = #session.lastDPAUpdate#,#session.audit_code#,#session.audit_for#,#session.audit_details#,#session.ethnic_code#,#session.audit_for_collar#,#session.audit_for_force#">	
 		 --->
@@ -67,14 +67,16 @@
 	<cffunction name="getUserSession" access="remote" output="false" returntype="Struct" returnformat="JSON">
 	 	<cfset var returnVar = structNew()>
 
-	 	<cfset returnVar.lastDPAUpdate=session.lastDPAUpdate>		
-		<cfset returnVar.audit_code=session.audit_code>
-		<cfset returnVar.audit_for=session.audit_for>
-		<cfset returnVar.audit_details=session.audit_details>
-		<cfset returnVar.ethnic_code=session.ethnic_code>
-		<cfset returnVar.audit_for_collar=session.audit_for_collar>
-		<cfset returnVar.audit_for_force=session.audit_for_force>
-		<cfset returnVar.dpaTimeout=session.dpaTimeout>
+		<cflock timeout=20 scope="Session" type="Exclusive">
+		 	<cfset returnVar.lastDPAUpdate=session.lastDPAUpdate>		
+			<cfset returnVar.audit_code=session.audit_code>
+			<cfset returnVar.audit_for=session.audit_for>
+			<cfset returnVar.audit_details=session.audit_details>
+			<cfset returnVar.ethnic_code=session.ethnic_code>
+			<cfset returnVar.audit_for_collar=session.audit_for_collar>
+			<cfset returnVar.audit_for_force=session.audit_for_force>
+			<cfset returnVar.dpaTimeout=session.dpaTimeout>
+		</cflock>
 	 	
 	 	<cfreturn returnVar>	
 		 

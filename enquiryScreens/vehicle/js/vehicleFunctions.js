@@ -58,7 +58,10 @@ function getFormData(){
 function doVehicleEnquiry(){
 	
 	//disable the search button
-	$('#startSearch').prop('disabled',true)	
+	$('#startSearch').prop('disabled',true);
+	
+	$('#wmpResultsData').prop('innerHTML','');
+	$('#wMidsResultsData').prop('innerHTML','');		
 	
 	// get the search form data
 	var dataToSend=getFormData();
@@ -93,9 +96,9 @@ function doVehicleEnquiry(){
 		 	
 		 	var $resultsTable=$($.trim(data))							
 				$resultsTable.find("tbody tr:even").addClass('row_colour0');
-				$resultsTable.find("tbody tr:odd").addClass("row_colour1");			
-							
-			    $('#wmpResultsData').append($resultsTable);
+				$resultsTable.find("tbody tr:odd").addClass("row_colour1");							
+			    
+				$('#wmpResultsData').append($resultsTable);				
   			    $('#wmpSpinner').hide();
 			    $('#wmpSearchingDiv').hide();
 														
@@ -208,7 +211,7 @@ function doVehicleEnquiry(){
 			 	console.log('WEST MIDS SEARCH - RUN STATUS EMPTY RE-ENABLE BUTTON')
 			 	$('#startSearch').prop('disabled', false)
 			 }								
-									  					  
+			console.log('west mids search has run and completed')						  					  
 		 }/*,
 		 error: function(jqXHR, textStatus, errorThrown){
 		 	alert('An error occurred running the west midlands police person enquiry: '+textStatus+', '+errorThrown)			
@@ -236,20 +239,9 @@ function doVehicleEnquiry(){
 function initWestMerciaTab(){
 	$('#wmpResults').hide();
 	$('#wmpSearchingDiv').show();
-	$('#wmpResultsData').prop('innerHTML','');
+	//$('#wmpResultsData').prop('innerHTML','');
 	$('#wmpSpinner').show();
 	$('#wmpResultsCount').hide().html('')	
-}
-
-// function that initialises the Firearms Results Tab
-function initFirearmsTab(){
-	
-	$('#firearmsResults').hide();
-	$('#firearmsSearchingDiv').show();	
-	$('#firearmsResultsData').prop('innerHTML','');	
-	$('#firearmsSpinner').show();
-	$('#firearmsResultsCount').hide().html('')
-	$('#firearmsLi').show();	
 }
 
 // function that initialises the West Mids Results Tab
@@ -257,7 +249,7 @@ function initWMidsTab(){
 	
 	$('#wMidsResults').hide();
 	$('#wMidsSearchingDiv').show();
-	$('#wMidsResultsData').prop('innerHTML','');
+	//$('#wMidsResultsData').prop('innerHTML','');
 	$('#wMidsSpinner').show();	
 	$('#wMidsResultsCount').hide().html('');
 	$('#wMidsLi').show();		

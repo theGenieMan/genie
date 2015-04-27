@@ -56,7 +56,7 @@
 	<cfset Application.sCustodyTimespan=CreateTimeSpan(application.timespanCustodyDay,application.timespanCustodyHour,application.timespanCustodyMin,application.timespanCustodySec)>
     
     <!--- application vars that are the same regardless of environment --->
-    <cfset Application.Version="4.0">
+    <cfset Application.Version="4.0.1">
 	<cfset Application.dateStarted=now()>
 	<cfset Application.lis_Months="JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC">
 	<cfset Application.lis_MonthNos="01,02,03,04,05,06,07,08,09,10,11,12">
@@ -253,9 +253,11 @@
 			
 			<cfif lastSession.valid>
 				<!--- found the last session, so setup the audit fields --->
+			  <cflock timeout=20 scope="Session" type="Exclusive">
 				<cfset session.audit_code=lastSession.reason>
 				<cfset session.audit_details=lastSession.reason_text>
 				<cfset session.audit_for=lastSession.request_for>
+			  </cflock>
 			<cfelse>		 
 				<!--- can't find the last session, so display the expiry page --->   				    
 				    <script>
@@ -269,7 +271,7 @@
   </cfif>
   
   <!--- update the session with the last access --->
-  <cflock timeout="10" scope="session">
+  <cflock timeout=20 scope="Session" type="Exclusive">
   	  <cfset session.lastRequestTime=now()>
   </cflock>
 	
@@ -416,8 +418,7 @@
 	  <cfset var lis_BailConds=Replace(application.bailCondsGroups,",","|","ALL")>  
 	  <cfset var lis_PackagePdf=Replace(application.packagePDFGroups,",","|","ALL")>	  
  	  <cfset var s_ISGenieUser=''>      
-      <cfset var qry_LogAccess=''>
-      <cfset var sUserStyleFile=Replace(GetTemplatePath(),"index.cfm","accessibility/user_styles.txt")>
+      <cfset var qry_LogAccess=''>      
       <cfset var iFind=''>
       <cfset var inet_address = CreateObject("java", "java.net.InetAddress")>   
 	  <cfset var roleSettings="">  
@@ -430,130 +431,124 @@
 		</cfif>
 	  </cfif>                                        
 	  
-      <cfset Session.User=application.hrService.getUserByUID(sUser)>   	 
-
-	  <cfset s_ISGenieUser = application.hrService.isMemberOf(groups=lis_GENIEGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
-	    
-	  <cflog file="genie" type="information" text="Session UserId: checking on:#session.user.getTrueUserId()# Complete #session.user.getTrueUserId()# Genie User?:#s_ISGenieUser#">
-	    	
-	  <cfset session.genieUser=s_ISGenieUser>
-	        
-       <!--- if it's the train env then make sure the user gets access regardless --->
-		<cfif application.Env is "TRAIN" OR application.Env IS "TRAIN_TEST">
-			<cfset s_IsGenieUser=true>
-		<cfelse>
-			<!--- if user is not a genie user then send to access denied --->
-	    	<cfif NOT s_ISGenieUser>
-		 		<cfinclude template="access_denied.cfm">
-		 		<cfabort>
-			</cfif>			
-		</cfif>   
-	    
-	  <cfset session.ISNameUpdater=application.hrService.isMemberOf(groups=lis_NameGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
-	  <!---
-	  <cfset session.ISDVSUser=application.hrService.isMemberOf(groups=lis_DVSGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
-	  --->
-      <cfset session.isWMidsUser=application.hrService.isMemberOf(groups=lis_WMidsGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
-      <cfset session.isHTCUUser=application.hrService.isMemberOf(groups=lis_HTCUGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
-	  <cfset session.isNomMergeUser=application.hrService.isMemberOf(groups=lis_NomMergeGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
-	  <cfset session.isGenieAdmin=application.hrService.isMemberOf(groups=lis_GenieAdmin,uid=session.user.getTrueUserId(),adServer=application.adServer)> 
-	  <cfset session.isBailCondsUser=application.hrService.isMemberOf(groups=lis_BailConds,uid=session.user.getTrueUserId(),adServer=application.adServer)> 	    
-	  <cfset session.isPDFPackageUser=application.hrService.isMemberOf(groups=lis_PackagePdf,uid=session.user.getTrueUserId(),adServer=application.adServer)>
-
-      <cfif Session.user.getIsValidRecord()>
-	  	  <cfset Session.LoggedInUserId=session.user.getUSERID()>
-		  <cfset Session.LoggedInUser=session.user.getFULLNAME()>
-		  <cfset Session.LoggedInUserCollar=session.user.getCOLLAR()>
-		  <cfset Session.LoggedInUserEmail=session.user.getEMAILADDRESS()>
-		  <cfset Session.LoggedInUserDiv=session.user.getDIVISION()>                                                                                                                                                                   
-      <cfelse>
-	  	  <cfset Session.LoggedInUserId=session.user.getUserId()>
-		  <cfset Session.LoggedInUser=session.user.getUserId()>
-		  <cfset Session.LoggedInUserCollar="">
-		  <cfset Session.LoggedInUserEmail="">
-		  <cfset Session.LoggedInUserDiv="H">                                                                                                                                                                   	
-	  </cfif>
-	  	  
-	  <!--- if training everybody gets access to west mids --->
-	  <cfif application.ENV IS "TRAIN">
-	  	  <cfset session.isWMidsUser=true>
-  	  </cfif>
-	  
-	  <!--- should the person be able to submit a stop search / drink drive --->
-	  <cfif (session.user.getDepartment() IS "Infrastructure" OR 
-	  	     session.user.getDepartment() IS "Public Contact" OR 
-			 session.user.getDepartment() IS "ES ICT" OR
-			 session.user.getDepartment() IS "LP Operational Support" OR
-			 session.user.getDuty() IS "ANPR CONTROLLERS")
-	  	    OR session.user.getUserId() IS "p_nor002"
-			OR session.user.getUserId() IS "l_hil001"
-			OR session.user.getUserId() IS "l_dai001"
-			OR session.user.getUserId() IS "c_new002"
-			OR session.user.getUserId() IS "s_add001" 
-			OR session.user.getUserId() IS "s_jac005"
-			OR session.user.getUserId() IS "d_mon002" 
-			OR session.user.getUserId() IS "23004310"
-			OR session.user.getUserId() IS "23004392TW">
-			<cfset session.isOCC=true>
-	  <cfelse>
-	        <cfset session.isOCC=false>
-	  </cfif>	
-	  
-  	  <cfif session.user.getDuty() IS "INSPECTOR OCC"
-	  	 OR session.user.getDuty() IS "INSPECTOR OCC RELIEF"
-		 OR session.user.getDuty() IS "ANALYST PROGRAMMER"
-		 OR session.user.getDuty() IS "SYSTEMS SUPPORT ANALYST">  
-	     <cfset session.isFDI=true>
-	  <cfelse>
-	  	 <cfset session.isFDI=false>
-	  </cfif>
-	  
-	  <cfif ListFindNoCase(application.mopiDisclosureRoles,session.user.getDuty(),",") GT 0>
-	  	<cfset session.isMopiDisclosureUser=true>	  
-	  <cfelse>
-	  	<cfset session.isMopiDisclosureUser=false>  
-  	  </cfif>
-
-	  <!--- get the users dpa retention and timeout settings --->
-	  <cfset roleSettings=application.genieUserService.getUserRoleSettings(session.user.getDUTY())>
-	  <cfset session.dpaClear=roleSettings.dpaClear>
-	  <cfset session.dpaTimeout=roleSettings.dpaTimeout>	
-	  <!---
-	  <cfif isDefined('application.dpaExceptions')>
-		  <cfif ListContains(application.dpaExceptions,session.user.getDUTY(),",") GT 0>
-		  	  <cfset session.dpaClear=false>
-		  <cfelse>
-		  	  <cfset session.dpaClear=true>
+	  <cflock timeout=20 scope="Session" type="Exclusive">
+	      <cfset Session.User=application.hrService.getUserByUID(sUser)>   	 
+	
+		  <cfset s_ISGenieUser = application.hrService.isMemberOf(groups=lis_GENIEGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+		    
+		  <cflog file="genie" type="information" text="Session UserId: checking on:#session.user.getTrueUserId()# Complete #session.user.getTrueUserId()# Genie User?:#s_ISGenieUser#">
+		    	
+		  <cfset session.genieUser=s_ISGenieUser>
+		        
+	       <!--- if it's the train env then make sure the user gets access regardless --->
+			<cfif application.Env is "TRAIN" OR application.Env IS "TRAIN_TEST">
+				<cfset s_IsGenieUser=true>
+			<cfelse>
+				<!--- if user is not a genie user then send to access denied --->
+		    	<cfif NOT s_ISGenieUser>
+			 		<cfinclude template="access_denied.cfm">
+			 		<cfabort>
+				</cfif>			
+			</cfif>   
+		    
+		  <cfset session.ISNameUpdater=application.hrService.isMemberOf(groups=lis_NameGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>	  
+	      <cfset session.isWMidsUser=application.hrService.isMemberOf(groups=lis_WMidsGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+	      <cfset session.isHTCUUser=application.hrService.isMemberOf(groups=lis_HTCUGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+		  <cfset session.isNomMergeUser=application.hrService.isMemberOf(groups=lis_NomMergeGroups,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+		  <cfset session.isGenieAdmin=application.hrService.isMemberOf(groups=lis_GenieAdmin,uid=session.user.getTrueUserId(),adServer=application.adServer)> 
+		  <cfset session.isBailCondsUser=application.hrService.isMemberOf(groups=lis_BailConds,uid=session.user.getTrueUserId(),adServer=application.adServer)> 	    
+		  <cfset session.isPDFPackageUser=application.hrService.isMemberOf(groups=lis_PackagePdf,uid=session.user.getTrueUserId(),adServer=application.adServer)>
+	
+	      <cfif Session.user.getIsValidRecord()>
+		  	  <cfset Session.LoggedInUserId=session.user.getUSERID()>
+			  <cfset Session.LoggedInUser=session.user.getFULLNAME()>
+			  <cfset Session.LoggedInUserCollar=session.user.getCOLLAR()>
+			  <cfset Session.LoggedInUserEmail=session.user.getEMAILADDRESS()>
+			  <cfset Session.LoggedInUserDiv=session.user.getDIVISION()>                                                                                                                                                                   
+	      <cfelse>
+		  	  <cfset Session.LoggedInUserId=LCase(session.user.getUserId())>
+			  <cfset Session.LoggedInUser=LCase(session.user.getUserId())>
+			  <cfset Session.LoggedInUserCollar="">
+			  <cfset Session.LoggedInUserEmail="">
+			  <cfset Session.LoggedInUserDiv="H">                                                                                                                                                                   	
+		  </cfif>
+		  	  
+		  <!--- if training everybody gets access to west mids --->
+		  <cfif application.ENV IS "TRAIN">
+		  	  <cfset session.isWMidsUser=true>
 	  	  </cfif>
-	  <cfelse>
-	  	<cfset session.dpaClear=true>
-  	  </cfif>
-	  --->
-		
-        <!--- user is valid so log the user in --->
-        <cfset session.lastLoginDate=application.genieUserService.logUserIn(userId=session.user.getUSERID(),fullName=session.loggedInUser)>
-
-        <cfif sUser IS "n_bla003">
-         <cfset session.LoggedInUserDiv="D">
-         <cfset session.user.setDivision('D')>
-        </cfif>
-		
-		<cfset session.LoggedInUserLogAccess=application.genieUserService.getUserLogAccessLevel(userId=UCase(session.user.getUserId()))>            
-    
-    <cfset Session.userSettings = application.genieUserService.getUserSettings(userId=session.user.getUserId(),userName=session.user.getFullName())>   
-	<cfset Session.hostName = Left(Replace(inet_address.getByName(REMOTE_ADDR).getHostName(),".","","ALL"),8)> 
-	<cfset Session.server = inet_address.getLocalHost().getHostName()>   
-	<cfset Session.serverIp = inet_address.getLocalHost().getHostAddress()>   
-    <cfset Session.ThisUUID=CreateUUID()>
-	<cfset Session.StartTime=now()>    
-	<cfset session.lastDPAUpdate=now()>		
-	<cfset session.audit_code=''>
-	<cfset session.audit_for=''>
-	<cfset session.audit_details=''>
-	<cfset session.ethnic_code=''>
-	<cfset session.audit_for_collar=''>
-	<cfset session.audit_for_force=''>
-
+		  
+		  <!--- should the person be able to submit a stop search / drink drive --->
+		  <cfif (session.user.getDepartment() IS "Infrastructure" OR 
+		  	     session.user.getDepartment() IS "Public Contact" OR 
+				 session.user.getDepartment() IS "ES ICT" OR
+				 session.user.getDepartment() IS "LP Operational Support" OR
+				 session.user.getDuty() IS "ANPR CONTROLLERS")
+		  	    OR session.user.getUserId() IS "p_nor002"
+				OR session.user.getUserId() IS "l_hil001"
+				OR session.user.getUserId() IS "l_dai001"
+				OR session.user.getUserId() IS "c_new002"
+				OR session.user.getUserId() IS "s_add001" 
+				OR session.user.getUserId() IS "s_jac005"
+				OR session.user.getUserId() IS "d_mon002" 
+				OR session.user.getUserId() IS "23004310"
+				OR session.user.getUserId() IS "23004392TW">
+				<cfset session.isOCC=true>
+		  <cfelse>
+		        <cfset session.isOCC=false>
+		  </cfif>	
+		  
+	  	  <cfif session.user.getDuty() IS "INSPECTOR OCC"
+		  	 OR session.user.getDuty() IS "INSPECTOR OCC RELIEF"
+			 OR session.user.getDuty() IS "ANALYST PROGRAMMER"
+			 OR session.user.getDuty() IS "SYSTEMS SUPPORT ANALYST">  
+		     <cfset session.isFDI=true>
+		  <cfelse>
+		  	 <cfset session.isFDI=false>
+		  </cfif>
+		  
+		  <cfif ListFindNoCase(application.mopiDisclosureRoles,session.user.getDuty(),",") GT 0>
+		  	<cfset session.isMopiDisclosureUser=true>	  
+		  <cfelse>
+		  	<cfset session.isMopiDisclosureUser=false>  
+	  	  </cfif>
+	
+		  <!--- get the users dpa retention and timeout settings --->
+		  <cfset roleSettings=application.genieUserService.getUserRoleSettings(session.user.getDUTY())>
+		  <cfset session.dpaClear=roleSettings.dpaClear>
+		  <cfset session.dpaTimeout=roleSettings.dpaTimeout>	
+		  <!---
+		  <cfif isDefined('application.dpaExceptions')>
+			  <cfif ListContains(application.dpaExceptions,session.user.getDUTY(),",") GT 0>
+			  	  <cfset session.dpaClear=false>
+			  <cfelse>
+			  	  <cfset session.dpaClear=true>
+		  	  </cfif>
+		  <cfelse>
+		  	<cfset session.dpaClear=true>
+	  	  </cfif>
+		  --->
+			
+	        <!--- user is valid so log the user in --->
+	        <cfset session.lastLoginDate=application.genieUserService.logUserIn(userId=session.user.getUSERID(),fullName=session.loggedInUser)>
+			
+			<cfset session.LoggedInUserLogAccess=application.genieUserService.getUserLogAccessLevel(userId=UCase(session.user.getUserId()))>            
+	    
+	    <cfset Session.userSettings = application.genieUserService.getUserSettings(userId=session.user.getUserId(),userName=session.user.getFullName())>   
+		<cfset Session.hostName = Left(Replace(inet_address.getByName(REMOTE_ADDR).getHostName(),".","","ALL"),8)> 
+		<cfset Session.server = inet_address.getLocalHost().getHostName()>   
+		<cfset Session.serverIp = inet_address.getLocalHost().getHostAddress()>   
+	    <cfset Session.ThisUUID=CreateUUID()>
+		<cfset Session.StartTime=now()>    
+		<cfset session.lastDPAUpdate=now()>		
+		<cfset session.audit_code=''>
+		<cfset session.audit_for=''>
+		<cfset session.audit_details=''>
+		<cfset session.ethnic_code=''>
+		<cfset session.audit_for_collar=''>
+		<cfset session.audit_for_force=''>
+	</cflock>
+	
     <cflog file="genie" type="information" text="Session Start: Complete #session.URLToken# #session.loggedInUser#, last login=#session.lastLoginDate#, log access level set to #session.LoggedInUserLogAccess#, GenieUser=#session.genieUser#">
 
 </cffunction>

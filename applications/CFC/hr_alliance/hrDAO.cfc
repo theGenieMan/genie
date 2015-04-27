@@ -105,7 +105,7 @@
 							<cfif userQuery.recordCount GT 0>
 								<cfset hrRecord.setFullName(userQuery.displayName) />
 								<cfset hrRecord.setForceCode('XX')>
-								<cfset hrRecord.setUserId(ref)>
+								<cfset hrRecord.setUserId(Lcase(ref))>
 								<cfset hrRecord.setCollar('999999')>
 								<cfset hrRecord.setDuty('TEMPORARY USER NOT ON HR')>
 								<cfset hrRecord.setIsValidRecord(true)>		

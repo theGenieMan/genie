@@ -1407,6 +1407,22 @@ font-size:90%;
 	padding:2px;	
 }
 
+.genieTooltipHeader_IM{
+	background-color:#000000;
+	color:#FFFF00;	
+	font-size:100%;
+	font-weight:bold;	
+	padding:2px;	
+}
+
+.genieTooltipHolder_IM{
+	font-size:100%;
+	background-color:#FFFF00;
+	color:#000000;
+	padding:2px;	
+	line-height: 0.4cm;
+}
+
 .photo_title
 {
 	background-color : #000000;

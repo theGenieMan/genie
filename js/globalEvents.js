@@ -226,7 +226,7 @@ $(document).on('click','.genieNominal',
 										}
 										else
 										{
-											$('#dpa').dpa('show');
+											$('#dpa').dpa('show',false);
 										}
 																								
 									})					

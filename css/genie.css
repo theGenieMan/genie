@@ -51,7 +51,9 @@ input.input4char{
 
 .geniePlus {width:20px; height:15px; background:url(/images/personSearch.png) 0 -62px;} 
 
-.genieFamily {width:20px; height:15px; background:url(/images/personSearch.png) 0 -81px; float:right;} 
+.genieFamily {width:20px; height:15px; background:url(/images/personSearch.png) 0 -81px; float:right;}
+
+.genieIM {width:20px; height:17px; background:url(/images/personSearch.png) 0 -98px;} 
 
 .progressBar {width:160px; height:20px;background:url(/images/progressBar.gif)}
 
